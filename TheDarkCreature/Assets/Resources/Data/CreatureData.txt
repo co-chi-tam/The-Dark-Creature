@@ -1,0 +1,59 @@
+{
+	"creatures" : [
+		{
+			"ID": 1,
+			"Name": "Dodono",
+			"GameType": 5,
+			"CreatureType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Dodono"],
+			"FSMPath": "FSM/EasyAIFSM",
+			"IconPath": "",
+			"WalkSpeed": 5,
+			"RunSpeed": 7,
+			"DetectRange": 20,
+			"CurrentHP": 10,
+			"MaxHP": 10,
+			"MinDamage": 1,
+			"MaxDamage": 1,
+			"Enemies": [2,3,6,7],
+			"Foods": [251]
+		},{
+			"ID": 2,
+			"Name": "Satla",
+			"GameType": 6,
+			"CreatureType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Satla"],
+			"FSMPath": "FSM/EasyAIFSM",
+			"IconPath": "",
+			"WalkSpeed": 7,
+			"RunSpeed": 9,
+			"DetectRange": 20,
+			"CurrentHP": 50,
+			"MaxHP": 50,
+			"MinDamage": 2,
+			"MaxDamage": 3,
+			"Enemies": [3,7],
+			"Foods": [5]
+		},{
+			"ID": 3,
+			"Name": "Bob",
+			"GameType": 7,
+			"CreatureType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Bob"],
+			"FSMPath": "FSM/EasyAIFSM",
+			"IconPath": "",
+			"WalkSpeed": 8,
+			"RunSpeed": 11,
+			"DetectRange": 30,
+			"CurrentHP": 100,
+			"MaxHP": 100,
+			"MinDamage": 5,
+			"MaxDamage": 10,
+			"Enemies": [],
+			"Foods": [1,2,5,6]
+		}
+	]
+}

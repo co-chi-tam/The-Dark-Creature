@@ -1,0 +1,14 @@
+{
+	"foods": [
+		{
+			"ID": 1,
+			"Name": "Meat",
+			"GameType": 51,
+			"ItemType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Meat"],
+			"IconPath": "Meat",
+			"RecoverPoint": 10
+		}
+	]
+}

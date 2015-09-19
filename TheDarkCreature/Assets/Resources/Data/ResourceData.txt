@@ -1,0 +1,17 @@
+{
+	"resources": [
+		{
+			"ID": 1,
+			"Name": "Enviroment Grass",
+			"GameType": 251,
+			"CreatureType": 3,
+			"Description": "",
+			"ModelPath": ["Prefabs/Grass1","Prefabs/Grass2","Prefabs/Grass3"],
+			"FSMPath": "FSM/ResourceFSM",
+			"CurrentHP": "5",
+			"MaxHP": "5",
+			"IconPath": "",
+			"Inventory": []
+		}
+	]
+}

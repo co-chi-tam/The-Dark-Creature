@@ -1,0 +1,57 @@
+{
+	"groups": [
+		{
+			"ID": 1,
+			"Name": "GroupDodono",
+			"GameType": 201,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/GroupFSM",
+			"Radius": 50,
+			"MinMember": 5,
+			"MaxMember": 10,
+			"TimeRespawnMember": 10
+		},{
+			"ID": 2,
+			"Name": "GroupSatla",
+			"GameType": 202,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/GroupFSM",
+			"Radius": 50,
+			"MinMember": 2,
+			"MaxMember": 5,
+			"TimeRespawnMember": 60
+		},{
+			"ID": 3,
+			"Name": "GroupBob",
+			"GameType": 203,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/GroupFSM",
+			"Radius": 50,
+			"MinMember": 5,
+			"MaxMember": 10,
+			"TimeRespawnMember": 120
+		},{
+			"ID": 3,
+			"Name": "GroupGrass",
+			"GameType": 204,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/GroupFSM",
+			"Radius": 50,
+			"MinMember": 10,
+			"MaxMember": 20,
+			"TimeRespawnMember": 60
+		}
+	]
+}

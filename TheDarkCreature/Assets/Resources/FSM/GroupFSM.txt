@@ -1,0 +1,36 @@
+﻿{
+	"fsm": [
+		{
+			"condition_name": "IsRoot",
+			"condition_value": true,
+			"state_name": "IdleState",
+			"states": [
+				{
+					"condition_name": "IsFullGroup",
+					"condition_value": false,
+					"state_name": "WaitingState",
+					"states": [
+						{
+							"condition_name": "CountdownWaitingTime",
+							"condition_value": true,
+							"state_name": "SpawnMemberState",
+							"states": [
+								{
+									"condition_name": "IsActive",
+									"condition_value": true,
+									"state_name": "IdleState",
+									"states": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},{
+			"condition_name": "IsAnyState",
+			"condition_value": true,
+			"state_name": "AnyState",
+			"states": []
+		}
+	]
+}

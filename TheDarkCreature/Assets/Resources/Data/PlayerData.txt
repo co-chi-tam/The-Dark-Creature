@@ -1,0 +1,66 @@
+{
+	"players": [
+		{
+			"ID": 1,
+			"Name": "PlayerDodono",
+			"GameType": 1,
+			"CreatureType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Dodono"],
+			"FSMPath": "FSM/PlayerFSM",
+			"IconPath": "",
+			"WalkSpeed": 5,
+			"RunSpeed": 10,
+			"CurrentHP": 10,
+			"MaxHP": 10,
+			"MinDamage": 5,
+			"MaxDamage": 10,
+			"Level": 1,
+			"Inventory": [
+				
+			]
+		},{
+			"ID": 2,
+			"Name": "PlayerSatla",
+			"GameType": 2,
+			"CreatureType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Satla"],
+			"FSMPath": "FSM/PlayerFSM",
+			"IconPath": "",
+			"WalkSpeed": 7,
+			"RunSpeed": 12,
+			"CurrentHP": 50,
+			"MaxHP": 50,
+			"MinDamage": 10,
+			"MaxDamage": 15,
+			"Level": 1,
+			"Inventory": [
+				{
+					"ItemType": 1,
+					"GameType": 51
+				}
+			]
+		},{
+			"ID": 3,
+			"Name": "PlayerBob",
+			"GameType": 3,
+			"CreatureType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Bob"],
+			"FSMPath": "FSM/PlayerFSM",
+			"IconPath": "",
+			"WalkSpeed": 9,
+			"RunSpeed": 15,
+			"CurrentHP": 100,
+			"MaxHP": 100,
+			"MinDamage": 20,
+			"MaxDamage": 25,
+			"Level": 1,
+			"Inventory": [
+				
+			]
+		}
+	]
+}
+
