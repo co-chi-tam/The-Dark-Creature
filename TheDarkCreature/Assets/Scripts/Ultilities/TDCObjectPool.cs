@@ -10,18 +10,6 @@ namespace ObjectPool
         private LinkedList<T> m_ListUsing;
         private Queue<T> m_ListWaiting;
 
-		public T this [int index] {
-			get { 
-				lock (m_ListUsing) {
-					return m_ListUsing.ElementAt(index); 
-				}
-			}
-			set { 
-				var val = m_ListUsing.ElementAt(index);
-				val = value;
-			}
-		}
-
         public TDCObjectPool()
         {
 			m_ListUsing = new LinkedList<T>();
