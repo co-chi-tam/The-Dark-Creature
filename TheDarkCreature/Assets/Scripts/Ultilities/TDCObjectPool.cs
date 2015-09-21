@@ -11,7 +11,11 @@ namespace ObjectPool
         private Queue<T> m_ListWaiting;
 
 		public T this [int index] {
-			get { return m_ListUsing.ElementAt(index); }
+			get { 
+				lock (m_ListUsing) {
+					return m_ListUsing.ElementAt(index); 
+				}
+			}
 			set { 
 				var val = m_ListUsing.ElementAt(index);
 				val = value;
