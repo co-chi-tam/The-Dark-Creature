@@ -105,15 +105,12 @@ public class TDCEasyAIController : TDCCreatureController
         var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_EnemyLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
 			var target = colliders[i].GetComponent<TDCBaseController>();
-			if (target != null) {
-				for (int x = 0; x < GetTypeEnemies().Count; x++) {
-					if (target.GetActive () == false) {
-						return false;
-					}
-					if (target.GetCreatureType().Equals (GetTypeEnemies()[x])) {
-						SetEnemyController (target);
-						return true;
-					}
+			if (target == null || target.GetActive () == false) {
+				continue;
+			} else {
+				if (GetTypeEnemies().IndexOf (target.GetCreatureType()) != -1) {
+					SetEnemyController (target);
+					return true;
 				}
 			}
         }
@@ -124,15 +121,12 @@ public class TDCEasyAIController : TDCCreatureController
 		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_FoodLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
 			var food = colliders[i].GetComponent<TDCBaseController>();
-			if (food != null) {
-				for (int x = 0; x < GetTypeFoods().Count; x++) {
-					if (food.GetActive () == false) {
-						return false;
-					}
-					if (food.GetCreatureType().Equals (GetTypeFoods()[x])) {
-						SetEnemyController (food);
-						return true;
-					}
+			if (food == null || food.GetActive () == false) {
+				continue;
+			} else {
+				if (GetTypeFoods().IndexOf (food.GetCreatureType()) != -1) {
+					SetEnemyController (food);
+					return true;
 				}
 			}
 		}

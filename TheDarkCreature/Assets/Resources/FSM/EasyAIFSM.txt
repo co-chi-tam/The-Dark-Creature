@@ -6,20 +6,6 @@
 			"state_name": "IdleState",
 			"states": [
 				{
-					"condition_name": "FoundEnemy",
-					"condition_value": true,
-					"state_name": "AvoidState",
-					"states": [ 
-						{
-							"condition_name": "MoveToTarget",
-							"condition_value": true,
-							"state_name": "IdleState",
-							"states": [
-
-							]
-						}
-					]
-				},{
 					"condition_name": "FoundFood",
 					"condition_value": false,
 					"state_name": "FindRandomState",
@@ -95,6 +81,20 @@
 							"condition_value": false,
 							"state_name": "IdleState",
 							"states": []
+						}
+					]
+				}, {
+					"condition_name": "FoundEnemy",
+					"condition_value": true,
+					"state_name": "AvoidState",
+					"states": [ 
+						{
+							"condition_name": "MoveToTarget",
+							"condition_value": true,
+							"state_name": "IdleState",
+							"states": [
+
+							]
 						}
 					]
 				}

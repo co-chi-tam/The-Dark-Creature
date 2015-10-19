@@ -7,6 +7,7 @@ public class TDCPlayerController : TDCCreatureController
     #region Property
     [SerializeField]
 	private string StateName = "";
+
 	private FSMManager m_FSMMamager;
 	private TDCPlayerData m_PlayerData;
 	private TDCInventory m_Inventory;
@@ -81,15 +82,17 @@ public class TDCPlayerController : TDCCreatureController
 	private void PlayerAction(RaycastHit hitInfo) {
 		var hitGameObject = hitInfo.collider.gameObject;
 		var controller = hitGameObject.GetComponent<TDCBaseController>();
+		Debug.LogError (hitGameObject.layer);
 		switch (hitGameObject.layer) {
-		case (int) TDCEnum.ELayer.LayerPlane : {
+		case (int) TDCEnum.ELayer.LayerPlane: {
 			SetTargetPosition (hitInfo.point);
-			break;
-		}
-		case (int) TDCEnum.ELayer.LayerEnviroment : {
-			controller.SetIsActive (false);
-			break;
-		}
+		} break;
+		case (int) TDCEnum.ELayer.LayerEnviroment: {
+
+		} break;
+		case (int) TDCEnum.ELayer.LayerCreature: {
+			
+		} break;
 		}
 	}
 

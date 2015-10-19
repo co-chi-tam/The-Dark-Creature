@@ -49,14 +49,14 @@ public class TDCEnum{
 	}
 
 	public enum EGroupType : int {
-		None		= 0,
+		None			= 0,
 		GroupCreature	= 1
 	}
 
 	public enum ELayer: int {
-		None = 0,
-		LayerPlane = 9,
-		LayerCreature = 8,
+		None 			= 0,
+		LayerPlane 		= 9,
+		LayerCreature 	= 8,
 		LayerEnviroment = 10
 	}
 }
