@@ -59,4 +59,11 @@ public class TDCEnum{
 		LayerCreature 	= 8,
 		LayerEnviroment = 10
 	}
+
+	public enum EGameSeason : byte {
+		Spring = 0,
+		Summer = 1,
+		Autumn = 2,
+		Winter = 3
+	}
 }

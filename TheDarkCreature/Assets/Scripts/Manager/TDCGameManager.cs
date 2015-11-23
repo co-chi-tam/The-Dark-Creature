@@ -43,10 +43,9 @@ public class TDCGameManager : MonoBehaviour {
 
     void Awake() {
 		m_TrapsPool = new TDCObjectPool<TDCTrapController>();
-		m_DataLoader = TDCDataLoader.GetInstance ();
+		m_DataLoader = new TDCDataLoader();
 		
 		CreatTrapPool(10);
-		m_DataLoader.Init ();
     }
 
 	void Start() {

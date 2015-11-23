@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MiniJSON;
 
-public class TDCDataLoader : MonoBehaviour {
+public class TDCDataLoader {
 
 	#region Property
 
@@ -17,36 +17,9 @@ public class TDCDataLoader : MonoBehaviour {
 
 	#endregion
 
-	#region Singleton
-	public static object m_objectSingleton = new object();
-	public static TDCDataLoader m_Instance;
+	#region Contructor
 
-	public static TDCDataLoader Instance {
-		get {
-			lock (m_objectSingleton)
-			{
-				if (m_Instance == null) {
-					GameObject go = new GameObject ("DataLoader");
-					m_Instance = go.AddComponent <TDCDataLoader>();
-				}
-				return m_Instance;
-			}
-		}
-	}
-
-	public static TDCDataLoader GetInstance() {
-		return Instance;
-	}
-	
-	public TDCDataLoader ()
-	{
-		m_Instance = this;
-	}
-	#endregion
-
-	#region Implementation Mono
-
-	public void Init() {
+	public TDCDataLoader() {
 		m_ListCreatureData = new Dictionary<TDCEnum.EGameType, TDCCreatureData> ();
 		m_ListFoodData = new Dictionary<TDCEnum.EGameType, TDCFoodData> ();
 		m_ListGroupData = new Dictionary<TDCEnum.EGameType, TDCGroupData> ();

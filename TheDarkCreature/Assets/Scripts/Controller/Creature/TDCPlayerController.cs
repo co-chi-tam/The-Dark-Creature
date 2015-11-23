@@ -82,7 +82,7 @@ public class TDCPlayerController : TDCCreatureController
 	private void PlayerAction(RaycastHit hitInfo) {
 		var hitGameObject = hitInfo.collider.gameObject;
 		var controller = hitGameObject.GetComponent<TDCBaseController>();
-		Debug.LogError (hitGameObject.layer);
+//		Debug.LogError (hitGameObject.layer);
 		switch (hitGameObject.layer) {
 		case (int) TDCEnum.ELayer.LayerPlane: {
 			SetTargetPosition (hitInfo.point);
