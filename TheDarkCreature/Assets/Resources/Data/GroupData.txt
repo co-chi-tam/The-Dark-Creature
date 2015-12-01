@@ -52,6 +52,19 @@
 			"MinMember": 10,
 			"MaxMember": 20,
 			"TimeRespawnMember": 60
+		},{
+			"ID": 4,
+			"Name": "GroupGrass",
+			"GameType": 205,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/GroupFSM",
+			"Radius": 50,
+			"MinMember": 5,
+			"MaxMember": 10,
+			"TimeRespawnMember": 120
 		}
 	]
 }

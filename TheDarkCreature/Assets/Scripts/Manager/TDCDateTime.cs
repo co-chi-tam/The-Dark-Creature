@@ -46,6 +46,8 @@ public class TDCDateTime : MonoBehaviour {
 
 	private List<AlarmClockInfo> m_AlarmClocks;
 
+	private float m_SunLightIntensity = 0f;
+
 	#endregion
 
 	#region Internal Class
@@ -137,6 +139,7 @@ public class TDCDateTime : MonoBehaviour {
 		m_SecondPerSeason 	= m_SecondPerMinute * m_MinutePerHour * m_HourPerDay * m_DayPerSeason;
 		m_SeasonCount 		= Enum.GetNames (typeof(TDCEnum.EGameSeason)).Length;
 		m_AlarmClocks 		= new List<AlarmClockInfo> ();
+		m_SunLightIntensity = m_DayLight.intensity;
 	}
 
 	void Start() {
@@ -157,9 +160,7 @@ public class TDCDateTime : MonoBehaviour {
 	
 		var alarmCount = m_AlarmClocks.Count;
 		for (int i = 0; i < alarmCount; i++) {
-			if (m_AlarmClocks[i].AlarmComplete ((int) m_Hour,
-			                                    (int) m_Day, 
-			                                    m_Season)) {
+			if (m_AlarmClocks[i].AlarmComplete ((int) m_Hour, (int) m_Day, m_Season)) {
 				if (m_AlarmClocks[i].Repeat == false) {
 					m_AlarmClocks.RemoveAt (i);
 					m_AlarmClocks.TrimExcess();
@@ -169,7 +170,7 @@ public class TDCDateTime : MonoBehaviour {
 		var value = m_Hour / 24;
 		m_SunImage.fillAmount 	= m_DayNightCurve.Evaluate (value);
 		m_MoonImage.fillAmount 	= 1f - m_DayNightCurve.Evaluate (value);
-		m_DayLight.intensity 	= m_SunImage.fillAmount;
+		m_DayLight.intensity 	= m_SunImage.fillAmount * m_SunLightIntensity;
 	}
 
 	#endregion

@@ -51,7 +51,7 @@ public class TDCTrapController : TDCCreatureController
     {
         base.SetActive(value);
         if (!value) {
-            m_GameManager.ReturnTrap(this);
+//            m_GameManager.ReturnTrap(this);
         }
     }
 

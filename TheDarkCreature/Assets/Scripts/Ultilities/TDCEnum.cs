@@ -9,29 +9,27 @@ public class TDCEnum{
 		PlayerBob		= 3,
 
 		// Creature
-		Creature	= 4,
 		Dodono 		= 5,
 		Satla 		= 6,
 		Bob 		= 7,
 
 		// Food
-		Food 		= 50,
 		Meat 		= 51,
+		Mushroom	= 52,
 
 		// Weapon
-		Weapon		= 70,
 		Trap		= 71,
 
 		// Group
-		Group 		= 200,
 		GroupDodono	= 201,
 		GroupSatla	= 202,
 		GroupBob	= 203,
 		GroupGrass	= 204,
+		GroupMushRoom = 205,
 
 		// Enviroment
-		Enviroment  = 250,
-		EnviromentGrass = 251
+		EnviromentGrass = 251,
+		EnviromentMushroom = 252
 	}
 
 	public enum EItemType : int {

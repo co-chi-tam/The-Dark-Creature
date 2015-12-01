@@ -44,22 +44,63 @@ public class TDCGameManager : MonoBehaviour {
     void Awake() {
 		m_TrapsPool = new TDCObjectPool<TDCTrapController>();
 		m_DataLoader = new TDCDataLoader();
-		
-		CreatTrapPool(10);
     }
 
 	void Start() {
 		CreateCreature (TDCEnum.EGameType.PlayerSatla, Vector3.zero, Quaternion.identity);
 
-		CreateCreature (TDCEnum.EGameType.GroupDodono, Vector3.zero, Quaternion.identity);
-		CreateCreature (TDCEnum.EGameType.GroupSatla, new Vector3 (10f, 0f, 20f), Quaternion.identity);
+		CreateGroup (TDCEnum.EGameType.GroupDodono, Vector3.zero, Quaternion.identity);
+		CreateGroup (TDCEnum.EGameType.GroupSatla, new Vector3 (10f, 0f, 20f), Quaternion.identity);
 
-		CreateCreature (TDCEnum.EGameType.GroupGrass, new Vector3 (20f, 0f, 20f), Quaternion.identity);
+		CreateGroup (TDCEnum.EGameType.GroupGrass, new Vector3 (20f, 0f, 20f), Quaternion.identity);
+		CreateGroup (TDCEnum.EGameType.GroupMushRoom, new Vector3 (10f, 0f, 20f), Quaternion.identity);
+
 	}
 
     #endregion
 
     #region Main method
+
+	public TDCGroupCreatureController CreateGroup(TDCEnum.EGameType type, 
+	                                               Vector3 position, 
+	                                               Quaternion rotation, 
+	                                               GameObject parent = null) {
+		var random = Random.Range (0, 9999);
+		TDCBaseData data = m_DataLoader.GetGroup (type);
+		GameObject gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [random % data.ModelPath.Length]));
+		TDCGroupCreatureController controller = gObject.AddComponent<TDCGroupCreatureController> ();
+		var groupController = controller as TDCGroupCreatureController;
+
+		controller.SetData (data);
+		controller.Init ();
+
+		switch (type) {
+		case TDCEnum.EGameType.GroupDodono:
+			groupController.CreatePoolMember (TDCEnum.EGameType.Dodono);
+			break;
+		case TDCEnum.EGameType.GroupSatla:
+			groupController.CreatePoolMember (TDCEnum.EGameType.Satla);
+			break;
+		case TDCEnum.EGameType.GroupBob: 
+			groupController.CreatePoolMember (TDCEnum.EGameType.Bob);
+			break;
+		case TDCEnum.EGameType.GroupGrass:
+			groupController.CreatePoolMember (TDCEnum.EGameType.EnviromentGrass);
+			break;
+		case TDCEnum.EGameType.GroupMushRoom:
+			groupController.CreatePoolMember (TDCEnum.EGameType.EnviromentMushroom);
+			break;
+		}
+		gObject.transform.position = position;
+		gObject.transform.rotation = rotation;
+		controller.SetData (data);
+		controller.SetCreatureType (type);
+		controller.name = type.ToString ();
+		if (parent != null) {
+			gObject.transform.SetParent (parent.transform);		
+		}
+		return controller;
+	}
 
 	public TDCBaseController CreateCreature(TDCEnum.EGameType type, 
 	                                        Vector3 position, 
@@ -68,8 +109,7 @@ public class TDCGameManager : MonoBehaviour {
 		TDCBaseData data = null;
 		GameObject gObject = null;
 		TDCBaseController controller = null;
-		var random = Random.Range (0, 100); 
-
+		var random = Random.Range (0, 9999);
 		switch (type) { 
 		case TDCEnum.EGameType.PlayerDodono:
 		case TDCEnum.EGameType.PlayerSatla:
@@ -90,39 +130,15 @@ public class TDCGameManager : MonoBehaviour {
 			controller.Init ();
 			break;
 		}
-		case TDCEnum.EGameType.Food:
 		case TDCEnum.EGameType.Meat: {
 
 			break;
 		}
-		case TDCEnum.EGameType.Weapon:
 		case TDCEnum.EGameType.Trap: {
 			data = m_DataLoader.GetWeapon (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]));
 			controller = gObject.AddComponent<TDCTrapController> ();
 			controller.Init ();
-			break;
-		}
-		case TDCEnum.EGameType.Group:
-		case TDCEnum.EGameType.GroupDodono:
-		case TDCEnum.EGameType.GroupSatla:
-		case TDCEnum.EGameType.GroupBob: 
-		case TDCEnum.EGameType.GroupGrass: {
-			data = m_DataLoader.GetGroup (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]));
-			controller = gObject.AddComponent<TDCGroupCreatureController> ();
-			var groupController = controller as TDCGroupCreatureController;
-			controller.SetData (data);
-			controller.Init ();
-			if (type == TDCEnum.EGameType.GroupDodono) {
-				groupController.CreatePoolMember (TDCEnum.EGameType.Dodono);
-			} else if (type == TDCEnum.EGameType.GroupSatla) {
-				groupController.CreatePoolMember (TDCEnum.EGameType.Satla);
-			} else if (type == TDCEnum.EGameType.GroupBob) {
-				groupController.CreatePoolMember (TDCEnum.EGameType.Bob);
-			} else if (type == TDCEnum.EGameType.GroupGrass) {
-				groupController.CreatePoolMember (TDCEnum.EGameType.EnviromentGrass);
-			}
 			break;
 		}
 		case TDCEnum.EGameType.EnviromentGrass: {
@@ -132,6 +148,16 @@ public class TDCGameManager : MonoBehaviour {
 			controller.Init ();
 			break;
 		}
+		case TDCEnum.EGameType.EnviromentMushroom: {
+			data = m_DataLoader.GetResource (type);
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]));
+			controller = gObject.AddComponent<TDCResourceController> ();
+			controller.Init ();
+			break;
+		}
+		default:
+
+			break;
 		}
 		gObject.transform.position = position;
 		gObject.transform.rotation = rotation;
@@ -143,29 +169,6 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		return controller;
 	}
-
-    private void CreatTrapPool(int amout) {
-        for (int i = 0; i < amout; i++)
-        {
-            GameObject trapObject = GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Trap"));
-            trapObject.name = string.Format("Trap {0}", i);
-            var trapController = trapObject.AddComponent<TDCTrapController>();
-            trapController.transform.SetParent(this.transform);
-			trapController.gameObject.SetActive (false);
-            m_TrapsPool.Create(trapController);
-        }
-    }
-
-    public void SpawnTrap(Vector3 position) {
-        var trap = m_TrapsPool.Get();
-        trap.transform.position = position;
-    }
-
-    public void ReturnTrap(TDCTrapController item)
-    {
-		item.gameObject.SetActive (false);
-        m_TrapsPool.Set(item);
-    }
 
     #endregion
 }
