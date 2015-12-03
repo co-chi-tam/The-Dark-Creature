@@ -4,7 +4,7 @@ public class TDCBaseData : TDCPropertyReflection
     private int m_ID;
     private string m_Name;
 	private TDCEnum.EGameType m_GameType;
-	private TDCEnum.ECreatureType m_CreaturType;
+	private TDCEnum.ECreatureType m_CreatureType;
 	private TDCEnum.EItemType m_ItemType;
     private string m_Description;
 	private string[] m_ModelPath;
@@ -49,8 +49,8 @@ public class TDCBaseData : TDCPropertyReflection
 	}
 	
 	public TDCEnum.ECreatureType CreatureType {
-		get { return m_CreaturType; }
-		set { m_CreaturType = value; }
+		get { return m_CreatureType; }
+		set { m_CreatureType = value; }
 	}
 
     public TDCBaseData()
@@ -59,7 +59,7 @@ public class TDCBaseData : TDCPropertyReflection
         this.m_Name         = string.Empty;
         this.m_GameType     = TDCEnum.EGameType.None;
 		this.m_ItemType		= TDCEnum.EItemType.None;
-		m_CreaturType 		= TDCEnum.ECreatureType.None;
+		m_CreatureType 		= TDCEnum.ECreatureType.None;
         this.m_Description  = string.Empty;
 		this.m_ModelPath 	= new string[] {};
 		this.m_FSMPath = string.Empty;

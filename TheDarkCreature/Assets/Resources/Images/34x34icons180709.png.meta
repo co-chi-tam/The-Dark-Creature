@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b461d0575b5b907458c8137ab38c4877
-timeCreated: 1441472394
+timeCreated: 1449071187
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -23,7 +23,7 @@ TextureImporter:
     21300032: 34x34icons180709_16
     21300034: 34x34icons180709_17
     21300036: 34x34icons180709_18
-    21300038: 34x34icons180709_19
+    21300038: MushRoom
     21300040: 34x34icons180709_20
     21300042: 34x34icons180709_21
     21300044: 34x34icons180709_22
@@ -285,7 +285,7 @@ TextureImporter:
     21300556: 34x34icons180709_278
     21300558: 34x34icons180709_279
     21300560: 34x34icons180709_280
-    21300562: 34x34icons180709_281
+    21300562: CampFire
     21300564: 34x34icons180709_282
     21300566: 34x34icons180709_283
     21300568: 34x34icons180709_284
@@ -476,6 +476,7 @@ TextureImporter:
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
+  allowsAlphaSplitting: 0
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
@@ -678,7 +679,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 34x34icons180709_19
+    - name: MushRoom
       rect:
         serializedVersion: 2
         x: 170
@@ -3268,7 +3269,7 @@ TextureImporter:
       alignment: 0
       pivot: {x: .5, y: .5}
       border: {x: 0, y: 0, z: 0, w: 0}
-    - name: 34x34icons180709_281
+    - name: CampFire
       rect:
         serializedVersion: 2
         x: 35

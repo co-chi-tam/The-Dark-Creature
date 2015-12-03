@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using MiniJSON;
+using System.Linq;
 
 public class TDCDataLoader {
 
@@ -14,6 +15,7 @@ public class TDCDataLoader {
 	private Dictionary<TDCEnum.EGameType, TDCPlayerData> m_ListPlayerData;
 	private Dictionary<TDCEnum.EGameType, TDCWeaponData> m_ListWeaponData;
 	private Dictionary<TDCEnum.EGameType, TDCResourceData> m_ListResourceData;
+	private Dictionary<TDCEnum.EGameType, TDCGObjectData> m_ListGObjectData;
 
 	#endregion
 
@@ -26,6 +28,7 @@ public class TDCDataLoader {
 		m_ListPlayerData = new Dictionary<TDCEnum.EGameType, TDCPlayerData> ();
 		m_ListWeaponData = new Dictionary<TDCEnum.EGameType, TDCWeaponData> ();
 		m_ListResourceData = new Dictionary<TDCEnum.EGameType, TDCResourceData> ();
+		m_ListGObjectData = new Dictionary<TDCEnum.EGameType, TDCGObjectData> (); 
 
 		LoadData ();
 	}
@@ -40,6 +43,7 @@ public class TDCDataLoader {
 		var playerAsset = Resources.Load<TextAsset> ("Data/PlayerData");
 		var weaponAsset = Resources.Load<TextAsset> ("Data/WeaponData");
 		var resourceTextAsset = Resources.Load<TextAsset> ("Data/ResourceData");
+		var objectTextAsset = Resources.Load<TextAsset> ("Data/ObjectData");
 
 		var jsonCreature = Json.Deserialize (creatureAsset.text) as Dictionary<string, object>;
 		var jsonfood = Json.Deserialize (foodAsset.text) as Dictionary<string, object>;
@@ -47,12 +51,14 @@ public class TDCDataLoader {
 		var jsonPlayer = Json.Deserialize (playerAsset.text) as Dictionary<string, object>;
 		var jsonWeapon = Json.Deserialize (weaponAsset.text) as Dictionary<string, object>;
 		var jsonResource = Json.Deserialize (resourceTextAsset.text) as Dictionary<string, object>;
+		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
 
 		LoadFood (jsonfood["foods"] as List<object>);
 		LoadGroup (jsonGroup["groups"] as List<object>);
 		LoadWeapon (jsonWeapon["weapons"] as List<object>);
 		LoadResource (jsonResource["resources"] as List<object>);
 		LoadCreature (jsonCreature["creatures"] as List<object>);
+		LoadObject (jsonObject["objects"] as List<object>);
 		LoadPlayer (jsonPlayer["players"] as List<object>);
 	}
 
@@ -92,7 +98,8 @@ public class TDCDataLoader {
 			food.Icon = instance["IconPath"].ToString();
 			food.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			food.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
-			food.RecoverPoint = int.Parse (instance ["RecoverPoint"].ToString ());
+			food.EffectName = instance ["EffectName"].ToString ();
+			food.EffectValue = instance ["EffectValue"];
 			m_ListFoodData.Add (food.GameType, food);
 		}
 	}
@@ -190,10 +197,32 @@ public class TDCDataLoader {
 				case TDCEnum.EItemType.Resource:
 					player.Inventory[x] = GetResource (gameType);
 					break;
+				case TDCEnum.EItemType.GObject:
+					player.Inventory[x] = GetGObject (gameType);
+					break;
 				}
 				player.Inventory[x].Amount = 1;
 			}
 			m_ListPlayerData.Add (player.GameType, player);
+		}
+	}
+
+	public void LoadObject(List<object> values) {
+		for (int i = 0; i < values.Count; i++) {
+			var instance = values [i] as Dictionary<string, object>;
+			var gObject = new TDCGObjectData ();
+			gObject.ID = int.Parse (instance ["ID"].ToString ());
+			gObject.Name = instance ["Name"].ToString ();
+			gObject.Description = instance ["Description"].ToString ();
+			gObject.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
+			gObject.FSMPath = instance["FSMPath"].ToString();
+			gObject.Icon = instance["IconPath"].ToString();
+			gObject.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
+			gObject.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
+			gObject.EffectName = instance ["EffectName"].ToString ();
+			gObject.EffectValue = instance ["EffectValue"];
+			gObject.Duration = float.Parse (instance ["Duration"].ToString ());
+			m_ListGObjectData.Add (gObject.GameType, gObject);
 		}
 	}
 
@@ -221,6 +250,10 @@ public class TDCDataLoader {
 
 	public TDCResourceData GetResource(TDCEnum.EGameType resource) {
 		return TDCResourceData.Clone (m_ListResourceData[resource]);
+	}
+
+	public TDCGObjectData GetGObject(TDCEnum.EGameType gObject) {
+		return TDCGObjectData.Clone (m_ListGObjectData[gObject]);
 	}
 
 	#endregion

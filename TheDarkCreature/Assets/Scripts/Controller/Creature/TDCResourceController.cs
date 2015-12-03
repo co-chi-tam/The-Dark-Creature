@@ -5,8 +5,7 @@ using FSM;
 public class TDCResourceController : TDCCreatureController {
 
 	#region Property
-	[SerializeField]
-	private string StateName = "";
+
 	private FSMManager m_FSMMamager;
 	private TDCGameManager m_GameManager;
 	protected TDCResourceData m_ResourceData;

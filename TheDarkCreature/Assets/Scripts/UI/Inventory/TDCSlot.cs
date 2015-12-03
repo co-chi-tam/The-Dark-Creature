@@ -5,7 +5,7 @@ public class TDCSlot : MonoBehaviour {
 
 	#region Properties
 	private TDCInventory.SelectedSlot m_SelectedSlot;
-	public TDCInventory.SelectedSlot DelegateSelectedSlot {
+	public TDCInventory.SelectedSlot OnSelectedSlot {
 		get { return m_SelectedSlot; }
 		set { m_SelectedSlot = value; }
 	}
@@ -54,7 +54,7 @@ public class TDCSlot : MonoBehaviour {
 
 	private void OnPointerClick() {
 		if (m_SelectedSlot != null) {
-			m_SelectedSlot (this);
+			m_SelectedSlot (this.m_ItemData as TDCItemData);
 		}
 	}
 

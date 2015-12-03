@@ -1,0 +1,17 @@
+{
+	"objects": [
+		{
+			"ID": 1,
+			"Name": "CampFire",
+			"GameType": 301,
+			"ItemType": 4,
+			"Description": "",
+			"ModelPath": ["Prefabs/CampFire"],
+			"FSMPath": "FSM/CampFireFSM",
+			"IconPath": "CampFire",
+			"EffectName": "CreateObject"
+			"EffectValue": 301,
+			"Duration": 120
+		}
+	]
+}

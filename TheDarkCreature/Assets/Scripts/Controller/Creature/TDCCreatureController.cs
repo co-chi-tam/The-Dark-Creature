@@ -5,6 +5,7 @@ using System.Collections.Generic;
 public class TDCCreatureController : TDCBaseController {
 
 	#region Property
+
 	protected Animator m_AnimatorController;
 	protected Rigidbody m_Rigidbody;
 	protected Vector3 m_TargetPosition;
@@ -47,7 +48,7 @@ public class TDCCreatureController : TDCBaseController {
 	
 	#region Main Method
 
-	public virtual void OnSelectedItem(TDCSlot slot) {
+	public virtual void OnSelectedItem(TDCItemData slot) {
 		
 	}
 	

@@ -1,0 +1,22 @@
+{
+	"fsm": [
+		{
+			"condition_name": "IsRoot",
+			"condition_value": true,
+			"state_name": "FireState",
+			"states": [
+				{
+					"condition_name": "IsFireActive",
+					"condition_value": false,
+					"state_name": "DisableState",
+					"states": []
+				}
+			]
+		},{
+			"condition_name": "IsAnyState",
+			"condition_value": true,
+			"state_name": "AnyState",
+			"states": []
+		}
+	]
+}

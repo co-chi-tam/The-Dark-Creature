@@ -5,12 +5,11 @@ using FSM;
 public class TDCTrapController : TDCCreatureController
 {
     #region Property
-    [SerializeField]
-    private string StateName = "";
-    private FSMManager m_FSMMamager;
-    private LayerMask m_EnemyLayerMask;
 
+	private FSMManager m_FSMMamager;
+    private LayerMask m_EnemyLayerMask;
     private TDCGameManager m_GameManager;
+
     #endregion
 
     #region Implementation Mono

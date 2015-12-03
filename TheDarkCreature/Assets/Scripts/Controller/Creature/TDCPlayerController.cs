@@ -1,16 +1,21 @@
 ﻿using UnityEngine;
 using UnityEngine.EventSystems;
 using FSM;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 
 public class TDCPlayerController : TDCCreatureController
 {
     #region Property
-    [SerializeField]
-	private string StateName = "";
 
 	private FSMManager m_FSMMamager;
 	private TDCPlayerData m_PlayerData;
 	private TDCInventory m_Inventory;
+	private TDCGameManager m_GameManager;
+
+	private Dictionary<string, Action<object>> m_EffectEvents;
+
     #endregion
 
     #region Implementation Mono
@@ -37,6 +42,13 @@ public class TDCPlayerController : TDCCreatureController
 
         m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
 
+		m_EffectEvents = new Dictionary<string, Action<object>> ();
+		m_EffectEvents["Default"] = UsedDefaultItem;
+		m_EffectEvents["IncreaseHealthPoint"] = IncreaseHealthPoint;
+		m_EffectEvents["DecreaseHealthPoint"] = DecreaseHealthPoint;
+		m_EffectEvents["CreateObject"] = CreateObject;
+
+		m_GameManager = TDCGameManager.GetInstance ();
 	}
 	
 	void LateUpdate () {
@@ -79,6 +91,23 @@ public class TDCPlayerController : TDCCreatureController
 
     #region Main method
 
+	private void UsedDefaultItem(object value) {
+		// TODO
+	}
+
+	private void IncreaseHealthPoint(object value) {
+		Debug.LogError (value);
+	}
+
+	private void DecreaseHealthPoint(object value) {
+		
+	}
+
+	private void CreateObject(object value) {
+		var gameType = (TDCEnum.EGameType)(int.Parse (value.ToString ()));
+		m_GameManager.CreateGObject (gameType, this.transform.position, Quaternion.identity);
+	}
+
 	private void PlayerAction(RaycastHit hitInfo) {
 		var hitGameObject = hitInfo.collider.gameObject;
 		var controller = hitGameObject.GetComponent<TDCBaseController>();
@@ -96,15 +125,15 @@ public class TDCPlayerController : TDCCreatureController
 		}
 	}
 
-	public override void OnSelectedItem (TDCSlot slot)
+	public override void OnSelectedItem (TDCItemData item)
 	{
-		base.OnSelectedItem (slot);
-		var itemType = slot.GetData ().ItemType;
+		base.OnSelectedItem (item);
+		var itemType = item.ItemType;
 		switch (itemType) {
 		case TDCEnum.EItemType.Food: 
 		case TDCEnum.EItemType.Resource: 
 		{
-			var itemData = slot.GetData () as TDCFoodData;
+			var itemData = item as TDCFoodData;
 			itemData.Amount --;
 			if (itemData.Amount == 0) {
 				m_Inventory.RemoveItem (itemData);
@@ -112,7 +141,7 @@ public class TDCPlayerController : TDCCreatureController
 			break;
 		}
 		case TDCEnum.EItemType.Weapon:{
-			var weapon = slot.GetData () as TDCWeaponData;
+			var weapon = item as TDCWeaponData;
 			weapon.Duration -= weapon.DecreaseDuration;
 			if (weapon.Duration == 0) {
 				weapon.Amount --;
@@ -122,7 +151,15 @@ public class TDCPlayerController : TDCCreatureController
 			}
 			break;
 		}
+		case TDCEnum.EItemType.GObject: {
+			var gObject = item as TDCGObjectData;
+			gObject.Amount --;
+			if (gObject.Amount == 0) {
+				m_Inventory.RemoveItem (gObject);
+			}
+		} break;
 		}
+		m_EffectEvents [item.EffectName] (item.EffectValue);
 	}
 
     private bool CanMove() {
@@ -140,7 +177,7 @@ public class TDCPlayerController : TDCCreatureController
 
 	public override TDCBaseData GetData ()
 	{
-		return m_PlayerData as TDCBaseData;
+		return m_PlayerData;
 	}
 
 	public override void SetData(TDCBaseData value) {

@@ -18,6 +18,9 @@ public enum EAnimation:int {
 public class TDCBaseController : TDCMonoBehaviour
 {
 	#region Property
+	[SerializeField]
+	protected string StateName = "";
+
 	protected Transform m_Transform;
 	protected Vector3 m_StartPosition;
     protected bool m_IsActive = true;
@@ -26,8 +29,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	protected TDCEnum.EGameType m_CreatureType;
 	protected TDCBaseGroupController m_GroupController;
 	protected SphereCollider m_Collider;
-
-	private TDCBaseData m_BaseData;
+	protected TDCBaseData m_BaseData;
 
     public Vector3 TransformPosition {
 		get { return m_Transform.position; }
@@ -49,6 +51,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	public virtual void Init() {
 		m_Transform	= this.transform;
 		m_StartPosition = m_Transform.position;
+		SetActive (true);
 	}
 
 	public virtual void Start()

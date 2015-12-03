@@ -8,7 +8,8 @@
 			"Description": "",
 			"ModelPath": ["Prefabs/Meat"],
 			"IconPath": "Meat",
-			"RecoverPoint": 10
+			"EffectName": "IncreaseHealthPoint"
+			"EffectValue": 10,
 		}
 	]
 }

@@ -29,14 +29,18 @@ public class TDCEnum{
 
 		// Enviroment
 		EnviromentGrass = 251,
-		EnviromentMushroom = 252
+		EnviromentMushroom = 252,
+
+		// Object
+		CampFire	= 301
 	}
 
 	public enum EItemType : int {
 		None 		= 0,
 		Food 		= 1,
 		Weapon 		= 2,
-		Resource	= 3
+		Resource	= 3,
+		GObject		= 4
 	}
 
 	public enum ECreatureType : int {

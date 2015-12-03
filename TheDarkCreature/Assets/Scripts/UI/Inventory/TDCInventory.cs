@@ -36,10 +36,11 @@ public class TDCInventory : MonoBehaviour {
 
 	[SerializeField]
 	private TDCCreatureController m_OwnerController;
+
 	private TDCCreatureData m_OwnerData;
 	private TDCSlot[] m_ItemSlots;
 
-	public delegate void SelectedSlot(TDCSlot item);
+	public delegate void SelectedSlot(TDCItemData item);
 
 	#endregion
 
@@ -66,20 +67,17 @@ public class TDCInventory : MonoBehaviour {
 				} else if (m_OwnerData.Inventory[i] == null) {
 					m_OwnerData.Inventory[i] = itemData;
 					m_ItemSlots[i].LoadSlot (itemData);
-					if (m_ItemSlots[i].DelegateSelectedSlot == null) {
-						m_ItemSlots[i].DelegateSelectedSlot += m_OwnerController.OnSelectedItem;
-					}
+					m_ItemSlots[i].OnSelectedSlot = m_OwnerController.OnSelectedItem;
 					return true;
 				}
 				break;
 			}
-			case TDCEnum.EItemType.Weapon: {
+			case TDCEnum.EItemType.Weapon: 
+			case TDCEnum.EItemType.GObject: {
 				if (m_OwnerData.Inventory[i] == null) {
 					m_OwnerData.Inventory[i] = itemData;
 					m_ItemSlots[i].LoadSlot (itemData);
-					if (m_ItemSlots[i].DelegateSelectedSlot == null) {
-						m_ItemSlots[i].DelegateSelectedSlot += m_OwnerController.OnSelectedItem;
-					}
+					m_ItemSlots[i].OnSelectedSlot = m_OwnerController.OnSelectedItem;
 					return true;
 				}
 				break;
@@ -93,9 +91,7 @@ public class TDCInventory : MonoBehaviour {
 		for (int i = 0; i < m_OwnerData.Inventory.Length; i++) {
 			if (m_OwnerData.Inventory[i] != null) {
 				if (m_OwnerData.Inventory[i].GameType == itemData.GameType) {
-					if (m_ItemSlots[i].DelegateSelectedSlot != null) {
-						m_ItemSlots[i].DelegateSelectedSlot -= m_OwnerController.OnSelectedItem;
-					}
+					m_ItemSlots[i].OnSelectedSlot = null;
 					m_ItemSlots[i].EmptySlot();
 					m_OwnerData.Inventory[i] = null;
 					return true;
@@ -112,9 +108,7 @@ public class TDCInventory : MonoBehaviour {
 		for (int i = 0; i < m_OwnerData.Inventory.Length; i++) {
 			var child = this.transform.GetChild (i).GetComponent<TDCSlot>();
 			if (m_OwnerData.Inventory[i] != null) {
-				if (child.DelegateSelectedSlot == null) {
-					child.DelegateSelectedSlot += m_OwnerController.OnSelectedItem;
-				}
+				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
 				child.LoadSlot (m_OwnerData.Inventory[i]);
 			}
 			m_ItemSlots[i] = child;

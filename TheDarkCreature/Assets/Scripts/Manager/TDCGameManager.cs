@@ -54,12 +54,37 @@ public class TDCGameManager : MonoBehaviour {
 
 		CreateGroup (TDCEnum.EGameType.GroupGrass, new Vector3 (20f, 0f, 20f), Quaternion.identity);
 		CreateGroup (TDCEnum.EGameType.GroupMushRoom, new Vector3 (10f, 0f, 20f), Quaternion.identity);
-
 	}
 
     #endregion
 
     #region Main method
+
+	public TDCBaseController CreateGObject(TDCEnum.EGameType type, 
+	                                       Vector3 position, 
+	                                       Quaternion rotation, 
+	                                       GameObject parent = null) {
+		TDCBaseData data = m_DataLoader.GetGObject (type);
+		GameObject gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]));
+		TDCBaseController controller = null;
+
+		switch (type) {
+		case TDCEnum.EGameType.CampFire:
+			controller = gObject.AddComponent <TDCCampFireController>();
+			break;
+		}
+
+		gObject.transform.position = position;
+		gObject.transform.rotation = rotation;
+		controller.SetData (data);
+		controller.Init ();
+		controller.SetCreatureType (type);
+		controller.name = type.ToString ();
+		if (parent != null) {
+			gObject.transform.SetParent (parent.transform);		
+		}
+		return controller;
+	}
 
 	public TDCGroupCreatureController CreateGroup(TDCEnum.EGameType type, 
 	                                               Vector3 position, 

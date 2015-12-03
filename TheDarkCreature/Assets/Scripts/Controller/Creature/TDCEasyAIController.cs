@@ -5,7 +5,7 @@ using FSM;
 public class TDCEasyAIController : TDCCreatureController
 {
     #region Properties
-    public string StateName = "";
+    
     private FSMManager m_FSMMamager;
 	private LayerMask m_EnemyLayerMask;
 	private LayerMask m_FoodLayerMask;
