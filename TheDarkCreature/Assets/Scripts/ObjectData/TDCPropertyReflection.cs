@@ -76,6 +76,21 @@ public class TDCPropertyReflection {
         {
             throw new Exception(ex.Message);
         }
-
     }
+
+	public Type GetType(string name) {
+		try
+		{
+			var propObj     = this.m_Properties[name];
+			var propInfo    = propObj.GetType().GetProperty("Value");
+			var propValue   = propInfo.GetValue(propObj, null);
+			return propValue.GetType();
+		}
+		catch (Exception ex)
+		{
+			throw new Exception(ex.Message);
+		}
+		return null;
+	}
+
 }

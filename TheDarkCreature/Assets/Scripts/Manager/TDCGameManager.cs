@@ -65,7 +65,7 @@ public class TDCGameManager : MonoBehaviour {
 	                                       Quaternion rotation, 
 	                                       GameObject parent = null) {
 		TDCBaseData data = m_DataLoader.GetGObject (type);
-		GameObject gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]));
+		GameObject gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]), position, rotation) as GameObject;
 		TDCBaseController controller = null;
 
 		switch (type) {
@@ -92,7 +92,7 @@ public class TDCGameManager : MonoBehaviour {
 	                                               GameObject parent = null) {
 		var random = Random.Range (0, 9999);
 		TDCBaseData data = m_DataLoader.GetGroup (type);
-		GameObject gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [random % data.ModelPath.Length]));
+		GameObject gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [random % data.ModelPath.Length]), position, rotation) as GameObject;
 		TDCGroupCreatureController controller = gObject.AddComponent<TDCGroupCreatureController> ();
 		var groupController = controller as TDCGroupCreatureController;
 
@@ -140,7 +140,7 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.PlayerSatla:
 		case TDCEnum.EGameType.PlayerBob: {
 			data = m_DataLoader.GetPlayer (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]));
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCPlayerController> ();
 			CameraController.Instance.Target = gObject.transform;
 			controller.Init ();
@@ -150,7 +150,7 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.Satla:
 		case TDCEnum.EGameType.Bob: {
 			data = m_DataLoader.GetCreature (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]));
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEasyAIController> ();
 			controller.Init ();
 			break;
@@ -161,21 +161,21 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		case TDCEnum.EGameType.Trap: {
 			data = m_DataLoader.GetWeapon (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]));
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCTrapController> ();
 			controller.Init ();
 			break;
 		}
 		case TDCEnum.EGameType.EnviromentGrass: {
 			data = m_DataLoader.GetResource (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]));
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCResourceController> ();
 			controller.Init ();
 			break;
 		}
 		case TDCEnum.EGameType.EnviromentMushroom: {
 			data = m_DataLoader.GetResource (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]));
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCResourceController> ();
 			controller.Init ();
 			break;

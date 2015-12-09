@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class TDCCreatureData : TDCBaseData {
 
-	private float m_WalkSpeed;
+	private TDCObjectProperty<float> m_WalkSpeed;
 	private float m_RunSpeed;
 	private float m_RotationSpeed;
 	private int m_CurrentHP;
@@ -15,8 +15,8 @@ public class TDCCreatureData : TDCBaseData {
 	private List<TDCEnum.EGameType> m_TypeFoods;
 
 	public float WalkSpeed {
-		get { return m_WalkSpeed; }
-		set { m_WalkSpeed = value; }
+		get { return m_WalkSpeed.GetValue(); }
+		set { m_WalkSpeed.SetValue (value); }
 	}
 
 	public float RunSpeed {
@@ -66,7 +66,7 @@ public class TDCCreatureData : TDCBaseData {
 
     public TDCCreatureData() : base()
     {
-		m_WalkSpeed = 0;
+		m_WalkSpeed = new TDCObjectProperty<float>("WalkSpeed");
 		m_RunSpeed = 0;
 		m_RotationSpeed = 5f;
 		m_CurrentHP = 0;
@@ -76,6 +76,8 @@ public class TDCCreatureData : TDCBaseData {
 		m_DetectRange = 0f;
 		m_TypeEnemies = new List<TDCEnum.EGameType> ();
 		m_TypeFoods = new List<TDCEnum.EGameType> ();
+
+		RegisterProperty (m_WalkSpeed);
     }
 
 	public static TDCCreatureData Clone (TDCCreatureData instance) {

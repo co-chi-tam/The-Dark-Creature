@@ -7,7 +7,6 @@ namespace FSM
 {
     public class FSMReader
     {
-
         private Dictionary<string, FSMStateData> m_Maps;
         private FSMStateData m_CurrentState;
         private FSMStateData m_AnyState;

@@ -18,7 +18,7 @@
 			"GameType": 252,
 			"CreatureType": 3,
 			"Description": "",
-			"ModelPath": ["Prefabs/Mushroom1","Prefabs/Mushroom2","Prefabs/Mushroom3"],
+			"ModelPath": ["Prefabs/Mushroom1","Prefabs/Mushroom2"],
 			"FSMPath": "FSM/ResourceFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",

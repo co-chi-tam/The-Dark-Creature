@@ -11,6 +11,7 @@ public class TDCCampFireController : TDCBaseController {
 	private FSMManager m_FSMMamager;
 	private TDCGObjectData m_GObjectData;
 	private float m_CurrentIntensity;
+	private float m_CurrentStartSize;
 	private bool m_IsFireActive = true;
 	private float m_FirePower;
 	
@@ -44,6 +45,7 @@ public class TDCCampFireController : TDCBaseController {
 		m_Light = pointLight.GetComponent<Light> ();
 		
 		m_CurrentIntensity = m_Light.intensity;
+		m_CurrentStartSize = m_ParticleSystem.startSize;
 
 	}
 
@@ -71,6 +73,7 @@ public class TDCCampFireController : TDCBaseController {
 	
 	public void UpdateFirePower(float value) {
 		m_FirePower -= value;
+		SetParticleSize (m_FirePower);
 		m_IsFireActive = m_FirePower > 0f;
 	}
 
@@ -82,8 +85,12 @@ public class TDCCampFireController : TDCBaseController {
 
 	#region Getter & Setter
 
-	public void SetIntensityPerlinNoise(float value) {
+	public void SetIntensity(float value) {
 		m_Light.intensity = value * (m_CurrentIntensity - 1) + 1;
+	}
+
+	public void SetParticleSize(float value) {
+		m_ParticleSystem.startSize = value / m_GObjectData.Duration * (m_CurrentStartSize - 5) + 5;  
 	}
 
 	#endregion
