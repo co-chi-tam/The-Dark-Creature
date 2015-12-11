@@ -60,32 +60,6 @@ public class TDCGameManager : MonoBehaviour {
 
     #region Main method
 
-	public TDCBaseController CreateGObject(TDCEnum.EGameType type, 
-	                                       Vector3 position, 
-	                                       Quaternion rotation, 
-	                                       GameObject parent = null) {
-		TDCBaseData data = m_DataLoader.GetGObject (type);
-		GameObject gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]), position, rotation) as GameObject;
-		TDCBaseController controller = null;
-
-		switch (type) {
-		case TDCEnum.EGameType.CampFire:
-			controller = gObject.AddComponent <TDCCampFireController>();
-			break;
-		}
-
-		gObject.transform.position = position;
-		gObject.transform.rotation = rotation;
-		controller.SetData (data);
-		controller.Init ();
-		controller.SetCreatureType (type);
-		controller.name = type.ToString ();
-		if (parent != null) {
-			gObject.transform.SetParent (parent.transform);		
-		}
-		return controller;
-	}
-
 	public TDCGroupCreatureController CreateGroup(TDCEnum.EGameType type, 
 	                                               Vector3 position, 
 	                                               Quaternion rotation, 
@@ -143,7 +117,6 @@ public class TDCGameManager : MonoBehaviour {
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCPlayerController> ();
 			CameraController.Instance.Target = gObject.transform;
-			controller.Init ();
 			break;
 		}
 		case TDCEnum.EGameType.Dodono: 
@@ -152,7 +125,6 @@ public class TDCGameManager : MonoBehaviour {
 			data = m_DataLoader.GetCreature (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEasyAIController> ();
-			controller.Init ();
 			break;
 		}
 		case TDCEnum.EGameType.Meat: {
@@ -170,16 +142,19 @@ public class TDCGameManager : MonoBehaviour {
 			data = m_DataLoader.GetResource (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCResourceController> ();
-			controller.Init ();
 			break;
 		}
 		case TDCEnum.EGameType.EnviromentMushroom: {
 			data = m_DataLoader.GetResource (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCResourceController> ();
-			controller.Init ();
 			break;
 		}
+		case TDCEnum.EGameType.CampFire:
+			data = m_DataLoader.GetGObject (type);
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]), position, rotation) as GameObject;
+			controller = gObject.AddComponent <TDCCampFireController>();
+			break;
 		default:
 
 			break;
@@ -188,6 +163,7 @@ public class TDCGameManager : MonoBehaviour {
 		gObject.transform.rotation = rotation;
 		controller.SetData (data);
 		controller.SetCreatureType (type);
+		controller.Init ();
 		controller.name = type.ToString ();
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		

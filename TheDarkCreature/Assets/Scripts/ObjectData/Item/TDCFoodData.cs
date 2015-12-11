@@ -11,12 +11,12 @@ public class TDCFoodData : TDCItemData {
 		tmp.ID = instance.ID;
 		tmp.Name = instance.Name;
 		tmp.Description = instance.Description;
-		tmp.ModelPath = instance.ModelPath;
 		tmp.GameType = instance.GameType;
 		tmp.EffectName = instance.EffectName;
 		tmp.EffectValue = instance.EffectValue;
 		tmp.ItemType = instance.ItemType;
 		tmp.Icon = instance.Icon;
+		tmp.ModelPath = instance.ModelPath;
 		return tmp;
 	}
 }

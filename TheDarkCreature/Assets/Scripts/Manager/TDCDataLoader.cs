@@ -10,12 +10,9 @@ public class TDCDataLoader {
 	#region Property
 
 	private Dictionary<TDCEnum.EGameType, TDCCreatureData> m_ListCreatureData;
-	private Dictionary<TDCEnum.EGameType, TDCFoodData> m_ListFoodData;
+	private Dictionary<TDCEnum.EGameType, TDCItemData> m_ListItemData;
 	private Dictionary<TDCEnum.EGameType, TDCGroupData> m_ListGroupData;
-	private Dictionary<TDCEnum.EGameType, TDCPlayerData> m_ListPlayerData;
-	private Dictionary<TDCEnum.EGameType, TDCWeaponData> m_ListWeaponData;
-	private Dictionary<TDCEnum.EGameType, TDCResourceData> m_ListResourceData;
-	private Dictionary<TDCEnum.EGameType, TDCGObjectData> m_ListGObjectData;
+
 
 	#endregion
 
@@ -23,12 +20,8 @@ public class TDCDataLoader {
 
 	public TDCDataLoader() {
 		m_ListCreatureData = new Dictionary<TDCEnum.EGameType, TDCCreatureData> ();
-		m_ListFoodData = new Dictionary<TDCEnum.EGameType, TDCFoodData> ();
 		m_ListGroupData = new Dictionary<TDCEnum.EGameType, TDCGroupData> ();
-		m_ListPlayerData = new Dictionary<TDCEnum.EGameType, TDCPlayerData> ();
-		m_ListWeaponData = new Dictionary<TDCEnum.EGameType, TDCWeaponData> ();
-		m_ListResourceData = new Dictionary<TDCEnum.EGameType, TDCResourceData> ();
-		m_ListGObjectData = new Dictionary<TDCEnum.EGameType, TDCGObjectData> (); 
+		m_ListItemData = new Dictionary<TDCEnum.EGameType, TDCItemData> ();
 
 		LoadData ();
 	}
@@ -73,7 +66,6 @@ public class TDCDataLoader {
 			creature.FSMPath = instance["FSMPath"].ToString ();
 			creature.Icon = instance["IconPath"].ToString();
 			creature.GameType = (TDCEnum.EGameType)int.Parse (instance["GameType"].ToString());
-			creature.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			creature.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			creature.MaxHP = int.Parse (instance["MaxHP"].ToString());
 			creature.MinDamage = int.Parse (instance["MinDamage"].ToString());
@@ -100,7 +92,7 @@ public class TDCDataLoader {
 			food.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
 			food.EffectName = instance ["EffectName"].ToString ();
 			food.EffectValue = instance ["EffectValue"];
-			m_ListFoodData.Add (food.GameType, food);
+			m_ListItemData.Add (food.GameType, food);
 		}
 	}
 
@@ -112,7 +104,6 @@ public class TDCDataLoader {
 			weapon.Name = instance ["Name"].ToString ();
 			weapon.Description = instance ["Description"].ToString ();
 			weapon.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
-			weapon.FSMPath = instance["FSMPath"].ToString ();
 			weapon.Icon = instance["IconPath"].ToString();
 			weapon.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			weapon.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
@@ -121,7 +112,7 @@ public class TDCDataLoader {
 			weapon.AttackRange = float.Parse (instance ["AttackRange"].ToString ());
 			weapon.Duration = int.Parse (instance ["Duration"].ToString ());
 			weapon.DecreaseDuration = int.Parse (instance ["DecreaseDuration"].ToString ());
-			m_ListWeaponData.Add (weapon.GameType, weapon);
+			m_ListItemData.Add (weapon.GameType, weapon);
 		}
 	}
 
@@ -156,10 +147,9 @@ public class TDCDataLoader {
 			resource.FSMPath = instance["FSMPath"].ToString ();
 			resource.Icon = instance["IconPath"].ToString();
 			resource.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
-			resource.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance ["CreatureType"].ToString ());
 			resource.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			resource.MaxHP = int.Parse (instance["MaxHP"].ToString());
-			m_ListResourceData.Add (resource.GameType, resource);
+			m_ListCreatureData.Add (resource.GameType, resource);
 		}
 	}
 
@@ -174,7 +164,6 @@ public class TDCDataLoader {
 			player.FSMPath = instance["FSMPath"].ToString ();
 			player.Icon = instance["IconPath"].ToString();
 			player.GameType = (TDCEnum.EGameType)int.Parse (instance["GameType"].ToString());
-			player.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			player.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			player.MaxHP = int.Parse (instance["MaxHP"].ToString());
 			player.MinDamage = int.Parse (instance["MinDamage"].ToString());
@@ -182,28 +171,27 @@ public class TDCDataLoader {
 			player.RunSpeed = float.Parse (instance["RunSpeed"].ToString());
 			player.WalkSpeed = float.Parse (instance["WalkSpeed"].ToString());
 			player.Level = int.Parse (instance["Level"].ToString());
-			var inventory = instance["Inventory"] as List<object>;
-			for (int x = 0; x < inventory.Count; x++) {
-				var invenData = inventory[x] as Dictionary<string, object>;
-				var itemType = (TDCEnum.EItemType)int.Parse (invenData["ItemType"].ToString());
-				var gameType = (TDCEnum.EGameType)int.Parse (invenData["GameType"].ToString());
-				switch (itemType) {
-				case TDCEnum.EItemType.Food:
-					player.Inventory[x] = GetFood (gameType);
-					break;
-				case TDCEnum.EItemType.Weapon:
-					player.Inventory[x] = GetWeapon (gameType);
-					break;
-				case TDCEnum.EItemType.Resource:
-					player.Inventory[x] = GetResource (gameType);
-					break;
-				case TDCEnum.EItemType.GObject:
-					player.Inventory[x] = GetGObject (gameType);
-					break;
-				}
-				player.Inventory[x].Amount = 1;
-			}
-			m_ListPlayerData.Add (player.GameType, player);
+//			var inventory = instance["Inventory"] as List<object>;
+//			for (int x = 0; x < inventory.Count; x++) {
+//				var invenData = inventory[x] as Dictionary<string, object>;
+//				var itemType = (TDCEnum.EItemType)int.Parse (invenData["ItemType"].ToString());
+//				var gameType = (TDCEnum.EGameType)int.Parse (invenData["GameType"].ToString());
+//				TDCItemData item = null;
+//				switch (itemType) {
+//				case TDCEnum.EItemType.Food:
+//					item = GetFood (gameType);
+//					break;
+//				case TDCEnum.EItemType.Weapon:
+//					item = GetWeapon (gameType);
+//					break;
+//				case TDCEnum.EItemType.GObject:
+//					item = GetGObject (gameType);
+//					break;
+//				}
+//				player.Inventory[x] = item;
+//				player.Inventory[x].Amount = 1;
+//			}
+			m_ListCreatureData.Add (player.GameType, player);
 		}
 	}
 
@@ -218,42 +206,50 @@ public class TDCDataLoader {
 			gObject.FSMPath = instance["FSMPath"].ToString();
 			gObject.Icon = instance["IconPath"].ToString();
 			gObject.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
-			gObject.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
 			gObject.EffectName = instance ["EffectName"].ToString ();
 			gObject.EffectValue = instance ["EffectValue"];
 			gObject.Duration = float.Parse (instance ["Duration"].ToString ());
-			m_ListGObjectData.Add (gObject.GameType, gObject);
+			m_ListCreatureData.Add (gObject.GameType, gObject);
 		}
 	}
 
 	public TDCCreatureData GetCreature(TDCEnum.EGameType creature) {
-		return TDCCreatureData.Clone (m_ListCreatureData[creature]);
+		var creatureData = TDCCreatureData.Clone (m_ListCreatureData [creature]);
+		return creatureData;
 	}
 
 	public TDCFoodData GetFood (TDCEnum.EGameType food) {
-		var foodData = TDCFoodData.Clone (m_ListFoodData[food]);
-		foodData.Amount += 1;
+		var foodData = TDCFoodData.Clone (m_ListItemData[food] as TDCFoodData);
+		foodData.Amount = 1;
+		foodData.Owner = null;
 		return foodData;
 	}
 
 	public TDCGroupData GetGroup(TDCEnum.EGameType group) {
-		return TDCGroupData.Clone (m_ListGroupData[group]);
+		var groupData = TDCGroupData.Clone (m_ListGroupData[group]);
+		return groupData;
 	}
 
 	public TDCPlayerData GetPlayer(TDCEnum.EGameType player) {
-		return TDCPlayerData.Clone (m_ListPlayerData[player]);
+		var playerData = TDCPlayerData.Clone (m_ListCreatureData[player] as TDCPlayerData);
+		return playerData;
 	}
 
 	public TDCWeaponData GetWeapon(TDCEnum.EGameType weapon) {
-		return TDCWeaponData.Clone (m_ListWeaponData[weapon]);
+		var weapondata = TDCWeaponData.Clone (m_ListItemData[weapon] as TDCWeaponData);
+		weapondata.Amount = 1;
+		weapondata.Owner = null;
+		return weapondata;
 	}
 
 	public TDCResourceData GetResource(TDCEnum.EGameType resource) {
-		return TDCResourceData.Clone (m_ListResourceData[resource]);
+		var resourceData = TDCResourceData.Clone (m_ListCreatureData[resource] as TDCResourceData);
+		return resourceData;
 	}
 
 	public TDCGObjectData GetGObject(TDCEnum.EGameType gObject) {
-		return TDCGObjectData.Clone (m_ListGObjectData[gObject]);
+		var objectData = TDCGObjectData.Clone (m_ListCreatureData[gObject] as TDCGObjectData);
+		return objectData;
 	}
 
 	#endregion

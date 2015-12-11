@@ -10,6 +10,8 @@ public class TDCEasyAIController : TDCCreatureController
 	private LayerMask m_EnemyLayerMask;
 	private LayerMask m_FoodLayerMask;
 
+	private TDCCreatureData m_CreatureData;
+
     #endregion
 
     #region Implementation Mono
@@ -51,7 +53,7 @@ public class TDCEasyAIController : TDCCreatureController
 
         m_EnemyLayerMask = 1 << 8;
 		m_FoodLayerMask = 1 << 8 | 1 << 10;
-        m_FSMMamager.LoadFSM(GetData().FSMPath);
+		m_FSMMamager.LoadFSM(m_CreatureData.FSMPath);
     }
 	
 	public virtual void FixedUpdate () {
@@ -131,6 +133,21 @@ public class TDCEasyAIController : TDCCreatureController
 			}
 		}
 		return false;
+	}
+
+	#endregion
+
+	#region Getter & Setter
+
+	public override void SetData (TDCBaseData data)
+	{
+		base.SetData (data);
+		m_CreatureData = data as TDCCreatureData;
+	}
+
+	public override TDCBaseData GetData ()
+	{
+		return m_CreatureData;
 	}
 
 	#endregion

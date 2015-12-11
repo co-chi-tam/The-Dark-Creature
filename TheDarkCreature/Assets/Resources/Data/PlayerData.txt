@@ -39,10 +39,6 @@
 				{
 					"ItemType": 1,
 					"GameType": 51
-				},
-				{
-					"ItemType": 4,
-					"GameType": 301
 				}
 			]
 		},{

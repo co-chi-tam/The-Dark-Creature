@@ -3,6 +3,8 @@ using System.Collections.Generic;
 
 public class TDCCreatureData : TDCBaseData {
 
+	private TDCItemData[] m_Inventory;
+	private string m_FSMPath;
 	private TDCObjectProperty<float> m_WalkSpeed;
 	private float m_RunSpeed;
 	private float m_RotationSpeed;
@@ -13,6 +15,16 @@ public class TDCCreatureData : TDCBaseData {
 	private float m_DetectRange;
 	private List<TDCEnum.EGameType> m_TypeEnemies;
 	private List<TDCEnum.EGameType> m_TypeFoods;
+	
+	public string FSMPath {
+		get { return m_FSMPath; }
+		set { m_FSMPath = value; }
+	}
+
+	public TDCItemData[] Inventory {
+		get { return m_Inventory; }
+		set { m_Inventory = value; }
+	}
 
 	public float WalkSpeed {
 		get { return m_WalkSpeed.GetValue(); }
@@ -65,7 +77,8 @@ public class TDCCreatureData : TDCBaseData {
 	}
 
     public TDCCreatureData() : base()
-    {
+	{
+		this.m_FSMPath 		= string.Empty;
 		m_WalkSpeed = new TDCObjectProperty<float>("WalkSpeed");
 		m_RunSpeed = 0;
 		m_RotationSpeed = 5f;
@@ -74,6 +87,7 @@ public class TDCCreatureData : TDCBaseData {
 		m_MinDamage = 0;
 		m_MaxDamage = 0;
 		m_DetectRange = 0f;
+		this.m_Inventory = new TDCItemData[20];
 		m_TypeEnemies = new List<TDCEnum.EGameType> ();
 		m_TypeFoods = new List<TDCEnum.EGameType> ();
 
@@ -97,9 +111,10 @@ public class TDCCreatureData : TDCBaseData {
 		tmp.DetectRange = instance.DetectRange;
 		tmp.TypeEnemies = instance.TypeEnemies;
 		tmp.TypeFoods = instance.TypeFoods;
-		tmp.CreatureType = instance.CreatureType;
 		tmp.Inventory = instance.Inventory;
 		tmp.Icon = instance.Icon;
+		tmp.EffectName = instance.EffectName;
+		tmp.EffectValue = instance.EffectValue;
 		return tmp;
 	}
 

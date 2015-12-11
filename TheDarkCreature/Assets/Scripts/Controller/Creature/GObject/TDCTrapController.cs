@@ -9,6 +9,7 @@ public class TDCTrapController : TDCCreatureController
 	private FSMManager m_FSMMamager;
     private LayerMask m_EnemyLayerMask;
     private TDCGameManager m_GameManager;
+	private TDCGObjectData m_TrapData;
 
     #endregion
 
@@ -29,7 +30,7 @@ public class TDCTrapController : TDCCreatureController
 
         m_FSMMamager.RegisterCondition("FoundEnemy", FoundEnemy);
         m_FSMMamager.RegisterCondition("IsActive", GetActive);
-        m_FSMMamager.LoadFSM(GetData().FSMPath);
+		m_FSMMamager.LoadFSM(m_TrapData.FSMPath);
 
         m_EnemyLayerMask = 1 << 8;
 
@@ -45,6 +46,17 @@ public class TDCTrapController : TDCCreatureController
     #endregion
 
     #region Main method
+
+	public override void SetData (TDCBaseData data)
+	{
+		base.SetData (data);
+		m_TrapData = data as TDCGObjectData;
+	}
+
+	public override TDCBaseData GetData ()
+	{
+		return m_TrapData;
+	}
 
     public override void SetActive(bool value)
     {

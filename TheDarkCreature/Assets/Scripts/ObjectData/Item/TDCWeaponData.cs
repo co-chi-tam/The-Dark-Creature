@@ -41,7 +41,7 @@ public class TDCWeaponData : TDCItemData {
 		m_DecreaseDuration = 0;
 	}
 
-	public static TDCWeaponData Clone (TDCWeaponData instance) {
+	public new static TDCWeaponData Clone (TDCWeaponData instance) {
 		var tmp = new TDCWeaponData ();
 		tmp.ID = instance.ID;
 		tmp.Name = instance.Name;
@@ -54,6 +54,7 @@ public class TDCWeaponData : TDCItemData {
 		tmp.AttackRange = instance.AttackRange;
 		tmp.ItemType = instance.ItemType;
 		tmp.Icon = instance.Icon;
+		tmp.ModelPath = instance.ModelPath;
 		tmp.DecreaseDuration = instance.DecreaseDuration;
 		return tmp;
 	}

@@ -17,7 +17,7 @@ public class TDCSlot : MonoBehaviour {
 	[SerializeField]
 	private Button m_ItemButton;
 
-	private TDCBaseData m_ItemData;
+	private TDCItemData m_ItemData;
 
 	private Sprite m_NoImage;
 
@@ -25,12 +25,12 @@ public class TDCSlot : MonoBehaviour {
 
 	#region Main method
 
-	public TDCBaseData GetData() {
+	public TDCItemData GetData() {
 		return m_ItemData;
 	}
 
 	public void LoadSlot(TDCBaseData data) {
-		m_ItemData = data;
+		m_ItemData = data as TDCItemData;
 		m_NoImage = m_IconImage.sprite;
 		m_IconImage.sprite = TDCUltilities.LoadImage (m_ItemData.Icon);
 		m_ItemData.GetChangeValue<int> ("Amount", ChangeAmount);

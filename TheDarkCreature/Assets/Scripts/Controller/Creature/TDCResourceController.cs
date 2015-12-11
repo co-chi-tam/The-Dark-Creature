@@ -26,7 +26,7 @@ public class TDCResourceController : TDCCreatureController {
 		m_FSMMamager.RegisterState("DieState", dieState);
 		
 		m_FSMMamager.RegisterCondition("IsDie", IsDie);
-		m_FSMMamager.LoadFSM(GetData().FSMPath);
+		m_FSMMamager.LoadFSM(m_ResourceData.FSMPath);
 		
 		m_GameManager = TDCGameManager.GetInstance();
 
@@ -44,6 +44,21 @@ public class TDCResourceController : TDCCreatureController {
 
 	private bool IsDie() {
 		return m_CreatureData.CurrentHP <= 0f;
+	}
+
+	#endregion
+
+	#region Getter & Setter 
+
+	public override void SetData (TDCBaseData data)
+	{
+		base.SetData (data);
+		m_ResourceData = data as TDCResourceData;
+	}
+
+	public override TDCBaseData GetData ()
+	{
+		return m_ResourceData;
 	}
 
 	#endregion

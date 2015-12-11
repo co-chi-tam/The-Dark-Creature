@@ -4,7 +4,6 @@ using FSM;
 public class TDCGroupCreatureController : TDCBaseGroupController {
 
     #region Properties
-    public string StateName = "";
     private FSMManager m_FSMMamager;
     #endregion
 

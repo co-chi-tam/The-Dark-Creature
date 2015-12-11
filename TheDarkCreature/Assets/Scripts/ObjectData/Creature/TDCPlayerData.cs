@@ -36,7 +36,6 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.MaxDamage = instance.MaxDamage;
 		tmp.Level = instance.Level;
 		tmp.Inventory = instance.Inventory;
-		tmp.CreatureType = instance.CreatureType;
 		return tmp;
 	}
 
@@ -55,7 +54,6 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.MaxDamage = (lh.MaxDamage + rh.MaxDamage) / 2;
 		tmp.Level = lh.Level + 1;
 		tmp.Inventory = lh.Inventory;
-		tmp.CreatureType = lh.CreatureType;
 		tmp.Icon = lh.Icon;
 		return tmp;
 	}

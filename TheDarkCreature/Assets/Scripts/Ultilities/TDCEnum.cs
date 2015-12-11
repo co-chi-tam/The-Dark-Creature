@@ -39,7 +39,7 @@ public class TDCEnum{
 		None 		= 0,
 		Food 		= 1,
 		Weapon 		= 2,
-		Resource	= 3,
+		Item		= 3,
 		GObject		= 4
 	}
 

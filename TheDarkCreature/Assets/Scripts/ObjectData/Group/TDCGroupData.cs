@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class TDCGroupData : TDCBaseData {
-
+	
+	private string m_FSMPath;
 	private float m_Radius;
 	private int m_MinMember;
 	private int m_MaxMember;
@@ -34,6 +35,11 @@ public class TDCGroupData : TDCBaseData {
 		set { m_TimeRespawnMember = value; }
 	}
 
+	public string FSMPath {
+		get { return m_FSMPath; }
+		set { m_FSMPath = value; }
+	}
+
 	public TDCGroupData () : base ()
 	{
 		m_Radius = 0f;
@@ -49,7 +55,6 @@ public class TDCGroupData : TDCBaseData {
 		tmp.Name = instance.Name;
 		tmp.Description = instance.Description;
 		tmp.ModelPath = instance.ModelPath;
-		tmp.FSMPath = instance.FSMPath;
 		tmp.GameType = instance.GameType;
 		tmp.Radius = instance.Radius;
 		tmp.MinMember = instance.MinMember;
@@ -57,6 +62,7 @@ public class TDCGroupData : TDCBaseData {
 		tmp.GroupType = instance.GroupType;
 		tmp.Icon = instance.Icon;
 		tmp.TimeRespawnMember = instance.TimeRespawnMember;
+		tmp.FSMPath = instance.FSMPath;
 		return tmp;
 	}
 }

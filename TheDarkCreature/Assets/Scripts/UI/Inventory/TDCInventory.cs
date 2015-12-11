@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using ObjectPool;
@@ -57,7 +57,7 @@ public class TDCInventory : MonoBehaviour {
 			var itemType = itemData.ItemType;
 			switch (itemType) {
 			case TDCEnum.EItemType.Food: 
-			case TDCEnum.EItemType.Resource: 
+			case TDCEnum.EItemType.Item: 
 			{
 				if (m_OwnerData.Inventory[i] != null) {
 					if (m_OwnerData.Inventory[i].GameType == itemData.GameType) {
@@ -67,7 +67,6 @@ public class TDCInventory : MonoBehaviour {
 				} else if (m_OwnerData.Inventory[i] == null) {
 					m_OwnerData.Inventory[i] = itemData;
 					m_ItemSlots[i].LoadSlot (itemData);
-					m_ItemSlots[i].OnSelectedSlot = m_OwnerController.OnSelectedItem;
 					return true;
 				}
 				break;
@@ -77,12 +76,13 @@ public class TDCInventory : MonoBehaviour {
 				if (m_OwnerData.Inventory[i] == null) {
 					m_OwnerData.Inventory[i] = itemData;
 					m_ItemSlots[i].LoadSlot (itemData);
-					m_ItemSlots[i].OnSelectedSlot = m_OwnerController.OnSelectedItem;
 					return true;
 				}
 				break;
 			} 
 			}
+			m_ItemSlots[i].OnSelectedSlot = m_OwnerController.OnSelectedItem;
+			itemData.Owner = m_OwnerController;
 		}
 		return false;
 	}

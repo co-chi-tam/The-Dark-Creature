@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.EventSystems;
 using FSM;
 using System;
@@ -105,7 +105,7 @@ public class TDCPlayerController : TDCCreatureController
 
 	private void CreateObject(object value) {
 		var gameType = (TDCEnum.EGameType)(int.Parse (value.ToString ()));
-		m_GameManager.CreateGObject (gameType, this.transform.position, Quaternion.identity);
+		m_GameManager.CreateCreature (gameType, this.transform.position, Quaternion.identity);
 	}
 
 	private void PlayerAction(RaycastHit hitInfo) {
@@ -131,7 +131,7 @@ public class TDCPlayerController : TDCCreatureController
 		var itemType = item.ItemType;
 		switch (itemType) {
 		case TDCEnum.EItemType.Food: 
-		case TDCEnum.EItemType.Resource: 
+		case TDCEnum.EItemType.Item: 
 		{
 			var itemData = item as TDCFoodData;
 			itemData.Amount --;
@@ -152,11 +152,11 @@ public class TDCPlayerController : TDCCreatureController
 			break;
 		}
 		case TDCEnum.EItemType.GObject: {
-			var gObject = item as TDCGObjectData;
-			gObject.Amount --;
-			if (gObject.Amount == 0) {
+			var gObject = item;
+//			gObject.Amount --;
+//			if (gObject.Amount == 0) {
 				m_Inventory.RemoveItem (gObject);
-			}
+//			}
 		} break;
 		}
 		m_EffectEvents [item.EffectName] (item.EffectValue);
