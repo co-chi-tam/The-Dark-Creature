@@ -57,9 +57,10 @@ public class TDCEnum{
 
 	public enum ELayer: int {
 		None 			= 0,
-		LayerPlane 		= 9,
 		LayerCreature 	= 8,
-		LayerEnviroment = 10
+		LayerPlane 		= 9,
+		LayerEnviroment = 10,
+		LayerPlayer		= 31
 	}
 
 	public enum EGameSeason : byte {

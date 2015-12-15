@@ -30,13 +30,13 @@ public class TDCDataLoader {
 
 	#region Main methods
 	private void LoadData() {
-		var creatureAsset = Resources.Load<TextAsset> ("Data/CreatureData");
-		var foodAsset = Resources.Load<TextAsset> ("Data/FoodData");
-		var groupAsset = Resources.Load<TextAsset> ("Data/GroupData");
-		var playerAsset = Resources.Load<TextAsset> ("Data/PlayerData");
-		var weaponAsset = Resources.Load<TextAsset> ("Data/WeaponData");
-		var resourceTextAsset = Resources.Load<TextAsset> ("Data/ResourceData");
-		var objectTextAsset = Resources.Load<TextAsset> ("Data/ObjectData");
+		var creatureAsset = Resources.Load<TextAsset> ("Data/Creature/CreatureData");
+		var foodAsset = Resources.Load<TextAsset> ("Data/Item/FoodData");
+		var groupAsset = Resources.Load<TextAsset> ("Data/Group/GroupData");
+		var playerAsset = Resources.Load<TextAsset> ("Data/Creature/PlayerData");
+		var weaponAsset = Resources.Load<TextAsset> ("Data/Item/WeaponData");
+		var resourceTextAsset = Resources.Load<TextAsset> ("Data/Creature/ResourceData");
+		var objectTextAsset = Resources.Load<TextAsset> ("Data/Creature/ObjectData");
 
 		var jsonCreature = Json.Deserialize (creatureAsset.text) as Dictionary<string, object>;
 		var jsonfood = Json.Deserialize (foodAsset.text) as Dictionary<string, object>;
@@ -66,6 +66,7 @@ public class TDCDataLoader {
 			creature.FSMPath = instance["FSMPath"].ToString ();
 			creature.Icon = instance["IconPath"].ToString();
 			creature.GameType = (TDCEnum.EGameType)int.Parse (instance["GameType"].ToString());
+			creature.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			creature.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			creature.MaxHP = int.Parse (instance["MaxHP"].ToString());
 			creature.MinDamage = int.Parse (instance["MinDamage"].ToString());
@@ -86,7 +87,6 @@ public class TDCDataLoader {
 			food.ID = int.Parse (instance ["ID"].ToString ());
 			food.Name = instance ["Name"].ToString ();
 			food.Description = instance ["Description"].ToString ();
-			food.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
 			food.Icon = instance["IconPath"].ToString();
 			food.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			food.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
@@ -103,7 +103,6 @@ public class TDCDataLoader {
 			weapon.ID = int.Parse (instance ["ID"].ToString ());
 			weapon.Name = instance ["Name"].ToString ();
 			weapon.Description = instance ["Description"].ToString ();
-			weapon.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
 			weapon.Icon = instance["IconPath"].ToString();
 			weapon.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			weapon.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
@@ -147,6 +146,7 @@ public class TDCDataLoader {
 			resource.FSMPath = instance["FSMPath"].ToString ();
 			resource.Icon = instance["IconPath"].ToString();
 			resource.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
+			resource.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			resource.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			resource.MaxHP = int.Parse (instance["MaxHP"].ToString());
 			m_ListCreatureData.Add (resource.GameType, resource);
@@ -164,6 +164,7 @@ public class TDCDataLoader {
 			player.FSMPath = instance["FSMPath"].ToString ();
 			player.Icon = instance["IconPath"].ToString();
 			player.GameType = (TDCEnum.EGameType)int.Parse (instance["GameType"].ToString());
+			player.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			player.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			player.MaxHP = int.Parse (instance["MaxHP"].ToString());
 			player.MinDamage = int.Parse (instance["MinDamage"].ToString());
@@ -206,8 +207,7 @@ public class TDCDataLoader {
 			gObject.FSMPath = instance["FSMPath"].ToString();
 			gObject.Icon = instance["IconPath"].ToString();
 			gObject.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
-			gObject.EffectName = instance ["EffectName"].ToString ();
-			gObject.EffectValue = instance ["EffectValue"];
+			gObject.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			gObject.Duration = float.Parse (instance ["Duration"].ToString ());
 			m_ListCreatureData.Add (gObject.GameType, gObject);
 		}

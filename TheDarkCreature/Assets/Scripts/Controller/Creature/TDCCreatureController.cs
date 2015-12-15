@@ -5,17 +5,17 @@ using System.Collections.Generic;
 public class TDCCreatureController : TDCBaseController {
 
 	#region Property
+	[SerializeField]
+	private float HealthPoint;
 
 	protected Animator m_AnimatorController;
 	protected Rigidbody m_Rigidbody;
 	protected Vector3 m_TargetPosition;
 	protected TDCBaseController m_EnemyController;
-//	protected TDCBaseController m_TargetController;
 	protected bool m_CanMove = true;
 
 	protected TDCCreatureData m_CreatureData;
 
-	public string m_HealthPoint;
 	#endregion
 	
 	#region Implement Mono
@@ -40,7 +40,8 @@ public class TDCCreatureController : TDCBaseController {
 		if (m_CreatureData != null) {
 			m_CreatureData.CurrentHP -= m_DamageTake;
 			m_DamageTake = 0;
-			m_HealthPoint = m_CreatureData.CurrentHP.ToString();
+			// UI
+			HealthPoint = m_CreatureData.CurrentHP;
 		}
 	}
 
@@ -70,6 +71,7 @@ public class TDCCreatureController : TDCBaseController {
 		//m_Rigidbody.AddTorque(deltavel, ForceMode.Impulse);
 		
 		//Look at and dampen the rotation
+		rotation.y = 0f;
 		var direction = m_Transform.position - rotation;
 		Quaternion rot = Quaternion.LookRotation(direction);
 		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, 
@@ -77,6 +79,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 	
 	protected void MovePosition(Vector3 position, float speed) {
+		position.y = 0f;
 		var direction = position - m_Transform.position;
 		//m_Rigidbody.MovePosition(m_Transform.position + direction.normalized * speed * Time.deltaTime);
 		m_Transform.position = m_Transform.position + direction.normalized * speed * Time.deltaTime;
@@ -128,16 +131,6 @@ public class TDCCreatureController : TDCBaseController {
 		return m_EnemyController;
 	}
 
-//	public override void SetTargetController(TDCBaseController controller)
-//	{
-//		m_TargetController = controller;
-//	}
-//	
-//	public override TDCBaseController GetTargetController()
-//	{
-//		return m_TargetController;
-//	}
-	
 	public override void SetAnimation(EAnimation anim) {
 		base.SetAnimation (anim);
 		m_AnimatorController.SetInteger("AnimParam", (int) anim);
@@ -151,7 +144,7 @@ public class TDCCreatureController : TDCBaseController {
 		base.SetTargetPosition (pos);
 		m_TargetPosition = pos;
 	}
-	
+
 	public override float GetDetectEnemyRange() {
 		return m_CreatureData.DetectRange;
 	}

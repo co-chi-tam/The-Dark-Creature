@@ -14,8 +14,6 @@ public class TDCResourceData : TDCCreatureData {
 		tmp.Description = instance.Description;
 		tmp.ModelPath = instance.ModelPath;
 		tmp.FSMPath = instance.FSMPath;
-		tmp.EffectName = instance.EffectName;
-		tmp.EffectValue = instance.EffectValue;
 		tmp.Icon = instance.Icon;
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;

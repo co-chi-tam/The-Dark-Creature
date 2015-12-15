@@ -2,13 +2,19 @@
 using System.Collections;
 
 public class TDCGroupData : TDCBaseData {
-	
+
+	private string[] m_ModelPath;
 	private string m_FSMPath;
 	private float m_Radius;
 	private int m_MinMember;
 	private int m_MaxMember;
 	private TDCEnum.EGroupType m_GroupType;
 	private float m_TimeRespawnMember;
+
+	public string[] ModelPath {
+		get { return m_ModelPath; }
+		set { m_ModelPath = value; }
+	}
 
 	public float Radius {
 		get { return m_Radius; }
@@ -47,6 +53,7 @@ public class TDCGroupData : TDCBaseData {
 		m_MaxMember = 0;
 		m_GroupType = TDCEnum.EGroupType.None;
 		m_TimeRespawnMember = 0f;
+		this.m_ModelPath 	= new string[] {};
 	}
 
 	public static TDCGroupData Clone (TDCGroupData instance) {

@@ -1,6 +1,8 @@
 ﻿
 public class TDCItemData : TDCBaseData {
-
+	
+	private string m_EffectName;
+	private object m_EffectValue;
 	private TDCEnum.EItemType m_ItemType;
 	private TDCCreatureController m_Owner;
 	private TDCObjectProperty<int> m_Amount;
@@ -18,6 +20,16 @@ public class TDCItemData : TDCBaseData {
 	public int Amount {
 		get { return m_Amount.Value; }
 		set { m_Amount.SetValue (value < 0 ? 0 : value); }
+	}
+	
+	public string EffectName {
+		get { return m_EffectName; }
+		set { m_EffectName = value; }
+	}
+	
+	public object EffectValue {
+		get { return m_EffectValue; }
+		set { m_EffectValue = value; }
 	}
 
 	public TDCItemData () : base ()

@@ -47,14 +47,12 @@ public class TDCWeaponData : TDCItemData {
 		tmp.Name = instance.Name;
 		tmp.GameType = instance.GameType;
 		tmp.Description = instance.Description;
-		tmp.ModelPath = instance.ModelPath;
 		tmp.MinDamage = instance.MinDamage;
 		tmp.MaxDamage = instance.MaxDamage;
 		tmp.Duration = instance.Duration;
 		tmp.AttackRange = instance.AttackRange;
 		tmp.ItemType = instance.ItemType;
 		tmp.Icon = instance.Icon;
-		tmp.ModelPath = instance.ModelPath;
 		tmp.DecreaseDuration = instance.DecreaseDuration;
 		return tmp;
 	}

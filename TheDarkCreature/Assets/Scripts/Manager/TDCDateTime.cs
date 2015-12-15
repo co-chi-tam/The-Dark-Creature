@@ -22,10 +22,6 @@ public class TDCDateTime : MonoBehaviour {
 	[SerializeField]
 	private float m_Speed 	= 10f;
 	[SerializeField]
-	private float m_Second 	= 0f;
-	[SerializeField]
-	private float m_Minute 	= 0f;
-	[SerializeField]
 	private float m_Hour 	= 0f;
 	[SerializeField]
 	private float m_Day 	= 0f;
@@ -152,11 +148,16 @@ public class TDCDateTime : MonoBehaviour {
 		if (m_Active == false)
 			return;
 		m_Timer 	+= Time.deltaTime * m_Speed;
-		m_Second 	= m_Timer % m_SecondPerMinute;
-		m_Minute 	= m_Timer / m_SecondPerMinute % m_MinutePerHour;
-		m_Hour 		= m_Timer / m_SecondPerHour % m_HourPerDay;
-		m_Day 		= m_Timer / m_SecondPerDay;
-		m_Season	= (TDCEnum.EGameSeason)(m_Timer / m_SecondPerSeason % m_SeasonCount);
+		m_Hour 		= m_Timer / m_SecondPerHour;
+
+		var day = m_HourPerDay * m_Day + m_Hour;
+		var nextDay = m_HourPerDay * (m_Day + 1);
+		if (day > nextDay) {
+			m_Day ++;
+			m_Timer = 0f;
+			m_Hour = 0f;
+		}
+		m_Season	= (TDCEnum.EGameSeason)(m_Day / m_DayPerSeason % m_SeasonCount);
 	
 		var alarmCount = m_AlarmClocks.Count;
 		for (int i = 0; i < alarmCount; i++) {
@@ -189,7 +190,7 @@ public class TDCDateTime : MonoBehaviour {
 	}
 
 	public void SetDay(int day) {
-		m_Timer = m_SecondPerDay * day;
+		m_Day = day;
 	}
 	
 	public void SetHourAlarmClock(int h, Action complete, bool repeat = false) {

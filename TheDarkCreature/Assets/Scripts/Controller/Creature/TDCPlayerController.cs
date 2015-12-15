@@ -33,20 +33,19 @@ public class TDCPlayerController : TDCCreatureController
 
 		var idleState   = new FSMIdleState(this);
 		var moveState   = new FSMMoveState(this);
+		var attackState = new FSMAttackState (this);
+		var waitingState = new FSMWaitingState (this);
 		
 		m_FSMMamager.RegisterState("IdleState", idleState);
 		m_FSMMamager.RegisterState("MoveState", moveState);
+		m_FSMMamager.RegisterState("AttackState", attackState);
+		m_FSMMamager.RegisterState("WaitingState", waitingState);
 		
 		m_FSMMamager.RegisterCondition("CanMove", CanMove);
 		m_FSMMamager.RegisterCondition("MoveToTarget", MoveToTarget);
+		m_FSMMamager.RegisterCondition("HaveEnemy", HaveEnemy);
 
         m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
-
-		m_EffectEvents = new Dictionary<string, Action<object>> ();
-		m_EffectEvents["Default"] = UsedDefaultItem;
-		m_EffectEvents["IncreaseHealthPoint"] = IncreaseHealthPoint;
-		m_EffectEvents["DecreaseHealthPoint"] = DecreaseHealthPoint;
-		m_EffectEvents["CreateObject"] = CreateObject;
 
 		m_GameManager = TDCGameManager.GetInstance ();
 	}
@@ -91,33 +90,19 @@ public class TDCPlayerController : TDCCreatureController
 
     #region Main method
 
-	private void UsedDefaultItem(object value) {
-		// TODO
-	}
-
-	private void IncreaseHealthPoint(object value) {
-		Debug.LogError (value);
-	}
-
-	private void DecreaseHealthPoint(object value) {
-		
-	}
-
-	private void CreateObject(object value) {
-		var gameType = (TDCEnum.EGameType)(int.Parse (value.ToString ()));
-		m_GameManager.CreateCreature (gameType, this.transform.position, Quaternion.identity);
-	}
-
 	private void PlayerAction(RaycastHit hitInfo) {
 		var hitGameObject = hitInfo.collider.gameObject;
 		var controller = hitGameObject.GetComponent<TDCBaseController>();
-//		Debug.LogError (hitGameObject.layer);
+		var point = hitInfo.point;
+		point.y = 0f;
 		switch (hitGameObject.layer) {
 		case (int) TDCEnum.ELayer.LayerPlane: {
-			SetTargetPosition (hitInfo.point);
+			SetTargetPosition (point);
+			SetEnemyController (null);
 		} break;
 		case (int) TDCEnum.ELayer.LayerEnviroment: {
-
+			SetTargetPosition (point);
+			SetEnemyController (controller);
 		} break;
 		case (int) TDCEnum.ELayer.LayerCreature: {
 			
@@ -168,7 +153,13 @@ public class TDCPlayerController : TDCCreatureController
 	
 	private bool MoveToTarget()
 	{
-		return (TransformPosition - GetTargetPosition()).sqrMagnitude < 0.5f; 
+		var distance = (TransformPosition - GetTargetPosition ()).sqrMagnitude;
+		return distance < 0.5f; 
+	}
+
+	private bool HaveEnemy() {
+		var enemy = this.GetEnemyController ();
+		return enemy != null && enemy.GetActive();
 	}
 
     #endregion

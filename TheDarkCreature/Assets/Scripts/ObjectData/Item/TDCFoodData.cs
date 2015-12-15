@@ -16,7 +16,6 @@ public class TDCFoodData : TDCItemData {
 		tmp.EffectValue = instance.EffectValue;
 		tmp.ItemType = instance.ItemType;
 		tmp.Icon = instance.Icon;
-		tmp.ModelPath = instance.ModelPath;
 		return tmp;
 	}
 }

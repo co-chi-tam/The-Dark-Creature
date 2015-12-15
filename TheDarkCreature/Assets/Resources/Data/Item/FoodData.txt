@@ -6,7 +6,6 @@
 			"GameType": 51,
 			"ItemType": 1,
 			"Description": "",
-			"ModelPath": ["Prefabs/Meat"],
 			"IconPath": "Meat",
 			"EffectName": "IncreaseHealthPoint"
 			"EffectValue": 10,

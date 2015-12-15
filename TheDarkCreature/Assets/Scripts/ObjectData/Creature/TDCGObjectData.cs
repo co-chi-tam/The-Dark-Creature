@@ -21,8 +21,6 @@ public class TDCGObjectData : TDCCreatureData{
 		tmp.Description = instance.Description;
 		tmp.ModelPath = instance.ModelPath;
 		tmp.FSMPath = instance.FSMPath;
-		tmp.EffectName = instance.EffectName;
-		tmp.EffectValue = instance.EffectValue;
 		tmp.Icon = instance.Icon;
 		tmp.Duration = instance.Duration;
 		return tmp;

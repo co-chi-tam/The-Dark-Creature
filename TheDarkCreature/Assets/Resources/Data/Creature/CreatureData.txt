@@ -7,7 +7,7 @@
 			"CreatureType": 1,
 			"Description": "",
 			"ModelPath": ["Prefabs/Dodono"],
-			"FSMPath": "FSM/EasyAIFSM",
+			"FSMPath": "FSM/Creature/EasyAIFSM",
 			"IconPath": "",
 			"WalkSpeed": 5,
 			"RunSpeed": 7,
@@ -17,7 +17,8 @@
 			"MinDamage": 1,
 			"MaxDamage": 1,
 			"Enemies": [2,3,6,7],
-			"Foods": [251]
+			"Foods": [251],
+			"Inventory": []
 		},{
 			"ID": 2,
 			"Name": "Satla",
@@ -25,7 +26,7 @@
 			"CreatureType": 1,
 			"Description": "",
 			"ModelPath": ["Prefabs/Satla"],
-			"FSMPath": "FSM/EasyAIFSM",
+			"FSMPath": "FSM/Creature/EasyAIFSM",
 			"IconPath": "",
 			"WalkSpeed": 7,
 			"RunSpeed": 9,
@@ -35,7 +36,8 @@
 			"MinDamage": 2,
 			"MaxDamage": 3,
 			"Enemies": [3,7],
-			"Foods": [5]
+			"Foods": [5],
+			"Inventory": []
 		},{
 			"ID": 3,
 			"Name": "Bob",
@@ -43,7 +45,7 @@
 			"CreatureType": 1,
 			"Description": "",
 			"ModelPath": ["Prefabs/Bob"],
-			"FSMPath": "FSM/EasyAIFSM",
+			"FSMPath": "FSM/Creature/EasyAIFSM",
 			"IconPath": "",
 			"WalkSpeed": 8,
 			"RunSpeed": 11,
@@ -53,7 +55,8 @@
 			"MinDamage": 5,
 			"MaxDamage": 10,
 			"Enemies": [],
-			"Foods": [1,2,5,6]
+			"Foods": [1,2,5,6],
+			"Inventory": []
 		}
 	]
 }

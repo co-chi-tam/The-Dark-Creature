@@ -88,7 +88,7 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	}
 
-	public virtual void ApplyDamage(int damage) {
+	public virtual void ApplyDamage(int damage, TDCBaseController attacker) {
 		m_DamageTake += damage;
 	}
 
@@ -205,16 +205,6 @@ public class TDCBaseController : TDCMonoBehaviour
 	public virtual int GetMaxHealth() {
 		return 0;
 	}
-
-//	public virtual void SetTargetController(TDCBaseController controller)
-//	{
-//
-//	}
-//	
-//	public virtual TDCBaseController GetTargetController()
-//	{
-//		return null;
-//	}
 
 	#endregion
 }

@@ -4,14 +4,13 @@
 			"ID": 1,
 			"Name": "CampFire",
 			"GameType": 301,
-			"ItemType": 4,
+			"CreatureType": 3,
 			"Description": "",
 			"ModelPath": ["Prefabs/CampFire"],
-			"FSMPath": "FSM/CampFireFSM",
+			"FSMPath": "FSM/Creature/CampFireFSM",
 			"IconPath": "CampFire",
-			"EffectName": "CreateObject"
-			"EffectValue": 301,
-			"Duration": 120
+			"Duration": 120,
+			"Inventory": []
 		}
 	]
 }
