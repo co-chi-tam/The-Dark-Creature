@@ -15,6 +15,7 @@ public class TDCCreatureData : TDCBaseData {
 	private int m_MinDamage;
 	private int m_MaxDamage;
 	private float m_DetectRange;
+	private float m_AttackRange;
 	private List<TDCEnum.EGameType> m_TypeEnemies;
 	private List<TDCEnum.EGameType> m_TypeFoods;
 
@@ -73,6 +74,11 @@ public class TDCCreatureData : TDCBaseData {
 		set { m_DetectRange = value; }
 	}
 
+	public float AttackRange {
+		get { return m_AttackRange; }
+		set { m_AttackRange = value; }
+	}
+
 	public List<TDCEnum.EGameType> TypeEnemies {
 		get { return m_TypeEnemies; }
 		set { m_TypeEnemies = value; }
@@ -99,6 +105,7 @@ public class TDCCreatureData : TDCBaseData {
 		m_MinDamage = 0;
 		m_MaxDamage = 0;
 		m_DetectRange = 0f;
+		m_AttackRange = 0f;
 		this.m_Inventory = new TDCItemData[20];
 		m_TypeEnemies = new List<TDCEnum.EGameType> ();
 		m_TypeFoods = new List<TDCEnum.EGameType> ();
@@ -124,6 +131,7 @@ public class TDCCreatureData : TDCBaseData {
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
 		tmp.DetectRange = instance.DetectRange;
+		tmp.AttackRange = instance.AttackRange;
 		tmp.TypeEnemies = instance.TypeEnemies;
 		tmp.TypeFoods = instance.TypeFoods;
 		tmp.Inventory = instance.Inventory;

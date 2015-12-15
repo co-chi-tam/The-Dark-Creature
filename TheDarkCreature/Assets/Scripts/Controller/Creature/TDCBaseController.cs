@@ -206,5 +206,13 @@ public class TDCBaseController : TDCMonoBehaviour
 		return 0;
 	}
 
+	public virtual void SetAttacker(TDCBaseController attacker) {
+
+	}
+	
+	public virtual TDCBaseController GetAttacker() {
+		return null;
+	}
+
 	#endregion
 }

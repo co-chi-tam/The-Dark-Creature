@@ -72,6 +72,7 @@ public class TDCDataLoader {
 			creature.MinDamage = int.Parse (instance["MinDamage"].ToString());
 			creature.MaxDamage = int.Parse (instance["MaxDamage"].ToString());
 			creature.DetectRange = float.Parse (instance["DetectRange"].ToString());
+			creature.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			creature.RunSpeed = float.Parse (instance["RunSpeed"].ToString());
 			creature.WalkSpeed = float.Parse (instance["WalkSpeed"].ToString());
 			ConvertToEnum (instance["Enemies"] as List<object>, creature.TypeEnemies);
@@ -171,6 +172,7 @@ public class TDCDataLoader {
 			player.MaxDamage = int.Parse (instance["MaxDamage"].ToString());
 			player.RunSpeed = float.Parse (instance["RunSpeed"].ToString());
 			player.WalkSpeed = float.Parse (instance["WalkSpeed"].ToString());
+			player.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			player.Level = int.Parse (instance["Level"].ToString());
 //			var inventory = instance["Inventory"] as List<object>;
 //			for (int x = 0; x < inventory.Count; x++) {

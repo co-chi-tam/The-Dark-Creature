@@ -14,6 +14,8 @@ public class FSMDieState : FSMBaseState
         m_Controller.SetAnimation(EAnimation.Die);
 		m_Controller.SetActive (false);
 		m_Controller.GetGroupController ().ReturnMember (m_Controller);
+
+		var attacker = m_Controller.GetAttacker ();
     }
 
     public override void UpdateState()
@@ -23,6 +25,6 @@ public class FSMDieState : FSMBaseState
 
     public override void ExitState()
     {
-
+		m_Controller.SetAttacker (null);
     }
 }

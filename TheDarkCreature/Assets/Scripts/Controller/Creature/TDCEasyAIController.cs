@@ -44,7 +44,6 @@ public class TDCEasyAIController : TDCCreatureController
 		m_FSMMamager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
 		m_FSMMamager.RegisterCondition("MoveToTarget", MoveToTarget);
 		m_FSMMamager.RegisterCondition("MoveToEnemy", MoveToEnemy);
-//		m_FSMMamager.RegisterCondition("MoveToObjectTarget", MoveToObjectTarget);
         m_FSMMamager.RegisterCondition("FoundEnemy", FoundEnemy);
 		m_FSMMamager.RegisterCondition("IsEnemyDie", IsEnemyDie);
 		m_FSMMamager.RegisterCondition("IsDie", IsDie);
@@ -95,7 +94,8 @@ public class TDCEasyAIController : TDCCreatureController
 	
 	private bool MoveToEnemy()
 	{
-		return (TransformPosition - GetEnemyPosition()).sqrMagnitude < GetEnemyController().GetColliderRadius(); 
+		return (TransformPosition - GetEnemyPosition()).sqrMagnitude < 
+			GetEnemyController().GetColliderRadius() + m_CreatureData.AttackRange; 
 	}
 
     private bool CountdownWaitingTime() {

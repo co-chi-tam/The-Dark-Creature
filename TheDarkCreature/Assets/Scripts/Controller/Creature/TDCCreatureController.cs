@@ -12,6 +12,7 @@ public class TDCCreatureController : TDCBaseController {
 	protected Rigidbody m_Rigidbody;
 	protected Vector3 m_TargetPosition;
 	protected TDCBaseController m_EnemyController;
+	protected TDCBaseController m_AttackerController;
 	protected bool m_CanMove = true;
 
 	protected TDCCreatureData m_CreatureData;
@@ -26,11 +27,13 @@ public class TDCCreatureController : TDCBaseController {
 		m_Rigidbody	= this.GetComponent<Rigidbody>();
 		m_AnimatorController = this.GetComponent<Animator> ();
 		m_TargetPosition = m_Transform.position;
+		m_AttackerController = null;
 	}
 	
 	public override void Start()
 	{
 		base.Start ();
+		m_AttackerController = null;
 	}
 
 	public override void Update ()
@@ -48,6 +51,12 @@ public class TDCCreatureController : TDCBaseController {
 	#endregion
 	
 	#region Main Method
+
+	public override void ApplyDamage (int damage, TDCBaseController attacker)
+	{
+		base.ApplyDamage (damage, attacker);
+		m_AttackerController = attacker;
+	}
 
 	public virtual void OnSelectedItem(TDCItemData slot) {
 		
@@ -88,11 +97,21 @@ public class TDCCreatureController : TDCBaseController {
 	public override void ResetObject ()
 	{
 		SetHealth (GetMaxHealth());
+		SetAttacker (null);
+		SetEnemyController (null);
 	}
 	
 	#endregion
 	
 	#region Getter & Setter
+
+	public override void SetAttacker(TDCBaseController attacker) {
+		m_AttackerController = attacker;
+	}
+
+	public override TDCBaseController GetAttacker() {
+		return m_AttackerController;
+	}
 
 	public override float GetColliderRadius() {
 		return base.GetColliderRadius();
