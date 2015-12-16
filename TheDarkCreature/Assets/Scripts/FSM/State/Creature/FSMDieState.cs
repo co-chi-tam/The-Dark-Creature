@@ -15,7 +15,7 @@ public class FSMDieState : FSMBaseState
 		m_Controller.SetActive (false);
 		m_Controller.GetGroupController ().ReturnMember (m_Controller);
 
-		var attacker = m_Controller.GetAttacker ();
+//		var attacker = m_Controller.GetAttacker ();
     }
 
     public override void UpdateState()

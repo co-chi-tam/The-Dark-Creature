@@ -8,7 +8,6 @@ public class TDCTrapController : TDCCreatureController
 
 	private FSMManager m_FSMMamager;
     private LayerMask m_EnemyLayerMask;
-    private TDCGameManager m_GameManager;
 	private TDCGObjectData m_TrapData;
 
     #endregion
@@ -33,8 +32,6 @@ public class TDCTrapController : TDCCreatureController
 		m_FSMMamager.LoadFSM(m_TrapData.FSMPath);
 
         m_EnemyLayerMask = 1 << 8;
-
-        m_GameManager = TDCGameManager.GetInstance();
     }
 
 	public override void Update() {
@@ -62,7 +59,7 @@ public class TDCTrapController : TDCCreatureController
     {
         base.SetActive(value);
         if (!value) {
-//            m_GameManager.ReturnTrap(this);
+			
         }
     }
 

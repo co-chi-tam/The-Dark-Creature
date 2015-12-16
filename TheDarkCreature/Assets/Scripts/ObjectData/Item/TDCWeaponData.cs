@@ -41,7 +41,7 @@ public class TDCWeaponData : TDCItemData {
 		m_DecreaseDuration = 0;
 	}
 
-	public new static TDCWeaponData Clone (TDCWeaponData instance) {
+	public static TDCWeaponData Clone (TDCWeaponData instance) {
 		var tmp = new TDCWeaponData ();
 		tmp.ID = instance.ID;
 		tmp.Name = instance.Name;

@@ -29,7 +29,7 @@ public class TDCDateTime : MonoBehaviour {
 	private TDCEnum.EGameSeason m_Season = TDCEnum.EGameSeason.Spring;
 
 	private float m_Timer 		= 0f;
-	private int m_TickPerSecond = 60;
+//	private int m_TickPerSecond = 60;
 	private int m_SecondPerMinute = 60;
 	private int m_MinutePerHour = 60;
 	private int m_HourPerDay 	= 24;
@@ -37,8 +37,6 @@ public class TDCDateTime : MonoBehaviour {
 	private int m_SeasonCount	= 0;
 
 	private int m_SecondPerHour 	= 0;
-	private int m_SecondPerDay 		= 0;
-	private int m_SecondPerSeason 	= 0;
 
 	private List<AlarmClockInfo> m_AlarmClocks;
 
@@ -131,8 +129,6 @@ public class TDCDateTime : MonoBehaviour {
 	void Awake () {
 		m_Active 			= m_SunImage != null && m_MoonImage != null && m_DayLight != null;
 		m_SecondPerHour 	= m_SecondPerMinute * m_MinutePerHour;
-		m_SecondPerDay 		= m_SecondPerMinute * m_MinutePerHour * m_HourPerDay;
-		m_SecondPerSeason 	= m_SecondPerMinute * m_MinutePerHour * m_HourPerDay * m_DayPerSeason;
 		m_SeasonCount 		= Enum.GetNames (typeof(TDCEnum.EGameSeason)).Length;
 		m_AlarmClocks 		= new List<AlarmClockInfo> ();
 		m_SunLightIntensity = m_DayLight.intensity;

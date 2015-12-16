@@ -34,7 +34,6 @@ public class TDCGameManager : MonoBehaviour {
 
     #region Properties
 
-    private TDCObjectPool<TDCTrapController> m_TrapsPool;
 	private TDCDataLoader m_DataLoader;
 
     #endregion
@@ -42,7 +41,6 @@ public class TDCGameManager : MonoBehaviour {
     #region Implementation Mono
 
     void Awake() {
-		m_TrapsPool = new TDCObjectPool<TDCTrapController>();
 		m_DataLoader = new TDCDataLoader();
     }
 

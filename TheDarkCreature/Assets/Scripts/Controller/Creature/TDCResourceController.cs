@@ -7,7 +7,6 @@ public class TDCResourceController : TDCCreatureController {
 	#region Property
 
 	private FSMManager m_FSMMamager;
-	private TDCGameManager m_GameManager;
 	protected TDCResourceData m_ResourceData;
 
 	#endregion
@@ -28,8 +27,6 @@ public class TDCResourceController : TDCCreatureController {
 		m_FSMMamager.RegisterCondition("IsDie", IsDie);
 		m_FSMMamager.LoadFSM(m_ResourceData.FSMPath);
 		
-		m_GameManager = TDCGameManager.GetInstance();
-
 	}
 	
 	public override void FixedUpdate() {

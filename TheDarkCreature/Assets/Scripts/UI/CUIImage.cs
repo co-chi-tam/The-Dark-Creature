@@ -1,9 +1,14 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using System.Collections;
+using System;
 
 [AddComponentMenu("UI/Image Custom")]
-public class CUIImage : Image {
+public class CUIImage : Image, IUserInterface {
 
+	#region Properties
+	private RectTransform m_RectTransform;
+	
 	[SerializeField]
 	[Range(0f, 100f)]
 	private float m_PercentX = 0f;
@@ -32,40 +37,72 @@ public class CUIImage : Image {
 		get { return m_PercentHeight; }
 		set { m_PercentHeight = value; }
 	}
+	
+	#endregion
 
-	protected override void Awake ()
+	#region Implementation
+
+	protected override void OnDestroy ()
 	{
-		base.Awake ();
+		base.OnDestroy ();
 	}
 
-	protected override void Start ()
-	{
-		base.Start ();
+	protected virtual void OnApplicationQuit() {
+
 	}
 
-	public void CalculateContent() {
-		var _x = this.rectTransform.anchorMin.x * 100f;
-		var _y = 100f - this.rectTransform.anchorMax.y * 100f;
-		var _width = this.rectTransform.anchorMax.x * 100f - _x;
-		var _height = 100f - (this.rectTransform.anchorMin.y * 100f + _y);
-		m_PercentX = _x;
-		m_PercentY = _y;
-		m_PercentWidth = _width;
-		m_PercentHeight = _height;
-		this.rectTransform.sizeDelta		= new Vector2 (0f, 0f);
-		this.rectTransform.localScale		= new Vector3 (1f, 1f, 1f);
-		this.rectTransform.anchoredPosition	= new Vector3 (0f, 0f, 0f);
-	}
+	#endregion
 
-	public void FitContent() {
+	#region Main method
+	
+	public virtual void Init (string directory = "images") {
+		m_RectTransform = this.GetComponent<RectTransform>();
+		this.FitContent();
+//		this.color 		= Color.white;
+		CalculateContent();
+	}
+	
+	public virtual void FitContent() {
+		m_RectTransform = this.GetComponent<RectTransform>();
 		var offsetX		= m_PercentX / 100;
 		var offsetY		= 1f - m_PercentY / 100;
 		var perWidth 	= Mathf.Min (1f, offsetX + m_PercentWidth / 100);
 		var perHeight 	= Mathf.Max (0f, offsetY - m_PercentHeight / 100);
-		this.rectTransform.anchorMin 			= new Vector2 (offsetX, perHeight);
-		this.rectTransform.anchorMax 			= new Vector2 (perWidth, offsetY);
-		this.rectTransform.sizeDelta			= new Vector2 (0f, 0f);
-		this.rectTransform.localScale			= new Vector3 (1f, 1f, 1f);
-		this.rectTransform.anchoredPosition   = new Vector3 (0f, 0f, 0f);
+		this.m_RectTransform.anchorMin 			= new Vector2 (offsetX, perHeight);
+		this.m_RectTransform.anchorMax 			= new Vector2 (perWidth, offsetY);
+		this.m_RectTransform.sizeDelta			= Vector2.zero;
+		this.m_RectTransform.localScale			= Vector3.one;
+		this.m_RectTransform.anchoredPosition   = Vector3.zero;
 	}
+	
+	public virtual void CalculateContent() {
+		m_RectTransform = this.GetComponent<RectTransform>();
+		var vectorAnchorMin = this.m_RectTransform.anchorMin;
+		var vectorAnchorMax = this.m_RectTransform.anchorMax;
+		m_PercentX			= vectorAnchorMin.x * 100f;
+		m_PercentY			= (1f - vectorAnchorMax.y) * 100f;
+		m_PercentWidth		= vectorAnchorMax.x * 100f - m_PercentX;
+		m_PercentHeight		= 100f - (vectorAnchorMin.y * 100f + m_PercentY);
+		this.m_RectTransform.sizeDelta			= Vector2.zero;
+		this.m_RectTransform.localScale			= Vector3.one;
+		this.m_RectTransform.anchoredPosition   = Vector3.zero;
+	}
+	
+	public virtual void MoveToFirst() {
+		
+	}
+
+	public float GetPercentX() {
+		return m_PercentX;
+	}
+	public float GetPercentY() {
+		return m_PercentY;
+	}
+	public float GetPercentWidth() {
+		return m_PercentWidth;
+	}
+	public float GetPercentHeight() {
+		return m_PercentHeight;
+	}
+	#endregion
 }

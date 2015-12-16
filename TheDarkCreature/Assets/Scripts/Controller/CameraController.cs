@@ -21,9 +21,6 @@ public class CameraController : MonoBehaviour
     private Vector3 _position;
     private bool _isFirstSetCamra = true;
 
-    private bool m_IsZoom = false;
-    private bool m_IsPan = false;
-
 	#region Singleton
 	
 	public static object m_singletonObject = new object();
@@ -61,8 +58,8 @@ public class CameraController : MonoBehaviour
     {
 		if (_target == null)
 			return;
-        RotationAroundObjectByCamera();
-//        ZoomCamera();
+//        RotationAroundObjectByCamera();
+        ZoomCamera();
         MoveCamera();
     }
 

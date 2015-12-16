@@ -3,45 +3,48 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 using System.IO;
-using System.Xml.Serialization;
 using System.Collections.Generic;
-using System.Net;
 
 [AddComponentMenu("UI/Image Downloader")]
-public class CUIImageDownloader : CUIImage {
+public class CUIImageDownloader : CUIImage, IUserInterface {
 
 	#region Properties
-	private Image 	m_ImageSprite;
+	[SerializeField]
 	private string 	m_StorePath;
+	public string StorePath {
+		get { return m_StorePath; }
+	}
+
 	private byte 	_ImageBytes;
-	private bool 	_IsRun = false;
-	private RectTransform m_RectTransform;
-	private float m_ContentWidth;
-	private float m_ContentHeight;
+	[SerializeField]
+	private string	m_AbsoluteImageURL;
+	public string AbsoluteImageURL {
+		get { return m_AbsoluteImageURL; }
+	}
 
 	[SerializeField]
-	private Camera m_CameraControl;
-	public Camera CameraControl {
-		get { return m_CameraControl; }
-		set { m_CameraControl = value; }
-	}
-	[SerializeField]
-	private string m_ImageName = "Noimage";
+	private string m_ImageName = "";
 	public string ImageName {
 		get { return m_ImageName; }
 		set { m_ImageName = value; }
 	}
 	[SerializeField]
-	private string m_ImageType;
+	private string m_ImageType = "";
 	public string ImageType {
 		get { return m_ImageType; }
 		set { m_ImageType = value; }
 	}
 	[SerializeField]
-	private string m_ImagePath = "https://s-media-cache-ak0.pinimg.com/736x/88/f6/b9/88f6b97c37b9101283d9a22259a4de3f.jpg";
+	private string m_ImagePath = "";
 	public string ImagePath {
 		get { return m_ImagePath; }
 		set { m_ImagePath = value; }
+	}
+	[SerializeField]
+	private string m_DirectoryPath = "images";
+	public string DirectoryPath {
+		get { return m_DirectoryPath; }
+		set { m_DirectoryPath = value; }
 	}
 	[SerializeField]
 	private int m_ImageWidth = 1024;
@@ -55,94 +58,225 @@ public class CUIImageDownloader : CUIImage {
 		get { return m_ImageHeight; }
 		set { m_ImageHeight = value; }
 	}
+	[SerializeField]
+	private int m_PixelPerUnit = 1024;
+	public int PixelPerUnit {
+		get { return m_PixelPerUnit; }
+		set { m_PixelPerUnit = value; }
+	}
 
+	[SerializeField]
+	private bool m_NeedSave = true;
+	public bool NeedSave {
+		get { return m_NeedSave; }
+		set { m_NeedSave = value; }
+	}
+	
+	private Texture2D m_Texture2D;
 
 	#endregion
 
 	#region MonoBehaviour
 
-	public void Init () {
-		m_ImageSprite 	= this.GetComponent<Image>();
-		m_RectTransform = this.GetComponent<RectTransform>();
-		m_StorePath		= string.Format("{0}/{1}_{2}x{3}", Application.temporaryCachePath, m_ImageName, m_ImageWidth, m_ImageHeight);
-		m_ContentWidth  = this.m_CameraControl.pixelWidth;
-		m_ContentHeight = this.m_CameraControl.pixelHeight;
-		this.FitContent();
+	public override void Init (string directory = "images") {
+		base.Init();
+		m_DirectoryPath = directory;
+		m_StorePath		= Application.persistentDataPath + "/" + m_DirectoryPath + "/" + m_ImageName + ".png";
+
+		this.color 		= Color.white;
+		m_AbsoluteImageURL = m_ImagePath + m_ImageName + "." + m_ImageType;
+
+		var dirTemp =  Application.persistentDataPath + "/" + m_DirectoryPath;
+		if (!System.IO.Directory.Exists (dirTemp)) {
+			System.IO.Directory.CreateDirectory (dirTemp);
+		}
+		if (m_Texture2D == null) {
+			m_Texture2D = new Texture2D (m_ImageWidth, m_ImageHeight, TextureFormat.PVRTC_RGBA2, false);
+		}
+	}
+
+	protected override void Start ()
+	{
+		base.Start ();
+		m_Texture2D = new Texture2D (m_ImageWidth, m_ImageHeight, TextureFormat.PVRTC_RGBA2, false);
+	}
+
+	protected override void OnDestroy ()
+	{
+		base.OnDestroy ();
+		m_Texture2D = null;
 	}
 
 	#endregion
 
 	#region Main Method
 
-	public void StartDownload() {
-		if (_IsRun == false) {
-			_IsRun = true;
-			StartCoroutine (DownloadWWW());
+	public void SetupImageDownload(string url, string directory = "images") {
+		if (url.StartsWith ("http://") || url.StartsWith ("https://")) {
+			try {
+				var uri = new Uri (url);
+				var fileNameWithType = Path.GetFileName (uri.LocalPath);
+
+				var filePath = uri.OriginalString.Substring(0, uri.OriginalString.IndexOf (fileNameWithType));
+				var fileName = fileNameWithType.Substring (0, fileNameWithType.IndexOf ('.'));
+				var fileType = fileNameWithType.Substring (fileNameWithType.IndexOf ('.') + 1, fileNameWithType.Length - fileNameWithType.IndexOf ('.') - 1);
+				
+				m_ImagePath = filePath;
+				m_ImageName = fileName;
+				m_ImageType = fileType;
+
+				Init (directory);
+			} catch (Exception ex) {
+				Debug.LogError (string.Format ("[CUIImageDownloader] Error {0} - {1}", ex.Message, url));
+			}
+		} else {
+			LoadImageFromLocalFile (url);
+		}
+	}
+
+	public void StartDownload(Action complete = null, Action<string> error = null) {
+		if (string.IsNullOrEmpty (m_ImagePath)) {
+			LoadResources (m_ImageName);
+			if (complete != null) {
+				complete();
+			}
+			return;
+		}
+		if (m_ImagePath.StartsWith ("http://") || m_ImagePath.StartsWith ("https://")) {
+			DownLoadCNetRequest(complete, error);
+		} else {
+			var realPath = m_ImagePath + (m_ImageName);
+			LoadResources (realPath);
+			if (complete != null) {
+				complete();
+			}
 		}
 	}
 
 	public void StopDownload() {
-		if (_IsRun == true) {
-			_IsRun = false;
-			StopCoroutine (DownloadWWW());
+//		StopCoroutine (DownloadWWW());
+	}
+
+	public void LoadResources(string path) {
+		var textureWWW = Resources.Load<Texture2D> (path);
+		if (textureWWW != null) {
+			var spriteWWW = Sprite.Create (textureWWW, new Rect (0, 0, textureWWW.width, textureWWW.height), Vector2.zero, m_PixelPerUnit);
+			this.sprite = spriteWWW;
+		} else {
+			Debug.LogError ("Image path "+ (path));
 		}
 	}
 
-	private IEnumerator DownloadWWW() {
-		WWW _www = null ;
-		var _needSave = false;
+	private void DownLoadCNetRequest(Action complete = null, Action<string> error = null) {
+		if (string.IsNullOrEmpty (m_ImagePath)) return;
+		/*if (m_Request == null) {
+			m_Request = CNetRequest.GetInstance ();
+		}
+		var realPath = string.Empty;
 		if (File.Exists (m_StorePath)) {
-			var localPath = string.Format ("file:///{0}", m_StorePath);
-			_www = new WWW (localPath);
+			realPath = "file:///".Append (m_StorePath);
+			LoadImage (m_StorePath);
+			if (complete != null) {
+				complete();
+			}
 		} else {
-			var imageURL = string.Format ("{0}{1}.{2}", m_ImagePath, m_ImageName, m_ImageType);
-			_www = new WWW (imageURL);
-			_needSave = true;
-		}
-		var waiter = new WaitForSeconds (0.001f);
-		while (!_www.isDone) {
-			m_ImageSprite.color = new Color(m_ImageSprite.color.r, m_ImageSprite.color.g, m_ImageSprite.color.b, _www.progress);
-			yield return waiter;
-		}
-		yield return _www;
-		m_ImageSprite.color = new Color(m_ImageSprite.color.r, m_ImageSprite.color.g, m_ImageSprite.color.b, 1f);
-		var bytes = _www.bytes;
-		if (_needSave) {
-			SaveImage (m_StorePath, bytes);
-		}
-		LoadImage (bytes);
-	}	
+			realPath = m_ImagePath.Append (m_ImageName, ".", m_ImageType);
+			m_Request.Request (realPath, (x) => {
+				var bytes = x.Bytes;
+				if (m_NeedSave) {
+					StartCoroutine (SaveImage (m_StorePath, bytes, () => {
+						if (complete != null) {
+							complete();
+						}
+						LoadImage (m_StorePath);
+					}));
+				} else {
+					if (complete != null) {
+						complete();
+					}
+					LoadImage (bytes);
+				}
+			}, (y) => {
+				Debug.LogError (y.Append (" / ", gameObject.name, " / ", realPath));
+				if (error != null) {
+					error (y.Append (" / ", gameObject.name, " / ", realPath));
+				}
+			});
+		}*/
+	}
 
-	private void SaveImage(string path, byte[] bytes) {
-		var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, true);
-		fs.BeginWrite(bytes, 0, bytes.Length, new AsyncCallback(EndWriteCallback), fs);
+	private IEnumerator SaveImage(string path, byte[] bytes, Action saveComplete = null) {
+		var fs = new FileStream(path, FileMode.Create, FileAccess.Write, FileShare.None, 4096, false);
+		fs.BeginWrite(bytes, 0, bytes.Length, new AsyncCallback (EndWriteCallback), fs);
+		yield return File.Exists (path);
+		if (saveComplete != null) {
+			saveComplete();
+		}
 	} 
 
 	private void LoadImage(byte[] bytes) {
-		var textureWWW = new Texture2D (m_ImageWidth, m_ImageHeight, TextureFormat.ARGB32, false);
-		textureWWW.LoadImage (bytes);
-		var spriteWWW = Sprite.Create (textureWWW, new Rect (0, 0, textureWWW.width, textureWWW.height), Vector2.zero);
-		m_ImageSprite.sprite = spriteWWW;
+		if (m_Texture2D == null) {
+			m_Texture2D = new Texture2D (m_ImageWidth, m_ImageHeight, TextureFormat.PVRTC_RGBA2, false);
+		}
+		m_Texture2D.LoadImage (bytes);
+		LoadImage (m_Texture2D);
+		m_Texture2D = null;
 	}
 
-	private void LoadImage(string path) {
+	private void LoadImage(Texture2D textureWWW) {
+		this.sprite = Sprite.Create (textureWWW, new Rect (0, 0, textureWWW.width, textureWWW.height), Vector2.zero, m_PixelPerUnit);
+		textureWWW = null;
+	}
+
+	public void LoadImage(string path) {
 		var bytes = File.ReadAllBytes (path);
 		LoadImage (bytes);
 	}
 
 	private void LoadImageFromResource(string name) {
-		var noImageSprite = Resources.Load <Sprite> (string.Format ("Images/", name));
-		m_ImageSprite.sprite = noImageSprite;
+		var noImageSprite = Resources.Load <Sprite> ("Images/" + (name));
+		this.sprite = noImageSprite;
+	}
+	
+	private void LoadImageFromLocalFile(string path) {
+		LoadImage (path);
 	}
 
 	private void EndWriteCallback(IAsyncResult result) {
-		FileStream fs = result.AsyncState as FileStream;
+		var fs = result.AsyncState as FileStream;
 		fs.EndWrite(result);
 		fs.Flush();
 		fs.Close();
 	}
 
+	public override void FitContent() {
+		base.FitContent();
+	}
+	
+	public override void CalculateContent() {
+		base.CalculateContent();
+	}
+	
+	public override void MoveToFirst() {
+		base.MoveToFirst();
+	}
 
+	public void ChangeSprite(Sprite newSprite) {
+		StartCoroutine (DoChangeSprite(newSprite));
+	}
+
+	private IEnumerator DoChangeSprite(Sprite newSprite, float speed = 0.05f) {
+		var currentColor = this.color;
+		var waiter = new WaitForFixedUpdate();
+		this.sprite = newSprite != null ? newSprite : this.sprite;
+//		this.color = new Color (this.color.r, this.color.g, this.color.b, 0.25f);
+//		while (this.color.a < 1f) {
+//			this.color = new Color (this.color.r, this.color.g, this.color.b, 
+//			                        Mathf.Clamp (this.color.a + speed, 0f, 1f));
+			yield return waiter;
+//		}
+		this.color = currentColor;
+	}
 
 	#endregion
 

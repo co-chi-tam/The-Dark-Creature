@@ -12,9 +12,6 @@ public class TDCPlayerController : TDCCreatureController
 	private FSMManager m_FSMMamager;
 	private TDCPlayerData m_PlayerData;
 	private TDCInventory m_Inventory;
-	private TDCGameManager m_GameManager;
-
-	private Dictionary<string, Action<object>> m_EffectEvents;
 
     #endregion
 
@@ -47,7 +44,6 @@ public class TDCPlayerController : TDCCreatureController
 
         m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
 
-		m_GameManager = TDCGameManager.GetInstance ();
 	}
 	
 	void LateUpdate () {
@@ -144,7 +140,6 @@ public class TDCPlayerController : TDCCreatureController
 //			}
 		} break;
 		}
-		m_EffectEvents [item.EffectName] (item.EffectValue);
 	}
 
     private bool CanMove() {
