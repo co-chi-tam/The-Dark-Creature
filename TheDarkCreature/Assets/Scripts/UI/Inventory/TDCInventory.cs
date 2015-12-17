@@ -64,22 +64,19 @@ public class TDCInventory : MonoBehaviour {
 						m_OwnerData.Inventory[i].Amount++;
 						return true;
 					}
-				} else if (m_OwnerData.Inventory[i] == null) {
-					m_OwnerData.Inventory[i] = itemData;
-					m_ItemSlots[i].LoadSlot (itemData);
-					return true;
-				}
+				} 
 				break;
 			}
 			case TDCEnum.EItemType.Weapon: 
 			case TDCEnum.EItemType.GObject: {
-				if (m_OwnerData.Inventory[i] == null) {
-					m_OwnerData.Inventory[i] = itemData;
-					m_ItemSlots[i].LoadSlot (itemData);
-					return true;
-				}
+				
 				break;
 			} 
+			}
+			if (m_OwnerData.Inventory[i] == null) {
+				m_OwnerData.Inventory[i] = itemData;
+				m_ItemSlots[i].LoadSlot (itemData);
+				return true;
 			}
 			m_ItemSlots[i].OnSelectedSlot = m_OwnerController.OnSelectedItem;
 			itemData.Owner = m_OwnerController;

@@ -52,6 +52,14 @@ public class TDCBaseGroupController : TDCBaseController
 		return null;
 	}
 
+	public virtual void SpawnMinMember() {
+		
+	}
+
+	public virtual void SpawnMaxMember() {
+
+	}
+
 	#endregion
 
 	#region getter & Setter

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using Effect;
 
 public class TDCSlot : MonoBehaviour {
 
@@ -11,26 +12,29 @@ public class TDCSlot : MonoBehaviour {
 	}
 
 	[SerializeField]
-	private Image m_IconImage;
+	private Image m_IconImage = null;
 	[SerializeField]
-	private Text m_AmountItem;
+	private Text m_AmountItem = null;
 	[SerializeField]
-	private Button m_ItemButton;
+	private Button m_ItemButton = null;
 
 	private TDCItemData m_ItemData;
-
 	private Sprite m_NoImage;
 
 	#endregion 
 
 	#region Main method
 
+	void Start() {
+		
+	}
+
 	public TDCItemData GetData() {
 		return m_ItemData;
 	}
 
-	public void LoadSlot(TDCBaseData data) {
-		m_ItemData = data as TDCItemData;
+	public void LoadSlot(TDCItemData data) {
+		m_ItemData = data;
 		m_NoImage = m_IconImage.sprite;
 		m_IconImage.sprite = TDCUltilities.LoadImage (m_ItemData.Icon);
 		m_ItemData.GetChangeValue<int> ("Amount", ChangeAmount);
@@ -46,7 +50,6 @@ public class TDCSlot : MonoBehaviour {
 
 	public void EmptySlot() {
 		m_ItemData = null;
-//		m_IconImage.sprite = TDCUltilities.LoadImage ("NoIcon");
 		m_IconImage.sprite = m_NoImage;
 		m_ItemButton.onClick.RemoveAllListeners ();
 		m_AmountItem.text = string.Empty;
@@ -54,7 +57,7 @@ public class TDCSlot : MonoBehaviour {
 
 	private void OnPointerClick() {
 		if (m_SelectedSlot != null) {
-			m_SelectedSlot (this.m_ItemData as TDCItemData);
+			m_SelectedSlot (this.m_ItemData);
 		}
 	}
 

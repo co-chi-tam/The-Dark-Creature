@@ -152,7 +152,10 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override void SetAnimation(EAnimation anim) {
 		base.SetAnimation (anim);
-		m_AnimatorController.SetInteger("AnimParam", (int) anim);
+		if (m_AnimatorController.avatar != null && 
+			m_AnimatorController.runtimeAnimatorController != null) {
+			m_AnimatorController.SetInteger ("AnimParam", (int)anim);
+		}
 	}
 	
 	public override Vector3 GetTargetPosition() {

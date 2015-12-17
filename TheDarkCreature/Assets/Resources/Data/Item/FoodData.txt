@@ -8,7 +8,6 @@
 			"Description": "",
 			"IconPath": "Meat",
 			"EffectName": "IncreaseHealthPoint"
-			"EffectValue": 10,
 		}
 	]
 }

@@ -39,8 +39,8 @@
 			"Level": 1,
 			"Inventory": [
 				{
-					"ItemType": 1,
-					"GameType": 51
+					"GameType": 51,
+					"Amount": 99
 				}
 			]
 		},{

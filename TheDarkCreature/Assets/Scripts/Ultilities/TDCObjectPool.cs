@@ -49,6 +49,10 @@ namespace ObjectPool
 			return m_ListUsing.Count;
 		}
 
+		public int CountUnuse() {
+			return m_ListWaiting.Count;
+		}
+
 		public T ElementAtIndex(int index) {
 			if (index > m_ListUsing.Count - 1)
 				return default (T);

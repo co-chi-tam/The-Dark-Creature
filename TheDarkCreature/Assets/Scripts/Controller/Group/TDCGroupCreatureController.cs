@@ -16,11 +16,15 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
         var idleState = new FSMGroupIdleState(this);
         var waitingState = new FSMGroupWaitingState(this);
-        var spawnMemberState = new FSMGroupSpawnMemberState(this);
+		var spawnMemberState = new FSMGroupSpawnMemberState(this);
+		var spawnMinMemberState = new FSMGroupSpawnMinMemberState(this);
+		var spawnMaxMemberState = new FSMGroupSpawnMaxMemberState(this);
 
         m_FSMMamager.RegisterState("IdleState", idleState);
         m_FSMMamager.RegisterState("WaitingState", waitingState);
-        m_FSMMamager.RegisterState("SpawnMemberState", spawnMemberState);
+		m_FSMMamager.RegisterState("SpawnMemberState", spawnMemberState);
+		m_FSMMamager.RegisterState("SpawnMinMemberState", spawnMinMemberState);
+		m_FSMMamager.RegisterState("SpawnMaxMemberState", spawnMaxMemberState);
 
         m_FSMMamager.RegisterCondition("IsActive", IsActive);
         m_FSMMamager.RegisterCondition("IsFullGroup", IsFullGroup);
@@ -55,11 +59,6 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 			controller.SetGroupController (this);
 			controller.gameObject.SetActive (false);
 			m_MemberPool.Create (controller);
-			if (i < GetMinMember()) 
-			{
-				var go = m_MemberPool.Get();
-				go.SetActive (true);
-			}
 		}
 	}
 
@@ -70,10 +69,32 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
 	public override TDCBaseController SpawnMember ()
 	{
+		if (m_MemberPool.CountUnuse () == 0)
+			return null;
 		var member = m_MemberPool.Get ();
 		member.ResetObject ();
 		member.SetActive (true);
 		return member;
+	}
+
+	public override void SpawnMinMember ()
+	{
+		base.SpawnMinMember ();
+		if (m_MemberPool.CountUnuse () == 0)
+			return;
+		for (int i = 0; i < GetMinMember (); i++) {
+			SpawnMember ();
+		}
+	}
+
+	public override void SpawnMaxMember ()
+	{
+		base.SpawnMaxMember ();
+		if (m_MemberPool.CountUnuse () == 0)
+			return;
+		for (int i = 0; i < GetMaxMember (); i++) {
+			SpawnMember ();
+		}
 	}
 
     private bool IsActive()

@@ -47,6 +47,7 @@ public class TDCWeaponData : TDCItemData {
 		tmp.Name = instance.Name;
 		tmp.GameType = instance.GameType;
 		tmp.Description = instance.Description;
+		tmp.EffectName = instance.EffectName;
 		tmp.MinDamage = instance.MinDamage;
 		tmp.MaxDamage = instance.MaxDamage;
 		tmp.Duration = instance.Duration;

@@ -2,7 +2,6 @@
 public class TDCItemData : TDCBaseData {
 	
 	private string m_EffectName;
-	private object m_EffectValue;
 	private TDCEnum.EItemType m_ItemType;
 	private TDCCreatureController m_Owner;
 	private TDCObjectProperty<int> m_Amount;
@@ -26,11 +25,6 @@ public class TDCItemData : TDCBaseData {
 		get { return m_EffectName; }
 		set { m_EffectName = value; }
 	}
-	
-	public object EffectValue {
-		get { return m_EffectValue; }
-		set { m_EffectValue = value; }
-	}
 
 	public TDCItemData () : base ()
 	{	
@@ -51,7 +45,6 @@ public class TDCItemData : TDCBaseData {
 		tmp.ItemType = instance.ItemType;
 		tmp.Owner = instance.Owner;
 		tmp.EffectName = instance.EffectName;
-		tmp.EffectValue = instance.EffectValue;
 		return tmp;
 	}
 
@@ -66,7 +59,6 @@ public class TDCItemData : TDCBaseData {
 		tmp.ItemType = lh.ItemType;
 		tmp.Owner = lh.Owner;
 		tmp.EffectName = lh.EffectName;
-		tmp.EffectValue = lh.EffectValue;
 		return tmp;
 	}
 }
