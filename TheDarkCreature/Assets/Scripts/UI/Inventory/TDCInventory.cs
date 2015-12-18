@@ -40,7 +40,7 @@ public class TDCInventory : MonoBehaviour {
 	private TDCCreatureData m_OwnerData;
 	private TDCSlot[] m_ItemSlots;
 
-	public delegate void SelectedSlot(TDCItemData item);
+    public delegate void SelectedSlot(TDCItemEntity item);
 
 	#endregion
 
@@ -53,48 +53,10 @@ public class TDCInventory : MonoBehaviour {
 	}
 
 	public bool AddItem(TDCItemData itemData) {
-		for (int i = 0; i < m_OwnerData.Inventory.Length; i++) {
-			var itemType = itemData.ItemType;
-			switch (itemType) {
-			case TDCEnum.EItemType.Food: 
-			case TDCEnum.EItemType.Item: 
-			{
-				if (m_OwnerData.Inventory[i] != null) {
-					if (m_OwnerData.Inventory[i].GameType == itemData.GameType) {
-						m_OwnerData.Inventory[i].Amount++;
-						return true;
-					}
-				} 
-				break;
-			}
-			case TDCEnum.EItemType.Weapon: 
-			case TDCEnum.EItemType.GObject: {
-				
-				break;
-			} 
-			}
-			if (m_OwnerData.Inventory[i] == null) {
-				m_OwnerData.Inventory[i] = itemData;
-				m_ItemSlots[i].LoadSlot (itemData);
-				return true;
-			}
-			m_ItemSlots[i].OnSelectedSlot = m_OwnerController.OnSelectedItem;
-			itemData.Owner = m_OwnerController;
-		}
 		return false;
 	}
 
 	public bool RemoveItem(TDCItemData itemData) {
-		for (int i = 0; i < m_OwnerData.Inventory.Length; i++) {
-			if (m_OwnerData.Inventory[i] != null) {
-				if (m_OwnerData.Inventory[i].GameType == itemData.GameType) {
-					m_ItemSlots[i].OnSelectedSlot = null;
-					m_ItemSlots[i].EmptySlot();
-					m_OwnerData.Inventory[i] = null;
-					return true;
-				}
-			}
-		}
 		return false;
 	}
 
@@ -107,6 +69,7 @@ public class TDCInventory : MonoBehaviour {
 			if (m_OwnerData.Inventory[i] != null) {
 				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
 				child.LoadSlot (m_OwnerData.Inventory[i]);
+                m_OwnerData.Inventory[i].GetData().Owner = m_OwnerController;
 			}
 			m_ItemSlots[i] = child;
 		}

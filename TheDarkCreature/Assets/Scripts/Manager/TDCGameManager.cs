@@ -52,7 +52,11 @@ public class TDCGameManager : MonoBehaviour {
 
 		CreateGroup (TDCEnum.EGameType.GroupGrass, new Vector3 (20f, 0f, 20f), Quaternion.identity);
 		CreateGroup (TDCEnum.EGameType.GroupMushRoom, new Vector3 (10f, 0f, 20f), Quaternion.identity);
-	}
+	
+
+        var item = new TDCItemEntity(m_DataLoader.GetFood(TDCEnum.EGameType.Meat));
+        item.ExcuteItem();
+    }
 
     #endregion
 

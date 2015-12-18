@@ -24,8 +24,8 @@ public class TDCPlayerController : TDCCreatureController
     public override void Start()
 	{
 		base.Start ();
-		
-		m_FSMMamager    = new FSMManager();
+
+        m_FSMMamager    = new FSMManager();
 		m_Inventory 	= TDCInventory.GetInstance ();
 
 		var idleState   = new FSMIdleState(this);
@@ -106,40 +106,12 @@ public class TDCPlayerController : TDCCreatureController
 		}
 	}
 
-	public override void OnSelectedItem (TDCItemData item)
+    public override void OnSelectedItem (TDCItemEntity item)
 	{
 		base.OnSelectedItem (item);
-		var itemType = item.ItemType;
-		switch (itemType) {
-		case TDCEnum.EItemType.Food: 
-		case TDCEnum.EItemType.Item: 
-		{
-			var itemData = item as TDCFoodData;
-			itemData.Amount --;
-			if (itemData.Amount == 0) {
-				m_Inventory.RemoveItem (itemData);
-			}
-			break;
-		}
-		case TDCEnum.EItemType.Weapon:{
-			var weapon = item as TDCWeaponData;
-			weapon.Duration -= weapon.DecreaseDuration;
-			if (weapon.Duration == 0) {
-				weapon.Amount --;
-				if (weapon.Amount == 0) {
-					m_Inventory.RemoveItem (weapon);
-				}
-			}
-			break;
-		}
-		case TDCEnum.EItemType.GObject: {
-			var gObject = item;
-//			gObject.Amount --;
-//			if (gObject.Amount == 0) {
-				m_Inventory.RemoveItem (gObject);
-//			}
-		} break;
-		}
+        var itemType = item.GetData().ItemType;
+        item.GetData().Amount--;
+        item.ExcuteItem();
 	}
 
     private bool CanMove() {

@@ -58,7 +58,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_AttackerController = attacker;
 	}
 
-	public virtual void OnSelectedItem(TDCItemData slot) {
+    public virtual void OnSelectedItem(TDCItemEntity item) {
 		
 	}
 	
@@ -152,8 +152,7 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override void SetAnimation(EAnimation anim) {
 		base.SetAnimation (anim);
-		if (m_AnimatorController.avatar != null && 
-			m_AnimatorController.runtimeAnimatorController != null) {
+		if (m_AnimatorController.runtimeAnimatorController != null) {
 			m_AnimatorController.SetInteger ("AnimParam", (int)anim);
 		}
 	}

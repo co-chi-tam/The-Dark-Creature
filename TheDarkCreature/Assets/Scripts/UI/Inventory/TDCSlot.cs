@@ -18,7 +18,7 @@ public class TDCSlot : MonoBehaviour {
 	[SerializeField]
 	private Button m_ItemButton = null;
 
-	private TDCItemData m_ItemData;
+    private TDCItemEntity m_ItemEntity;
 	private Sprite m_NoImage;
 
 	#endregion 
@@ -29,19 +29,15 @@ public class TDCSlot : MonoBehaviour {
 		
 	}
 
-	public TDCItemData GetData() {
-		return m_ItemData;
-	}
-
-	public void LoadSlot(TDCItemData data) {
-		m_ItemData = data;
+    public void LoadSlot(TDCItemEntity entity) {
+        m_ItemEntity = entity;
 		m_NoImage = m_IconImage.sprite;
-		m_IconImage.sprite = TDCUltilities.LoadImage (m_ItemData.Icon);
-		m_ItemData.GetChangeValue<int> ("Amount", ChangeAmount);
+        m_IconImage.sprite = TDCUltilities.LoadImage (m_ItemEntity.GetData().Icon);
+        m_ItemEntity.GetData().GetChangeValue<int> ("Amount", ChangeAmount);
 		m_ItemButton.onClick.AddListener (() => {
 			OnPointerClick();
 		});
-		m_AmountItem.text = m_ItemData.Amount.ToString ();
+        m_AmountItem.text = m_ItemEntity.GetData().Amount.ToString ();
 	}
 
 	private void ChangeAmount(int source, int target) {
@@ -49,7 +45,7 @@ public class TDCSlot : MonoBehaviour {
 	}
 
 	public void EmptySlot() {
-		m_ItemData = null;
+		m_ItemEntity = null;
 		m_IconImage.sprite = m_NoImage;
 		m_ItemButton.onClick.RemoveAllListeners ();
 		m_AmountItem.text = string.Empty;
@@ -57,7 +53,7 @@ public class TDCSlot : MonoBehaviour {
 
 	private void OnPointerClick() {
 		if (m_SelectedSlot != null) {
-			m_SelectedSlot (this.m_ItemData);
+			m_SelectedSlot (this.m_ItemEntity);
 		}
 	}
 

@@ -1,9 +1,9 @@
 ﻿
 public class TDCItemData : TDCBaseData {
 	
-	private string m_EffectName;
+	private string m_EffectPath;
 	private TDCEnum.EItemType m_ItemType;
-	private TDCCreatureController m_Owner;
+    private TDCBaseController m_Owner;
 	private TDCObjectProperty<int> m_Amount;
 
 	public TDCEnum.EItemType ItemType {
@@ -11,7 +11,7 @@ public class TDCItemData : TDCBaseData {
 		set { m_ItemType = value; }
 	}
 
-	public TDCCreatureController Owner {
+    public TDCBaseController Owner {
 		get { return m_Owner; }
 		set { m_Owner = value; }
 	}
@@ -21,9 +21,9 @@ public class TDCItemData : TDCBaseData {
 		set { m_Amount.SetValue (value < 0 ? 0 : value); }
 	}
 	
-	public string EffectName {
-		get { return m_EffectName; }
-		set { m_EffectName = value; }
+	public string EffectPath {
+        get { return m_EffectPath; }
+		set { m_EffectPath = value; }
 	}
 
 	public TDCItemData () : base ()
@@ -44,7 +44,7 @@ public class TDCItemData : TDCBaseData {
 		tmp.Icon = instance.Icon;
 		tmp.ItemType = instance.ItemType;
 		tmp.Owner = instance.Owner;
-		tmp.EffectName = instance.EffectName;
+		tmp.EffectPath = instance.EffectPath;
 		return tmp;
 	}
 
@@ -58,7 +58,7 @@ public class TDCItemData : TDCBaseData {
 		tmp.Icon = lh.Icon;
 		tmp.ItemType = lh.ItemType;
 		tmp.Owner = lh.Owner;
-		tmp.EffectName = lh.EffectName;
+		tmp.EffectPath = lh.EffectPath;
 		return tmp;
 	}
 }

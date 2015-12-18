@@ -12,7 +12,7 @@ public class TDCFoodData : TDCItemData {
 		tmp.Name = instance.Name;
 		tmp.Description = instance.Description;
 		tmp.GameType = instance.GameType;
-		tmp.EffectName = instance.EffectName;
+		tmp.EffectPath = instance.EffectPath;
 		tmp.ItemType = instance.ItemType;
 		tmp.Icon = instance.Icon;
 		return tmp;

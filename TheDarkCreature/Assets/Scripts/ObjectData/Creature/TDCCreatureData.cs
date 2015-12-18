@@ -5,7 +5,7 @@ public class TDCCreatureData : TDCBaseData {
 
 	private TDCEnum.ECreatureType m_CreatureType;
 	private string[] m_ModelPath;
-	private TDCItemData[] m_Inventory;
+    private TDCItemEntity[] m_Inventory;
 	private string m_FSMPath;
 	private TDCObjectProperty<float> m_WalkSpeed;
 	private float m_RunSpeed;
@@ -29,7 +29,7 @@ public class TDCCreatureData : TDCBaseData {
 		set { m_FSMPath = value; }
 	}
 
-	public TDCItemData[] Inventory {
+    public TDCItemEntity[] Inventory {
 		get { return m_Inventory; }
 		set { m_Inventory = value; }
 	}
@@ -106,7 +106,7 @@ public class TDCCreatureData : TDCBaseData {
 		m_MaxDamage = 0;
 		m_DetectRange = 0f;
 		m_AttackRange = 0f;
-		this.m_Inventory = new TDCItemData[20];
+        this.m_Inventory = new TDCItemEntity[20];
 		m_TypeEnemies = new List<TDCEnum.EGameType> ();
 		m_TypeFoods = new List<TDCEnum.EGameType> ();
 		m_CreatureType = TDCEnum.ECreatureType.None;

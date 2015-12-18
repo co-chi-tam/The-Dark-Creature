@@ -91,7 +91,7 @@ public class TDCDataLoader {
 			food.Icon = instance["IconPath"].ToString();
 			food.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			food.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
-			food.EffectName = instance ["EffectName"].ToString ();
+            food.EffectPath = instance ["EffectPath"].ToString ();
 			m_ListItemData.Add (food.GameType, food);
 		}
 	}
@@ -104,7 +104,7 @@ public class TDCDataLoader {
 			weapon.Name = instance ["Name"].ToString ();
 			weapon.Description = instance ["Description"].ToString ();
 			weapon.Icon = instance["IconPath"].ToString();
-			weapon.EffectName = instance["EffectName"].ToString();
+			weapon.EffectPath = instance["EffectPath"].ToString();
 			weapon.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			weapon.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
 			weapon.MinDamage = int.Parse (instance ["MinDamage"].ToString ());
@@ -189,8 +189,8 @@ public class TDCDataLoader {
 					item = GetWeapon (gameType);
 					break;
 				}
-				player.Inventory[x] = item;
-				player.Inventory[x].Amount = amount;
+                player.Inventory[x] = new TDCItemEntity (item);
+                player.Inventory[x].GetData().Amount = amount;
 			}
 			m_ListCreatureData.Add (player.GameType, player);
 		}

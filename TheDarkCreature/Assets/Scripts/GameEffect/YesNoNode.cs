@@ -6,14 +6,9 @@ namespace Effect
 {
 	public class YesNoNode: BaseEffectNode
 	{
-		private string m_Method;
+        private EffectParam m_EffectParam;
 		private List<BaseEffectNode> m_YesMethods;
 		private List<BaseEffectNode> m_NoMethods;
-
-		public string Method {
-			get { return m_Method; }
-			set { m_Method = value; }
-		}
 
 		public List<BaseEffectNode> YesMethods {
 			get { return m_YesMethods; }
@@ -25,8 +20,15 @@ namespace Effect
 			set { m_NoMethods = value; }
 		}
 
+        public EffectParam EffectParam
+        {
+            get { return m_EffectParam; }
+            set { m_EffectParam = value; }
+        }
+
 		public YesNoNode () : base ()
 		{
+            EffectParam = new EffectParam();
 			m_YesMethods = new List<BaseEffectNode> ();
 			m_NoMethods = new List<BaseEffectNode> ();                                     
 		}

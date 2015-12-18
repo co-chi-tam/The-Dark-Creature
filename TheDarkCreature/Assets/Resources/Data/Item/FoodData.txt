@@ -7,7 +7,7 @@
 			"ItemType": 1,
 			"Description": "",
 			"IconPath": "Meat",
-			"EffectName": "IncreaseHealthPoint"
+			"EffectPath": "Effect/MeatEffect"
 		}
 	]
 }
