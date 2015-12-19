@@ -23,6 +23,7 @@ public class TDCGObjectData : TDCCreatureData{
 		tmp.FSMPath = instance.FSMPath;
 		tmp.Icon = instance.Icon;
 		tmp.Duration = instance.Duration;
+		tmp.Inventory = instance.Inventory;
 		return tmp;
 	}
 }

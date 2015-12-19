@@ -17,6 +17,7 @@ public class TDCResourceData : TDCCreatureData {
 		tmp.Icon = instance.Icon;
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
+		tmp.Inventory = instance.Inventory;
 		return tmp;
 	}
 }

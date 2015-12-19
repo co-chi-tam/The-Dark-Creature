@@ -52,15 +52,31 @@ public class TDCGameManager : MonoBehaviour {
 
 		CreateGroup (TDCEnum.EGameType.GroupGrass, new Vector3 (20f, 0f, 20f), Quaternion.identity);
 		CreateGroup (TDCEnum.EGameType.GroupMushRoom, new Vector3 (10f, 0f, 20f), Quaternion.identity);
-	
-
-        var item = new TDCItemEntity(m_DataLoader.GetFood(TDCEnum.EGameType.Meat));
-        item.ExcuteItem();
     }
 
     #endregion
 
     #region Main method
+
+	public TDCItemController CreateItem(TDCEnum.EGameType type, TDCEnum.EItemType itemType, TDCBaseController owner, int amount) {
+		TDCItemData itemData = null;
+		switch (itemType)
+		{
+			default:
+			case TDCEnum.EItemType.Food:
+				itemData = m_DataLoader.GetFood(type);
+				break;
+			case TDCEnum.EItemType.Weapon:
+				itemData = m_DataLoader.GetWeapon(type);
+				break;
+		}
+		if (itemData == null)
+			return null;
+		var item = new TDCItemController(itemData);
+		item.GetData().Owner = owner;
+		item.GetData().Amount = amount;
+		return item;
+	}
 
 	public TDCGroupCreatureController CreateGroup(TDCEnum.EGameType type, 
 	                                               Vector3 position, 
@@ -86,10 +102,10 @@ public class TDCGameManager : MonoBehaviour {
 			groupController.CreatePoolMember (TDCEnum.EGameType.Bob);
 			break;
 		case TDCEnum.EGameType.GroupGrass:
-			groupController.CreatePoolMember (TDCEnum.EGameType.EnviromentGrass);
+			groupController.CreatePoolMember (TDCEnum.EGameType.Grass);
 			break;
 		case TDCEnum.EGameType.GroupMushRoom:
-			groupController.CreatePoolMember (TDCEnum.EGameType.EnviromentMushroom);
+			groupController.CreatePoolMember (TDCEnum.EGameType.Mushroom);
 			break;
 		}
 		gObject.transform.position = position;
@@ -135,8 +151,8 @@ public class TDCGameManager : MonoBehaviour {
 			//TODO
 			break;
 		}
-		case TDCEnum.EGameType.EnviromentGrass:
-		case TDCEnum.EGameType.EnviromentMushroom: {
+		case TDCEnum.EGameType.Grass:
+		case TDCEnum.EGameType.Mushroom: {
 			data = m_DataLoader.GetResource (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCResourceController> ();

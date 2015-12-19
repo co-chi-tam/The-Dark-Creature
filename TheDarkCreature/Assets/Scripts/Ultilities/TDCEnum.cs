@@ -13,9 +13,10 @@ public class TDCEnum{
 		Satla 		= 6,
 		Bob 		= 7,
 
-		// Food
+		// Object
 		Meat 		= 51,
 		Mushroom	= 52,
+		Grass		= 53,
 
 		// Weapon
 		Trap		= 71,
@@ -26,10 +27,6 @@ public class TDCEnum{
 		GroupBob	= 203,
 		GroupGrass	= 204,
 		GroupMushRoom = 205,
-
-		// Enviroment
-		EnviromentGrass = 251,
-		EnviromentMushroom = 252,
 
 		// Object
 		CampFire	= 301

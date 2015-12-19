@@ -40,7 +40,7 @@ public class TDCInventory : MonoBehaviour {
 	private TDCCreatureData m_OwnerData;
 	private TDCSlot[] m_ItemSlots;
 
-    public delegate void SelectedSlot(TDCItemEntity item);
+    public delegate void SelectedSlot(TDCItemController item);
 
 	#endregion
 

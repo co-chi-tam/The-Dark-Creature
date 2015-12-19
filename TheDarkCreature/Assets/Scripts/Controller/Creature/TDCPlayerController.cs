@@ -106,11 +106,10 @@ public class TDCPlayerController : TDCCreatureController
 		}
 	}
 
-    public override void OnSelectedItem (TDCItemEntity item)
+    public override void OnSelectedItem (TDCItemController item)
 	{
 		base.OnSelectedItem (item);
         var itemType = item.GetData().ItemType;
-        item.GetData().Amount--;
         item.ExcuteItem();
 	}
 

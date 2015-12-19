@@ -41,6 +41,12 @@
 				{
 					"GameType": 51,
 					"Amount": 99
+				},{
+					"GameType": 52,
+					"Amount": 99
+				},{
+					"GameType": 53,
+					"Amount": 99
 				}
 			]
 		},{

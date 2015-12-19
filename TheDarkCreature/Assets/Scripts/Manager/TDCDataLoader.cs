@@ -47,11 +47,11 @@ public class TDCDataLoader {
 		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
 
 		LoadFood (jsonfood["foods"] as List<object>);
-		LoadGroup (jsonGroup["groups"] as List<object>);
 		LoadWeapon (jsonWeapon["weapons"] as List<object>);
 		LoadResource (jsonResource["resources"] as List<object>);
 		LoadCreature (jsonCreature["creatures"] as List<object>);
 		LoadObject (jsonObject["objects"] as List<object>);
+		LoadGroup (jsonGroup["groups"] as List<object>);
 		LoadPlayer (jsonPlayer["players"] as List<object>);
 	}
 
@@ -77,6 +77,24 @@ public class TDCDataLoader {
 			creature.WalkSpeed = float.Parse (instance["WalkSpeed"].ToString());
 			ConvertToEnum (instance["Enemies"] as List<object>, creature.TypeEnemies);
 			ConvertToEnum (instance["Foods"] as List<object>, creature.TypeFoods);
+			var inventory = instance["Inventory"] as List<object>;
+			for (int x = 0; x < inventory.Count; x++) {
+				var invenData = inventory[x] as Dictionary<string, object>;
+				var gameType = (TDCEnum.EGameType)int.Parse (invenData["GameType"].ToString());
+				var amount = int.Parse (invenData["Amount"].ToString());
+				var itemType = m_ListItemData [gameType].ItemType;
+				TDCItemData item = null;
+				switch (itemType) {
+					case TDCEnum.EItemType.Food:
+						item = GetFood (gameType);
+						break;
+					case TDCEnum.EItemType.Weapon:
+						item = GetWeapon (gameType);
+						break;
+				}
+				creature.Inventory[x] = new TDCItemController (item);
+				creature.Inventory[x].GetData().Amount = amount;
+			}
 			m_ListCreatureData.Add (creature.GameType, creature);
 		}
 	}
@@ -150,6 +168,24 @@ public class TDCDataLoader {
 			resource.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			resource.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			resource.MaxHP = int.Parse (instance["MaxHP"].ToString());
+			var inventory = instance["Inventory"] as List<object>;
+			for (int x = 0; x < inventory.Count; x++) {
+				var invenData = inventory[x] as Dictionary<string, object>;
+				var gameType = (TDCEnum.EGameType)int.Parse (invenData["GameType"].ToString());
+				var amount = int.Parse (invenData["Amount"].ToString());
+				var itemType = m_ListItemData [gameType].ItemType;
+				TDCItemData item = null;
+				switch (itemType) {
+					case TDCEnum.EItemType.Food:
+						item = GetFood (gameType);
+						break;
+					case TDCEnum.EItemType.Weapon:
+						item = GetWeapon (gameType);
+						break;
+				}
+				resource.Inventory[x] = new TDCItemController (item);
+				resource.Inventory[x].GetData().Amount = amount;
+			}
 			m_ListCreatureData.Add (resource.GameType, resource);
 		}
 	}
@@ -189,7 +225,7 @@ public class TDCDataLoader {
 					item = GetWeapon (gameType);
 					break;
 				}
-                player.Inventory[x] = new TDCItemEntity (item);
+                player.Inventory[x] = new TDCItemController (item);
                 player.Inventory[x].GetData().Amount = amount;
 			}
 			m_ListCreatureData.Add (player.GameType, player);
@@ -209,6 +245,24 @@ public class TDCDataLoader {
 			gObject.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			gObject.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			gObject.Duration = float.Parse (instance ["Duration"].ToString ());
+			var inventory = instance["Inventory"] as List<object>;
+			for (int x = 0; x < inventory.Count; x++) {
+				var invenData = inventory[x] as Dictionary<string, object>;
+				var gameType = (TDCEnum.EGameType) int.Parse (invenData["GameType"].ToString());
+				var amount = int.Parse (invenData["Amount"].ToString());
+				var itemType = m_ListItemData [gameType].ItemType;
+				TDCItemData item = null;
+				switch (itemType) {
+					case TDCEnum.EItemType.Food:
+						item = GetFood (gameType);
+						break;
+					case TDCEnum.EItemType.Weapon:
+						item = GetWeapon (gameType);
+						break;
+				}
+				gObject.Inventory[x] = new TDCItemController (item);
+				gObject.Inventory[x].GetData().Amount = amount;
+			}
 			m_ListCreatureData.Add (gObject.GameType, gObject);
 		}
 	}

@@ -4,7 +4,8 @@ using FSM;
 
 public class FSMDieState : FSMBaseState
 {
-    public FSMDieState(TDCBaseController controller) : base (controller)
+ 
+	public FSMDieState(TDCBaseController controller) : base (controller)
     {
 
     }
@@ -13,10 +14,13 @@ public class FSMDieState : FSMBaseState
     {
         m_Controller.SetAnimation(EAnimation.Die);
 		m_Controller.SetActive (false);
-		m_Controller.GetGroupController ().ReturnMember (m_Controller);
+		var group = m_Controller.GetGroupController();
+		if (group != null)
+		{
+			group.ReturnMember(m_Controller);
+		}
 
-//		var attacker = m_Controller.GetAttacker ();
-    }
+	}
 
     public override void UpdateState()
     {

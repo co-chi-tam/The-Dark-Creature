@@ -8,6 +8,22 @@
 			"Description": "",
 			"IconPath": "Meat",
 			"EffectPath": "Effect/MeatEffect"
+		},{
+			"ID": 2,
+			"Name": "Mushroom",
+			"GameType": 52,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "Mushroom",
+			"EffectPath": "Effect/MeatEffect"
+		},{
+			"ID": 3,
+			"Name": "Grass",
+			"GameType": 53,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "Grass",
+			"EffectPath": "Effect/MeatEffect"
 		}
 	]
 }

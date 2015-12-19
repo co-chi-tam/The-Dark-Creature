@@ -58,7 +58,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_AttackerController = attacker;
 	}
 
-    public virtual void OnSelectedItem(TDCItemEntity item) {
+    public virtual void OnSelectedItem(TDCItemController item) {
 		
 	}
 	
@@ -190,6 +190,11 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override int GetMaxHealth() {
 		return m_CreatureData.MaxHP;
+	}
+
+	public override TDCItemController[] GetInventory()
+	{
+		return m_CreatureData.Inventory;
 	}
 	
 	#endregion

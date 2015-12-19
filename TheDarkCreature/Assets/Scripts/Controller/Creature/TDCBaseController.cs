@@ -214,5 +214,9 @@ public class TDCBaseController : TDCMonoBehaviour
 		return null;
 	}
 
+	public virtual TDCItemController[] GetInventory() {
+		return null;
+	}
+
 	#endregion
 }
