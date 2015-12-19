@@ -12,6 +12,13 @@ public class TDCSlot : MonoBehaviour {
 	}
 
 	[SerializeField]
+	private int m_SlotIndex = 0;
+	public int SlotIndex
+	{
+		get { return m_SlotIndex; }
+		set { m_SlotIndex = value; }
+	}
+	[SerializeField]
 	private Image m_IconImage = null;
 	[SerializeField]
 	private Text m_AmountItem = null;
@@ -26,18 +33,22 @@ public class TDCSlot : MonoBehaviour {
 	#region Main method
 
 	void Start() {
-		
-	}
-
-    public void LoadSlot(TDCItemController item) {
-        m_ItemController = item;
-		m_NoImage = m_IconImage.sprite;
-        m_IconImage.sprite = TDCUltilities.LoadImage (m_ItemController.GetData().Icon);
-        m_ItemController.GetData().GetChangeValue<int> ("Amount", ChangeAmount);
 		m_ItemButton.onClick.AddListener (() => {
 			OnPointerClick();
 		});
-        m_AmountItem.text = m_ItemController.GetData().Amount.ToString ();
+		m_NoImage = TDCUltilities.LoadImage ("NoImage");
+	}
+
+	public void LoadSlot(TDCItemController item) {
+		m_ItemController = item;
+		m_IconImage.sprite = TDCUltilities.LoadImage (m_ItemController.GetData().Icon);
+		m_ItemController.GetData().GetChangeValue<int> ("Amount", ChangeAmount);
+		m_AmountItem.text = m_ItemController.GetData().Amount.ToString ();
+	}
+
+    public void LoadSlot(int index, TDCItemController item) {
+		m_SlotIndex = index;
+		LoadSlot(item);
 	}
 
 	private void ChangeAmount(int source, int target) {
@@ -47,13 +58,13 @@ public class TDCSlot : MonoBehaviour {
 	public void EmptySlot() {
 		m_ItemController = null;
 		m_IconImage.sprite = m_NoImage;
-		m_ItemButton.onClick.RemoveAllListeners ();
 		m_AmountItem.text = string.Empty;
+		m_SelectedSlot = null;
 	}
 
 	private void OnPointerClick() {
 		if (m_SelectedSlot != null) {
-			m_SelectedSlot (this.m_ItemController);
+			m_SelectedSlot (m_SlotIndex);
 		}
 	}
 

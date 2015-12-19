@@ -20,6 +20,28 @@ public class FSMDieState : FSMBaseState
 			group.ReturnMember(m_Controller);
 		}
 
+		var attacker = m_Controller.GetAttacker() as TDCCreatureController;
+		if (attacker != null) 
+		{
+			var inventory = m_Controller.GetInventory();
+			for (int i = 0; i < inventory.Length; i++)
+			{
+				var itemInInventory = inventory[i];
+				if (itemInInventory != null)
+				{
+					var itemData = itemInInventory.GetData();
+					if (attacker.AddItem(itemData.GameType, itemData.ItemType, itemData.Amount) != 1)
+					{
+						// TODO
+					} 
+					else 
+					{
+						break;
+					}
+					 
+				}
+			}
+		}
 	}
 
     public override void UpdateState()

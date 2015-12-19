@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e153fc6e3e7467442bfc44b27b46969f
-timeCreated: 1450526918
+timeCreated: 1450533362
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -80,7 +80,7 @@ TextureImporter:
     21300146: Items 3_73
     21300148: Items 3_74
     21300150: Items 3_75
-    21300152: Items 3_76
+    21300152: NoImage
     21300154: Items 3_77
     21300156: Items 3_78
     21300158: Items 3_79
@@ -1143,7 +1143,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 3_76
+    - name: NoImage
       rect:
         serializedVersion: 2
         x: 389

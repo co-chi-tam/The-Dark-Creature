@@ -16,6 +16,7 @@ public class TDCCreatureController : TDCBaseController {
 	protected bool m_CanMove = true;
 
 	protected TDCCreatureData m_CreatureData;
+	private TDCGameManager m_GameManager;
 
 	#endregion
 	
@@ -26,6 +27,7 @@ public class TDCCreatureController : TDCBaseController {
 		base.Init ();
 		m_Rigidbody	= this.GetComponent<Rigidbody>();
 		m_AnimatorController = this.GetComponent<Animator> ();
+		m_GameManager = TDCGameManager.GetInstance();
 		m_TargetPosition = m_Transform.position;
 		m_AttackerController = null;
 	}
@@ -58,10 +60,68 @@ public class TDCCreatureController : TDCBaseController {
 		m_AttackerController = attacker;
 	}
 
-    public virtual void OnSelectedItem(TDCItemController item) {
+	public virtual void OnSelectedItem(int itemIndex) {
 		
 	}
-	
+
+	public virtual int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount) {
+		var inventory = m_CreatureData.Inventory;
+		var indexItemInInventory = FindItemSlot(gameType);
+		var emptySlot = FindEmptySlot();
+		if (emptySlot == -1)
+			return -1;
+		switch (itemType)
+		{
+			case TDCEnum.EItemType.Food:
+			case TDCEnum.EItemType.Item:
+				{
+					if (indexItemInInventory != -1)
+					{
+						inventory[indexItemInInventory].GetData().Amount++;
+						return indexItemInInventory;
+					}
+					else
+					{
+						inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
+					}
+				}
+				break;
+			case TDCEnum.EItemType.GObject:
+			case TDCEnum.EItemType.Weapon:
+				{
+					inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
+				}
+				break;
+		}
+		return emptySlot;
+	}
+
+	private int FindEmptySlot() {
+		var inventory = m_CreatureData.Inventory;
+		for (int i = 0; i < inventory.Length; i++)
+		{
+			if (inventory[i] == null)
+				return i;
+		}
+		return -1;
+	}
+
+	private int FindItemSlot(TDCEnum.EGameType gameType) {
+		var inventory = m_CreatureData.Inventory;
+		for (int i = 0; i < inventory.Length; i++)
+		{
+			if (inventory[i] == null)
+				continue;
+			var data = inventory[i].GetData();
+			if (data != null)
+			{
+				if (data.GameType == gameType)
+					return i;
+			}
+		}
+		return -1;
+	}
+
 	public override void WalkPosition(Vector3 position) {
 		MovePosition(position, m_CreatureData.WalkSpeed);
 	}

@@ -59,7 +59,7 @@ public class CameraController : MonoBehaviour
 		if (_target == null)
 			return;
 //        RotationAroundObjectByCamera();
-        ZoomCamera();
+//        ZoomCamera();
         MoveCamera();
     }
 

@@ -58,16 +58,16 @@ public class TDCGameManager : MonoBehaviour {
 
     #region Main method
 
-	public TDCItemController CreateItem(TDCEnum.EGameType type, TDCEnum.EItemType itemType, TDCBaseController owner, int amount) {
+	public TDCItemController CreateItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, TDCBaseController owner, int amount) {
 		TDCItemData itemData = null;
 		switch (itemType)
 		{
 			default:
 			case TDCEnum.EItemType.Food:
-				itemData = m_DataLoader.GetFood(type);
+				itemData = m_DataLoader.GetFood(gameType);
 				break;
 			case TDCEnum.EItemType.Weapon:
-				itemData = m_DataLoader.GetWeapon(type);
+				itemData = m_DataLoader.GetWeapon(gameType);
 				break;
 		}
 		if (itemData == null)

@@ -106,11 +106,16 @@ public class TDCPlayerController : TDCCreatureController
 		}
 	}
 
-    public override void OnSelectedItem (TDCItemController item)
+	public override void OnSelectedItem (int itemIndex)
 	{
-		base.OnSelectedItem (item);
-        var itemType = item.GetData().ItemType;
-        item.ExcuteItem();
+		base.OnSelectedItem (itemIndex);
+		var item = m_CreatureData.Inventory[itemIndex];
+		item.ExcuteItem();
+		if (item.GetData().Amount == 0)
+		{
+			m_Inventory.RemoveItem(itemIndex);
+			m_CreatureData.Inventory[itemIndex] = null;
+		}
 	}
 
     private bool CanMove() {
@@ -126,6 +131,18 @@ public class TDCPlayerController : TDCCreatureController
 	private bool HaveEnemy() {
 		var enemy = this.GetEnemyController ();
 		return enemy != null && enemy.GetActive();
+	}
+
+	public override int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
+	{
+		var itemIndex = base.AddItem(gameType, itemType, amount);
+		if (itemIndex != -1)
+		{
+			var item = GetInventory()[itemIndex];
+			m_Inventory.AddItem(itemIndex, item);
+		}
+
+		return itemIndex;
 	}
 
     #endregion
