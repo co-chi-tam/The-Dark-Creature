@@ -36,15 +36,15 @@ public class CUIImageInspector : Editor
 	}
 }
 
-[CustomEditor(typeof(TDCInventory))]
+[CustomEditor(typeof(UIInventory))]
 public class TDCInventoryInspector : Editor 
 {
 	public override void OnInspectorGUI()
 	{
 		DrawDefaultInspector ();
-		var myTarget = (TDCInventory)target;
+		var myTarget = (UIInventory)target;
 		if (GUILayout.Button ("Load All Slot")) {
-			myTarget.LoadAllSlot ();
+			myTarget.LoadAllSlots ();
 		}
 	}
 }

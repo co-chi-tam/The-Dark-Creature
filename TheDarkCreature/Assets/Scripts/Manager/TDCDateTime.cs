@@ -9,6 +9,9 @@ public class TDCDateTime : MonoBehaviour {
 	#region Properties
 	[SerializeField]
 	private bool m_Active = false;
+	[Space(10f)]
+	[SerializeField]
+	private Text m_DayText;
 	[Space (10f)]
 	[SerializeField]
 	private Image m_SunImage;
@@ -127,7 +130,7 @@ public class TDCDateTime : MonoBehaviour {
 	#region Implementation MonoBehaviour
 
 	void Awake () {
-		m_Active 			= m_SunImage != null && m_MoonImage != null && m_DayLight != null;
+		m_Active 			= m_SunImage != null && m_MoonImage != null && m_DayLight != null && m_DayText != null;
 		m_SecondPerHour 	= m_SecondPerMinute * m_MinutePerHour;
 		m_SeasonCount 		= Enum.GetNames (typeof(TDCEnum.EGameSeason)).Length;
 		m_AlarmClocks 		= new List<AlarmClockInfo> ();
@@ -138,11 +141,15 @@ public class TDCDateTime : MonoBehaviour {
 		SetHour (8);
 		SetupImage (m_SunImage, 0, 1f);
 		SetupImage (m_MoonImage, 1, 0f);
+		m_DayText.text = "Day " + m_Day.ToString();
 	}
 	
 	void Update () {
 		if (m_Active == false)
+		{
+			this.gameObject.SetActive(false);
 			return;
+		}
 		m_Timer 	+= Time.deltaTime * m_Speed;
 		m_Hour 		= m_Timer / m_SecondPerHour;
 
@@ -152,6 +159,7 @@ public class TDCDateTime : MonoBehaviour {
 			m_Day ++;
 			m_Timer = 0f;
 			m_Hour = 0f;
+			m_DayText.text = "Day " + m_Day.ToString();
 		}
 		m_Season	= (TDCEnum.EGameSeason)(m_Day / m_DayPerSeason % m_SeasonCount);
 	
@@ -220,6 +228,14 @@ public class TDCDateTime : MonoBehaviour {
 		alarm.Callback = complete;
 		alarm.Repeat = repeat;
 		m_AlarmClocks.Add (alarm);
+	}
+
+	#endregion
+
+	#region Getter & Setter
+
+	public int Getday() {
+		return (int) m_Day;
 	}
 
 	#endregion

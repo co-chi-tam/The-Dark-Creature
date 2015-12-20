@@ -42,6 +42,9 @@ public class TDCGameManager : MonoBehaviour {
 
     void Awake() {
 		m_DataLoader = new TDCDataLoader();
+#if UNITY_ANDROID	
+		Screen.sleepTimeout = SleepTimeout.NeverSleep;
+#endif
     }
 
 	void Start() {

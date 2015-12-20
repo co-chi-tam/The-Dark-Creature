@@ -2,31 +2,34 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using ObjectPool;
+using UnityEngine.UI;
+using System.Linq;
+using System;
 
-public class TDCInventory : MonoBehaviour {
+public class UIInventory : MonoBehaviour {
 
 	#region Singleton
 	public static object m_objectSingleton = new object();
-	public static TDCInventory m_Instance;
+	public static UIInventory m_Instance;
 	
-	public static TDCInventory Instance {
+	public static UIInventory Instance {
 		get {
 			lock (m_objectSingleton)
 			{
 				if (m_Instance == null) {
 					GameObject go = new GameObject ("Inventory");
-					m_Instance = go.AddComponent <TDCInventory>();
+					m_Instance = go.AddComponent <UIInventory>();
 				}
 				return m_Instance;
 			}
 		}
 	}
 	
-	public static TDCInventory GetInstance() {
+	public static UIInventory GetInstance() {
 		return m_Instance;
 	}
 	
-	public TDCInventory ()
+	public UIInventory ()
 	{
 		m_Instance = this;
 	}
@@ -35,21 +38,45 @@ public class TDCInventory : MonoBehaviour {
 	#region Properties
 
 	[SerializeField]
+	private Button m_SortButton;
+
+	[SerializeField]
 	private TDCCreatureController m_OwnerController;
 
 	private TDCCreatureData m_OwnerData;
-	private TDCSlot[] m_ItemSlots;
+	private UISlot[] m_ItemSlots;
 
 	public delegate void SelectedSlot(int itemIndex);
 
 	#endregion
 
+	#region Implementation Monobehaviour
+
+	void Start() {
+		m_SortButton.onClick.AddListener(() =>
+			{
+				SortInventory();
+			});
+	}
+
+	#endregion
+
 	#region Main method
+
+	private void SortInventory() {
+		var inventory = m_OwnerData.Inventory;
+		QuickSort.SimpleSort(inventory, (x, y) => {
+			var lh = (int) x.GetData().GameType;
+			var rh = (int) y.GetData().GameType;
+			return lh > rh ? 1 : lh < rh ? -1 : 0;
+		});
+		ReloadSlots();
+	}
 
 	public void SetPlayer(TDCCreatureController owner) {
 		m_OwnerController = owner;
 		m_OwnerData = m_OwnerController.GetData () as TDCCreatureData;
-		LoadAllSlot();	
+		LoadAllSlots();	
 	}
 
 	public bool AddItem(int index, TDCItemController item) {
@@ -68,19 +95,35 @@ public class TDCInventory : MonoBehaviour {
 		return false;
 	}
 
-	public void LoadAllSlot() {
+	public void LoadAllSlots() {
 		if (m_OwnerData == null)
 			return;
 		m_ItemSlots = null;
-		m_ItemSlots = new TDCSlot [this.transform.childCount];
+		m_ItemSlots = new UISlot [this.transform.childCount];
 		for (int i = 0; i < m_OwnerData.Inventory.Length; i++) {
-			var child = this.transform.GetChild (i).GetComponent<TDCSlot>();
+			var child = this.transform.GetChild (i).GetComponent<UISlot>();
 			if (m_OwnerData.Inventory[i] != null) {
 				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
 				child.LoadSlot (i, m_OwnerData.Inventory[i]);
                 m_OwnerData.Inventory[i].GetData().Owner = m_OwnerController;
 			}
 			m_ItemSlots[i] = child;
+		}
+	}
+
+	public void ReloadSlots() {
+		for (int i = 0; i < m_OwnerData.Inventory.Length; i++) {
+			var child = m_ItemSlots[i];
+			if (m_OwnerData.Inventory[i] != null)
+			{
+				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
+				child.LoadSlot(i, m_OwnerData.Inventory[i]);
+				m_OwnerData.Inventory[i].GetData().Owner = m_OwnerController;
+			}
+			else
+			{
+				child.EmptySlot();
+			}
 		}
 	}
 

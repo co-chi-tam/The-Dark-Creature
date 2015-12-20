@@ -2,11 +2,11 @@
 using UnityEngine.UI;
 using Effect;
 
-public class TDCSlot : MonoBehaviour {
+public class UISlot : MonoBehaviour {
 
 	#region Properties
-	private TDCInventory.SelectedSlot m_SelectedSlot;
-	public TDCInventory.SelectedSlot OnSelectedSlot {
+	private UIInventory.SelectedSlot m_SelectedSlot;
+	public UIInventory.SelectedSlot OnSelectedSlot {
 		get { return m_SelectedSlot; }
 		set { m_SelectedSlot = value; }
 	}

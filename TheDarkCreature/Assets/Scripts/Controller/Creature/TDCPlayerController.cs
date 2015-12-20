@@ -11,7 +11,9 @@ public class TDCPlayerController : TDCCreatureController
 
 	private FSMManager m_FSMMamager;
 	private TDCPlayerData m_PlayerData;
-	private TDCInventory m_Inventory;
+	private UIInventory m_Inventory;
+
+	private bool m_TouchedUI = false;
 
     #endregion
 
@@ -26,7 +28,7 @@ public class TDCPlayerController : TDCCreatureController
 		base.Start ();
 
         m_FSMMamager    = new FSMManager();
-		m_Inventory 	= TDCInventory.GetInstance ();
+		m_Inventory 	= UIInventory.GetInstance ();
 
 		var idleState   = new FSMIdleState(this);
 		var moveState   = new FSMMoveState(this);
@@ -45,7 +47,7 @@ public class TDCPlayerController : TDCCreatureController
         m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
 
 	}
-	
+
 	void LateUpdate () {
 		m_FSMMamager.UpdateState();
 #if UNITY_EDITOR
@@ -53,7 +55,7 @@ public class TDCPlayerController : TDCCreatureController
 		if (Input.GetMouseButtonUp(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
-			if (Physics.Raycast(ray, out hitInfo, 100f)) {
+			if (Physics.Raycast(ray, out hitInfo)) {
 				if (!EventSystem.current.IsPointerOverGameObject()) { 
 					PlayerAction(hitInfo);
 				}
@@ -64,14 +66,15 @@ public class TDCPlayerController : TDCCreatureController
 			var touchPhase = Input.GetTouch (0).phase;
 			switch (touchPhase) {
 			case TouchPhase.Began:
+				m_TouchedUI = !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
 				break;
 			case TouchPhase.Moved:
 				break;
 			case TouchPhase.Ended:
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hitInfo;
-				if (Physics.Raycast(ray, out hitInfo, 100f)) {
-                    if (!EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId))
+				if (Physics.Raycast(ray, out hitInfo)) {
+					if (m_TouchedUI)
                     {
 						PlayerAction(hitInfo);
                     }
@@ -157,7 +160,7 @@ public class TDCPlayerController : TDCCreatureController
 	public override void SetData(TDCBaseData value) {
 		base.SetData (value);
 		m_PlayerData = value as TDCPlayerData;
-		TDCInventory.Instance.SetPlayer (this);
+		UIInventory.Instance.SetPlayer (this);
 	}
 
     #endregion
