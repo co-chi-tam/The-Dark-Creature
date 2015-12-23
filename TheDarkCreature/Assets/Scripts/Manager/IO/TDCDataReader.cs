@@ -12,7 +12,7 @@ public class TDCDataReader {
 	private Dictionary<TDCEnum.EGameType, TDCCreatureData> m_ListCreatureData;
 	private Dictionary<TDCEnum.EGameType, TDCItemData> m_ListItemData;
 	private Dictionary<TDCEnum.EGameType, TDCGroupData> m_ListGroupData;
-
+	private Dictionary<string, List<MapObjectData>> m_MapData;
 
 	#endregion
 
@@ -22,6 +22,7 @@ public class TDCDataReader {
 		m_ListCreatureData = new Dictionary<TDCEnum.EGameType, TDCCreatureData> ();
 		m_ListGroupData = new Dictionary<TDCEnum.EGameType, TDCGroupData> ();
 		m_ListItemData = new Dictionary<TDCEnum.EGameType, TDCItemData> ();
+		m_MapData = new Dictionary<string, List<MapObjectData>>();
 
 		LoadData ();
 	}
@@ -37,6 +38,7 @@ public class TDCDataReader {
 		var weaponAsset = Resources.Load<TextAsset> ("Data/Item/WeaponData");
 		var resourceTextAsset = Resources.Load<TextAsset> ("Data/Creature/ResourceData");
 		var objectTextAsset = Resources.Load<TextAsset> ("Data/Creature/ObjectData");
+		var mapTextAsset = Resources.Load<TextAsset>("Data/Map/WorldMap");
 
 		var jsonCreature = Json.Deserialize (creatureAsset.text) as Dictionary<string, object>;
 		var jsonfood = Json.Deserialize (foodAsset.text) as Dictionary<string, object>;
@@ -45,6 +47,7 @@ public class TDCDataReader {
 		var jsonWeapon = Json.Deserialize (weaponAsset.text) as Dictionary<string, object>;
 		var jsonResource = Json.Deserialize (resourceTextAsset.text) as Dictionary<string, object>;
 		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
+		var jsonMap = Json.Deserialize(mapTextAsset.text) as Dictionary<string, object>;
 
 		LoadFood (jsonfood["foods"] as List<object>);
 		LoadWeapon (jsonWeapon["weapons"] as List<object>);
@@ -53,6 +56,7 @@ public class TDCDataReader {
 		LoadObject (jsonObject["objects"] as List<object>);
 		LoadGroup (jsonGroup["groups"] as List<object>);
 		LoadPlayer (jsonPlayer["players"] as List<object>);
+		LoadMap(jsonMap["map"] as List<object>);
 	}
 
 	private void LoadCreature(List<object> values) {
@@ -268,6 +272,31 @@ public class TDCDataReader {
 		}
 	}
 
+	private void LoadMap(List<object> value) {
+		for (int i = 0; i < value.Count; i++)
+		{
+			var map = value[i] as Dictionary<string, object>;
+			var mapName = map["Name"].ToString();
+			if (m_MapData.ContainsKey(mapName)) 
+				continue;
+			m_MapData[mapName] = new List<MapObjectData>();
+			var mapObjects = map["MapObjects"] as List<object>;
+			for (int j = 0; j < mapObjects.Count; j++) {
+				var obj = new MapObjectData();
+				var mapObj = mapObjects[j] as Dictionary<string, object>;
+				obj.ID = int.Parse(mapObj["ID"].ToString());
+				obj.GameType = (TDCEnum.EGameType)int.Parse(mapObj["GameType"].ToString());
+				obj.Position = ConvertStringToV3(mapObj["Position"].ToString());
+				obj.Rotation = Quaternion.Euler (ConvertStringToV3(mapObj["Rotation"].ToString()));
+				m_MapData[mapName].Add(obj);
+			}
+		}
+	}
+
+	public List<MapObjectData> GetMap(string name) {
+		return m_MapData[name];
+	}
+
 	public TDCCreatureData GetCreature(TDCEnum.EGameType creature) {
 		var creatureData = TDCCreatureData.Clone (m_ListCreatureData [creature]);
 		return creatureData;
@@ -308,6 +337,15 @@ public class TDCDataReader {
 	#endregion
 
 	#region Ultilities
+
+	private Vector3 ConvertStringToV3(string value) {
+		var result = Vector3.zero;
+		var tmp = value.Split(',');
+		result.x = float.Parse(tmp[0].ToString());
+		result.y = float.Parse(tmp[1].ToString());
+		result.z = float.Parse(tmp[2].ToString());
+		return result;
+	}
 
 	private void ConvertToEnum (List<object> instance, List<TDCEnum.EGameType> listType) {
 		for (int i = 0; i < instance.Count; i++) {

@@ -20,7 +20,7 @@ public class FSMDieState : FSMBaseState
 			group.ReturnMember(m_Controller);
 		}
 
-		var attacker = m_Controller.GetAttacker() as TDCCreatureController;
+		var attacker = m_Controller.GetEnemyController() as TDCCreatureController;
 		if (attacker != null) 
 		{
 			var inventory = m_Controller.GetInventory();
@@ -51,6 +51,6 @@ public class FSMDieState : FSMBaseState
 
     public override void ExitState()
     {
-		m_Controller.SetAttacker (null);
+		m_Controller.SetEnemyController (null);
     }
 }

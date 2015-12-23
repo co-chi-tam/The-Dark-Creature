@@ -1,0 +1,34 @@
+﻿{
+	"map": [
+		{
+			"ID": 0,
+			"Name": "World1",
+			"MapObjects": [
+				{
+					"ID": 1,
+					"GameType": 201,
+					"Position": "0,0,0",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 2,
+					"GameType": 202,
+					"Position": "0,0,0",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 3,
+					"GameType": 204,
+					"Position": "-30,0,0",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 4,
+					"GameType": 205,
+					"Position": "0,0,30",
+					"Rotation": "0,0,0"
+				}
+			]
+		}
+	]
+}

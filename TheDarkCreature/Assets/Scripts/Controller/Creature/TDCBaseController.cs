@@ -25,7 +25,6 @@ public class TDCBaseController : TDCMonoBehaviour
 	protected Vector3 m_StartPosition;
     protected bool m_IsActive = true;
 	protected float m_WaitingTimeInterval = 3f;
-	protected int m_DamageTake = 0;
 	protected TDCEnum.EGameType m_GameType;
 	protected TDCBaseGroupController m_GroupController;
 	protected SphereCollider m_Collider;
@@ -91,7 +90,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 
 	public virtual void ApplyDamage(int damage, TDCBaseController attacker) {
-		m_DamageTake += damage;
+		
 	}
 
 	public virtual void ResetObject() {
@@ -206,14 +205,6 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual int GetMaxHealth() {
 		return 0;
-	}
-
-	public virtual void SetAttacker(TDCBaseController attacker) {
-
-	}
-	
-	public virtual TDCBaseController GetAttacker() {
-		return null;
 	}
 
 	public virtual TDCItemController[] GetInventory() {

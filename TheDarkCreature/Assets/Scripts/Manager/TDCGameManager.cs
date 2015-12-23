@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using ObjectPool;
 
 public class TDCGameManager : MonoBehaviour {
@@ -35,6 +36,7 @@ public class TDCGameManager : MonoBehaviour {
     #region Properties
 
 	private TDCDataReader m_DataLoader;
+	private List<TDCBaseController> m_ListController;
 
     #endregion
 
@@ -43,27 +45,29 @@ public class TDCGameManager : MonoBehaviour {
     void Awake() {
 		DontDestroyOnLoad(this.gameObject);
 		m_DataLoader = new TDCDataReader();
+		m_ListController = new List<TDCBaseController>();
+
 #if UNITY_ANDROID	
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 #endif
     }
 
 	void Start() {
-		LoadMap();
+		LoadMap("World1");
     }
 
     #endregion
 
     #region Main method
 
-	public void LoadMap() {
+	public void LoadMap(string mapName) {
 		CreateCreature (TDCEnum.EGameType.PlayerSatla, Vector3.zero, Quaternion.identity);
-
-		CreateGroup (TDCEnum.EGameType.GroupDodono, Vector3.zero, Quaternion.identity);
-		CreateGroup (TDCEnum.EGameType.GroupSatla, Vector3.zero, Quaternion.identity);
-
-		CreateGroup (TDCEnum.EGameType.GroupGrass, Vector3.zero, Quaternion.identity);
-		CreateGroup (TDCEnum.EGameType.GroupMushRoom, Vector3.zero, Quaternion.identity);
+		var map = m_DataLoader.GetMap(mapName);
+		for (int i = 0; i < map.Count; i++)
+		{
+			var mapObj = map[i];
+			CreateGroup(mapObj.GameType, mapObj.Position, mapObj.Rotation);
+		}
 	}
 
 	public TDCItemController CreateItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, TDCBaseController owner, int amount) {
@@ -121,6 +125,7 @@ public class TDCGameManager : MonoBehaviour {
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
+		m_ListController.Add(controller);
 		return controller;
 	}
 
@@ -179,6 +184,7 @@ public class TDCGameManager : MonoBehaviour {
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
+		m_ListController.Add(controller);
 		return controller;
 	}
 

@@ -17,4 +17,14 @@ public static class TDCUltilities {
 	public static byte[] GetBytes(this string value) {
 		return Encoding.ASCII.GetBytes(value);
 	}
+
+	public static Vector2 RandomAround(float radius) {
+		var randomRadius = Random.Range(0f, radius);
+		var randomDegree = Random.Range(0f, 360f);
+		var angleRadian = randomDegree * Mathf.PI / 180f; // Deg2Rad
+		Vector2 returnVetor = Vector2.zero;
+		returnVetor.x = randomRadius * Mathf.Sin(angleRadian);
+		returnVetor.y = randomRadius * Mathf.Cos(angleRadian);
+		return returnVetor;
+	}
 }

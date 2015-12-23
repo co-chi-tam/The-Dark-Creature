@@ -112,10 +112,5 @@ namespace FSM
 			m_Map = m_FSMLoader.FSMMaps [name];
 			m_CurrentState = EState.StartState;
 		}
-
-		public void SetState(int index) {
-			m_Map = m_FSMLoader.FSMMaps.ElementAt (index).Value;
-			m_CurrentState = EState.StartState;
-		}
     }
 }

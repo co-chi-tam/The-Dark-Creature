@@ -14,8 +14,8 @@ public class TDCCreatureController : TDCBaseController {
 	protected Rigidbody m_Rigidbody;
 	protected Vector3 m_TargetPosition;
 	protected TDCBaseController m_EnemyController;
-	protected TDCBaseController m_AttackerController;
 	protected bool m_CanMove = true;
+	protected int m_DamageTake = 0;
 
 	protected TDCCreatureData m_CreatureData;
 	private TDCGameManager m_GameManager;
@@ -101,7 +101,8 @@ public class TDCCreatureController : TDCBaseController {
 	public override void ApplyDamage (int damage, TDCBaseController attacker)
 	{
 		base.ApplyDamage (damage, attacker);
-		SetAttacker (attacker);
+		m_DamageTake += damage;
+		SetEnemyController (attacker);
 	}
 
 	public virtual void OnSelectedItem(int itemIndex) {
@@ -203,13 +204,20 @@ public class TDCCreatureController : TDCBaseController {
 	public override void ResetObject ()
 	{
 		SetHealth (GetMaxHealth());
-		SetAttacker (null);
 		SetEnemyController (null);
 	}
 	
 	#endregion
 
 	#region FSM
+
+	internal virtual bool HaveEnemy() {
+		return false;
+	}
+
+	internal virtual bool HaveAttacker() {
+		return false;
+	}
 
 	internal virtual bool IsToFarGroup() {
 		return false;
@@ -252,17 +260,6 @@ public class TDCCreatureController : TDCBaseController {
 	#endregion
 	
 	#region Getter & Setter
-
-	public override TDCBaseController GetAttacker()
-	{
-		return m_AttackerController;
-	}
-
-	public override void SetAttacker(TDCBaseController attacker)
-	{
-		base.SetAttacker(attacker);
-		m_AttackerController = attacker;
-	}
 
 	public override float GetColliderRadius() {
 		return base.GetColliderRadius();

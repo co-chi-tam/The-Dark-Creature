@@ -63,12 +63,6 @@
               "states": []
             }
           ]
-        },
-        {
-          "condition_name": "HaveEnemy",
-          "condition_value": true,
-          "state_name": "ChaseState",
-          "states": []
         }
       ]
     },

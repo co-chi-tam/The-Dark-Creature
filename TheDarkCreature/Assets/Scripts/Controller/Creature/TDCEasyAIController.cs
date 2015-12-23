@@ -35,15 +35,25 @@ public class TDCEasyAIController : TDCCreatureController
 
     #region FSM
 
-	internal virtual bool HaveEnemy() {
+	internal override bool HaveEnemy() {
 		var enemies = GetTypeEnemies();
 		var enemyCtrl = GetEnemyController();
 		return GetEnemyController() != null && enemies.IndexOf (enemyCtrl.GameType) == -1;
 	}
 
 	internal override bool IsToFarGroup() {
-		var distance = (TransformPosition - m_GroupController.TransformPosition).sqrMagnitude;
-		var range = m_GroupController.GetRadius();
+		var distance = 0f;
+		var range = 0f;
+		if (m_GroupController == null)
+		{
+			distance = (TransformPosition - m_StartPosition).sqrMagnitude;
+			range = 50f;
+		}
+		else
+		{
+			distance = (TransformPosition - m_GroupController.TransformPosition).sqrMagnitude;
+			range = m_GroupController.GetRadius();
+		}
 		return distance > range * range;
 	}
 
