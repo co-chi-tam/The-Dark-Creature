@@ -10,10 +10,10 @@ public class TDCCreatureData : TDCBaseData {
 	private TDCObjectProperty<float> m_WalkSpeed;
 	private float m_RunSpeed;
 	private float m_RotationSpeed;
-	private int m_CurrentHP;
-	private int m_MaxHP;
-	private int m_MinDamage;
-	private int m_MaxDamage;
+	private TDCObjectProperty<int> m_CurrentHP;
+	private TDCObjectProperty<int> m_MaxHP;
+	private TDCObjectProperty<int> m_MinDamage;
+	private TDCObjectProperty<int> m_MaxDamage;
 	private float m_DetectRange;
 	private float m_AttackRange;
 	private List<TDCEnum.EGameType> m_TypeEnemies;
@@ -50,23 +50,23 @@ public class TDCCreatureData : TDCBaseData {
 	}
 
 	public int MinDamage {
-		get { return m_MinDamage; }
-		set { m_MinDamage = value; }
+		get { return m_MinDamage.GetValue(); }
+		set { m_MinDamage.SetValue (value); }
 	}
 
 	public int MaxDamage {
-		get { return m_MaxDamage; }
-		set { m_MaxDamage = value; }
+		get { return m_MaxDamage.GetValue(); }
+		set { m_MaxDamage.SetValue(value); }
 	}
 
 	public int CurrentHP {
-		get { return m_CurrentHP; }
-		set { m_CurrentHP = value; }
+		get { return m_CurrentHP.GetValue(); }
+		set { m_CurrentHP.SetValue (value); }
 	}
 
 	public int MaxHP {
-		get { return m_MaxHP; }
-		set { m_MaxHP = value; }
+		get { return m_MaxHP.GetValue(); }
+		set { m_MaxHP.SetValue (value); }
 	}
 
 	public float DetectRange {
@@ -100,10 +100,10 @@ public class TDCCreatureData : TDCBaseData {
 		m_WalkSpeed = new TDCObjectProperty<float>("WalkSpeed");
 		m_RunSpeed = 0;
 		m_RotationSpeed = 5f;
-		m_CurrentHP = 0;
-		m_MaxHP = 0;
-		m_MinDamage = 0;
-		m_MaxDamage = 0;
+		m_CurrentHP = new TDCObjectProperty<int>("CurrentHP");
+		m_MaxHP = new TDCObjectProperty<int>("MaxHP");
+		m_MinDamage = new TDCObjectProperty<int> ("MinDamage");
+		m_MaxDamage = new TDCObjectProperty<int>("MaxDamage");
 		m_DetectRange = 0f;
 		m_AttackRange = 0f;
         this.m_Inventory = new TDCItemController[20];
@@ -112,7 +112,11 @@ public class TDCCreatureData : TDCBaseData {
 		m_CreatureType = TDCEnum.ECreatureType.None;
 		this.m_ModelPath 	= new string[] {};
 
-		RegisterProperty (m_WalkSpeed);
+		RegisterProperty(m_WalkSpeed);
+		RegisterProperty(m_CurrentHP);
+		RegisterProperty(m_MaxHP);
+		RegisterProperty(m_MinDamage);
+		RegisterProperty(m_MaxDamage);
     }
 
 	public static TDCCreatureData Clone (TDCCreatureData instance) {

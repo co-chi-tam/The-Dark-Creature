@@ -4,7 +4,7 @@ using System.Reflection;
 
 public class TDCPropertyReflection {
 
-    private Dictionary<string, object> m_Properties;
+	private Dictionary<string, object> m_Properties;
 
     public TDCPropertyReflection()
     {

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using ObjectPool;
+using FSM;
 
 public class TDCBaseGroupController : TDCBaseController
 {
@@ -8,6 +9,7 @@ public class TDCBaseGroupController : TDCBaseController
 	protected TDCObjectPool<TDCBaseController> m_MemberPool;
 	protected TDCGroupData m_GroupData;
 	protected TDCEnum.EGameType m_GroupMemberType;
+	protected FSMManager m_FSMMamager;
 
 	#endregion
 
@@ -22,13 +24,29 @@ public class TDCBaseGroupController : TDCBaseController
     public override void Start()
     {
 		base.Start();
+
+		m_FSMMamager = new FSMManager();
+
+		var idleState = new FSMGroupIdleState(this);
+		var waitingState = new FSMGroupWaitingState(this);
+		var spawnMemberState = new FSMGroupSpawnMemberState(this);
+		var spawnMinMemberState = new FSMGroupSpawnMinMemberState(this);
+		var spawnMaxMemberState = new FSMGroupSpawnMaxMemberState(this);
+
+		m_FSMMamager.RegisterState("IdleState", idleState);
+		m_FSMMamager.RegisterState("WaitingState", waitingState);
+		m_FSMMamager.RegisterState("SpawnMemberState", spawnMemberState);
+		m_FSMMamager.RegisterState("SpawnMinMemberState", spawnMinMemberState);
+		m_FSMMamager.RegisterState("SpawnMaxMemberState", spawnMaxMemberState);
+
+		m_FSMMamager.RegisterCondition("IsActive", IsActive);
+		m_FSMMamager.RegisterCondition("IsFullGroup", IsFullGroup);
+		m_FSMMamager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
     }
 
 	void OnDrawGizmos() {
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere (TransformPosition, GetRadius());
-		Gizmos.color = Color.blue;
-		Gizmos.DrawWireSphere (TransformPosition, GetRadius() * 2f);
 	}
 
     #endregion
@@ -62,7 +80,25 @@ public class TDCBaseGroupController : TDCBaseController
 
 	#endregion
 
-	#region getter & Setter
+	#region FSM
+
+	internal virtual bool IsActive()
+	{
+		return m_IsActive;
+	}
+
+	internal virtual bool IsFullGroup() {
+		return false;
+	}
+
+	internal virtual bool CountdownWaitingTime()
+	{
+		return false;
+	}
+
+	#endregion
+
+	#region Getter & Setter
 
 	public override void SetData (TDCBaseData data)
 	{

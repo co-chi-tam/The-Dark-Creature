@@ -5,11 +5,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
+using System.Text;
+
 public class TDCPlayerController : TDCCreatureController
 {
     #region Property
 
-	private FSMManager m_FSMMamager;
 	private TDCPlayerData m_PlayerData;
 	private UIInventory m_Inventory;
 
@@ -26,26 +27,12 @@ public class TDCPlayerController : TDCCreatureController
     public override void Start()
 	{
 		base.Start ();
-
-        m_FSMMamager    = new FSMManager();
+			
 		m_Inventory 	= UIInventory.GetInstance ();
 
-		var idleState   = new FSMIdleState(this);
-		var moveState   = new FSMMoveState(this);
-		var attackState = new FSMAttackState (this);
-		var waitingState = new FSMWaitingState (this);
-		
-		m_FSMMamager.RegisterState("IdleState", idleState);
-		m_FSMMamager.RegisterState("MoveState", moveState);
-		m_FSMMamager.RegisterState("AttackState", attackState);
-		m_FSMMamager.RegisterState("WaitingState", waitingState);
-		
-		m_FSMMamager.RegisterCondition("CanMove", CanMove);
-		m_FSMMamager.RegisterCondition("MoveToTarget", MoveToTarget);
 		m_FSMMamager.RegisterCondition("HaveEnemy", HaveEnemy);
 
         m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
-
 	}
 
 	void LateUpdate () {
@@ -121,21 +108,6 @@ public class TDCPlayerController : TDCCreatureController
 		}
 	}
 
-    private bool CanMove() {
-		return true;
-	}
-	
-	private bool MoveToTarget()
-	{
-		var distance = (TransformPosition - GetTargetPosition ()).sqrMagnitude;
-		return distance < 0.5f; 
-	}
-
-	private bool HaveEnemy() {
-		var enemy = this.GetEnemyController ();
-		return enemy != null && enemy.GetActive();
-	}
-
 	public override int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
 	{
 		var itemIndex = base.AddItem(gameType, itemType, amount);
@@ -146,6 +118,34 @@ public class TDCPlayerController : TDCCreatureController
 		}
 
 		return itemIndex;
+	}
+
+	#endregion
+
+	#region FSM
+
+	internal override bool CanMove() {
+		return true;
+	}
+	
+	internal override bool MoveToTarget()
+	{
+		if (GetEnemyController() == null)
+		{
+			var distance = (TransformPosition - GetTargetPosition()).sqrMagnitude;
+			return distance < 0.5f; 
+		}
+		else
+		{
+			var distance = (TransformPosition - GetEnemyPosition()).sqrMagnitude;
+			var range = GetEnemyController().GetColliderRadius() + m_CreatureData.AttackRange;
+			return distance < range * range; 
+		}
+	}
+
+	internal virtual bool HaveEnemy() {
+		var enemy = this.GetEnemyController ();
+		return enemy != null && enemy.GetActive();
 	}
 
     #endregion

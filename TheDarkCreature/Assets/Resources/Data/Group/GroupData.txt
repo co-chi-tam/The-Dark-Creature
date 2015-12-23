@@ -10,8 +10,8 @@
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 50,
-			"MinMember": 5,
-			"MaxMember": 10,
+			"MinMember": 10,
+			"MaxMember": 20,
 			"TimeRespawnMember": 10
 		},{
 			"ID": 2,
@@ -22,23 +22,10 @@
 			"ModelPath": ["Prefabs/GroupCreature"],
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
-			"Radius": 50,
-			"MinMember": 2,
-			"MaxMember": 5,
-			"TimeRespawnMember": 60
-		},{
-			"ID": 3,
-			"Name": "GroupBob",
-			"GameType": 203,
-			"GroupType": 1,
-			"Description": "",
-			"ModelPath": ["Prefabs/GroupCreature"],
-			"IconPath": "",
-			"FSMPath": "FSM/Group/GroupFSM",
-			"Radius": 50,
+			"Radius": 100,
 			"MinMember": 5,
 			"MaxMember": 10,
-			"TimeRespawnMember": 120
+			"TimeRespawnMember": 60
 		},{
 			"ID": 3,
 			"Name": "GroupGrass",

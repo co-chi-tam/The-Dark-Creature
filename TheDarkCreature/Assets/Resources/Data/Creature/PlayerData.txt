@@ -11,7 +11,8 @@
 			"IconPath": "",
 			"WalkSpeed": 5,
 			"RunSpeed": 10,
-			"AttackRange": 10,
+			"DetectRange": 20,
+			"AttackRange": 3,
 			"CurrentHP": 10,
 			"MaxHP": 10,
 			"MinDamage": 3,
@@ -31,7 +32,8 @@
 			"IconPath": "",
 			"WalkSpeed": 7,
 			"RunSpeed": 12,
-			"AttackRange": 10,
+			"DetectRange": 20,
+			"AttackRange": 3,
 			"CurrentHP": 50,
 			"MaxHP": 50,
 			"MinDamage": 5,
@@ -42,26 +44,6 @@
 					"GameType": 51,
 					"Amount": 5
 				}
-			]
-		},{
-			"ID": 3,
-			"Name": "PlayerBob",
-			"GameType": 3,
-			"CreatureType": 2,
-			"Description": "",
-			"ModelPath": ["Prefabs/Bob"],
-			"FSMPath": "FSM/Creature/PlayerFSM",
-			"IconPath": "",
-			"WalkSpeed": 9,
-			"RunSpeed": 15,
-			"AttackRange": 10,
-			"CurrentHP": 100,
-			"MaxHP": 100,
-			"MinDamage": 10,
-			"MaxDamage": 15,
-			"Level": 1,
-			"Inventory": [
-				
 			]
 		}
 	]

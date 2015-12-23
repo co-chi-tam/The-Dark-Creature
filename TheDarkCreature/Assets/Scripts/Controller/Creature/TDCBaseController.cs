@@ -26,7 +26,7 @@ public class TDCBaseController : TDCMonoBehaviour
     protected bool m_IsActive = true;
 	protected float m_WaitingTimeInterval = 3f;
 	protected int m_DamageTake = 0;
-	protected TDCEnum.EGameType m_CreatureType;
+	protected TDCEnum.EGameType m_GameType;
 	protected TDCBaseGroupController m_GroupController;
 	protected SphereCollider m_Collider;
 	protected TDCBaseData m_BaseData;
@@ -39,9 +39,9 @@ public class TDCBaseController : TDCMonoBehaviour
 		get { return m_Transform.rotation; }
 	}
 
-	public TDCEnum.EGameType CreatureType {
-		get { return m_CreatureType; }
-		set { m_CreatureType = value; }
+	public TDCEnum.EGameType GameType {
+		get { return m_GameType; }
+		set { m_GameType = value; }
 	}
 
 	#endregion
@@ -67,7 +67,9 @@ public class TDCBaseController : TDCMonoBehaviour
 		
 	}
 
-	void OnDrawGizmos() {
+	public virtual void OnDrawGizmos() {
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere (TransformPosition, GetColliderRadius());
 		Gizmos.color = Color.magenta;
 		Gizmos.DrawWireSphere (TransformPosition, GetDetectEnemyRange());
 	}
@@ -84,7 +86,7 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	}
 	
-	public virtual void MoveRotation(Vector3 rotation) {
+	public virtual void LookAtRotation(Vector3 rotation) {
 
 	}
 
@@ -132,12 +134,12 @@ public class TDCBaseController : TDCMonoBehaviour
 		return m_StartPosition;
 	}
 
-	public virtual TDCEnum.EGameType GetCreatureType() {
-		return m_CreatureType;
+	public virtual TDCEnum.EGameType GetGameType() {
+		return m_GameType;
 	}
 
 	public virtual void SetCreatureType(TDCEnum.EGameType type) {
-		m_CreatureType = type;
+		m_GameType = type;
 	}
 	
 	public virtual void SetWaitingTimeInterval(float time) {

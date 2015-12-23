@@ -6,12 +6,10 @@ public class TDCEnum{
 		// Player
 		PlayerDodono	= 1,
 		PlayerSatla		= 2,
-		PlayerBob		= 3,
 
 		// Creature
 		Dodono 		= 5,
 		Satla 		= 6,
-		Bob 		= 7,
 
 		// Object
 		Meat 		= 51,
@@ -24,7 +22,6 @@ public class TDCEnum{
 		// Group
 		GroupDodono	= 201,
 		GroupSatla	= 202,
-		GroupBob	= 203,
 		GroupGrass	= 204,
 		GroupMushRoom = 205,
 

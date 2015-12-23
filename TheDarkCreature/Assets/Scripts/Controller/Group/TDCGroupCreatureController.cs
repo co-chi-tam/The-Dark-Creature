@@ -4,31 +4,13 @@ using FSM;
 public class TDCGroupCreatureController : TDCBaseGroupController {
 
     #region Properties
-    private FSMManager m_FSMMamager;
+    
     #endregion
 
     #region Implementation Mono
     public override void Start()
     {
         base.Start();
-
-        m_FSMMamager = new FSMManager();
-
-        var idleState = new FSMGroupIdleState(this);
-        var waitingState = new FSMGroupWaitingState(this);
-		var spawnMemberState = new FSMGroupSpawnMemberState(this);
-		var spawnMinMemberState = new FSMGroupSpawnMinMemberState(this);
-		var spawnMaxMemberState = new FSMGroupSpawnMaxMemberState(this);
-
-        m_FSMMamager.RegisterState("IdleState", idleState);
-        m_FSMMamager.RegisterState("WaitingState", waitingState);
-		m_FSMMamager.RegisterState("SpawnMemberState", spawnMemberState);
-		m_FSMMamager.RegisterState("SpawnMinMemberState", spawnMinMemberState);
-		m_FSMMamager.RegisterState("SpawnMaxMemberState", spawnMaxMemberState);
-
-        m_FSMMamager.RegisterCondition("IsActive", IsActive);
-        m_FSMMamager.RegisterCondition("IsFullGroup", IsFullGroup);
-        m_FSMMamager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
 
         m_FSMMamager.LoadFSM(m_GroupData.FSMPath);
     }
@@ -97,16 +79,20 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		}
 	}
 
-    private bool IsActive()
+	#endregion
+
+	#region FSM
+
+	internal override bool IsActive()
     {
         return m_IsActive;
     }
 
-    private bool IsFullGroup() {
+	internal override bool IsFullGroup() {
 		return m_MemberPool.Count() == GetMinMember();
     }
 
-    private bool CountdownWaitingTime()
+	internal override bool CountdownWaitingTime()
     {
         m_WaitingTimeInterval -= Time.deltaTime;
         return m_WaitingTimeInterval <= 0;

@@ -34,32 +34,37 @@ public class TDCGameManager : MonoBehaviour {
 
     #region Properties
 
-	private TDCDataLoader m_DataLoader;
+	private TDCDataReader m_DataLoader;
 
     #endregion
 
     #region Implementation Mono
 
     void Awake() {
-		m_DataLoader = new TDCDataLoader();
+		DontDestroyOnLoad(this.gameObject);
+		m_DataLoader = new TDCDataReader();
 #if UNITY_ANDROID	
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
 #endif
     }
 
 	void Start() {
-		CreateCreature (TDCEnum.EGameType.PlayerSatla, Vector3.zero, Quaternion.identity);
-
-		CreateGroup (TDCEnum.EGameType.GroupDodono, Vector3.zero, Quaternion.identity);
-		CreateGroup (TDCEnum.EGameType.GroupSatla, new Vector3 (10f, 0f, 20f), Quaternion.identity);
-
-		CreateGroup (TDCEnum.EGameType.GroupGrass, new Vector3 (20f, 0f, 20f), Quaternion.identity);
-		CreateGroup (TDCEnum.EGameType.GroupMushRoom, new Vector3 (10f, 0f, 20f), Quaternion.identity);
+		LoadMap();
     }
 
     #endregion
 
     #region Main method
+
+	public void LoadMap() {
+		CreateCreature (TDCEnum.EGameType.PlayerSatla, Vector3.zero, Quaternion.identity);
+
+		CreateGroup (TDCEnum.EGameType.GroupDodono, Vector3.zero, Quaternion.identity);
+		CreateGroup (TDCEnum.EGameType.GroupSatla, Vector3.zero, Quaternion.identity);
+
+		CreateGroup (TDCEnum.EGameType.GroupGrass, Vector3.zero, Quaternion.identity);
+		CreateGroup (TDCEnum.EGameType.GroupMushRoom, Vector3.zero, Quaternion.identity);
+	}
 
 	public TDCItemController CreateItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, TDCBaseController owner, int amount) {
 		TDCItemData itemData = null;
@@ -101,9 +106,6 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.GroupSatla:
 			groupController.CreatePoolMember (TDCEnum.EGameType.Satla);
 			break;
-		case TDCEnum.EGameType.GroupBob: 
-			groupController.CreatePoolMember (TDCEnum.EGameType.Bob);
-			break;
 		case TDCEnum.EGameType.GroupGrass:
 			groupController.CreatePoolMember (TDCEnum.EGameType.Grass);
 			break;
@@ -132,8 +134,7 @@ public class TDCGameManager : MonoBehaviour {
 		var random = Random.Range (0, 9999);
 		switch (type) { 
 		case TDCEnum.EGameType.PlayerDodono:
-		case TDCEnum.EGameType.PlayerSatla:
-		case TDCEnum.EGameType.PlayerBob: {
+		case TDCEnum.EGameType.PlayerSatla: {
 			data = m_DataLoader.GetPlayer (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCPlayerController> ();
@@ -142,8 +143,7 @@ public class TDCGameManager : MonoBehaviour {
 			break;
 		}
 		case TDCEnum.EGameType.Dodono: 
-		case TDCEnum.EGameType.Satla:
-		case TDCEnum.EGameType.Bob: {
+		case TDCEnum.EGameType.Satla: {
 			data = m_DataLoader.GetCreature (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEasyAIController> ();

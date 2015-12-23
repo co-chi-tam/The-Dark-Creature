@@ -5,7 +5,6 @@ using System.Collections.Generic;
 public struct CNetResponse {
 
 	public WWW www;
-	public Dictionary<string, string> Header;
 
 	public Texture2D Texture {
 		get { return www.texture; }
@@ -36,6 +35,10 @@ public struct CNetResponse {
 		}
 		return null;
 	}
+
+	public Dictionary<string, string> GetHeaders() {
+		return www.responseHeaders;
+	}
 }
 
 public class WWWFormSimple {
@@ -54,17 +57,7 @@ public class WWWFormSimple {
 	}
 
 	public void AddHeader(string name, string value) {
-		if (!Header.ContainsKey(name)) {
-			Header[name] = value;
-		}
-	}
-
-	public void SetHeader(string name, string value) {
-		if (Header.ContainsKey(name)) {
-			Header[name] = value;
-		} else {
-			AddHeader (name, value);
-		}
+		Header[name] = value;
 	}
 
 	public void AddField(string name, string value) {

@@ -1,104 +1,115 @@
 ﻿{
-	"fsm": [
-		{
-			"condition_name": "IsRoot",
-			"condition_value": true,
-			"state_name": "IdleState",
-			"states": [
-				{
-					"condition_name": "FoundFood",
-					"condition_value": false,
-					"state_name": "FindRandomState",
-					"states": [
-						{
-							"condition_name": "CountdownWaitingTime",
-							"condition_value": true,
-							"state_name": "MoveState",
-							"states": [
-								{
-									"condition_name": "MoveToTarget",
-									"condition_value": true,
-									"state_name": "IdleState",
-									"states": [
-								
-									]
-								}
-							]
-						}
-					]
-				},{
-					"condition_name": "FoundFood",
-					"condition_value": true,
-					"state_name": "HuntingState",
-					"states": [ 
-						{
-							"condition_name": "MoveToEnemy",
-							"condition_value": true,
-							"state_name": "AttackState",
-							"states": [
-								{
-									"condition_name": "IsEnemyDie",
-									"condition_value": true,
-									"state_name": "IdleState",
-									"states": []
-								}, {
-									"condition_name": "IsEnemyDie",
-									"condition_value": false,
-									"state_name": "WaitingState",
-									"states": [
-										{
-											"condition_name": "CountdownWaitingTime",
-											"condition_value": true,
-											"state_name": "HuntingState",
-											"states": []
-										}
-									]
-								}
-							]
-						}
-					]
-				}
-			]
-		},{
-			"condition_name": "IsAnyState",
-			"condition_value": true,
-			"state_name": "AnyState",
-			"states": [
-				{
-					"condition_name": "CanMove",
-					"condition_value": false,
-					"state_name": "IdleState",
-					"states": [
-				
-					]
-				},{
-					"condition_name": "IsDie",
-					"condition_value": true,
-					"state_name": "DieState",
-					"states": [
-						{
-							"condition_name": "IsDie",
-							"condition_value": false,
-							"state_name": "IdleState",
-							"states": []
-						}
-					]
-				}, {
-					"condition_name": "FoundEnemy",
-					"condition_value": true,
-					"state_name": "AvoidState",
-					"states": [ 
-						{
-							"condition_name": "MoveToTarget",
-							"condition_value": true,
-							"state_name": "IdleState",
-							"states": [
-
-							]
-						}
-					]
-				}
-			]
-		}
-	]
+  "fsm": [
+    {
+      "condition_name": "IsRoot",
+      "condition_value": true,
+      "state_name": "IdleState",
+      "states": [
+        {
+          "condition_name": "FoundFood",
+          "condition_value": false,
+          "state_name": "FindRandomState",
+          "states": [
+            {
+              "condition_name": "CountdownWaitingTime",
+              "condition_value": true,
+              "state_name": "MoveState",
+              "states": [
+                {
+                  "condition_name": "MoveToTarget",
+                  "condition_value": true,
+                  "state_name": "IdleState",
+                  "states": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition_name": "FoundFood",
+          "condition_value": true,
+          "state_name": "ChaseState",
+          "states": [
+            {
+              "condition_name": "MoveToEnemy",
+              "condition_value": true,
+              "state_name": "WaitingOneSecondState",
+              "states": [
+                {
+                  "condition_name": "CountdownWaitingTime",
+                  "condition_value": true,
+                  "state_name": "AttackState",
+                  "states": [
+                    {
+                      "condition_name": "IsEnemyDie",
+                      "condition_value": true,
+                      "state_name": "IdleState",
+                      "states": []
+                    },
+                    {
+                      "condition_name": "MoveToEnemy",
+                      "condition_value": false,
+                      "state_name": "ChaseState",
+                      "states": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "condition_name": "IsToFarGroup",
+              "condition_value": true,
+              "state_name": "FindRandomState",
+              "states": []
+            }
+          ]
+        },
+        {
+          "condition_name": "HaveEnemy",
+          "condition_value": true,
+          "state_name": "ChaseState",
+          "states": []
+        }
+      ]
+    },
+    {
+      "condition_name": "IsAnyState",
+      "condition_value": true,
+      "state_name": "AnyState",
+      "states": [
+        {
+          "condition_name": "CanMove",
+          "condition_value": false,
+          "state_name": "IdleState",
+          "states": []
+        },
+        {
+          "condition_name": "IsDie",
+          "condition_value": true,
+          "state_name": "DieState",
+          "states": [
+            {
+              "condition_name": "IsDie",
+              "condition_value": false,
+              "state_name": "IdleState",
+              "states": []
+            }
+          ]
+        },
+        {
+          "condition_name": "FoundEnemy",
+          "condition_value": true,
+          "state_name": "AvoidState",
+          "states": [
+            {
+              "condition_name": "MoveToTarget",
+              "condition_value": true,
+              "state_name": "IdleState",
+              "states": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }

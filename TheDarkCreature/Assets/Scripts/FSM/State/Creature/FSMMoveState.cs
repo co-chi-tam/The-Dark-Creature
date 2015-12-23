@@ -19,7 +19,6 @@ public class FSMMoveState : FSMBaseState
     {
         var targetPos = m_Controller.GetTargetPosition();
         m_Controller.WalkPosition(targetPos);
-        m_Controller.MoveRotation(targetPos);
     }
 
 	public override void ExitState()

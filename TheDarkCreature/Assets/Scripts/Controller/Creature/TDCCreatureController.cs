@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
+using FSM;
 
 public class TDCCreatureController : TDCBaseController {
 
@@ -8,6 +9,7 @@ public class TDCCreatureController : TDCBaseController {
 	[SerializeField]
 	private float HealthPoint;
 
+	protected FSMManager m_FSMMamager;
 	protected Animator m_AnimatorController;
 	protected Rigidbody m_Rigidbody;
 	protected Vector3 m_TargetPosition;
@@ -20,7 +22,7 @@ public class TDCCreatureController : TDCBaseController {
 
 	#endregion
 	
-	#region Implement Mono
+	#region Implement Monobehaviour
 
 	public override void Init ()
 	{
@@ -29,13 +31,46 @@ public class TDCCreatureController : TDCBaseController {
 		m_AnimatorController = this.GetComponent<Animator> ();
 		m_GameManager = TDCGameManager.GetInstance();
 		m_TargetPosition = m_Transform.position;
-		m_AttackerController = null;
 	}
 	
 	public override void Start()
 	{
 		base.Start ();
-		m_AttackerController = null;
+
+		m_FSMMamager    = new FSMManager();
+
+		var idleState   	= new FSMIdleState(this);
+		var moveState   	= new FSMMoveState(this);
+		var findRandomState = new FSMFindRandomState(this);
+		var avoidState  	= new FSMAvoidState(this);
+		var chaseState  	= new FSMChaseState(this);
+		var attackState  	= new FSMAttackState(this);
+		var dieState    	= new FSMDieState(this);
+		var waiting 		= new FSMWaitingState (this);
+		var waitingOne 		= new FSMWaitingOneSecondState (this);
+		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
+
+		m_FSMMamager.RegisterState("IdleState", idleState);
+		m_FSMMamager.RegisterState("MoveState", moveState);
+		m_FSMMamager.RegisterState("FindRandomState", findRandomState);
+		m_FSMMamager.RegisterState("AvoidState", avoidState);
+		m_FSMMamager.RegisterState("ChaseState", chaseState);
+		m_FSMMamager.RegisterState("AttackState", attackState);
+		m_FSMMamager.RegisterState("WaitingState", waiting);
+		m_FSMMamager.RegisterState("WaitingOneSecondState", waitingOne);
+		m_FSMMamager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
+		m_FSMMamager.RegisterState("DieState", dieState);
+
+		m_FSMMamager.RegisterCondition("IsActive", GetActive);
+		m_FSMMamager.RegisterCondition("CanMove", CanMove);
+		m_FSMMamager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
+		m_FSMMamager.RegisterCondition("MoveToTarget", MoveToTarget);
+		m_FSMMamager.RegisterCondition("MoveToEnemy", MoveToEnemy);
+		m_FSMMamager.RegisterCondition("FoundEnemy", FoundEnemy);
+		m_FSMMamager.RegisterCondition("IsEnemyDie", IsEnemyDie);
+		m_FSMMamager.RegisterCondition("IsDie", IsDie);
+		m_FSMMamager.RegisterCondition("IsToFarGroup", IsToFarGroup);
+		m_FSMMamager.RegisterCondition("FoundFood", FoundFood);
 	}
 
 	public override void Update ()
@@ -50,6 +85,15 @@ public class TDCCreatureController : TDCBaseController {
 		}
 	}
 
+	public override void OnDrawGizmos()
+	{
+		base.OnDrawGizmos();
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere (TransformPosition, m_CreatureData.AttackRange);
+		Gizmos.color = Color.white;
+		Gizmos.DrawLine(TransformPosition, GetTargetPosition());
+	}
+
 	#endregion
 	
 	#region Main Method
@@ -57,7 +101,7 @@ public class TDCCreatureController : TDCBaseController {
 	public override void ApplyDamage (int damage, TDCBaseController attacker)
 	{
 		base.ApplyDamage (damage, attacker);
-		m_AttackerController = attacker;
+		SetAttacker (attacker);
 	}
 
 	public virtual void OnSelectedItem(int itemIndex) {
@@ -131,7 +175,7 @@ public class TDCCreatureController : TDCBaseController {
 		MovePosition(position, m_CreatureData.RunSpeed);
 	}
 	
-	public override void MoveRotation(Vector3 rotation)
+	public override void LookAtRotation(Vector3 rotation)
 	{
 		//Vector3 inverseVect = -m_Transform.InverseTransformPoint(rotation);
 		//float rotationAngle = Mathf.Atan2(inverseVect.x, inverseVect.z) * Mathf.Rad2Deg;
@@ -152,6 +196,8 @@ public class TDCCreatureController : TDCBaseController {
 		var direction = position - m_Transform.position;
 		//m_Rigidbody.MovePosition(m_Transform.position + direction.normalized * speed * Time.deltaTime);
 		m_Transform.position = m_Transform.position + direction.normalized * speed * Time.deltaTime;
+
+		LookAtRotation(position);
 	}
 
 	public override void ResetObject ()
@@ -162,15 +208,60 @@ public class TDCCreatureController : TDCBaseController {
 	}
 	
 	#endregion
+
+	#region FSM
+
+	internal virtual bool IsToFarGroup() {
+		return false;
+	}
+
+	internal virtual bool IsEnemyDie() {
+		return false;
+	}
+
+	internal virtual bool IsDie() {
+		return false;
+	}
+
+	internal virtual bool CanMove() {
+		return m_CanMove;
+	}
+
+	internal virtual bool MoveToTarget()
+	{
+		return false; 
+	}
+
+	internal virtual bool MoveToEnemy()
+	{
+		return false; 
+	}
+
+	internal virtual bool CountdownWaitingTime() {
+		return false;   
+	}
+
+	internal virtual bool FoundEnemy() {
+		return false;
+	}
+
+	internal virtual bool FoundFood() {
+		return false;
+	}
+
+	#endregion
 	
 	#region Getter & Setter
 
-	public override void SetAttacker(TDCBaseController attacker) {
-		m_AttackerController = attacker;
+	public override TDCBaseController GetAttacker()
+	{
+		return m_AttackerController;
 	}
 
-	public override TDCBaseController GetAttacker() {
-		return m_AttackerController;
+	public override void SetAttacker(TDCBaseController attacker)
+	{
+		base.SetAttacker(attacker);
+		m_AttackerController = attacker;
 	}
 
 	public override float GetColliderRadius() {

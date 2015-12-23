@@ -21,7 +21,6 @@ public class FSMAvoidState : FSMBaseState
     {
         var target = m_Controller.GetTargetPosition();
         m_Controller.RunPosition(target);
-        m_Controller.MoveRotation(target);
     }
 
     public override void ExitState()

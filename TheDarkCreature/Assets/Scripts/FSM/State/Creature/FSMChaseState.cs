@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using FSM;
 
-public class FSMHuntingState : FSMBaseState {
-	
-	public FSMHuntingState(TDCBaseController controller) : base (controller)
+public class FSMChaseState : FSMBaseState {
+
+	private TDCCreatureData m_Data;
+
+	public FSMChaseState(TDCBaseController controller) : base (controller)
 	{
-		
+		m_Data = controller.GetData() as TDCCreatureData;
 	}
 	
 	public override void StartState() {
@@ -15,7 +17,6 @@ public class FSMHuntingState : FSMBaseState {
 	public override void UpdateState() {
 		var enemyPos = m_Controller.GetEnemyPosition();
 		m_Controller.RunPosition(enemyPos);
-		m_Controller.MoveRotation(enemyPos);
 	}
 	
 	public override void ExitState()

@@ -18,7 +18,6 @@ public class FSMFindRandomState : FSMBaseState
 
         m_Controller.SetTargetPosition (new Vector3(randomX, 0f, randomZ));
 		m_Controller.SetWaitingTimeInterval (Random.Range (1f, 5f));
-
     }
 
 	public override void UpdateState()

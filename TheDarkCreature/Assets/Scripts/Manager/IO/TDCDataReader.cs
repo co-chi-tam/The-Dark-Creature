@@ -5,7 +5,7 @@ using UnityEngine;
 using MiniJSON;
 using System.Linq;
 
-public class TDCDataLoader {
+public class TDCDataReader {
 
 	#region Property
 
@@ -18,7 +18,7 @@ public class TDCDataLoader {
 
 	#region Contructor
 
-	public TDCDataLoader() {
+	public TDCDataReader() {
 		m_ListCreatureData = new Dictionary<TDCEnum.EGameType, TDCCreatureData> ();
 		m_ListGroupData = new Dictionary<TDCEnum.EGameType, TDCGroupData> ();
 		m_ListItemData = new Dictionary<TDCEnum.EGameType, TDCItemData> ();
@@ -209,6 +209,7 @@ public class TDCDataLoader {
 			player.RunSpeed = float.Parse (instance["RunSpeed"].ToString());
 			player.WalkSpeed = float.Parse (instance["WalkSpeed"].ToString());
 			player.AttackRange = float.Parse (instance["AttackRange"].ToString());
+			player.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			player.Level = int.Parse (instance["Level"].ToString());
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
