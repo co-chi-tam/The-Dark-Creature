@@ -15,6 +15,12 @@
 			"AttackRange": 3,
 			"CurrentHP": 10,
 			"MaxHP": 10,
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 50,
+			"CurrentHungerPoint": 50,
+			"MaxHungerPoint": 50,
+			"CurrentSanityPoint": 50,
+			"MaxSanityPoint": 50,
 			"MinDamage": 3,
 			"MaxDamage": 5,
 			"Level": 1,
@@ -36,6 +42,12 @@
 			"AttackRange": 3,
 			"CurrentHP": 50,
 			"MaxHP": 50,
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 50,
+			"CurrentHungerPoint": 50,
+			"MaxHungerPoint": 50,
+			"CurrentSanityPoint": 50,
+			"MaxSanityPoint": 50,
 			"MinDamage": 5,
 			"MaxDamage": 10,
 			"Level": 1,
@@ -43,6 +55,10 @@
 				{
 					"GameType": 51,
 					"Amount": 5
+				},
+				{
+					"GameType": 301,
+					"Amount": 1
 				}
 			]
 		}

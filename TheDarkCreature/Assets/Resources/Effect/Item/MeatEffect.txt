@@ -1,16 +1,21 @@
 {
   "effect": {
-    "Id": 0,
+    "ID": 0,
     "Type": 1,
     "Method": "CanActiveEffect()",
     "YesMethods": [
 	    {
-	    	"Id": 1,
+	    	"ID": 1,
    			"Type": 10,
 	        "ExcuteMethods": ["ExcuteEffect(HealthPoint:10,SpeedPoint:10)"]
 	    }
     ],
     "NoMethods": [
+   		{
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["PrintDebug(Meat Effect:Can not active effect)"]
+	    }
     ]
   }
 }

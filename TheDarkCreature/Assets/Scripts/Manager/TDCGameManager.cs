@@ -35,7 +35,7 @@ public class TDCGameManager : MonoBehaviour {
 
     #region Properties
 
-	private TDCDataReader m_DataLoader;
+	private TDCDataReader m_DataReader;
 	private List<TDCBaseController> m_ListController;
 
     #endregion
@@ -44,7 +44,7 @@ public class TDCGameManager : MonoBehaviour {
 
     void Awake() {
 		DontDestroyOnLoad(this.gameObject);
-		m_DataLoader = new TDCDataReader();
+		m_DataReader = new TDCDataReader();
 		m_ListController = new List<TDCBaseController>();
 
 #if UNITY_ANDROID	
@@ -62,7 +62,7 @@ public class TDCGameManager : MonoBehaviour {
 
 	public void LoadMap(string mapName) {
 		CreateCreature (TDCEnum.EGameType.PlayerSatla, Vector3.zero, Quaternion.identity);
-		var map = m_DataLoader.GetMap(mapName);
+		var map = m_DataReader.GetMap(mapName);
 		for (int i = 0; i < map.Count; i++)
 		{
 			var mapObj = map[i];
@@ -76,10 +76,14 @@ public class TDCGameManager : MonoBehaviour {
 		{
 			default:
 			case TDCEnum.EItemType.Food:
-				itemData = m_DataLoader.GetFood(gameType);
+				itemData = m_DataReader.GetFood(gameType);
 				break;
 			case TDCEnum.EItemType.Weapon:
-				itemData = m_DataLoader.GetWeapon(gameType);
+				itemData = m_DataReader.GetWeapon(gameType);
+				break;
+			case TDCEnum.EItemType.GObject:
+			case TDCEnum.EItemType.Item:
+				itemData = m_DataReader.GetItem(gameType);
 				break;
 		}
 		if (itemData == null)
@@ -95,7 +99,7 @@ public class TDCGameManager : MonoBehaviour {
 	                                               Quaternion rotation, 
 	                                               GameObject parent = null) {
 		var random = Random.Range (0, 9999);
-		var data = m_DataLoader.GetGroup (type);
+		var data = m_DataReader.GetGroup (type);
 		var gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [random % data.ModelPath.Length]), position, rotation) as GameObject;
 		var controller = gObject.AddComponent<TDCGroupCreatureController> ();
 		var groupController = controller as TDCGroupCreatureController;
@@ -140,7 +144,7 @@ public class TDCGameManager : MonoBehaviour {
 		switch (type) { 
 		case TDCEnum.EGameType.PlayerDodono:
 		case TDCEnum.EGameType.PlayerSatla: {
-			data = m_DataLoader.GetPlayer (type);
+			data = m_DataReader.GetPlayer (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCPlayerController> ();
 //			controller.gameObject.layer = (int)TDCEnum.ELayer.LayerPlayer;
@@ -149,7 +153,7 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		case TDCEnum.EGameType.Dodono: 
 		case TDCEnum.EGameType.Satla: {
-			data = m_DataLoader.GetCreature (type);
+			data = m_DataReader.GetCreature (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEasyAIController> ();
 			break;
@@ -161,13 +165,13 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		case TDCEnum.EGameType.Grass:
 		case TDCEnum.EGameType.Mushroom: {
-			data = m_DataLoader.GetResource (type);
+			data = m_DataReader.GetResource (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCResourceController> ();
 			break;
 		}
 		case TDCEnum.EGameType.CampFire:
-			data = m_DataLoader.GetGObject (type);
+			data = m_DataReader.GetGObject (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent <TDCCampFireController>();
 			break;
@@ -186,6 +190,21 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		m_ListController.Add(controller);
 		return controller;
+	}
+
+	public TDCSkillController CreatSkill(TDCEnum.ESkillType skillType, TDCBaseController owner) {
+		var skillData = m_DataReader.GetSkillData(skillType);
+		TDCSkillController skillCtr = null;
+		switch (skillType)
+		{
+			case TDCEnum.ESkillType.FlameBody:
+				skillCtr = new TDCFlameBodyController(skillData, owner);
+				break;
+			default:
+				skillCtr = new TDCSkillController(skillData, owner);
+				break;
+		}
+		return skillCtr;
 	}
 
     #endregion

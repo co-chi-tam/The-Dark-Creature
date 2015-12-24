@@ -15,8 +15,8 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
         m_FSMMamager.LoadFSM(m_GroupData.FSMPath);
     }
 
-	public override void Update() {
-		base.Update ();
+	public override void FixedUpdate() {
+		base.FixedUpdate ();
         m_FSMMamager.UpdateState();
         StateName = m_FSMMamager.StateCurrentName;
     }

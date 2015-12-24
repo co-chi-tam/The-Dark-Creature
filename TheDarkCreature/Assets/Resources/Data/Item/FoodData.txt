@@ -7,7 +7,7 @@
 			"ItemType": 1,
 			"Description": "",
 			"IconPath": "Meat",
-			"EffectPath": "Effect/MeatEffect"
+			"EffectPath": "Effect/Item/MeatEffect"
 		},{
 			"ID": 2,
 			"Name": "Mushroom",
@@ -15,7 +15,7 @@
 			"ItemType": 1,
 			"Description": "",
 			"IconPath": "Mushroom",
-			"EffectPath": "Effect/MeatEffect"
+			"EffectPath": "Effect/Item/MeatEffect"
 		},{
 			"ID": 3,
 			"Name": "Grass",
@@ -23,7 +23,7 @@
 			"ItemType": 1,
 			"Description": "",
 			"IconPath": "Grass",
-			"EffectPath": "Effect/MeatEffect"
+			"EffectPath": "Effect/Item/MeatEffect"
 		}
 	]
 }

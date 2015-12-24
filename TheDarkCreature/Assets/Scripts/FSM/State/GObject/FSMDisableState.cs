@@ -13,6 +13,7 @@ public class FSMDisableState : FSMBaseState {
 	
 	public override void StartState() {
 		m_CampFireController.SetActive (false);
+		m_CampFireController.DestroyGameObject();
 	}
 	
 	public override void UpdateState() {

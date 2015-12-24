@@ -13,8 +13,10 @@ public class TDCPlayerController : TDCCreatureController
 
 	private TDCPlayerData m_PlayerData;
 	private UIInventory m_Inventory;
-
 	private bool m_TouchedUI = false;
+
+	[SerializeField]
+	private float HeatPoint = 0f;
 
     #endregion
 
@@ -35,10 +37,16 @@ public class TDCPlayerController : TDCCreatureController
         m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
 	}
 
-	void LateUpdate () {
+	public override void FixedUpdate()
+	{
+		base.FixedUpdate();
 		m_FSMMamager.UpdateState();
-#if UNITY_EDITOR
 		StateName = m_FSMMamager.StateCurrentName;
+	}
+
+	public override void LateUpdate () {
+		HeatPoint = m_PlayerData.CurrentHeatPoint;
+#if UNITY_EDITOR
 		if (Input.GetMouseButtonUp(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
@@ -159,7 +167,7 @@ public class TDCPlayerController : TDCCreatureController
 
 	public override void SetData(TDCBaseData value) {
 		base.SetData (value);
-		m_PlayerData = value as TDCPlayerData;
+		m_PlayerData = m_CreatureData as TDCPlayerData;
 		UIInventory.Instance.SetPlayer (this);
 	}
 

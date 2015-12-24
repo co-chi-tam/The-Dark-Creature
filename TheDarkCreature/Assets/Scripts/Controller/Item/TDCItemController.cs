@@ -6,6 +6,7 @@ public class TDCItemController {
 
 	#region Properties
 
+	private TDCGameManager m_GameManager;
 	private EffectManager m_EffectManager;
 	private TDCItemData m_Data;
 
@@ -13,22 +14,32 @@ public class TDCItemController {
 
 	#region Main methods
 
+	public TDCItemController()
+	{
+		m_Data = null;
+		m_EffectManager = null;
+	}
+
 	public TDCItemController(TDCItemData data)
 	{
 		m_Data = data;
-		Init();
-	}
+		m_GameManager = TDCGameManager.GetInstance();
 
-	public virtual void Init() {
 		m_EffectManager = new EffectManager();
 		m_EffectManager.LoadEffect(m_Data.EffectPath);
 		m_EffectManager.RegisterCondition("CanActiveEffect", CanActiveEffect);
+		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
 		m_EffectManager.RegisterExcuteMethod("ExcuteEffect", ExcuteEffect);
 	}
 
-	public virtual void Init(TDCItemData data) {
-		m_Data = data;
-		Init();
+	internal virtual void PrintDebug(object[] pas)
+	{
+		for (int i = 0; i < pas.Length; i+=2)
+		{
+			var name = pas[i];
+			var value = pas[i + 1];
+			Debug.LogError(string.Format ("[{0}] - {1}", name, value));
+		}
 	}
 
 	public virtual void ExcuteItem() {
@@ -59,9 +70,20 @@ public class TDCItemController {
 				{
 					var weaponData = m_Data as TDCWeaponData;
 					weaponData.Duration -= weaponData.DecreaseDuration;
+					if (weaponData.Duration < 0f)
+					{
+						m_Data.Amount--;
+					}
 				} break;
+			case TDCEnum.EItemType.GObject:
+			case TDCEnum.EItemType.Item:
+				{
+					var owner = m_Data.Owner;
+					m_GameManager.CreateCreature(m_Data.GameType, owner.TransformPosition, Quaternion.identity);
+					m_Data.Amount--;
+				}
+				break;
 		}
-
 	}
 
 	#endregion
@@ -70,11 +92,6 @@ public class TDCItemController {
 
 	public TDCItemData GetData() {
 		return m_Data;
-	}
-
-	public void SetData(TDCItemData value) {
-		m_Data = value;
-		Init();
 	}
 
 	#endregion

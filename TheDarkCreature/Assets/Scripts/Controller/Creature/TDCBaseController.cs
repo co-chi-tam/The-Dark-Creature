@@ -62,6 +62,10 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	}
 
+	public virtual void LateUpdate() {
+
+	}
+
 	public virtual void FixedUpdate() {
 		
 	}
@@ -205,6 +209,18 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual int GetMaxHealth() {
 		return 0;
+	}
+
+	public virtual void SetHeat(int value) {
+
+	}
+
+	public virtual void SetHunger(int value) {
+
+	}
+
+	public virtual void SetSanity(int value) {
+
 	}
 
 	public virtual TDCItemController[] GetInventory() {

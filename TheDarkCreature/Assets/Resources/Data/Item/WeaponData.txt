@@ -6,7 +6,7 @@
 			"GameType": 71,
 			"ItemType": 2,
 			"Description": "",
-			"EffectPath": "Effect/WeaponEffect",
+			"EffectPath": "Effect/Item/WeaponEffect",
 			"IconPath": "Trap",
 			"AttackRange": 5,
 			"MinDamage": 15,

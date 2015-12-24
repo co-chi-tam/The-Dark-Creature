@@ -29,6 +29,11 @@ public class TDCEnum{
 		CampFire	= 301
 	}
 
+	public enum ESkillType : int {
+		None = 0,
+		FlameBody = 1
+	}
+
 	public enum EItemType : int {
 		None 		= 0,
 		Food 		= 1,

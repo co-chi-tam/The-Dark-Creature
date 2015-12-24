@@ -1,0 +1,18 @@
+﻿{
+	"skills": [
+		{
+			"ID": 0,
+			"Name": "FlameBody",
+			"Description": "",
+			"SkillLevel": 1,
+			"SkillType": 1,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"EffectRadius": 30,
+			"TimeDelay": 3,
+			"TimeEffect": 1,
+			"EffectPath": "Effect/Skill/FlameBodySkill"
+		}
+	]
+}

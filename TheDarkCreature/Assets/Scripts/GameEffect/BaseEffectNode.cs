@@ -3,9 +3,8 @@ using System;
 
 namespace Effect
 {
-	public class BaseEffectNode
+	public class BaseEffectNode : TDCInfo
 	{
-		protected int m_ID;
 		protected EffectNodeType m_NodeType;
 
 		public EffectNodeType NodeType {
@@ -13,14 +12,8 @@ namespace Effect
 			set { m_NodeType = value; }
 		}
 
-		public int ID {
-			get { return m_ID; }
-			set { m_ID = value; }
-		}
-
-		public BaseEffectNode ()
+		public BaseEffectNode () : base ()
 		{
-			m_ID = 0;
 			m_NodeType = EffectNodeType.None;
 		}
 	}

@@ -4,13 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class TDCPlayerData : TDCCreatureData {
-
-	private TDCObjectProperty<int> m_CurrentHeatPoint;
-	private TDCObjectProperty<int> m_MaxHeatPoint;
-	private TDCObjectProperty<int> m_CurrentHungerPoint;
-	private TDCObjectProperty<int> m_MaxHungerPoint;
-	private TDCObjectProperty<int> m_CurrentSanityPoint;
-	private TDCObjectProperty<int> m_MaxSanityPoint;
+	
 	private TDCObjectProperty<int> m_Level;
 
 	public int Level {
@@ -18,52 +12,13 @@ public class TDCPlayerData : TDCCreatureData {
 		set { m_Level.Value = value; }
 	}
 
-	public int CurrentHeatPoint {
-		get { return m_CurrentHeatPoint.Value; }
-		set { m_CurrentHeatPoint.Value = value; }
-	}
 
-	public int MaxHeatPoint {
-		get { return m_MaxHeatPoint.Value; }
-		set { m_MaxHeatPoint.Value = value; }
-	}
-
-	public int CurrentHungerPoint {
-		get { return m_CurrentHungerPoint.Value; }
-		set { m_CurrentHungerPoint.Value = value; }
-	}
-
-	public int MaxHungerPoint {
-		get { return m_MaxHungerPoint.Value; }
-		set { m_MaxHungerPoint.Value = value; }
-	}
-
-	public int CurrentSanityPoint {
-		get { return m_CurrentSanityPoint.Value; }
-		set { m_CurrentSanityPoint.Value = value; }
-	}
-
-	public int MaxSanityPoint {
-		get { return m_MaxSanityPoint.Value; }
-		set { m_MaxSanityPoint.Value = value; }
-	}
 
 	public TDCPlayerData () : base ()
 	{
 		m_Level = new TDCObjectProperty<int> ("Level");
-		m_CurrentHeatPoint = new TDCObjectProperty<int>("CurrentHeatPoint");
-		m_MaxHeatPoint = new TDCObjectProperty<int>("MaxHeatPoint");
-		m_CurrentHungerPoint = new TDCObjectProperty<int>("CurrentHungerPoint");
-		m_MaxHungerPoint = new TDCObjectProperty<int>("MaxHungerPoint");
-		m_CurrentSanityPoint = new TDCObjectProperty<int>("CurrentSanityPoint");
-		m_MaxSanityPoint = new TDCObjectProperty<int>("MaxSanityPoint");
+
 		RegisterProperty (m_Level);
-		RegisterProperty(m_CurrentHeatPoint);
-		RegisterProperty(m_MaxHeatPoint);
-		RegisterProperty(m_CurrentHungerPoint);
-		RegisterProperty(m_MaxHungerPoint);
-		RegisterProperty(m_CurrentSanityPoint);
-		RegisterProperty(m_MaxSanityPoint);
 	}
 
 	public static TDCPlayerData Clone(TDCPlayerData instance) {

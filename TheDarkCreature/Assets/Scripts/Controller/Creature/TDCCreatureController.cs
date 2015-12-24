@@ -7,7 +7,11 @@ public class TDCCreatureController : TDCBaseController {
 
 	#region Property
 	[SerializeField]
-	private float HealthPoint;
+	private int HealthPoint = 0;
+
+	private int m_HeatPoint = 0;
+	private int m_HungerPoint = 0;
+	private int m_SanityPoint = 0;
 
 	protected FSMManager m_FSMMamager;
 	protected Animator m_AnimatorController;
@@ -76,12 +80,26 @@ public class TDCCreatureController : TDCBaseController {
 	public override void Update ()
 	{
 		base.Update ();
-
 		if (m_CreatureData != null) {
 			m_CreatureData.CurrentHP -= m_DamageTake;
 			m_DamageTake = 0;
 			// UI
 			HealthPoint = m_CreatureData.CurrentHP;
+		}
+		if (m_HungerPoint != 0)
+		{
+			m_CreatureData.CurrentHungerPoint += m_HungerPoint;
+			m_HungerPoint = 0;
+		}
+		if (m_SanityPoint != 0)
+		{
+			m_CreatureData.CurrentSanityPoint += m_SanityPoint;
+			m_SanityPoint = 0;
+		}
+		if (m_HeatPoint != 0)
+		{
+			m_CreatureData.CurrentHeatPoint += m_HeatPoint;
+			m_HeatPoint = 0;
 		}
 	}
 
@@ -101,8 +119,11 @@ public class TDCCreatureController : TDCBaseController {
 	public override void ApplyDamage (int damage, TDCBaseController attacker)
 	{
 		base.ApplyDamage (damage, attacker);
-		m_DamageTake += damage;
-		SetEnemyController (attacker);
+		if (attacker.GetActive())
+		{
+			m_DamageTake += damage;
+			SetEnemyController(attacker);
+		}
 	}
 
 	public virtual void OnSelectedItem(int itemIndex) {
@@ -260,6 +281,12 @@ public class TDCCreatureController : TDCBaseController {
 	#endregion
 	
 	#region Getter & Setter
+
+	public override void SetHeat(int value)
+	{
+		base.SetHeat(value);
+		m_HeatPoint += value;
+	}
 
 	public override float GetColliderRadius() {
 		return base.GetColliderRadius();

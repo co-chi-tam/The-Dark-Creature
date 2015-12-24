@@ -1,0 +1,13 @@
+﻿{
+	"items": [
+		{
+			"ID": 0,
+			"Name": "CampFire",
+			"GameType": 301,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "CampFire",
+			"EffectPath": "Effect/Item/CampFireEffect"
+		}
+	]
+}

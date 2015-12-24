@@ -14,6 +14,8 @@ public class TDCCampFireController : TDCBaseController {
 	private float m_CurrentStartSize;
 	private bool m_IsFireActive = true;
 	private float m_FirePower;
+
+	private TDCSkillController m_SkillController;
 	
 	#endregion
 	
@@ -47,6 +49,7 @@ public class TDCCampFireController : TDCBaseController {
 		m_CurrentIntensity = m_Light.intensity;
 		m_CurrentStartSize = m_ParticleSystem.startSize;
 
+		m_SkillController = TDCGameManager.Instance.CreatSkill(TDCEnum.ESkillType.FlameBody, this);
 	}
 
 	public override void Init ()
@@ -61,6 +64,8 @@ public class TDCCampFireController : TDCBaseController {
 		base.FixedUpdate ();
 		m_FSMMamager.UpdateState();
 		StateName = m_FSMMamager.StateCurrentName;
+		m_SkillController.UpdateSkill(Time.fixedDeltaTime);
+		m_SkillController.ExcuteSkill();
 	}
 	
 	#endregion
@@ -80,7 +85,11 @@ public class TDCCampFireController : TDCBaseController {
 	public void AddPower(float value) {
 		m_FirePower += Mathf.Abs(value);
 	}
-	
+
+	public void DestroyGameObject() {
+		DestroyImmediate(this.gameObject);
+	}
+
 	#endregion
 
 	#region Getter & Setter

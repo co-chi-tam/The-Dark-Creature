@@ -36,7 +36,7 @@ namespace Effect
 		}
 
 		private BaseEffectNode ReadNode(Dictionary<string, object> nodeData, bool firstNode = false) {
-			var id = int.Parse (nodeData ["Id"].ToString ());
+			var id = int.Parse (nodeData ["ID"].ToString ());
 			var type = (EffectNodeType) byte.Parse (nodeData ["Type"].ToString ());
 			
             switch (type)

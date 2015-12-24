@@ -30,7 +30,7 @@ public class TDCResourceController : TDCCreatureController {
 	}
 	
 	public override void FixedUpdate() {
-		base.Update ();
+		base.FixedUpdate ();
 		m_FSMMamager.UpdateState();
 		StateName = m_FSMMamager.StateCurrentName;
 	}
