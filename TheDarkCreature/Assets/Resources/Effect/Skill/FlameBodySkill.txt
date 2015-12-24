@@ -17,7 +17,7 @@
 		    			{
 					    	"ID": 1,
 				   			"Type": 10,
-					        "ExcuteMethods": ["ExcuteEffect(HeatPoint:10),SpawnParticle()"]
+					        "ExcuteMethods": ["ExcuteEffect(HeatPoint:10)","SpawnParticle()"]
 					    }
 		    		],
 				    "NoMethods": []
