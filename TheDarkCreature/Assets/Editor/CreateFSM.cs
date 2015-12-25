@@ -8,7 +8,7 @@ public class UIState {
     public bool IsRoot = false;
     public CreateFSM Window;
 
-    private float m_RectWidth = 100;
+//    private float m_RectWidth = 100;
     private Rect m_NameStateLabel           = new Rect(5, 30, 40, 30);
     private Rect m_NameStateText            = new Rect(45, 30, 100, 20);
     private Rect m_IsRootCheckBox           = new Rect(45, 50, 100, 20);

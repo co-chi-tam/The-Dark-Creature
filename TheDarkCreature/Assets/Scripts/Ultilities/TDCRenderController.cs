@@ -3,29 +3,32 @@ using System.Collections;
 
 public class TDCRenderController : MonoBehaviour {
 
-	private Animator m_Animator;
-	private Collider m_Collider;
+	private TDCBaseController m_BaseController;
 
 	void Start () {
-		m_Animator = this.transform.parent.GetComponent<Animator> ();
-		m_Collider = this.transform.parent.GetComponent<Collider> ();
+		LoadController();
 	}
 
 	void OnBecameInvisible() {
-		if (m_Animator != null) {
-			m_Animator.enabled = false;
-		}
-		if (m_Collider != null) {
-			m_Collider.enabled = false;
+		LoadController();
+		if (m_BaseController != null)
+		{
+			m_BaseController.OnBecameInvisible();
 		}
 	}
 
 	void OnBecameVisible() {
-		if (m_Animator != null) {
-			m_Animator.enabled = true;
+		LoadController();
+		if (m_BaseController != null)
+		{
+			m_BaseController.OnBecameVisible();
 		}
-		if (m_Collider != null) {
-			m_Collider.enabled = true;
+	}
+
+	void LoadController() {
+		if (m_BaseController == null)
+		{
+			m_BaseController = this.transform.parent.GetComponent<TDCBaseController>();
 		}
 	}
 

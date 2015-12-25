@@ -3,11 +3,9 @@ using FSM;
 
 public class FSMChaseState : FSMBaseState {
 
-	private TDCCreatureData m_Data;
-
 	public FSMChaseState(TDCBaseController controller) : base (controller)
 	{
-		m_Data = controller.GetData() as TDCCreatureData;
+		
 	}
 	
 	public override void StartState() {

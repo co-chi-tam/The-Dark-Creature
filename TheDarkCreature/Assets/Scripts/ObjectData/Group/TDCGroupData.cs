@@ -4,7 +4,6 @@ using System.Collections;
 public class TDCGroupData : TDCBaseData {
 
 	private string[] m_ModelPath;
-	private string m_FSMPath;
 	private float m_Radius;
 	private int m_MinMember;
 	private int m_MaxMember;
@@ -41,18 +40,13 @@ public class TDCGroupData : TDCBaseData {
 		set { m_TimeRespawnMember = value; }
 	}
 
-	public string FSMPath {
-		get { return m_FSMPath; }
-		set { m_FSMPath = value; }
-	}
-
 	public TDCGroupData () : base ()
 	{
-		m_Radius = 0f;
-		m_MinMember = 0;
-		m_MaxMember = 0;
-		m_GroupType = TDCEnum.EGroupType.None;
-		m_TimeRespawnMember = 0f;
+		this.m_Radius = 0f;
+		this.m_MinMember = 0;
+		this.m_MaxMember = 0;
+		this.m_GroupType = TDCEnum.EGroupType.None;
+		this.m_TimeRespawnMember = 0f;
 		this.m_ModelPath 	= new string[] {};
 	}
 

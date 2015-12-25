@@ -58,8 +58,10 @@ public class CameraController : MonoBehaviour
     {
 		if (_target == null)
 			return;
-//        RotationAroundObjectByCamera();
-//        ZoomCamera();
+#if UNITY_EDITOR
+        RotationAroundObjectByCamera();
+        ZoomCamera();
+#endif
         MoveCamera();
     }
 

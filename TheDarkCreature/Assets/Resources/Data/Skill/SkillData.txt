@@ -4,6 +4,8 @@
 			"ID": 0,
 			"Name": "FlameBody",
 			"Description": "",
+			"GameType": 501,
+			"IconPath": "FlameFire",
 			"SkillLevel": 1,
 			"SkillType": 1,
 			"CostHealthPoint": 0,
@@ -11,8 +13,10 @@
 			"CostSanityPoint": 0,
 			"EffectRadius": 30,
 			"TimeDelay": 3,
-			"TimeEffect": 1,
-			"EffectPath": "Effect/Skill/FlameBodySkill"
+			"TimeEffect": 0,
+			"RepeatSkill": true,
+			"FSMPath": "FSM/Skill/FlameBodyFSM"
+			"EffectPath": "Effect/Skill/FlameBodyEffect"
 		}
 	]
 }

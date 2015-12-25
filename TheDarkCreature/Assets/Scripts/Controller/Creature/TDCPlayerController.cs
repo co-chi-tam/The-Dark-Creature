@@ -35,6 +35,9 @@ public class TDCPlayerController : TDCCreatureController
 		m_FSMMamager.RegisterCondition("HaveEnemy", HaveEnemy);
 
         m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
+
+		var skill = TDCGameManager.Instance.CreateSkill(TDCEnum.ESkillType.FlameBody, TransformPosition, TransformRotation);
+
 	}
 
 	public override void FixedUpdate()
@@ -151,7 +154,8 @@ public class TDCPlayerController : TDCCreatureController
 		}
 	}
 
-	internal virtual bool HaveEnemy() {
+	internal override bool HaveEnemy() {
+		base.HaveEnemy();
 		var enemy = this.GetEnemyController ();
 		return enemy != null && enemy.GetActive();
 	}

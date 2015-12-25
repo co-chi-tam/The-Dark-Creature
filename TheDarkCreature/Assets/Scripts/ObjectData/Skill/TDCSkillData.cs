@@ -1,6 +1,6 @@
 ﻿using System;
 
-public class TDCSkillData : TDCInfo
+public class TDCSkillData : TDCBaseData
 {
 	private int m_SkillLevel;
 	private TDCEnum.ESkillType m_SkillType;
@@ -11,6 +11,8 @@ public class TDCSkillData : TDCInfo
 	private float m_TimeEffect;
 	private float m_EffectRadius;
 	private string m_EffectPath;
+	private bool m_RepeatSkill;
+	private TDCBaseController m_Owner;
 
 	public int SkillLevel
 	{
@@ -54,32 +56,40 @@ public class TDCSkillData : TDCInfo
 		set { m_TimeEffect = value; }
 	}
 
-	public string EffectPath
-	{
-		get { return m_EffectPath; }
-		set { m_EffectPath = value; }
-	}
-
 	public float EffectRadius
 	{
 		get { return m_EffectRadius; }
 		set { m_EffectRadius = value; }
 	}
 
+	public string EffectPath
+	{
+		get { return m_EffectPath; }
+		set { m_EffectPath = value; }
+	}
+
+	public bool RepeatSkill
+	{
+		get { return m_RepeatSkill; }
+		set { m_RepeatSkill = value; }
+	}
+
+	public TDCBaseController Owner
+	{
+		get { return m_Owner; }
+		set { m_Owner = value; }
+	}
+
 	public TDCSkillData(): base()
 	{
-		ID = 0;
-		Name = string.Empty;
-		Description = string.Empty;
-		SkillLevel = 0;
-		SkillType = TDCEnum.ESkillType.None;
-		CostHealthPoint = 0;
-		CostHeatPoint = 0;
-		CostSanityPoint = 0;
-		TimeDelay = 0f;
-		TimeEffect = 0f;
-		EffectRadius = 0f;
-		EffectPath = string.Empty;
+		this.m_SkillLevel = 0;
+		this.m_SkillType = TDCEnum.ESkillType.None;
+		this.m_CostHealthPoint = 0;
+		this.m_CostHeatPoint = 0;
+		this.m_CostSanityPoint = 0;
+		this.m_TimeDelay = 0f;
+		this.m_TimeEffect = 0f;
+		this.m_EffectRadius = 0f;
 	}
 
 	public static TDCSkillData Parse(TDCSkillData instance) {
@@ -87,6 +97,8 @@ public class TDCSkillData : TDCInfo
 		tmp.ID = instance.ID;
 		tmp.Name = instance.Name;
 		tmp.Description = instance.Description;
+		tmp.Icon = instance.Icon;
+		tmp.GameType = instance.GameType;
 		tmp.SkillLevel = instance.SkillLevel;
 		tmp.SkillType = instance.SkillType;
 		tmp.CostHealthPoint = instance.CostHealthPoint;
@@ -95,7 +107,10 @@ public class TDCSkillData : TDCInfo
 		tmp.TimeDelay = instance.TimeDelay;
 		tmp.TimeEffect = instance.TimeEffect;
 		tmp.EffectRadius = instance.EffectRadius;
+		tmp.FSMPath = instance.FSMPath;
 		tmp.EffectPath = instance.EffectPath;
+		tmp.RepeatSkill = instance.RepeatSkill;
+		tmp.Owner = instance.Owner;
 		return tmp;
 	}
 }

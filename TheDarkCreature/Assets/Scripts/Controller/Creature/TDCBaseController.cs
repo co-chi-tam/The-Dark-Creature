@@ -21,11 +21,11 @@ public class TDCBaseController : TDCMonoBehaviour
 	[SerializeField]
 	protected string StateName = "";
 
+	protected FSMManager m_FSMMamager;
 	protected Transform m_Transform;
 	protected Vector3 m_StartPosition;
     protected bool m_IsActive = true;
 	protected float m_WaitingTimeInterval = 3f;
-	protected TDCEnum.EGameType m_GameType;
 	protected TDCBaseGroupController m_GroupController;
 	protected SphereCollider m_Collider;
 	protected TDCBaseData m_BaseData;
@@ -36,11 +36,6 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public Quaternion TransformRotation {
 		get { return m_Transform.rotation; }
-	}
-
-	public TDCEnum.EGameType GameType {
-		get { return m_GameType; }
-		set { m_GameType = value; }
 	}
 
 	#endregion
@@ -68,6 +63,14 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual void FixedUpdate() {
 		
+	}
+
+	public virtual void OnBecameVisible() {
+		
+	}
+
+	public virtual void OnBecameInvisible() {
+			
 	}
 
 	public virtual void OnDrawGizmos() {
@@ -138,11 +141,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 
 	public virtual TDCEnum.EGameType GetGameType() {
-		return m_GameType;
-	}
-
-	public virtual void SetCreatureType(TDCEnum.EGameType type) {
-		m_GameType = type;
+		return m_BaseData.GameType;
 	}
 	
 	public virtual void SetWaitingTimeInterval(float time) {

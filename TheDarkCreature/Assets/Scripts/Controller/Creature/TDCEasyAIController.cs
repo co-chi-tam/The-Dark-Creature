@@ -38,7 +38,7 @@ public class TDCEasyAIController : TDCCreatureController
 	internal override bool HaveEnemy() {
 		var enemies = GetTypeEnemies();
 		var enemyCtrl = GetEnemyController();
-		return GetEnemyController() != null && enemies.IndexOf (enemyCtrl.GameType) == -1;
+		return GetEnemyController() != null && enemies.IndexOf (enemyCtrl.GetGameType()) == -1;
 	}
 
 	internal override bool IsToFarGroup() {

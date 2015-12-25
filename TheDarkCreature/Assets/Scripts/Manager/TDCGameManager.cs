@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using ObjectPool;
@@ -36,7 +37,7 @@ public class TDCGameManager : MonoBehaviour {
     #region Properties
 
 	private TDCDataReader m_DataReader;
-	private List<TDCBaseController> m_ListController;
+	private Dictionary<string, TDCBaseController> m_ListController;
 
     #endregion
 
@@ -45,7 +46,7 @@ public class TDCGameManager : MonoBehaviour {
     void Awake() {
 		DontDestroyOnLoad(this.gameObject);
 		m_DataReader = new TDCDataReader();
-		m_ListController = new List<TDCBaseController>();
+		m_ListController = new Dictionary<string, TDCBaseController>();
 
 #if UNITY_ANDROID	
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -69,6 +70,18 @@ public class TDCGameManager : MonoBehaviour {
 			CreateGroup(mapObj.GameType, mapObj.Position, mapObj.Rotation);
 		}
 	}
+
+	public TDCBaseController GetControllerByIndex(int index) {
+		return m_ListController.ElementAt (index).Value;
+	}
+
+	public TDCBaseController GetControllerByName(string name) {
+		return m_ListController[name];
+	}
+
+	#endregion
+
+	#region Create Game Creature
 
 	public TDCItemController CreateItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, TDCBaseController owner, int amount) {
 		TDCItemData itemData = null;
@@ -124,12 +137,11 @@ public class TDCGameManager : MonoBehaviour {
 		gObject.transform.position = position;
 		gObject.transform.rotation = rotation;
 		controller.SetData (data);
-		controller.SetCreatureType (type);
-		controller.name = type.ToString ();
+		controller.name = string.Format("{0}-{1}", type, m_ListController.Count);
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
-		m_ListController.Add(controller);
+		m_ListController.Add(controller.name, controller);
 		return controller;
 	}
 
@@ -182,29 +194,41 @@ public class TDCGameManager : MonoBehaviour {
 		gObject.transform.position = position;
 		gObject.transform.rotation = rotation;
 		controller.SetData (data);
-		controller.SetCreatureType (type);
 		controller.Init ();
-		controller.name = type.ToString ();
+		controller.name = string.Format("{0}-{1}", type, m_ListController.Count);
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
-		m_ListController.Add(controller);
+		m_ListController.Add(controller.name, controller);
 		return controller;
 	}
 
-	public TDCSkillController CreatSkill(TDCEnum.ESkillType skillType, TDCBaseController owner) {
+	public TDCSkillController CreateSkill(TDCEnum.ESkillType skillType,  
+											Vector3 position, 
+											Quaternion rotation, 
+											GameObject parent = null) {
 		var skillData = m_DataReader.GetSkillData(skillType);
-		TDCSkillController skillCtr = null;
+		TDCSkillController controller = null;
+		TDCSkillData data = null;
+		var gObject = GameObject.Instantiate (Resources.Load<GameObject> ("Prefabs/BlankGO"), position, rotation) as GameObject;
+		gObject.transform.position = position;
+		gObject.transform.rotation = rotation;
+		gObject.name = string.Format("{0}-{1}", skillType, m_ListController.Count);
 		switch (skillType)
 		{
 			case TDCEnum.ESkillType.FlameBody:
-				skillCtr = new TDCFlameBodyController(skillData, owner);
+				data = m_DataReader.GetSkillData(TDCEnum.ESkillType.FlameBody);
+				controller = gObject.AddComponent<TDCFlameBodyController>();
 				break;
 			default:
-				skillCtr = new TDCSkillController(skillData, owner);
+				
 				break;
 		}
-		return skillCtr;
+		data.Owner = null;
+		controller.SetData(data);
+		controller.Init();
+		m_ListController.Add(controller.name, controller);
+		return controller;
 	}
 
     #endregion

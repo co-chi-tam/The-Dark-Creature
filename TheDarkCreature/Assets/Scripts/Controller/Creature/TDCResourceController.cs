@@ -6,7 +6,6 @@ public class TDCResourceController : TDCCreatureController {
 
 	#region Property
 
-	private FSMManager m_FSMMamager;
 	protected TDCResourceData m_ResourceData;
 
 	#endregion
@@ -15,16 +14,9 @@ public class TDCResourceController : TDCCreatureController {
 	public override void Start()
 	{
 		base.Start();
-		
-		m_FSMMamager = new FSMManager();
-		
-		var idleState = new FSMIdleState(this);
-		var dieState = new FSMDieState(this);
-		
-		m_FSMMamager.RegisterState("IdleState", idleState);
-		m_FSMMamager.RegisterState("DieState", dieState);
-		
+
 		m_FSMMamager.RegisterCondition("IsDie", IsDie);
+
 		m_FSMMamager.LoadFSM(m_ResourceData.FSMPath);
 		
 	}
@@ -39,7 +31,8 @@ public class TDCResourceController : TDCCreatureController {
 	
 	#region Main method
 
-	private bool IsDie() {
+	internal override bool IsDie() {
+		base.IsDie();
 		return m_CreatureData.CurrentHP <= 0f;
 	}
 

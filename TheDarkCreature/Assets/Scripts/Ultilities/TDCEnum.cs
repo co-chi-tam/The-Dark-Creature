@@ -26,7 +26,10 @@ public class TDCEnum{
 		GroupMushRoom = 205,
 
 		// Object
-		CampFire	= 301
+		CampFire	= 301,
+
+		// Skill
+		FlameBody   = 501
 	}
 
 	public enum ESkillType : int {

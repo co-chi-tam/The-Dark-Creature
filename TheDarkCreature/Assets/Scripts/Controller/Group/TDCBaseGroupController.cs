@@ -9,7 +9,6 @@ public class TDCBaseGroupController : TDCBaseController
 	protected TDCObjectPool<TDCBaseController> m_MemberPool;
 	protected TDCGroupData m_GroupData;
 	protected TDCEnum.EGameType m_GroupMemberType;
-	protected FSMManager m_FSMMamager;
 
 	#endregion
 
@@ -44,7 +43,8 @@ public class TDCBaseGroupController : TDCBaseController
 		m_FSMMamager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
     }
 
-	void OnDrawGizmos() {
+	public override void OnDrawGizmos() {
+		base.OnDrawGizmos();
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere (TransformPosition, GetRadius());
 	}

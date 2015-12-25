@@ -4,28 +4,53 @@ using Effect;
 
 public class TDCFlameBodyController : TDCSkillController {
 
-	public TDCFlameBodyController() : base ()
+	#region Implementation Monobehaviour
+
+	public override void Init()
 	{
-		
+		base.Init();
 	}
 
-	public TDCFlameBodyController(TDCSkillData skillData, TDCBaseController ownerCtrl) : base (skillData, ownerCtrl)
+	public override void Start()
 	{
-		m_TimeDelay = skillData.TimeDelay;
+		base.Start();
 	}
 
-	public void UpdateSkill(float dt) {
-		m_TimeDelay -= dt;
+	#endregion
+
+	#region FSM
+
+	internal override bool CanActiveSkill()
+	{
+		return GetActive();
 	}
 
-	internal override void ExcuteEffect(object[] pas)
+	internal override bool IsRepeatSkill()
 	{
-		var name = pas[0].ToString();
-		var heatPoint = int.Parse (pas[1].ToString());
-		for (int i = 0; i < m_ControllerInsideRadius.Length; i++)
+		return m_SkillData.RepeatSkill;
+	}
+
+	#endregion
+
+	#region Effect
+
+	internal override bool CanActiveEffect(object[] pars)
+	{
+		return GetActive();
+	}
+
+	internal override void ExcuteStatusEffect(object[] pars)
+	{
+		base.ExcuteStatusEffect(pars);
+		var nameParam = pars[0].ToString();
+		var valueParam = int.Parse(pars[1].ToString());
+		for (int i = 0; i < m_ControllersInRadius.Length; i++)
 		{
-			m_ControllerInsideRadius[i].SetHeat(heatPoint);
+			m_ControllersInRadius[i].SetHeat (valueParam);
 		}
 	}
 
+	#endregion
+
 }
+

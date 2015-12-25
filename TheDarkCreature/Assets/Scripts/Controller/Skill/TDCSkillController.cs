@@ -1,130 +1,204 @@
 ﻿using UnityEngine;
 using System.Collections;
+using FSM;
 using Effect;
 
-public class TDCSkillController {
+public class TDCSkillController : TDCBaseController {
 
-	protected EffectManager m_EffectManager;
-	protected TDCSkillData m_SkillData;
-	protected TDCBaseController m_OwnerController;
-	protected int m_EnemyLayerMask;
-	protected TDCBaseController[] m_ControllerInsideRadius;
+	#region Properties
+
 	protected float m_TimeDelay;
 	protected float m_TimeEffect;
+	protected int m_LayerEffect;
+	protected TDCSkillData m_SkillData;
+	protected TDCGameManager m_GameManager;
+	protected EffectManager m_EffectManager;
+	protected TDCBaseController[] m_ControllersInRadius;
 
-	public TDCSkillController()
+	#endregion
+
+	#region Implementation Monobehaviour
+
+	public override void Init()
 	{
-		m_SkillData = null;
-		m_OwnerController = null;
-		m_EffectManager = null;
-		m_EnemyLayerMask = 0;
-		m_ControllerInsideRadius = null;
-		m_TimeDelay = 0;
+		base.Init();
+		m_GameManager = TDCGameManager.GetInstance();
 	}
 
-	public TDCSkillController(TDCSkillData skillData, TDCBaseController ownerCtrl)
+	public override void Start()
 	{
-		m_SkillData = skillData;
-		m_OwnerController = ownerCtrl;
-		m_EnemyLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
+		base.Start();
 
+		m_LayerEffect = 1 << 8 | 1 << 10 | 1 << 31;
+
+		m_FSMMamager = new FSMManager();
 		m_EffectManager = new EffectManager();
+
+		LoadFSM();
+		LoadEffect();
+
+		m_FSMMamager.LoadFSM(m_SkillData.FSMPath);
 		m_EffectManager.LoadEffect(m_SkillData.EffectPath);
 
+		m_TimeEffect = m_SkillData.TimeEffect;
+	}
+
+	public override void FixedUpdate()
+	{
+		base.FixedUpdate();
+		m_FSMMamager.UpdateState();
+		StateName = m_FSMMamager.StateCurrentName;
+	}
+
+	public override void OnDrawGizmos()
+	{
+		base.OnDrawGizmos();
+		Gizmos.color = Color.red;
+		Gizmos.DrawWireSphere(TransformPosition, m_SkillData.EffectRadius);
+	}
+
+	#endregion
+
+	#region Main methods
+
+	private void LoadFSM() {
+		var startState = new FSMStartSkillState(this);
+		var updateState = new FSMUpdateSkillState(this);
+		var excuteEffectState = new FSMExcuteEffectSkillState(this);
+		var endState = new FSMEndSkillState(this);
+		var destroyState = new FSMDestroySkillState(this);
+
+		m_FSMMamager.RegisterState("StartSkillState", startState);
+		m_FSMMamager.RegisterState("UpdateSkillState", updateState);
+		m_FSMMamager.RegisterState("ExcuteEffectSkillState", excuteEffectState);
+		m_FSMMamager.RegisterState("EndSkillState", endState);
+		m_FSMMamager.RegisterState("DestroySkillState", destroyState);
+
+		m_FSMMamager.RegisterCondition("CanActiveSkill", CanActiveSkill);
+		m_FSMMamager.RegisterCondition("HaveEndTimeDelay", HaveEndTimeDelay);
+		m_FSMMamager.RegisterCondition("HaveEndTimeEffect", HaveEndTimeEffect);
+		m_FSMMamager.RegisterCondition("HaveCreatureAroundOwner", HaveCreatureAroundOwner);
+		m_FSMMamager.RegisterCondition("IsRepeatSkill", IsRepeatSkill);
+	}
+
+	private void LoadEffect() {
 		m_EffectManager.RegisterCondition("CanActiveEffect", CanActiveEffect);
 		m_EffectManager.RegisterCondition("CanPayHealthPoint", CanPayHealthPoint);
 		m_EffectManager.RegisterCondition("CanPayHeatPoint", CanPayHeatPoint);
 		m_EffectManager.RegisterCondition("CanPaySanityPoint", CanPaySanityPoint);
-		m_EffectManager.RegisterCondition("HaveCreatureAroundOwner", HaveCreatureAroundOwner);
-		m_EffectManager.RegisterCondition("HaveEndTimeDelay", HaveEndTimeDelay);
 
+		m_EffectManager.RegisterExcuteMethod("ExcuteStatusEffect", ExcuteStatusEffect);
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
-		m_EffectManager.RegisterExcuteMethod("SpawnParticle", SpawnParticle);
-		m_EffectManager.RegisterExcuteMethod("ExcuteEffect", ExcuteEffect);
-
-		m_TimeDelay = skillData.TimeDelay;
 	}
 
-	public void UpdateSkill(float dt) {
-		m_TimeDelay -= dt;
-	}
-
-	public virtual void ExcuteSkill() {
+	public virtual void ExcuteEffect() {
 		m_EffectManager.ExcuteEffect();
 	}
 
-	internal virtual bool HaveEndTimeDelay(object[] pas)
+	public override void ResetObject()
 	{
-		var endTime = m_TimeDelay < 0f;
-		if (endTime)
-		{
-			m_TimeDelay = m_SkillData.TimeDelay;
-		}
-		return endTime;
+		base.ResetObject();
+		m_TimeDelay = m_SkillData.TimeDelay;
+		m_TimeEffect = m_SkillData.TimeEffect;
+		m_FSMMamager.SetState("StartSkillState");
 	}
 
-	internal virtual bool HaveEndTimeEffect(object[] pas)
+	#endregion
+
+	#region Getter & Setter
+
+	public override bool GetActive()
 	{
-		var endTime = m_TimeEffect < 0f;
-		if (endTime)
-		{
-			m_TimeEffect = m_SkillData.TimeEffect;
-		}
-		return endTime;
+		return base.GetActive();
 	}
 
-	internal virtual bool HaveCreatureAroundOwner(object[] pas)
-	{
-		var colliders = Physics.OverlapSphere(m_OwnerController.TransformPosition, 
-												m_SkillData.EffectRadius, m_EnemyLayerMask);
-		m_ControllerInsideRadius = new TDCBaseController[colliders.Length];
-		for (int i = 0; i < colliders.Length; i++)
-		{
-			m_ControllerInsideRadius[i] = colliders[i].GetComponent<TDCBaseController>();				
-		}
-		return m_ControllerInsideRadius.Length > 0;
+	public virtual void SetOwner(TDCBaseController owner) {
+		m_SkillData.Owner = owner;
 	}
 
-	internal virtual bool CanPayHealthPoint(object[] pas)
+	public override void SetData(TDCBaseData data)
 	{
+		base.SetData(data);
+		m_SkillData = data as TDCSkillData;
+	}
+
+	public override TDCBaseData GetData()
+	{
+		base.GetData();
+		return m_SkillData;
+	}
+
+	#endregion
+
+	#region FSM
+
+	internal virtual bool CanActiveSkill() {
 		return false;
 	}
 
-	internal virtual bool CanPayHeatPoint(object[] pas)
-	{
+	internal virtual bool IsRepeatSkill() {
 		return false;
 	}
 
-	internal virtual bool CanPaySanityPoint(object[] pas)
+	internal virtual bool HaveEndTimeDelay()
 	{
-		return false;
+		m_TimeDelay -= Time.fixedDeltaTime;
+		return m_TimeDelay <= 0f;
 	}
 
-	internal virtual bool CanActiveEffect(object[] pas)
+	internal virtual bool HaveEndTimeEffect()
 	{
-		return true;
+		m_TimeEffect -= Time.fixedDeltaTime;
+		return m_TimeEffect <= 0f;
 	}
 
-	internal virtual void PrintDebug(object[] pas)
+	internal virtual bool HaveCreatureAroundOwner()
 	{
-#if UNITY_EDITOR
-		for (int i = 0; i < pas.Length; i+=2)
+		var collider = Physics.OverlapSphere(TransformPosition, m_SkillData.EffectRadius, m_LayerEffect);
+		var haveCollider = collider.Length > 0;
+		if (haveCollider)
 		{
-			var name = pas[i];
-			var value = pas[i + 1];
-			Debug.LogError(string.Format ("[{0}] - {1}", name, value));
+			m_ControllersInRadius = new TDCBaseController[collider.Length];
+			for (int i = 0; i < collider.Length; i++)
+			{
+				var gName = collider[i].name;
+				m_ControllersInRadius[i] = m_GameManager.GetControllerByName(gName);
+			}
 		}
-#endif
+		return haveCollider;
 	}
 
-	internal virtual void ExcuteEffect(object[] pas)
-	{
+	#endregion
+
+	#region Effect
+
+	internal virtual void PrintDebug(object[] pars) {
+		Debug.LogError(string.Format("[{0} : {1}]", pars[0], pars[1]));
+	}
+
+	internal virtual void ExcuteStatusEffect(object[] pars) {
 		
 	}
 
-	internal virtual void SpawnParticle(object[] pas)
-	{
-
+	internal virtual bool CanActiveEffect(object[] pars) {
+		return false;
 	}
+
+	internal virtual bool CanPayHealthPoint(object[] pars)
+	{
+		return false;
+	}
+
+	internal virtual bool CanPayHeatPoint(object[] pars)
+	{
+		return false;
+	}
+
+	internal virtual bool CanPaySanityPoint(object[] pars)
+	{
+		return false;
+	}
+
+	#endregion
 
 }

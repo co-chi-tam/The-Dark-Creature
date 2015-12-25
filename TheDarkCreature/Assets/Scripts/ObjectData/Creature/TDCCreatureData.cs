@@ -6,7 +6,6 @@ public class TDCCreatureData : TDCBaseData {
 	private TDCEnum.ECreatureType m_CreatureType;
 	private string[] m_ModelPath;
     private TDCItemController[] m_Inventory;
-	private string m_FSMPath;
 	private float m_RotationSpeed;
 	private TDCObjectProperty<float> m_WalkSpeed;
 	private TDCObjectProperty<float> m_RunSpeed;
@@ -29,11 +28,6 @@ public class TDCCreatureData : TDCBaseData {
 	public string[] ModelPath {
 		get { return m_ModelPath; }
 		set { m_ModelPath = value; }
-	}
-
-	public string FSMPath {
-		get { return m_FSMPath; }
-		set { m_FSMPath = value; }
 	}
 
     public TDCItemController[] Inventory {
@@ -133,7 +127,6 @@ public class TDCCreatureData : TDCBaseData {
 
     public TDCCreatureData() : base()
 	{
-		this.m_FSMPath 		= string.Empty;
 		m_WalkSpeed = new TDCObjectProperty<float>("WalkSpeed");
 		m_RunSpeed = new TDCObjectProperty<float>("RunSpeed");
 		m_RotationSpeed = 5f;

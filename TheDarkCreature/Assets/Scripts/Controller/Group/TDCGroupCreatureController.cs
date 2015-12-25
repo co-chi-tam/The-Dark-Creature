@@ -5,9 +5,18 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
     #region Properties
     
+	private TDCGameManager m_GameManager;
+
     #endregion
 
     #region Implementation Mono
+	public override void Init()
+	{
+		base.Init();
+
+		m_GameManager = TDCGameManager.GetInstance();
+	}
+
     public override void Start()
     {
         base.Start();
@@ -30,11 +39,10 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		for (int i = 0; i < GetMaxMember(); i++) {
 			var randomPosition = Random.insideUnitCircle * GetRadius();
 			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y);
-			var controller = TDCGameManager.Instance.CreateCreature (type, 
-																	 memPosition, 
-			                                                         Quaternion.identity, 
-			                                                         this.gameObject);
-			controller.name = string.Format ("{0} {1}", type.ToString(), i);
+			var controller = m_GameManager.CreateCreature (type, 
+															 memPosition, 
+	                                                         Quaternion.identity, 
+	                                                         this.gameObject);
 			controller.SetGroupController (this);
 			controller.gameObject.SetActive (false);
 			m_MemberPool.Create (controller);

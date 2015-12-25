@@ -283,6 +283,8 @@ public class TDCDataReader {
 			skillData.ID = int.Parse(skill["ID"].ToString());
 			skillData.Name = skill["Name"].ToString();
 			skillData.Description = skill["Description"].ToString();
+			skillData.GameType = (TDCEnum.EGameType) int.Parse (skill["GameType"].ToString());
+			skillData.Icon = skill["IconPath"].ToString();
 			skillData.SkillLevel = int.Parse(skill["SkillLevel"].ToString());
 			skillData.SkillType = (TDCEnum.ESkillType)int.Parse(skill["SkillType"].ToString());
 			skillData.CostHealthPoint = int.Parse(skill["CostHealthPoint"].ToString());
@@ -291,6 +293,8 @@ public class TDCDataReader {
 			skillData.EffectRadius = float.Parse(skill["EffectRadius"].ToString());
 			skillData.TimeDelay = float.Parse(skill["TimeDelay"].ToString());
 			skillData.TimeEffect = float.Parse(skill["TimeEffect"].ToString());
+			skillData.RepeatSkill = bool.Parse(skill["RepeatSkill"].ToString());
+			skillData.FSMPath = skill["FSMPath"].ToString();
 			skillData.EffectPath = skill["EffectPath"].ToString();
 			m_ListSkillData.Add(skillData.SkillType, skillData);
 		}

@@ -13,7 +13,6 @@ public class TDCCreatureController : TDCBaseController {
 	private int m_HungerPoint = 0;
 	private int m_SanityPoint = 0;
 
-	protected FSMManager m_FSMMamager;
 	protected Animator m_AnimatorController;
 	protected Rigidbody m_Rigidbody;
 	protected Vector3 m_TargetPosition;
@@ -103,6 +102,20 @@ public class TDCCreatureController : TDCBaseController {
 		}
 	}
 
+	public override void OnBecameVisible()
+	{
+		base.OnBecameVisible();
+		m_AnimatorController.enabled = true;
+		m_Collider.enabled = true;
+	}
+
+	public override void OnBecameInvisible()
+	{
+		base.OnBecameInvisible();
+		m_AnimatorController.enabled = false;
+		m_Collider.enabled = false;
+	}
+
 	public override void OnDrawGizmos()
 	{
 		base.OnDrawGizmos();
@@ -118,7 +131,7 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override void ApplyDamage (int damage, TDCBaseController attacker)
 	{
-		base.ApplyDamage (damage, attacker);
+		base.ApplyDamage(damage, attacker);
 		if (attacker.GetActive())
 		{
 			m_DamageTake += damage;
@@ -189,22 +202,19 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	public override void WalkPosition(Vector3 position) {
+		base.WalkPosition(position);
 		MovePosition(position, m_CreatureData.WalkSpeed);
 	}
 	
 	public override void RunPosition(Vector3 position)
 	{
+		base.RunPosition(position);
 		MovePosition(position, m_CreatureData.RunSpeed);
 	}
 	
 	public override void LookAtRotation(Vector3 rotation)
 	{
-		//Vector3 inverseVect = -m_Transform.InverseTransformPoint(rotation);
-		//float rotationAngle = Mathf.Atan2(inverseVect.x, inverseVect.z) * Mathf.Rad2Deg;
-		//Vector3 rotationVelocity = (Vector3.up * rotationAngle) * m_RotationSpeed * Time.deltaTime;
-		//Vector3 deltavel = (rotationVelocity - m_Rigidbody.angularVelocity);
-		//m_Rigidbody.AddTorque(deltavel, ForceMode.Impulse);
-		
+		base.LookAtRotation(rotation);
 		//Look at and dampen the rotation
 		rotation.y = 0f;
 		var direction = m_Transform.position - rotation;
@@ -302,7 +312,6 @@ public class TDCCreatureController : TDCBaseController {
 	}
 	
 	public override void SetCanMove(bool value) {
-		base.SetCanMove (value);
 		m_CanMove = value;
 	}
 	
@@ -322,6 +331,7 @@ public class TDCCreatureController : TDCBaseController {
 	
 	public override TDCBaseController GetEnemyController()
 	{
+		base.GetEnemyController();
 		return m_EnemyController;
 	}
 
