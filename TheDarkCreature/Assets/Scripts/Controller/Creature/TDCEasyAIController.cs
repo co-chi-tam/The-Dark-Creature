@@ -17,16 +17,16 @@ public class TDCEasyAIController : TDCCreatureController
     {
 		base.Start ();
 
-		m_FSMMamager.RegisterCondition("HaveEnemy", HaveEnemy);
+		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
 
 		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
-		m_FSMMamager.LoadFSM(m_CreatureData.FSMPath);
+		m_FSMManager.LoadFSM(m_CreatureData.FSMPath);
     }
 	
 	public override void FixedUpdate () {
 		base.FixedUpdate ();
-		m_FSMMamager.UpdateState();
-		StateName = m_FSMMamager.StateCurrentName;
+		m_FSMManager.UpdateState();
+		StateName = m_FSMManager.StateCurrentName;
 	}
 
     #endregion

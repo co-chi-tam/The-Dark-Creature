@@ -15,16 +15,16 @@ public class TDCResourceController : TDCCreatureController {
 	{
 		base.Start();
 
-		m_FSMMamager.RegisterCondition("IsDie", IsDeath);
+		m_FSMManager.RegisterCondition("IsDie", IsDeath);
 
-		m_FSMMamager.LoadFSM(m_ResourceData.FSMPath);
+		m_FSMManager.LoadFSM(m_ResourceData.FSMPath);
 		
 	}
 	
 	public override void FixedUpdate() {
 		base.FixedUpdate ();
-		m_FSMMamager.UpdateState();
-		StateName = m_FSMMamager.StateCurrentName;
+		m_FSMManager.UpdateState();
+		StateName = m_FSMManager.StateCurrentName;
 	}
 	
 	#endregion

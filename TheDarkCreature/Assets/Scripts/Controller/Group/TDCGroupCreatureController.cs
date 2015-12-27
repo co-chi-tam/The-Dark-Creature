@@ -21,13 +21,13 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
     {
         base.Start();
 
-        m_FSMMamager.LoadFSM(m_GroupData.FSMPath);
+        m_FSMManager.LoadFSM(m_GroupData.FSMPath);
     }
 
 	public override void FixedUpdate() {
 		base.FixedUpdate ();
-        m_FSMMamager.UpdateState();
-        StateName = m_FSMMamager.StateCurrentName;
+        m_FSMManager.UpdateState();
+        StateName = m_FSMManager.StateCurrentName;
     }
 
     #endregion

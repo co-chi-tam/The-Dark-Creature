@@ -23,7 +23,7 @@ public class TDCBaseGroupController : TDCBaseController
     {
 		base.Start();
 
-		m_FSMMamager = new FSMManager();
+		m_FSMManager = new FSMManager();
 
 		var idleState = new FSMGroupIdleState(this);
 		var waitingState = new FSMGroupWaitingState(this);
@@ -31,15 +31,15 @@ public class TDCBaseGroupController : TDCBaseController
 		var spawnMinMemberState = new FSMGroupSpawnMinMemberState(this);
 		var spawnMaxMemberState = new FSMGroupSpawnMaxMemberState(this);
 
-		m_FSMMamager.RegisterState("IdleState", idleState);
-		m_FSMMamager.RegisterState("WaitingState", waitingState);
-		m_FSMMamager.RegisterState("SpawnMemberState", spawnMemberState);
-		m_FSMMamager.RegisterState("SpawnMinMemberState", spawnMinMemberState);
-		m_FSMMamager.RegisterState("SpawnMaxMemberState", spawnMaxMemberState);
+		m_FSMManager.RegisterState("IdleState", idleState);
+		m_FSMManager.RegisterState("WaitingState", waitingState);
+		m_FSMManager.RegisterState("SpawnMemberState", spawnMemberState);
+		m_FSMManager.RegisterState("SpawnMinMemberState", spawnMinMemberState);
+		m_FSMManager.RegisterState("SpawnMaxMemberState", spawnMaxMemberState);
 
-		m_FSMMamager.RegisterCondition("IsActive", IsActive);
-		m_FSMMamager.RegisterCondition("IsFullGroup", IsFullGroup);
-		m_FSMMamager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
+		m_FSMManager.RegisterCondition("IsActive", IsActive);
+		m_FSMManager.RegisterCondition("IsFullGroup", IsFullGroup);
+		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
     }
 
 	public override void OnDrawGizmos() {

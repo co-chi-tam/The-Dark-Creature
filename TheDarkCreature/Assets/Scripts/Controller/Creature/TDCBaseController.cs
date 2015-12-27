@@ -21,7 +21,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	[SerializeField]
 	protected string StateName = "";
 
-	protected FSMManager m_FSMMamager;
+	protected FSMManager m_FSMManager;
 	protected Transform m_Transform;
 	protected Vector3 m_StartPosition;
     protected bool m_IsActive = true;

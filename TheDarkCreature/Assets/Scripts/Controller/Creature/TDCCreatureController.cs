@@ -40,7 +40,7 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.Start ();
 
-		m_FSMMamager    = new FSMManager();
+		m_FSMManager    = new FSMManager();
 
 		var idleState   	= new FSMIdleState(this);
 		var moveState   	= new FSMMoveState(this);
@@ -53,27 +53,27 @@ public class TDCCreatureController : TDCBaseController {
 		var waitingOne 		= new FSMWaitingOneSecondState (this);
 		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
 
-		m_FSMMamager.RegisterState("IdleState", idleState);
-		m_FSMMamager.RegisterState("MoveState", moveState);
-		m_FSMMamager.RegisterState("FindRandomState", findRandomState);
-		m_FSMMamager.RegisterState("AvoidState", avoidState);
-		m_FSMMamager.RegisterState("ChaseState", chaseState);
-		m_FSMMamager.RegisterState("AttackState", attackState);
-		m_FSMMamager.RegisterState("WaitingState", waiting);
-		m_FSMMamager.RegisterState("WaitingOneSecondState", waitingOne);
-		m_FSMMamager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
-		m_FSMMamager.RegisterState("DieState", dieState);
+		m_FSMManager.RegisterState("IdleState", idleState);
+		m_FSMManager.RegisterState("MoveState", moveState);
+		m_FSMManager.RegisterState("FindRandomState", findRandomState);
+		m_FSMManager.RegisterState("AvoidState", avoidState);
+		m_FSMManager.RegisterState("ChaseState", chaseState);
+		m_FSMManager.RegisterState("AttackState", attackState);
+		m_FSMManager.RegisterState("WaitingState", waiting);
+		m_FSMManager.RegisterState("WaitingOneSecondState", waitingOne);
+		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
+		m_FSMManager.RegisterState("DieState", dieState);
 
-		m_FSMMamager.RegisterCondition("IsActive", GetActive);
-		m_FSMMamager.RegisterCondition("CanMove", CanMove);
-		m_FSMMamager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
-		m_FSMMamager.RegisterCondition("MoveToTarget", MoveToTarget);
-		m_FSMMamager.RegisterCondition("MoveToEnemy", MoveToEnemy);
-		m_FSMMamager.RegisterCondition("FoundEnemy", FoundEnemy);
-		m_FSMMamager.RegisterCondition("IsEnemyDie", IsEnemyDie);
-		m_FSMMamager.RegisterCondition("IsDeath", IsDeath);
-		m_FSMMamager.RegisterCondition("IsToFarGroup", IsToFarGroup);
-		m_FSMMamager.RegisterCondition("FoundFood", FoundFood);
+		m_FSMManager.RegisterCondition("IsActive", GetActive);
+		m_FSMManager.RegisterCondition("CanMove", CanMove);
+		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
+		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
+		m_FSMManager.RegisterCondition("MoveToEnemy", MoveToEnemy);
+		m_FSMManager.RegisterCondition("FoundEnemy", FoundEnemy);
+		m_FSMManager.RegisterCondition("IsEnemyDie", IsEnemyDie);
+		m_FSMManager.RegisterCondition("IsDeath", IsDeath);
+		m_FSMManager.RegisterCondition("IsToFarGroup", IsToFarGroup);
+		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
 	}
 
 	public override void Update ()

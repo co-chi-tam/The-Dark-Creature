@@ -28,6 +28,7 @@ public class TDCDateTime : MonoBehaviour {
 	private float m_Hour 	= 0f;
 	[SerializeField]
 	private float m_Day 	= 0f;
+
 	[SerializeField]
 	private TDCEnum.EGameSeason m_Season = TDCEnum.EGameSeason.Spring;
 
@@ -44,6 +45,9 @@ public class TDCDateTime : MonoBehaviour {
 	private List<AlarmClockInfo> m_AlarmClocks;
 
 	private float m_SunLightIntensity = 0f;
+	private float m_Tick = 0f;
+
+	public static float DeltaTime;
 
 	#endregion
 
@@ -142,6 +146,7 @@ public class TDCDateTime : MonoBehaviour {
 		SetupImage (m_SunImage, 0, 1f);
 		SetupImage (m_MoonImage, 1, 0f);
 		m_DayText.text = "Day " + m_Day.ToString();
+		DeltaTime = m_Tick;
 	}
 	
 	void Update () {
@@ -150,8 +155,10 @@ public class TDCDateTime : MonoBehaviour {
 			this.gameObject.SetActive(false);
 			return;
 		}
-		m_Timer 	+= Time.deltaTime * m_Speed;
+		m_Tick		= Time.deltaTime * m_Speed;
+		m_Timer 	+= m_Tick;
 		m_Hour 		= m_Timer / m_SecondPerHour;
+		DeltaTime 	= m_Tick;
 
 		var day = m_HourPerDay * m_Day + m_Hour;
 		var nextDay = m_HourPerDay * (m_Day + 1);
@@ -163,8 +170,7 @@ public class TDCDateTime : MonoBehaviour {
 		}
 		m_Season	= (TDCEnum.EGameSeason)(m_Day / m_DayPerSeason % m_SeasonCount);
 	
-		var alarmCount = m_AlarmClocks.Count;
-		for (int i = 0; i < alarmCount; i++) {
+		for (int i = 0; i < m_AlarmClocks.Count; i++) {
 			if (m_AlarmClocks[i].AlarmComplete ((int) m_Hour, (int) m_Day, m_Season)) {
 				if (m_AlarmClocks[i].Repeat == false) {
 					m_AlarmClocks.RemoveAt (i);
@@ -172,6 +178,11 @@ public class TDCDateTime : MonoBehaviour {
 				}
 			}
 		}
+	}
+
+	void LateUpdate() {
+		DeltaTime	= m_Tick;
+
 		var value = m_Hour / 24;
 		m_SunImage.fillAmount 	= m_DayNightCurve.Evaluate (value);
 		m_MoonImage.fillAmount 	= 1f - m_DayNightCurve.Evaluate (value);

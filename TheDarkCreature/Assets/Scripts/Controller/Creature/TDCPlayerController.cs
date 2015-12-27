@@ -32,18 +32,16 @@ public class TDCPlayerController : TDCCreatureController
 			
 		m_Inventory 	= UIInventory.GetInstance ();
 
-		m_FSMMamager.RegisterCondition("HaveEnemy", HaveEnemy);
+		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
 
-        m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
-
-		TDCGameManager.GetInstance().CreateSkill(TDCEnum.EGameType.FlameBody, Vector3.zero, Quaternion.identity);
+        m_FSMManager.LoadFSM(m_PlayerData.FSMPath);
 	}
 
 	public override void FixedUpdate()
 	{
 		base.FixedUpdate();
-		m_FSMMamager.UpdateState();
-		StateName = m_FSMMamager.StateCurrentName;
+		m_FSMManager.UpdateState();
+		StateName = m_FSMManager.StateCurrentName;
 	}
 
 	public override void LateUpdate () {
