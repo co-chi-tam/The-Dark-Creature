@@ -36,8 +36,7 @@ public class TDCPlayerController : TDCCreatureController
 
         m_FSMMamager.LoadFSM(m_PlayerData.FSMPath);
 
-		var skill = TDCGameManager.Instance.CreateSkill(TDCEnum.ESkillType.FlameBody, TransformPosition, TransformRotation);
-
+		TDCGameManager.GetInstance().CreateSkill(TDCEnum.EGameType.FlameBody, Vector3.zero, Quaternion.identity);
 	}
 
 	public override void FixedUpdate()
@@ -144,7 +143,7 @@ public class TDCPlayerController : TDCCreatureController
 		if (GetEnemyController() == null)
 		{
 			var distance = (TransformPosition - GetTargetPosition()).sqrMagnitude;
-			return distance < 0.5f; 
+			return distance < 0.5f * 0.5f; 
 		}
 		else
 		{

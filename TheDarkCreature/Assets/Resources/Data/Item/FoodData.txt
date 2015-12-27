@@ -24,6 +24,14 @@
 			"Description": "",
 			"IconPath": "Grass",
 			"EffectPath": "Effect/Item/MeatEffect"
+		},{
+			"ID": 3,
+			"Name": "Bush",
+			"GameType": 54,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "Bush",
+			"EffectPath": "Effect/Item/MeatEffect"
 		}
 	]
 }

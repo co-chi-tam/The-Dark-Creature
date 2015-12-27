@@ -21,7 +21,7 @@ public class TDCCreatureController : TDCBaseController {
 	protected int m_DamageTake = 0;
 
 	protected TDCCreatureData m_CreatureData;
-	private TDCGameManager m_GameManager;
+	protected TDCGameManager m_GameManager;
 
 	#endregion
 	
@@ -71,7 +71,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMMamager.RegisterCondition("MoveToEnemy", MoveToEnemy);
 		m_FSMMamager.RegisterCondition("FoundEnemy", FoundEnemy);
 		m_FSMMamager.RegisterCondition("IsEnemyDie", IsEnemyDie);
-		m_FSMMamager.RegisterCondition("IsDie", IsDie);
+		m_FSMMamager.RegisterCondition("IsDeath", IsDeath);
 		m_FSMMamager.RegisterCondition("IsToFarGroup", IsToFarGroup);
 		m_FSMMamager.RegisterCondition("FoundFood", FoundFood);
 	}
@@ -135,6 +135,9 @@ public class TDCCreatureController : TDCBaseController {
 		if (attacker.GetActive())
 		{
 			m_DamageTake += damage;
+		}
+		if (GetEnemyController() == null)
+		{
 			SetEnemyController(attacker);
 		}
 	}
@@ -258,8 +261,8 @@ public class TDCCreatureController : TDCBaseController {
 		return false;
 	}
 
-	internal virtual bool IsDie() {
-		return false;
+	internal virtual bool IsDeath() {
+		return m_CreatureData.CurrentHP <= 0f || GetActive() == false;
 	}
 
 	internal virtual bool CanMove() {

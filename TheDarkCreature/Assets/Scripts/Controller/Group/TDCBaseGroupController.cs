@@ -8,7 +8,6 @@ public class TDCBaseGroupController : TDCBaseController
 
 	protected TDCObjectPool<TDCBaseController> m_MemberPool;
 	protected TDCGroupData m_GroupData;
-	protected TDCEnum.EGameType m_GroupMemberType;
 
 	#endregion
 
@@ -58,8 +57,8 @@ public class TDCBaseGroupController : TDCBaseController
 		return m_GroupData.TimeRespawnMember;
 	}
 
-	public virtual void CreatePoolMember(TDCEnum.EGameType type) {
-		m_GroupMemberType = type;
+	public virtual void CreatePoolMember() {
+		
 	}
 
 	public virtual void ReturnMember(TDCBaseController member) {
@@ -121,6 +120,10 @@ public class TDCBaseGroupController : TDCBaseController
 
 	public virtual float GetRadius() {
 		return m_GroupData.Radius;
+	}
+
+	public virtual TDCEnum.EGameType GetGroupMemberType() {
+		return m_GroupData.MemberType;
 	}
 
 	#endregion

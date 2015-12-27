@@ -7,8 +7,7 @@ public class TDCEasyAIController : TDCCreatureController
 {
     #region Properties
     
-	private LayerMask m_EnemyLayerMask;
-	private LayerMask m_FoodLayerMask;
+	private LayerMask m_ColliderLayerMask;
 
     #endregion
 
@@ -20,8 +19,7 @@ public class TDCEasyAIController : TDCCreatureController
 
 		m_FSMMamager.RegisterCondition("HaveEnemy", HaveEnemy);
 
-		m_EnemyLayerMask = 1 << 8;
-		m_FoodLayerMask = 1 << 8 | 1 << 10;
+		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
 		m_FSMMamager.LoadFSM(m_CreatureData.FSMPath);
     }
 	
@@ -38,12 +36,13 @@ public class TDCEasyAIController : TDCCreatureController
 	internal override bool HaveEnemy() {
 		var enemies = GetTypeEnemies();
 		var enemyCtrl = GetEnemyController();
-		return GetEnemyController() != null && enemies.IndexOf (enemyCtrl.GetGameType()) == -1;
+		return enemyCtrl != null && enemies.IndexOf (enemyCtrl.GetGameType()) == -1;
 	}
 
 	internal override bool IsToFarGroup() {
 		var distance = 0f;
 		var range = 0f;
+		var isFar = false;
 		if (m_GroupController == null)
 		{
 			distance = (TransformPosition - m_StartPosition).sqrMagnitude;
@@ -54,15 +53,25 @@ public class TDCEasyAIController : TDCCreatureController
 			distance = (TransformPosition - m_GroupController.TransformPosition).sqrMagnitude;
 			range = m_GroupController.GetRadius();
 		}
-		return distance > range * range;
+		isFar = distance > range * range;
+		if (isFar)
+		{
+			SetEnemyController(null);
+		}
+		return isFar;
 	}
 
 	internal override bool IsEnemyDie() {
-		return m_EnemyController.GetHealth () <= 0;
+		var enemy = m_EnemyController.GetHealth() <= 0 || m_EnemyController.GetActive() == false;
+		if (enemy)
+		{
+			SetEnemyController(null);
+		}
+		return enemy;
 	}
 
-	internal override bool IsDie() {
-		return m_CreatureData.CurrentHP <= 0f;
+	internal override bool IsDeath() {
+		return base.IsDeath();
 	}
 
 	internal override bool CanMove() {
@@ -87,14 +96,14 @@ public class TDCEasyAIController : TDCCreatureController
     }
 
 	internal override bool FoundEnemy() {
-        var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_EnemyLayerMask);
+		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
-			var target = colliders[i].GetComponent<TDCBaseController>();
-			if (target == null || target.GetActive () == false) {
+			var target = m_GameManager.GetControllerByName (colliders[i].name);
+			if (target == null || target.GetActive () == false || target == this) {
 				continue;
 			} else {
 				if (GetTypeEnemies().IndexOf (target.GetGameType()) != -1) {
-					SetEnemyController (target);
+					SetEnemyController(target);
 					return true;
 				}
 			}
@@ -103,14 +112,21 @@ public class TDCEasyAIController : TDCCreatureController
     }
 
 	internal override bool FoundFood() {
-		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_FoodLayerMask);
+		if (GetEnemyController() != null)
+		{
+			return true;
+		}
+		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
-			var food = colliders[i].GetComponent<TDCBaseController>();
-			if (food == null || food.GetActive () == false) {
+			var food = m_GameManager.GetControllerByName (colliders[i].name);
+			if (food == null || food.GetActive () == false || food == this) {
 				continue;
 			} else {
 				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1) {
-					SetEnemyController (food);
+					if (GetEnemyController() == null)
+					{
+						SetEnemyController(food);
+					}
 					return true;
 				}
 			}

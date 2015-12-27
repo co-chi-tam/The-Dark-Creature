@@ -100,17 +100,11 @@ public class TDCSkillController : TDCBaseController {
 		base.ResetObject();
 		m_TimeDelay = m_SkillData.TimeDelay;
 		m_TimeEffect = m_SkillData.TimeEffect;
-		m_FSMMamager.SetState("StartSkillState");
 	}
 
 	#endregion
 
 	#region Getter & Setter
-
-	public override bool GetActive()
-	{
-		return base.GetActive();
-	}
 
 	public virtual void SetOwner(TDCBaseController owner) {
 		m_SkillData.Owner = owner;
@@ -133,7 +127,7 @@ public class TDCSkillController : TDCBaseController {
 	#region FSM
 
 	internal virtual bool CanActiveSkill() {
-		return false;
+		return GetActive();
 	}
 
 	internal virtual bool IsRepeatSkill() {
@@ -181,7 +175,7 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	internal virtual bool CanActiveEffect(object[] pars) {
-		return false;
+		return GetActive();
 	}
 
 	internal virtual bool CanPayHealthPoint(object[] pars)

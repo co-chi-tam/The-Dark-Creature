@@ -117,10 +117,6 @@ public class TDCBaseController : TDCMonoBehaviour
 	public virtual void SetData(TDCBaseData data) {
 		m_BaseData = data;
 	}
-	
-	public virtual void SetIsActive(bool value) {
-		m_IsActive = value;
-	}
 
 	public virtual void SetActive(bool value) {
 		m_IsActive = value;

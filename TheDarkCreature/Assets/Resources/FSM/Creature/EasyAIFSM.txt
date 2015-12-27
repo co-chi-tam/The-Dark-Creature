@@ -78,12 +78,12 @@
           "states": []
         },
         {
-          "condition_name": "IsDie",
+          "condition_name": "IsDeath",
           "condition_value": true,
           "state_name": "DieState",
           "states": [
             {
-              "condition_name": "IsDie",
+              "condition_name": "IsDeath",
               "condition_value": false,
               "state_name": "IdleState",
               "states": []

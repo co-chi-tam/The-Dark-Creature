@@ -4,6 +4,7 @@ public class TDCBaseData : TDCInfo
 	private string m_Icon;
 	private TDCEnum.EGameType m_GameType;
 	private string m_FSMPath;
+	private string[] m_ModelPath;
 
 	public string Icon {
 		get { return m_Icon; }
@@ -20,11 +21,17 @@ public class TDCBaseData : TDCInfo
 		set { m_FSMPath = value; }
 	}
 
+	public string[] ModelPath {
+		get { return m_ModelPath; }
+		set { m_ModelPath = value; }
+	}
+
 	public TDCBaseData() : base()
     {
 		this.m_GameType	= TDCEnum.EGameType.None;
 		this.m_Icon		= string.Empty;
 		this.m_FSMPath 	= string.Empty;
+		this.m_ModelPath = null;
     }
 
 	public static TDCBaseData Clone (TDCBaseData instance) {
@@ -35,6 +42,7 @@ public class TDCBaseData : TDCInfo
 		tmp.Description = instance.Description;
 		tmp.Icon = instance.Icon;
 		tmp.FSMPath = instance.FSMPath;
+		tmp.ModelPath = instance.ModelPath;
 		return tmp;
 	}
 }

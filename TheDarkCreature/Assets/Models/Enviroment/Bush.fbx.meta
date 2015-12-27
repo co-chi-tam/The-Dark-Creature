@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 23aeb859671d09a439b47f3ecc507cc3
-timeCreated: 1441553500
+guid: 5eac2d1a478c18e49ab823bd41ad822e
+timeCreated: 1451149729
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Grass
+    4300000: Cube
   materials:
     importMaterials: 1
     materialName: 0
@@ -34,7 +34,7 @@ ModelImporter:
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 1
+    globalScale: 2
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1
@@ -52,7 +52,7 @@ ModelImporter:
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
-    tangentImportMode: 4
+    tangentImportMode: 3
   importAnimation: 1
   copyAvatar: 0
   humanDescription:

@@ -4,7 +4,6 @@ using System.Collections.Generic;
 public class TDCCreatureData : TDCBaseData {
 
 	private TDCEnum.ECreatureType m_CreatureType;
-	private string[] m_ModelPath;
     private TDCItemController[] m_Inventory;
 	private float m_RotationSpeed;
 	private TDCObjectProperty<float> m_WalkSpeed;
@@ -24,11 +23,6 @@ public class TDCCreatureData : TDCBaseData {
 	private float m_AttackRange;
 	private List<TDCEnum.EGameType> m_TypeEnemies;
 	private List<TDCEnum.EGameType> m_TypeFoods;
-
-	public string[] ModelPath {
-		get { return m_ModelPath; }
-		set { m_ModelPath = value; }
-	}
 
     public TDCItemController[] Inventory {
 		get { return m_Inventory; }
@@ -147,7 +141,6 @@ public class TDCCreatureData : TDCBaseData {
 		m_TypeEnemies = new List<TDCEnum.EGameType> ();
 		m_TypeFoods = new List<TDCEnum.EGameType> ();
 		m_CreatureType = TDCEnum.ECreatureType.None;
-		this.m_ModelPath 	= new string[] {};
 
 		RegisterProperty(m_CurrentHeatPoint);
 		RegisterProperty(m_MaxHeatPoint);

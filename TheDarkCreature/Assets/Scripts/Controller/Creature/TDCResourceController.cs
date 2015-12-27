@@ -15,7 +15,7 @@ public class TDCResourceController : TDCCreatureController {
 	{
 		base.Start();
 
-		m_FSMMamager.RegisterCondition("IsDie", IsDie);
+		m_FSMMamager.RegisterCondition("IsDie", IsDeath);
 
 		m_FSMMamager.LoadFSM(m_ResourceData.FSMPath);
 		
@@ -31,8 +31,8 @@ public class TDCResourceController : TDCCreatureController {
 	
 	#region Main method
 
-	internal override bool IsDie() {
-		base.IsDie();
+	internal override bool IsDeath() {
+		base.IsDeath();
 		return m_CreatureData.CurrentHP <= 0f;
 	}
 

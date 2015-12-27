@@ -3,7 +3,7 @@
 		{
 			"ID": 1,
 			"Name": "PlayerDodono",
-			"GameType": 1,
+			"GameType": 5,
 			"CreatureType": 2,
 			"Description": "",
 			"ModelPath": ["Prefabs/Dodono"],
@@ -30,7 +30,7 @@
 		},{
 			"ID": 2,
 			"Name": "PlayerSatla",
-			"GameType": 2,
+			"GameType": 6,
 			"CreatureType": 2,
 			"Description": "",
 			"ModelPath": ["Prefabs/Satla"],

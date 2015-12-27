@@ -3,21 +3,22 @@ using System.Collections;
 
 public class TDCGroupData : TDCBaseData {
 
-	private string[] m_ModelPath;
 	private float m_Radius;
+	private TDCEnum.EGameType m_MemberType;
 	private int m_MinMember;
 	private int m_MaxMember;
 	private TDCEnum.EGroupType m_GroupType;
 	private float m_TimeRespawnMember;
 
-	public string[] ModelPath {
-		get { return m_ModelPath; }
-		set { m_ModelPath = value; }
-	}
-
 	public float Radius {
 		get { return m_Radius; }
 		set { m_Radius = value; }
+	}
+
+	public TDCEnum.EGameType MemberType
+	{
+		get { return m_MemberType; }
+		set { m_MemberType = value; }
 	}
 
 	public int MinMember {
@@ -47,7 +48,6 @@ public class TDCGroupData : TDCBaseData {
 		this.m_MaxMember = 0;
 		this.m_GroupType = TDCEnum.EGroupType.None;
 		this.m_TimeRespawnMember = 0f;
-		this.m_ModelPath 	= new string[] {};
 	}
 
 	public static TDCGroupData Clone (TDCGroupData instance) {
@@ -58,6 +58,7 @@ public class TDCGroupData : TDCBaseData {
 		tmp.ModelPath = instance.ModelPath;
 		tmp.GameType = instance.GameType;
 		tmp.Radius = instance.Radius;
+		tmp.MemberType = instance.MemberType;
 		tmp.MinMember = instance.MinMember;
 		tmp.MaxMember = instance.MaxMember;
 		tmp.GroupType = instance.GroupType;

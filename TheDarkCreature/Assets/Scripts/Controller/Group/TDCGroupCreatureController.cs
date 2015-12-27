@@ -34,15 +34,15 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
     #region Main method
 
-	public override void CreatePoolMember(TDCEnum.EGameType type) {
-		base.CreatePoolMember (type);
+	public override void CreatePoolMember() {
+		base.CreatePoolMember ();
 		for (int i = 0; i < GetMaxMember(); i++) {
 			var randomPosition = Random.insideUnitCircle * GetRadius();
 			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y);
-			var controller = m_GameManager.CreateCreature (type, 
-															 memPosition, 
-	                                                         Quaternion.identity, 
-	                                                         this.gameObject);
+			var controller = m_GameManager.CreateCreature ( m_GroupData.MemberType, 
+															memPosition, 
+															Quaternion.identity, 
+															this.gameObject);
 			controller.SetGroupController (this);
 			controller.gameObject.SetActive (false);
 			m_MemberPool.Create (controller);

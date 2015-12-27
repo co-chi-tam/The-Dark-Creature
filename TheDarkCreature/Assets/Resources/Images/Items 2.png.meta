@@ -1,13 +1,419 @@
 fileFormatVersion: 2
 guid: c85f2c9507707614583210f0d42c75a8
-timeCreated: 1450694738
+timeCreated: 1451150620
 licenseType: Free
 TextureImporter:
-  fileIDToRecycleName: {}
+  fileIDToRecycleName:
+    21300000: Items 2_0
+    21300002: Items 2_1
+    21300004: Items 2_2
+    21300006: Items 2_3
+    21300008: Items 2_4
+    21300010: Items 2_5
+    21300012: Items 2_6
+    21300014: Items 2_7
+    21300016: Items 2_8
+    21300018: Items 2_9
+    21300020: Items 2_10
+    21300022: Items 2_11
+    21300024: Items 2_12
+    21300026: Items 2_13
+    21300028: Items 2_14
+    21300030: Items 2_15
+    21300032: Items 2_16
+    21300034: Items 2_17
+    21300036: Items 2_18
+    21300038: Items 2_19
+    21300040: Items 2_20
+    21300042: Items 2_21
+    21300044: Items 2_22
+    21300046: Items 2_23
+    21300048: Items 2_24
+    21300050: Items 2_25
+    21300052: Items 2_26
+    21300054: Items 2_27
+    21300056: Items 2_28
+    21300058: Items 2_29
+    21300060: Items 2_30
+    21300062: Items 2_31
+    21300064: Items 2_32
+    21300066: Items 2_33
+    21300068: Items 2_34
+    21300070: Items 2_35
+    21300072: Items 2_36
+    21300074: Items 2_37
+    21300076: Items 2_38
+    21300078: Items 2_39
+    21300080: Items 2_40
+    21300082: Items 2_41
+    21300084: Items 2_42
+    21300086: Items 2_43
+    21300088: Items 2_44
+    21300090: Items 2_45
+    21300092: Items 2_46
+    21300094: Items 2_47
+    21300096: Items 2_48
+    21300098: Items 2_49
+    21300100: Items 2_50
+    21300102: Items 2_51
+    21300104: Items 2_52
+    21300106: Items 2_53
+    21300108: Items 2_54
+    21300110: Items 2_55
+    21300112: Items 2_56
+    21300114: Items 2_57
+    21300116: Items 2_58
+    21300118: Items 2_59
+    21300120: Items 2_60
+    21300122: Items 2_61
+    21300124: Items 2_62
+    21300126: Items 2_63
+    21300128: Items 2_64
+    21300130: Items 2_65
+    21300132: Items 2_66
+    21300134: Items 2_67
+    21300136: Items 2_68
+    21300138: Items 2_69
+    21300140: Items 2_70
+    21300142: Items 2_71
+    21300144: Items 2_72
+    21300146: Items 2_73
+    21300148: Items 2_74
+    21300150: Items 2_75
+    21300152: Items 2_76
+    21300154: Items 2_77
+    21300156: Items 2_78
+    21300158: Items 2_79
+    21300160: Items 2_80
+    21300162: Items 2_81
+    21300164: Items 2_82
+    21300166: Items 2_83
+    21300168: Items 2_84
+    21300170: Items 2_85
+    21300172: Items 2_86
+    21300174: Items 2_87
+    21300176: Items 2_88
+    21300178: Items 2_89
+    21300180: Items 2_90
+    21300182: Items 2_91
+    21300184: Items 2_92
+    21300186: Items 2_93
+    21300188: Items 2_94
+    21300190: Items 2_95
+    21300192: Items 2_96
+    21300194: Items 2_97
+    21300196: Items 2_98
+    21300198: Items 2_99
+    21300200: Items 2_100
+    21300202: Items 2_101
+    21300204: Items 2_102
+    21300206: Items 2_103
+    21300208: Items 2_104
+    21300210: Items 2_105
+    21300212: Items 2_106
+    21300214: Items 2_107
+    21300216: Items 2_108
+    21300218: Items 2_109
+    21300220: Items 2_110
+    21300222: Items 2_111
+    21300224: Items 2_112
+    21300226: Items 2_113
+    21300228: Items 2_114
+    21300230: Items 2_115
+    21300232: Items 2_116
+    21300234: Items 2_117
+    21300236: Items 2_118
+    21300238: Items 2_119
+    21300240: Items 2_120
+    21300242: Items 2_121
+    21300244: Items 2_122
+    21300246: Items 2_123
+    21300248: Items 2_124
+    21300250: Items 2_125
+    21300252: Items 2_126
+    21300254: Items 2_127
+    21300256: Items 2_128
+    21300258: Items 2_129
+    21300260: Items 2_130
+    21300262: Items 2_131
+    21300264: Items 2_132
+    21300266: Items 2_133
+    21300268: Items 2_134
+    21300270: Items 2_135
+    21300272: Items 2_136
+    21300274: Items 2_137
+    21300276: Items 2_138
+    21300278: Items 2_139
+    21300280: Items 2_140
+    21300282: Items 2_141
+    21300284: Items 2_142
+    21300286: Items 2_143
+    21300288: Items 2_144
+    21300290: Items 2_145
+    21300292: Items 2_146
+    21300294: Items 2_147
+    21300296: Items 2_148
+    21300298: Items 2_149
+    21300300: Items 2_150
+    21300302: Items 2_151
+    21300304: Items 2_152
+    21300306: Items 2_153
+    21300308: Items 2_154
+    21300310: Items 2_155
+    21300312: Items 2_156
+    21300314: Items 2_157
+    21300316: Items 2_158
+    21300318: Items 2_159
+    21300320: Items 2_160
+    21300322: Items 2_161
+    21300324: Items 2_162
+    21300326: Items 2_163
+    21300328: Items 2_164
+    21300330: Items 2_165
+    21300332: Items 2_166
+    21300334: Items 2_167
+    21300336: Items 2_168
+    21300338: Items 2_169
+    21300340: Items 2_170
+    21300342: Items 2_171
+    21300344: Items 2_172
+    21300346: Items 2_173
+    21300348: Items 2_174
+    21300350: Items 2_175
+    21300352: Items 2_176
+    21300354: Items 2_177
+    21300356: Items 2_178
+    21300358: Items 2_179
+    21300360: Items 2_180
+    21300362: Items 2_181
+    21300364: Items 2_182
+    21300366: Items 2_183
+    21300368: Items 2_184
+    21300370: Items 2_185
+    21300372: Items 2_186
+    21300374: Items 2_187
+    21300376: Items 2_188
+    21300378: Items 2_189
+    21300380: Items 2_190
+    21300382: Items 2_191
+    21300384: Items 2_192
+    21300386: Items 2_193
+    21300388: Items 2_194
+    21300390: Items 2_195
+    21300392: Items 2_196
+    21300394: Items 2_197
+    21300396: Items 2_198
+    21300398: Items 2_199
+    21300400: Bush
+    21300402: Items 2_201
+    21300404: Items 2_202
+    21300406: Items 2_203
+    21300408: Items 2_204
+    21300410: Items 2_205
+    21300412: Items 2_206
+    21300414: Items 2_207
+    21300416: Items 2_208
+    21300418: Items 2_209
+    21300420: Items 2_210
+    21300422: Items 2_211
+    21300424: Items 2_212
+    21300426: Items 2_213
+    21300428: Items 2_214
+    21300430: Items 2_215
+    21300432: Items 2_216
+    21300434: Items 2_217
+    21300436: Items 2_218
+    21300438: Items 2_219
+    21300440: Items 2_220
+    21300442: Items 2_221
+    21300444: Items 2_222
+    21300446: Items 2_223
+    21300448: Items 2_224
+    21300450: Items 2_225
+    21300452: Items 2_226
+    21300454: Items 2_227
+    21300456: Items 2_228
+    21300458: Items 2_229
+    21300460: Items 2_230
+    21300462: Items 2_231
+    21300464: Items 2_232
+    21300466: Items 2_233
+    21300468: Items 2_234
+    21300470: Items 2_235
+    21300472: Items 2_236
+    21300474: Items 2_237
+    21300476: Items 2_238
+    21300478: Items 2_239
+    21300480: Items 2_240
+    21300482: Items 2_241
+    21300484: Items 2_242
+    21300486: Items 2_243
+    21300488: Items 2_244
+    21300490: Items 2_245
+    21300492: Items 2_246
+    21300494: Items 2_247
+    21300496: Items 2_248
+    21300498: Items 2_249
+    21300500: Items 2_250
+    21300502: Items 2_251
+    21300504: Items 2_252
+    21300506: Items 2_253
+    21300508: Items 2_254
+    21300510: Items 2_255
+    21300512: Items 2_256
+    21300514: Items 2_257
+    21300516: Items 2_258
+    21300518: Items 2_259
+    21300520: Items 2_260
+    21300522: Items 2_261
+    21300524: Items 2_262
+    21300526: Items 2_263
+    21300528: Items 2_264
+    21300530: Items 2_265
+    21300532: Items 2_266
+    21300534: Items 2_267
+    21300536: Items 2_268
+    21300538: Items 2_269
+    21300540: Items 2_270
+    21300542: Items 2_271
+    21300544: Items 2_272
+    21300546: Items 2_273
+    21300548: Items 2_274
+    21300550: Items 2_275
+    21300552: Items 2_276
+    21300554: Items 2_277
+    21300556: Items 2_278
+    21300558: Items 2_279
+    21300560: Items 2_280
+    21300562: Items 2_281
+    21300564: Items 2_282
+    21300566: Items 2_283
+    21300568: Items 2_284
+    21300570: Items 2_285
+    21300572: Items 2_286
+    21300574: Items 2_287
+    21300576: Items 2_288
+    21300578: Items 2_289
+    21300580: Items 2_290
+    21300582: Items 2_291
+    21300584: Items 2_292
+    21300586: Items 2_293
+    21300588: Items 2_294
+    21300590: Items 2_295
+    21300592: Items 2_296
+    21300594: Items 2_297
+    21300596: Items 2_298
+    21300598: Items 2_299
+    21300600: Items 2_300
+    21300602: Items 2_301
+    21300604: Items 2_302
+    21300606: Items 2_303
+    21300608: Items 2_304
+    21300610: Items 2_305
+    21300612: Items 2_306
+    21300614: Items 2_307
+    21300616: Items 2_308
+    21300618: Items 2_309
+    21300620: Items 2_310
+    21300622: Items 2_311
+    21300624: Items 2_312
+    21300626: Items 2_313
+    21300628: Items 2_314
+    21300630: Items 2_315
+    21300632: Items 2_316
+    21300634: Items 2_317
+    21300636: Items 2_318
+    21300638: Items 2_319
+    21300640: Items 2_320
+    21300642: Items 2_321
+    21300644: Items 2_322
+    21300646: Items 2_323
+    21300648: Items 2_324
+    21300650: Items 2_325
+    21300652: Items 2_326
+    21300654: Items 2_327
+    21300656: Items 2_328
+    21300658: Items 2_329
+    21300660: Items 2_330
+    21300662: Items 2_331
+    21300664: Items 2_332
+    21300666: Items 2_333
+    21300668: Items 2_334
+    21300670: Items 2_335
+    21300672: Items 2_336
+    21300674: Items 2_337
+    21300676: Items 2_338
+    21300678: Items 2_339
+    21300680: Items 2_340
+    21300682: Items 2_341
+    21300684: Items 2_342
+    21300686: Items 2_343
+    21300688: Items 2_344
+    21300690: Items 2_345
+    21300692: Items 2_346
+    21300694: Items 2_347
+    21300696: Items 2_348
+    21300698: Items 2_349
+    21300700: Items 2_350
+    21300702: Items 2_351
+    21300704: Items 2_352
+    21300706: Items 2_353
+    21300708: Items 2_354
+    21300710: Items 2_355
+    21300712: Items 2_356
+    21300714: Items 2_357
+    21300716: Items 2_358
+    21300718: Items 2_359
+    21300720: Items 2_360
+    21300722: Items 2_361
+    21300724: Items 2_362
+    21300726: Items 2_363
+    21300728: Items 2_364
+    21300730: Items 2_365
+    21300732: Items 2_366
+    21300734: Items 2_367
+    21300736: Items 2_368
+    21300738: Items 2_369
+    21300740: Items 2_370
+    21300742: Items 2_371
+    21300744: Items 2_372
+    21300746: Items 2_373
+    21300748: Items 2_374
+    21300750: Items 2_375
+    21300752: Items 2_376
+    21300754: Items 2_377
+    21300756: Items 2_378
+    21300758: Items 2_379
+    21300760: Items 2_380
+    21300762: Items 2_381
+    21300764: Items 2_382
+    21300766: Items 2_383
+    21300768: Items 2_384
+    21300770: Items 2_385
+    21300772: Items 2_386
+    21300774: Items 2_387
+    21300776: Items 2_388
+    21300778: Items 2_389
+    21300780: Items 2_390
+    21300782: Items 2_391
+    21300784: Items 2_392
+    21300786: Items 2_393
+    21300788: Items 2_394
+    21300790: Items 2_395
+    21300792: Items 2_396
+    21300794: Items 2_397
+    21300796: Items 2_398
+    21300798: Items 2_399
+    21300800: Items 2_400
+    21300802: Items 2_401
+    21300804: Items 2_402
+    21300806: Items 2_403
+    21300808: Items 2_404
+    21300810: Items 2_405
   serializedVersion: 2
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     linearTexture: 0
     correctGamma: 0
     fadeOut: 0
@@ -32,24 +438,4495 @@ TextureImporter:
     filterMode: -1
     aniso: -1
     mipBias: -1
-    wrapMode: -1
-  nPOTScale: 1
+    wrapMode: 1
+  nPOTScale: 0
   lightmap: 0
   rGBM: 0
   compressionQuality: 50
   allowsAlphaSplitting: 0
-  spriteMode: 0
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
-  alphaIsTransparency: 0
-  textureType: -1
+  alphaIsTransparency: 1
+  textureType: 8
   buildTargetSettings: []
   spriteSheet:
-    sprites: []
+    sprites:
+    - name: Items 2_0
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 745
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_1
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 744
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_2
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 744
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_3
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 744
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_4
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 744
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_5
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 744
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_6
+      rect:
+        serializedVersion: 2
+        x: 173
+        y: 747
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_7
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 747
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_8
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 745
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_9
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 745
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_10
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 745
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_11
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 746
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_12
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 745
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_13
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 745
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_14
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 744
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 721
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_16
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 720
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_17
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 720
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_18
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 720
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_19
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 720
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_20
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 720
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_21
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 721
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_22
+      rect:
+        serializedVersion: 2
+        x: 160
+        y: 731
+        width: 7
+        height: 9
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_23
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 721
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_24
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 723
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_25
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 723
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_26
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 720
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_27
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 721
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_28
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 723
+        width: 24
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_29
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 697
+        width: 46
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_30
+      rect:
+        serializedVersion: 2
+        x: 48
+        y: 697
+        width: 47
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_31
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 697
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_32
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 697
+        width: 18
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_33
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 696
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_34
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 700
+        width: 21
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_35
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 697
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_36
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 697
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_37
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 697
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_38
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 696
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_39
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 697
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_40
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 696
+        width: 45
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_41
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 696
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_42
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 672
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_43
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 672
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_44
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 672
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_45
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 673
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_46
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 672
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_47
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 672
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_48
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 674
+        width: 22
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_49
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 674
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_50
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 676
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_51
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 676
+        width: 16
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_52
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 672
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_53
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 674
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_54
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 674
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_55
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 676
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_56
+      rect:
+        serializedVersion: 2
+        x: 339
+        y: 672
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_57
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 672
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_58
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 649
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_59
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 649
+        width: 14
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_60
+      rect:
+        serializedVersion: 2
+        x: 55
+        y: 649
+        width: 11
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_61
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 650
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_62
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 649
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_63
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 649
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_64
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 650
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_65
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 649
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_66
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 648
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_67
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 649
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_68
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 649
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_69
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 648
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_70
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 649
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_71
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 648
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_72
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 648
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_73
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 648
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_74
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 625
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_75
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 624
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_76
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 626
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_77
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 624
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_78
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 626
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_79
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 625
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_80
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 625
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_81
+      rect:
+        serializedVersion: 2
+        x: 176
+        y: 625
+        width: 14
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_82
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 624
+        width: 48
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_83
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 626
+        width: 21
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_84
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 625
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_85
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 625
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_86
+      rect:
+        serializedVersion: 2
+        x: 314
+        y: 624
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_87
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 626
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_88
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 624
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_89
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 602
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_90
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 602
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_91
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 602
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_92
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 602
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_93
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 602
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_94
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 602
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_95
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 602
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_96
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 602
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_97
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 600
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_98
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 600
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_99
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 600
+        width: 48
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_100
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 601
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_101
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 577
+        width: 21
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_102
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 577
+        width: 23
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_103
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 577
+        width: 22
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_104
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 577
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_105
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 577
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_106
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 580
+        width: 22
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_107
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 580
+        width: 18
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_108
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 579
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_109
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 579
+        width: 18
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_110
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 579
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_111
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 577
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_112
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 576
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_113
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 576
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_114
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 576
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_115
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 576
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_116
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 577
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_117
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 553
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_118
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 552
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_119
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 553
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_120
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 552
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_121
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 553
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_122
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 553
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_123
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 553
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_124
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 553
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_125
+      rect:
+        serializedVersion: 2
+        x: 195
+        y: 553
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_126
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 552
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_127
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 554
+        width: 22
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_128
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 552
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_129
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 553
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_130
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 529
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_131
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 529
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_132
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 529
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_133
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 528
+        width: 24
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_134
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 529
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_135
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 529
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_136
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 528
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_137
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 528
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_138
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 528
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_139
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 528
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_140
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 530
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_141
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 528
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_142
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 529
+        width: 19
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_143
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 531
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_144
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 530
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_145
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 529
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_146
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 504
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_147
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 504
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_148
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 505
+        width: 22
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_149
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 505
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_150
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 504
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_151
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 506
+        width: 19
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_152
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 506
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_153
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 506
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_154
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 504
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_155
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 506
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_156
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 507
+        width: 22
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_157
+      rect:
+        serializedVersion: 2
+        x: 269
+        y: 506
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_158
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 506
+        width: 23
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_159
+      rect:
+        serializedVersion: 2
+        x: 316
+        y: 506
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_160
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 506
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_161
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 505
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_162
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 481
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_163
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 481
+        width: 17
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_164
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 481
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_165
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 481
+        width: 22
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_166
+      rect:
+        serializedVersion: 2
+        x: 102
+        y: 480
+        width: 13
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_167
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 481
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_168
+      rect:
+        serializedVersion: 2
+        x: 146
+        y: 480
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_169
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 480
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_170
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 482
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_171
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 480
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_172
+      rect:
+        serializedVersion: 2
+        x: 243
+        y: 482
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_173
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 483
+        width: 19
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_174
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 480
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_175
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 480
+        width: 19
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_176
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 481
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_177
+      rect:
+        serializedVersion: 2
+        x: 364
+        y: 481
+        width: 17
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_178
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 457
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_179
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 456
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_180
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 457
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_181
+      rect:
+        serializedVersion: 2
+        x: 72
+        y: 456
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_182
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 457
+        width: 23
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_183
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 457
+        width: 18
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_184
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 456
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_185
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 456
+        width: 19
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_186
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 461
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_187
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 460
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_188
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 456
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_189
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 459
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_190
+      rect:
+        serializedVersion: 2
+        x: 292
+        y: 458
+        width: 15
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_191
+      rect:
+        serializedVersion: 2
+        x: 315
+        y: 458
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_192
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 457
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_193
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 458
+        width: 23
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_194
+      rect:
+        serializedVersion: 2
+        x: 4
+        y: 434
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_195
+      rect:
+        serializedVersion: 2
+        x: 28
+        y: 434
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_196
+      rect:
+        serializedVersion: 2
+        x: 52
+        y: 434
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_197
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 434
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_198
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 434
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_199
+      rect:
+        serializedVersion: 2
+        x: 124
+        y: 434
+        width: 16
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Bush
+      rect:
+        serializedVersion: 2
+        x: 144
+        y: 432
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_201
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 433
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_202
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 409
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_203
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 409
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_204
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 409
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_205
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 409
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_206
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 409
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_207
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 409
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_208
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 409
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_209
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 409
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_210
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 408
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_211
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 408
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_212
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 408
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_213
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 408
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_214
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 409
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_215
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 409
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_216
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 409
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_217
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 409
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_218
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 385
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_219
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 386
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_220
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 387
+        width: 23
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_221
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 384
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_222
+      rect:
+        serializedVersion: 2
+        x: 171
+        y: 386
+        width: 20
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_223
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 384
+        width: 16
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_224
+      rect:
+        serializedVersion: 2
+        x: 220
+        y: 384
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_225
+      rect:
+        serializedVersion: 2
+        x: 244
+        y: 384
+        width: 16
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_226
+      rect:
+        serializedVersion: 2
+        x: 268
+        y: 384
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_227
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 384
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_228
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 384
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_229
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 384
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_230
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 384
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_231
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 362
+        width: 24
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_232
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 360
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_233
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 361
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_234
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 361
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_235
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 361
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_236
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 360
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_237
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 361
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_238
+      rect:
+        serializedVersion: 2
+        x: 174
+        y: 363
+        width: 14
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_239
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 363
+        width: 17
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_240
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 360
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_241
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 360
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_242
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 361
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_243
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 360
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_244
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 360
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_245
+      rect:
+        serializedVersion: 2
+        x: 340
+        y: 363
+        width: 16
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_246
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 360
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_247
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 337
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_248
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 337
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_249
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 337
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_250
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 337
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_251
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 337
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_252
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 337
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_253
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 338
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_254
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 338
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_255
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 337
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_256
+      rect:
+        serializedVersion: 2
+        x: 219
+        y: 338
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_257
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 340
+        width: 23
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_258
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 337
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_259
+      rect:
+        serializedVersion: 2
+        x: 291
+        y: 337
+        width: 20
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_260
+      rect:
+        serializedVersion: 2
+        x: 312
+        y: 337
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_261
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 336
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_262
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 312
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_263
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 289
+        width: 21
+        height: 46
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_264
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 314
+        width: 18
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_265
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 314
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_266
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 313
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_267
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 313
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_268
+      rect:
+        serializedVersion: 2
+        x: 147
+        y: 312
+        width: 18
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_269
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 313
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_270
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 314
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_271
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 312
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_272
+      rect:
+        serializedVersion: 2
+        x: 242
+        y: 312
+        width: 20
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_273
+      rect:
+        serializedVersion: 2
+        x: 266
+        y: 313
+        width: 21
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_274
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 289
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_275
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 288
+        width: 20
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_276
+      rect:
+        serializedVersion: 2
+        x: 76
+        y: 289
+        width: 17
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_277
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 288
+        width: 17
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_278
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 289
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_279
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 289
+        width: 16
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_280
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 265
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_281
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 265
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_282
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 265
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_283
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 266
+        width: 20
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_284
+      rect:
+        serializedVersion: 2
+        x: 96
+        y: 266
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_285
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 265
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_286
+      rect:
+        serializedVersion: 2
+        x: 148
+        y: 268
+        width: 15
+        height: 15
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_287
+      rect:
+        serializedVersion: 2
+        x: 172
+        y: 269
+        width: 14
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_288
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 281
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_289
+      rect:
+        serializedVersion: 2
+        x: 196
+        y: 265
+        width: 14
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_290
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 267
+        width: 22
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_291
+      rect:
+        serializedVersion: 2
+        x: 210
+        y: 266
+        width: 5
+        height: 5
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_292
+      rect:
+        serializedVersion: 2
+        x: 5
+        y: 241
+        width: 15
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_293
+      rect:
+        serializedVersion: 2
+        x: 29
+        y: 241
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_294
+      rect:
+        serializedVersion: 2
+        x: 53
+        y: 241
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_295
+      rect:
+        serializedVersion: 2
+        x: 77
+        y: 241
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_296
+      rect:
+        serializedVersion: 2
+        x: 101
+        y: 241
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_297
+      rect:
+        serializedVersion: 2
+        x: 125
+        y: 241
+        width: 15
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_298
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 240
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_299
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 240
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_300
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 240
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_301
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 240
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_302
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 240
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_303
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_304
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_305
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_306
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_307
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_308
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_309
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_310
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_311
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_312
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_313
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_314
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 217
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_315
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 216
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_316
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 217
+        width: 22
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_317
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 216
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_318
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 217
+        width: 21
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_319
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 194
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_320
+      rect:
+        serializedVersion: 2
+        x: 24
+        y: 194
+        width: 23
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_321
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 193
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_322
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 193
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_323
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 193
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_324
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 193
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_325
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 193
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_326
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 144
+        width: 120
+        height: 47
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline:
+      - - {x: -60, y: 23.5}
+        - {x: -60, y: -23.5}
+        - {x: 59, y: -23.5}
+        - {x: 60, y: -21.5}
+        - {x: 60, y: 23.5}
+    - name: Items 2_327
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 144
+        width: 20
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_328
+      rect:
+        serializedVersion: 2
+        x: 120
+        y: 144
+        width: 144
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_329
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 144
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_330
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 144
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_331
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 147
+        width: 22
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_332
+      rect:
+        serializedVersion: 2
+        x: 338
+        y: 149
+        width: 21
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_333
+      rect:
+        serializedVersion: 2
+        x: 362
+        y: 146
+        width: 21
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_334
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 121
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_335
+      rect:
+        serializedVersion: 2
+        x: 26
+        y: 121
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_336
+      rect:
+        serializedVersion: 2
+        x: 50
+        y: 121
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_337
+      rect:
+        serializedVersion: 2
+        x: 74
+        y: 121
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_338
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 121
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_339
+      rect:
+        serializedVersion: 2
+        x: 122
+        y: 121
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_340
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 121
+        width: 21
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_341
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 122
+        width: 19
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_342
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 121
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_343
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 121
+        width: 21
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_344
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 120
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_345
+      rect:
+        serializedVersion: 2
+        x: 290
+        y: 121
+        width: 19
+        height: 21
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_346
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 121
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_347
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 123
+        width: 23
+        height: 14
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_348
+      rect:
+        serializedVersion: 2
+        x: 363
+        y: 123
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_349
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 98
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_350
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 98
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_351
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 98
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_352
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 98
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_353
+      rect:
+        serializedVersion: 2
+        x: 99
+        y: 98
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_354
+      rect:
+        serializedVersion: 2
+        x: 123
+        y: 98
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_355
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 97
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_356
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 97
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_357
+      rect:
+        serializedVersion: 2
+        x: 194
+        y: 97
+        width: 21
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_358
+      rect:
+        serializedVersion: 2
+        x: 218
+        y: 98
+        width: 19
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_359
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 99
+        width: 22
+        height: 17
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_360
+      rect:
+        serializedVersion: 2
+        x: 264
+        y: 98
+        width: 23
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_361
+      rect:
+        serializedVersion: 2
+        x: 6
+        y: 75
+        width: 15
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_362
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 72
+        width: 18
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_363
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 72
+        width: 17
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_364
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 72
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_365
+      rect:
+        serializedVersion: 2
+        x: 98
+        y: 72
+        width: 22
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_366
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 72
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_367
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 73
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_368
+      rect:
+        serializedVersion: 2
+        x: 170
+        y: 72
+        width: 21
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_369
+      rect:
+        serializedVersion: 2
+        x: 2
+        y: 49
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_370
+      rect:
+        serializedVersion: 2
+        x: 27
+        y: 49
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_371
+      rect:
+        serializedVersion: 2
+        x: 51
+        y: 49
+        width: 18
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_372
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 49
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_373
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 48
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_374
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 48
+        width: 23
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_375
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 49
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_376
+      rect:
+        serializedVersion: 2
+        x: 168
+        y: 48
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_377
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 48
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_378
+      rect:
+        serializedVersion: 2
+        x: 216
+        y: 48
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_379
+      rect:
+        serializedVersion: 2
+        x: 222
+        y: 53
+        width: 18
+        height: 19
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_380
+      rect:
+        serializedVersion: 2
+        x: 240
+        y: 48
+        width: 20
+        height: 20
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_381
+      rect:
+        serializedVersion: 2
+        x: 246
+        y: 54
+        width: 18
+        height: 18
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_382
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 48
+        width: 23
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_383
+      rect:
+        serializedVersion: 2
+        x: 288
+        y: 48
+        width: 24
+        height: 23
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_384
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 48
+        width: 23
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_385
+      rect:
+        serializedVersion: 2
+        x: 336
+        y: 48
+        width: 24
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_386
+      rect:
+        serializedVersion: 2
+        x: 360
+        y: 48
+        width: 24
+        height: 24
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_387
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_388
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_389
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_390
+      rect:
+        serializedVersion: 2
+        x: 73
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_391
+      rect:
+        serializedVersion: 2
+        x: 97
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_392
+      rect:
+        serializedVersion: 2
+        x: 121
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_393
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_394
+      rect:
+        serializedVersion: 2
+        x: 169
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_395
+      rect:
+        serializedVersion: 2
+        x: 193
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_396
+      rect:
+        serializedVersion: 2
+        x: 217
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_397
+      rect:
+        serializedVersion: 2
+        x: 241
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_398
+      rect:
+        serializedVersion: 2
+        x: 265
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_399
+      rect:
+        serializedVersion: 2
+        x: 289
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_400
+      rect:
+        serializedVersion: 2
+        x: 313
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_401
+      rect:
+        serializedVersion: 2
+        x: 337
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_402
+      rect:
+        serializedVersion: 2
+        x: 361
+        y: 25
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_403
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_404
+      rect:
+        serializedVersion: 2
+        x: 25
+        y: 1
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+    - name: Items 2_405
+      rect:
+        serializedVersion: 2
+        x: 49
+        y: 1
+        width: 22
+        height: 22
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
     outline: []
   spritePackingTag: 
   userData: 

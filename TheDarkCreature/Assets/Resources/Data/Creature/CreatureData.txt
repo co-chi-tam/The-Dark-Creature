@@ -23,7 +23,7 @@
 			"MaxSanityPoint": 50,
 			"MinDamage": 1,
 			"MaxDamage": 1,
-			"Enemies": [2,6],
+			"Enemies": [6],
 			"Foods": [52,53],
 			"Inventory": []
 		},{
@@ -50,7 +50,7 @@
 			"MinDamage": 2,
 			"MaxDamage": 3,
 			"Enemies": [],
-			"Foods": [1,5,52],
+			"Foods": [5,52],
 			"Inventory": []
 		}
 	]

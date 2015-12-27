@@ -10,8 +10,9 @@
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 50,
-			"MinMember": 10,
-			"MaxMember": 20,
+			"MemberType": 5,
+			"MinMember": 5,
+			"MaxMember": 10,
 			"TimeRespawnMember": 10
 		},{
 			"ID": 2,
@@ -23,8 +24,9 @@
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 100,
-			"MinMember": 5,
-			"MaxMember": 10,
+			"MemberType": 6,
+			"MinMember": 2,
+			"MaxMember": 5,
 			"TimeRespawnMember": 60
 		},{
 			"ID": 3,
@@ -36,6 +38,7 @@
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 50,
+			"MemberType": 53,
 			"MinMember": 10,
 			"MaxMember": 20,
 			"TimeRespawnMember": 60
@@ -49,8 +52,23 @@
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 50,
-			"MinMember": 5,
-			"MaxMember": 10,
+			"MemberType": 52,
+			"MinMember": 10,
+			"MaxMember": 20,
+			"TimeRespawnMember": 60
+		},{
+			"ID": 5,
+			"Name": "GroupBush",
+			"GameType": 206,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupFSM",
+			"Radius": 100,
+			"MemberType": 54,
+			"MinMember": 10,
+			"MaxMember": 20,
 			"TimeRespawnMember": 120
 		}
 	]

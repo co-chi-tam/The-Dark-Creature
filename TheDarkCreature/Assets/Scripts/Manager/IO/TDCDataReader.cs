@@ -10,9 +10,10 @@ public class TDCDataReader {
 	#region Property
 
 	private Dictionary<TDCEnum.EGameType, TDCCreatureData> m_ListCreatureData;
+	private Dictionary<TDCEnum.EGameType, TDCPlayerData> m_ListPlayerData;
 	private Dictionary<TDCEnum.EGameType, TDCItemData> m_ListItemData;
 	private Dictionary<TDCEnum.EGameType, TDCGroupData> m_ListGroupData;
-	private Dictionary<TDCEnum.ESkillType, TDCSkillData> m_ListSkillData;
+	private Dictionary<TDCEnum.EGameType, TDCSkillData> m_ListSkillData;
 	private Dictionary<string, List<MapObjectData>> m_MapData;
 
 	#endregion
@@ -21,9 +22,10 @@ public class TDCDataReader {
 
 	public TDCDataReader() {
 		m_ListCreatureData = new Dictionary<TDCEnum.EGameType, TDCCreatureData> ();
+		m_ListPlayerData = new Dictionary<TDCEnum.EGameType, TDCPlayerData> ();
 		m_ListGroupData = new Dictionary<TDCEnum.EGameType, TDCGroupData> ();
 		m_ListItemData = new Dictionary<TDCEnum.EGameType, TDCItemData> ();
-		m_ListSkillData = new Dictionary<TDCEnum.ESkillType, TDCSkillData>();
+		m_ListSkillData = new Dictionary<TDCEnum.EGameType, TDCSkillData>();
 		m_MapData = new Dictionary<string, List<MapObjectData>>();
 
 		LoadData ();
@@ -172,8 +174,9 @@ public class TDCDataReader {
 			group.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			group.GroupType = (TDCEnum.EGroupType)int.Parse (instance ["GroupType"].ToString ());
 			group.Radius = float.Parse (instance ["Radius"].ToString ());
-			group.MinMember = int.Parse (instance ["MinMember"].ToString ());
-			group.MaxMember = int.Parse (instance ["MaxMember"].ToString ());
+			group.MemberType = (TDCEnum.EGameType) int.Parse (instance["MemberType"].ToString());
+			group.MinMember = int.Parse (instance ["MinMember"].ToString());
+			group.MaxMember = int.Parse (instance ["MaxMember"].ToString());
 			group.TimeRespawnMember = float.Parse (instance ["TimeRespawnMember"].ToString ());
 			m_ListGroupData.Add (group.GameType, group);
 		}
@@ -244,7 +247,7 @@ public class TDCDataReader {
                 player.Inventory[x] = new TDCItemController (item);
                 player.Inventory[x].GetData().Amount = amount;
 			}
-			m_ListCreatureData.Add (player.GameType, player);
+			m_ListPlayerData.Add (player.GameType, player);
 		}
 	}
 
@@ -294,9 +297,10 @@ public class TDCDataReader {
 			skillData.TimeDelay = float.Parse(skill["TimeDelay"].ToString());
 			skillData.TimeEffect = float.Parse(skill["TimeEffect"].ToString());
 			skillData.RepeatSkill = bool.Parse(skill["RepeatSkill"].ToString());
+			skillData.ModelPath = ConvertTo<string> (skill["ModelPath"] as List<object>);
 			skillData.FSMPath = skill["FSMPath"].ToString();
 			skillData.EffectPath = skill["EffectPath"].ToString();
-			m_ListSkillData.Add(skillData.SkillType, skillData);
+			m_ListSkillData.Add(skillData.GameType, skillData);
 		}
 	}
 
@@ -342,8 +346,8 @@ public class TDCDataReader {
 
 	#region Getter 
 
-	public TDCSkillData GetSkillData(TDCEnum.ESkillType skill) {
-		var skillData = TDCSkillData.Parse (m_ListSkillData[skill]);
+	public TDCSkillData GetSkillData(TDCEnum.EGameType skill) {
+		var skillData = TDCSkillData.Parse (m_ListSkillData[skill] as TDCSkillData);
 		return skillData;
 	}
 
@@ -375,7 +379,7 @@ public class TDCDataReader {
 	}
 
 	public TDCPlayerData GetPlayer(TDCEnum.EGameType player) {
-		var playerData = TDCPlayerData.Clone (m_ListCreatureData[player] as TDCPlayerData);
+		var playerData = TDCPlayerData.Clone (m_ListPlayerData[player] as TDCPlayerData);
 		return playerData;
 	}
 

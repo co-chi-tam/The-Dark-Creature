@@ -109,6 +109,7 @@ public class TDCSkillData : TDCBaseData
 		tmp.EffectRadius = instance.EffectRadius;
 		tmp.FSMPath = instance.FSMPath;
 		tmp.EffectPath = instance.EffectPath;
+		tmp.ModelPath = instance.ModelPath;
 		tmp.RepeatSkill = instance.RepeatSkill;
 		tmp.Owner = instance.Owner;
 		return tmp;

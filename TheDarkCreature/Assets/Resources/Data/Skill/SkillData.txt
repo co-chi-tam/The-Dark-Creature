@@ -11,10 +11,11 @@
 			"CostHealthPoint": 0,
 			"CostHeatPoint": 0,
 			"CostSanityPoint": 0,
-			"EffectRadius": 30,
+			"EffectRadius": 10,
 			"TimeDelay": 3,
 			"TimeEffect": 0,
 			"RepeatSkill": true,
+			"ModelPath": ["Prefabs/Blank"],
 			"FSMPath": "FSM/Skill/FlameBodyFSM"
 			"EffectPath": "Effect/Skill/FlameBodyEffect"
 		}

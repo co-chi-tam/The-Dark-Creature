@@ -3,9 +3,6 @@ public class TDCEnum{
 
 	public enum EGameType : int {
 		None 		= 0,
-		// Player
-		PlayerDodono	= 1,
-		PlayerSatla		= 2,
 
 		// Creature
 		Dodono 		= 5,
@@ -15,6 +12,7 @@ public class TDCEnum{
 		Meat 		= 51,
 		Mushroom	= 52,
 		Grass		= 53,
+		Bush		= 54,
 
 		// Weapon
 		Trap		= 71,
@@ -24,6 +22,7 @@ public class TDCEnum{
 		GroupSatla	= 202,
 		GroupGrass	= 204,
 		GroupMushRoom = 205,
+		GroupBush 	= 206,
 
 		// Object
 		CampFire	= 301,
@@ -33,8 +32,10 @@ public class TDCEnum{
 	}
 
 	public enum ESkillType : int {
-		None = 0,
-		FlameBody = 1
+		None 		= 0,
+		Passive 	= 1,
+		Range 		= 2,
+		Melee 		= 3
 	}
 
 	public enum EItemType : int {

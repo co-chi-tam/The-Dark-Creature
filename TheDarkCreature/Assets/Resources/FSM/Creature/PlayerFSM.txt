@@ -46,7 +46,16 @@
 			"condition_name": "IsAnyState",
 			"condition_value": true,
 			"state_name": "AnyState",
-			"states": []
+			"states": [
+				{
+					"condition_name": "IsDeath",
+					"condition_value": true,
+					"state_name": "DieState",
+					"states": [
+						
+					]
+				}
+			]
 		}
 	]
 }

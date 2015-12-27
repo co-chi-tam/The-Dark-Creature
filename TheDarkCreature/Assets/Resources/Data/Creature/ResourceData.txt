@@ -24,6 +24,18 @@
 			"MaxHP": "5",
 			"IconPath": "",
 			"Inventory": [{ "GameType":52, "Amount":1 }]
+		},{
+			"ID": 2,
+			"Name": "Object Bush",
+			"GameType": 54,
+			"CreatureType": 3,
+			"Description": "",
+			"ModelPath": ["Prefabs/Bush"],
+			"FSMPath": "FSM/Creature/ResourceFSM",
+			"CurrentHP": "5",
+			"MaxHP": "5",
+			"IconPath": "",
+			"Inventory": [{ "GameType":54, "Amount":1 }]
 		}
 	]
 }
