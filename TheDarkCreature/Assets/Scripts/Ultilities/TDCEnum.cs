@@ -13,6 +13,7 @@ public class TDCEnum{
 		Mushroom	= 52,
 		Grass		= 53,
 		Bush		= 54,
+		BlueBerry	= 55,
 
 		// Weapon
 		Trap		= 71,
@@ -23,12 +24,14 @@ public class TDCEnum{
 		GroupGrass	= 204,
 		GroupMushRoom = 205,
 		GroupBush 	= 206,
+		GroupBlueBerry = 207,
 
 		// Object
 		CampFire	= 301,
 
 		// Skill
-		FlameBody   = 501
+		FlameBody   = 501,
+		NormalRangeAttack = 502,
 	}
 
 	public enum ESkillType : int {

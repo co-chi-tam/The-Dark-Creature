@@ -15,13 +15,15 @@ public class TDCCreatureController : TDCBaseController {
 
 	protected Animator m_AnimatorController;
 	protected Rigidbody m_Rigidbody;
-	protected Vector3 m_TargetPosition;
 	protected TDCBaseController m_EnemyController;
 	protected bool m_CanMove = true;
 	protected int m_DamageTake = 0;
+	protected LayerMask m_ColliderLayerMask;
 
 	protected TDCCreatureData m_CreatureData;
 	protected TDCGameManager m_GameManager;
+
+	protected TDCSkillSlot m_SkillSlot;
 
 	#endregion
 	
@@ -74,6 +76,9 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("IsDeath", IsDeath);
 		m_FSMManager.RegisterCondition("IsToFarGroup", IsToFarGroup);
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
+		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
+
+		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
 	}
 
 	public override void Update ()
@@ -128,6 +133,10 @@ public class TDCCreatureController : TDCBaseController {
 	#endregion
 	
 	#region Main Method
+
+	public override void ActiveSkill() {
+		base.ActiveSkill();
+	}
 
 	public override void ApplyDamage (int damage, TDCBaseController attacker)
 	{
@@ -204,15 +213,9 @@ public class TDCCreatureController : TDCBaseController {
 		return -1;
 	}
 
-	public override void WalkPosition(Vector3 position) {
-		base.WalkPosition(position);
-		MovePosition(position, m_CreatureData.WalkSpeed);
-	}
-	
-	public override void RunPosition(Vector3 position)
-	{
-		base.RunPosition(position);
-		MovePosition(position, m_CreatureData.RunSpeed);
+	public override void MovePosition(Vector3 position) {
+		base.MovePosition(position);
+		MovePosition(position, m_CreatureData.MoveSpeed);
 	}
 	
 	public override void LookAtRotation(Vector3 rotation)
@@ -245,11 +248,7 @@ public class TDCCreatureController : TDCBaseController {
 
 	#region FSM
 
-	internal virtual bool HaveEnemy() {
-		return false;
-	}
-
-	internal virtual bool HaveAttacker() {
+	internal override bool HaveEnemy() {
 		return false;
 	}
 
@@ -258,7 +257,16 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool IsEnemyDie() {
-		return false;
+		if (m_EnemyController != null)
+		{
+			var enemy = m_EnemyController.GetHealth() <= 0 || m_EnemyController.GetActive() == false;
+			if (enemy)
+			{
+				SetEnemyController(null);
+			}
+			return enemy;
+		}
+		return true;
 	}
 
 	internal virtual bool IsDeath() {
@@ -269,25 +277,65 @@ public class TDCCreatureController : TDCBaseController {
 		return m_CanMove;
 	}
 
-	internal virtual bool MoveToTarget()
+	internal override bool MoveToTarget()
 	{
-		return false; 
+		base.MoveToTarget();
+		return (TransformPosition - m_TargetPosition).sqrMagnitude < 0.5f * 0.5f;  
 	}
 
-	internal virtual bool MoveToEnemy()
+	internal override bool MoveToEnemy()
 	{
-		return false; 
+		base.MoveToEnemy();
+		if (GetEnemyController() != null)
+		{
+			var distance = (TransformPosition - GetEnemyPosition()).sqrMagnitude;
+			var range = GetEnemyController().GetColliderRadius() + m_CreatureData.AttackRange;
+			return distance < range * range; 
+		}
+		return true;
 	}
 
 	internal virtual bool CountdownWaitingTime() {
-		return false;   
+		m_WaitingTimeInterval -= Time.deltaTime;
+		return m_WaitingTimeInterval <= 0;     
 	}
 
 	internal virtual bool FoundEnemy() {
+		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
+		for (int i = 0; i < colliders.Length; i++) {
+			var target = m_GameManager.GetControllerByName (colliders[i].name);
+			if (target == null || target.GetActive () == false || target == this) {
+				continue;
+			} else {
+				if (GetTypeEnemies().IndexOf (target.GetGameType()) != -1) {
+					SetEnemyController(target);
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
 	internal virtual bool FoundFood() {
+		if (GetEnemyController() != null)
+		{
+			return true;
+		}
+		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
+		for (int i = 0; i < colliders.Length; i++) {
+			var food = m_GameManager.GetControllerByName (colliders[i].name);
+			if (food == null || food.GetActive () == false || food == this) {
+				continue;
+			} else {
+				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1) {
+					if (GetEnemyController() == null)
+					{
+						SetEnemyController(food);
+					}
+					return true;
+				}
+			}
+		}
 		return false;
 	}
 
@@ -346,12 +394,11 @@ public class TDCCreatureController : TDCBaseController {
 	}
 	
 	public override Vector3 GetTargetPosition() {
-		return m_TargetPosition;
+		return base.GetTargetPosition();
 	}
 	
 	public override void SetTargetPosition(Vector3 pos) {
 		base.SetTargetPosition (pos);
-		m_TargetPosition = pos;
 	}
 
 	public override float GetDetectEnemyRange() {

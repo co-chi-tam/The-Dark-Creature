@@ -12,6 +12,7 @@ public class TDCSkillData : TDCBaseData
 	private float m_EffectRadius;
 	private string m_EffectPath;
 	private bool m_RepeatSkill;
+	private string m_TriggerEvent;
 	private TDCBaseController m_Owner;
 
 	public int SkillLevel
@@ -74,6 +75,12 @@ public class TDCSkillData : TDCBaseData
 		set { m_RepeatSkill = value; }
 	}
 
+	public string TriggerEnvent
+	{
+		get { return m_TriggerEvent; }
+		set { m_TriggerEvent = value; }
+	}
+
 	public TDCBaseController Owner
 	{
 		get { return m_Owner; }
@@ -90,6 +97,9 @@ public class TDCSkillData : TDCBaseData
 		this.m_TimeDelay = 0f;
 		this.m_TimeEffect = 0f;
 		this.m_EffectRadius = 0f;
+		this.m_EffectPath = string.Empty;
+		this.m_RepeatSkill = false;
+		this.m_TriggerEvent = string.Empty;
 	}
 
 	public static TDCSkillData Parse(TDCSkillData instance) {
@@ -111,6 +121,7 @@ public class TDCSkillData : TDCBaseData
 		tmp.EffectPath = instance.EffectPath;
 		tmp.ModelPath = instance.ModelPath;
 		tmp.RepeatSkill = instance.RepeatSkill;
+		tmp.TriggerEnvent = instance.TriggerEnvent;
 		tmp.Owner = instance.Owner;
 		return tmp;
 	}

@@ -70,6 +70,20 @@
 			"MinMember": 10,
 			"MaxMember": 20,
 			"TimeRespawnMember": 120
+		},{
+			"ID": 6,
+			"Name": "GroupBlueBerry",
+			"GameType": 207,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupFSM",
+			"Radius": 100,
+			"MemberType": 55,
+			"MinMember": 1,
+			"MaxMember": 2,
+			"TimeRespawnMember": 180
 		}
 	]
 }

@@ -93,8 +93,7 @@ public class TDCDataReader {
 			creature.MaxSanityPoint = int.Parse (instance["MaxSanityPoint"].ToString());
 			creature.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			creature.AttackRange = float.Parse (instance["AttackRange"].ToString());
-			creature.RunSpeed = float.Parse (instance["RunSpeed"].ToString());
-			creature.WalkSpeed = float.Parse (instance["WalkSpeed"].ToString());
+			creature.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
 			ConvertToEnum (instance["Enemies"] as List<object>, creature.TypeEnemies);
 			ConvertToEnum (instance["Foods"] as List<object>, creature.TypeFoods);
 			var inventory = instance["Inventory"] as List<object>;
@@ -232,8 +231,7 @@ public class TDCDataReader {
 			player.MaxSanityPoint = int.Parse (instance["MaxSanityPoint"].ToString());
 			player.MinDamage = int.Parse (instance["MinDamage"].ToString());
 			player.MaxDamage = int.Parse (instance["MaxDamage"].ToString());
-			player.RunSpeed = float.Parse (instance["RunSpeed"].ToString());
-			player.WalkSpeed = float.Parse (instance["WalkSpeed"].ToString());
+			player.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
 			player.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			player.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			player.Level = int.Parse (instance["Level"].ToString());
@@ -300,6 +298,7 @@ public class TDCDataReader {
 			skillData.ModelPath = ConvertTo<string> (skill["ModelPath"] as List<object>);
 			skillData.FSMPath = skill["FSMPath"].ToString();
 			skillData.EffectPath = skill["EffectPath"].ToString();
+			skillData.TriggerEnvent = skill["TriggerEvent"].ToString();
 			m_ListSkillData.Add(skillData.GameType, skillData);
 		}
 	}

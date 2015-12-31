@@ -8,15 +8,15 @@ public class TDCGameManager : MonoBehaviour {
 
     #region Singleton
 
-    public static object m_singletonObject = new object();
-    public static TDCGameManager m_Instance;
+	private static object m_SingletonLock = new object();
+	private static TDCGameManager m_Instance = null;
 
     public static TDCGameManager Instance {
         get {
-            lock (m_singletonObject) {
+            lock (m_SingletonLock) {
                 if (m_Instance == null) {
-                    GameObject go = new GameObject("GameManager");
-                    m_Instance = go.AddComponent<TDCGameManager>();
+					var m_SingletonObject = new GameObject("GameManager");
+					m_Instance = m_SingletonObject.AddComponent<TDCGameManager>();
                 }
                 return m_Instance;
             }
@@ -25,11 +25,6 @@ public class TDCGameManager : MonoBehaviour {
 
     public static TDCGameManager GetInstance() {
         return Instance;
-    }
-
-    public TDCGameManager()
-    {
-        m_Instance = this;
     }
 
     #endregion
@@ -44,6 +39,8 @@ public class TDCGameManager : MonoBehaviour {
     #region Implementation Mono
 
     void Awake() {
+		m_Instance = this;
+
 		DontDestroyOnLoad(this.gameObject);
 		m_DataReader = new TDCDataReader();
 		m_ListController = new Dictionary<string, TDCBaseController>();
@@ -77,6 +74,10 @@ public class TDCGameManager : MonoBehaviour {
 
 	public TDCBaseController GetControllerByName(string name) {
 		return m_ListController[name];
+	}
+
+	public TDCSkillData GetSkillData(TDCEnum.EGameType skill) {
+		return m_DataReader.GetSkillData(skill);
 	}
 
 	#endregion
@@ -188,6 +189,7 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		case TDCEnum.EGameType.Grass:
 		case TDCEnum.EGameType.Mushroom: 
+		case TDCEnum.EGameType.BlueBerry:		
 		case TDCEnum.EGameType.Bush: {
 			data = m_DataReader.GetResource (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
@@ -215,14 +217,13 @@ public class TDCGameManager : MonoBehaviour {
 		return controller;
 	}
 
-	public TDCSkillController CreateSkill(TDCEnum.EGameType skillType,  
+	public TDCSkillController CreateSkill(	TDCSkillData data,
+											TDCEnum.EGameType skillType,  
 											Vector3 position, 
 											Quaternion rotation, 
 											GameObject parent = null) {
-		var random = Random.Range (0, 9999);
-		TDCSkillData data = m_DataReader.GetSkillData(skillType);
 		TDCSkillController controller = null;
-		var gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+		var gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
 		gObject.transform.position = position;
 		gObject.transform.rotation = rotation;
 		gObject.name = string.Format("{0}-{1}", skillType, m_ListController.Count);
@@ -231,13 +232,24 @@ public class TDCGameManager : MonoBehaviour {
 			case TDCEnum.EGameType.FlameBody:
 				controller = gObject.AddComponent<TDCFlameBodyController>();
 				break;
+			case TDCEnum.EGameType.NormalRangeAttack:
+				controller = gObject.AddComponent<TDCNormalRangeAttackController>();
+				break;
 			default:
-				
+				controller = gObject.AddComponent<TDCSkillController>();
 				break;
 		}
 		data.Owner = null;
 		controller.SetData(data);
 		controller.Init();
+		if (parent != null)
+		{
+			gObject.transform.SetParent(parent.transform);		
+		}
+		else
+		{
+			gObject.transform.SetParent(this.transform);
+		}
 		m_ListController.Add(controller.name, controller);
 		return controller;
 	}

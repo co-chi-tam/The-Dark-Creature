@@ -1,12 +1,12 @@
 ﻿{
 	"fsm": [
 		{
-			"condition_name": "CanActiveSkill",
+			"condition_name": "IsRoot",
 			"condition_value": true,
 			"state_name": "StartSkillState",
 			"states": [
 				{
-					"condition_name": "HaveEndTimeDelay",
+					"condition_name": "CanActiveSkill",
 					"condition_value": true,
 					"state_name": "UpdateSkillState",
 					"states": [
@@ -16,7 +16,7 @@
 							"state_name": "ExcuteEffectSkillState",
 							"states": [
 								{
-									"condition_name": "HaveEndTimeEffect",
+									"condition_name": "IsFinishSkill",
 									"condition_value": true,
 									"state_name": "EndSkillState",
 									"states": [

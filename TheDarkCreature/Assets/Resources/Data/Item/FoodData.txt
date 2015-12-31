@@ -32,6 +32,14 @@
 			"Description": "",
 			"IconPath": "Bush",
 			"EffectPath": "Effect/Item/MeatEffect"
+		},{
+			"ID": 4,
+			"Name": "Bush",
+			"GameType": 55,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "BlueBerry",
+			"EffectPath": "Effect/Item/MeatEffect"
 		}
 	]
 }

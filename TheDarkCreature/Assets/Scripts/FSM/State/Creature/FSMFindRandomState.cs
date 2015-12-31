@@ -23,6 +23,7 @@ public class FSMFindRandomState : FSMBaseState
 		var random = Random.insideUnitCircle * groupRadius; // TDCUltilities.RandomAround(groupRadius);
 		m_Controller.SetTargetPosition (groupPosition + new Vector3(random.x, 0f, random.y));
 		m_Controller.SetWaitingTimeInterval (Random.Range (1f, 3f));
+		m_Controller.CallBackEvent("OnFindRandom");
     }
 
 	public override void UpdateState()

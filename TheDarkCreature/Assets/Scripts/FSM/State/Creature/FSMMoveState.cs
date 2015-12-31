@@ -12,13 +12,14 @@ public class FSMMoveState : FSMBaseState
 
 	public override void StartState()
     {
-        m_Controller.SetAnimation(EAnimation.Walk);
+		m_Controller.SetAnimation(EAnimation.Walk);
+		m_Controller.CallBackEvent("OnMove");
     }
 
 	public override void UpdateState()
     {
         var targetPos = m_Controller.GetTargetPosition();
-        m_Controller.WalkPosition(targetPos);
+        m_Controller.MovePosition(targetPos);
     }
 
 	public override void ExitState()

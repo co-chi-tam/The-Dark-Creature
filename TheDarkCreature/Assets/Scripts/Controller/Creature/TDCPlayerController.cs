@@ -24,6 +24,11 @@ public class TDCPlayerController : TDCCreatureController
 	public override void Init ()
 	{
 		base.Init ();
+
+		AddEventListener("OnAttack", () =>
+			{
+				Debug.LogError ("Attacking");
+			});
 	}
 
     public override void Start()
@@ -34,7 +39,9 @@ public class TDCPlayerController : TDCCreatureController
 
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
 
-        m_FSMManager.LoadFSM(m_PlayerData.FSMPath);
+		m_FSMManager.LoadFSM(m_PlayerData.FSMPath);
+
+		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeAttack, this);
 	}
 
 	public override void FixedUpdate()
@@ -42,6 +49,12 @@ public class TDCPlayerController : TDCCreatureController
 		base.FixedUpdate();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
+	}
+
+	public override void Update()
+	{
+		base.Update();
+		m_SkillSlot.UpdateSkill(Time.deltaTime);
 	}
 
 	public override void LateUpdate () {
@@ -84,6 +97,12 @@ public class TDCPlayerController : TDCCreatureController
 
     #region Main method
 
+	public override void ActiveSkill()
+	{
+		base.ActiveSkill();
+		m_SkillSlot.ActiveSkill();
+	}
+
 	private void PlayerAction(RaycastHit hitInfo) {
 		var hitGameObject = hitInfo.collider.gameObject;
 		var controller = hitGameObject.GetComponent<TDCBaseController>();
@@ -92,14 +111,11 @@ public class TDCPlayerController : TDCCreatureController
 		switch (hitGameObject.layer) {
 		case (int) TDCEnum.ELayer.LayerPlane: {
 			SetTargetPosition (point);
-			SetEnemyController (null);
+			SetEnemyController(null);
 		} break;
+		case (int) TDCEnum.ELayer.LayerCreature:
 		case (int) TDCEnum.ELayer.LayerEnviroment: {
-			SetTargetPosition (point);
 			SetEnemyController (controller);
-		} break;
-		case (int) TDCEnum.ELayer.LayerCreature: {
-			
 		} break;
 		}
 	}
@@ -138,17 +154,12 @@ public class TDCPlayerController : TDCCreatureController
 	
 	internal override bool MoveToTarget()
 	{
-		if (GetEnemyController() == null)
-		{
-			var distance = (TransformPosition - GetTargetPosition()).sqrMagnitude;
-			return distance < 0.5f * 0.5f; 
-		}
-		else
-		{
-			var distance = (TransformPosition - GetEnemyPosition()).sqrMagnitude;
-			var range = GetEnemyController().GetColliderRadius() + m_CreatureData.AttackRange;
-			return distance < range * range; 
-		}
+		return base.MoveToTarget();
+	}
+
+	internal override bool MoveToEnemy()
+	{
+		return base.MoveToEnemy();
 	}
 
 	internal override bool HaveEnemy() {

@@ -26,7 +26,18 @@ namespace ObjectPool
             T tmp = m_ListWaiting.Dequeue();
             m_ListUsing.AddFirst(tmp);
             return tmp;
-        }
+		}
+
+		public bool Get(ref T value)
+		{
+			if (m_ListWaiting.Count > 0)
+			{
+				value = m_ListWaiting.Dequeue();
+				m_ListUsing.AddFirst(value);
+				return true;
+			}
+			return false;
+		}
 
         public void Set(T item)
         {

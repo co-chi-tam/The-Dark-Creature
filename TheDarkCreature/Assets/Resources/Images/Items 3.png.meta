@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e153fc6e3e7467442bfc44b27b46969f
-timeCreated: 1450533362
+timeCreated: 1451229973
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -87,7 +87,7 @@ TextureImporter:
     21300160: Items 3_80
     21300162: Items 3_81
     21300164: Grass
-    21300166: Items 3_83
+    21300166: BlueBerry
     21300168: Items 3_84
     21300170: Items 3_85
     21300172: Items 3_86
@@ -1220,7 +1220,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 3_83
+    - name: BlueBerry
       rect:
         serializedVersion: 2
         x: 103

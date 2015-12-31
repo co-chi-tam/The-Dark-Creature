@@ -6,14 +6,14 @@ namespace Effect
 {
 	public class EffectManager
 	{
-        private Dictionary<string, Func<object[], bool>> m_ConditionMethods;
-		private Dictionary<string, Action<object[]>> m_ExcuteMethods;
+		private Dictionary<string, Func<Dictionary<string, object>, bool>> m_ConditionMethods;
+		private Dictionary<string, Action<Dictionary<string, object>>> m_ExcuteMethods;
 		private EffectReader m_Reader;
 
 		public EffectManager ()
 		{
-            m_ConditionMethods = new Dictionary<string, Func<object[], bool>> ();
-			m_ExcuteMethods = new Dictionary<string, Action<object[]>> ();
+			m_ConditionMethods = new Dictionary<string, Func<Dictionary<string, object>, bool>> ();
+			m_ExcuteMethods = new Dictionary<string, Action<Dictionary<string, object>>> ();
 			m_Reader = new EffectReader ();
 		}
 
@@ -21,11 +21,11 @@ namespace Effect
 			m_Reader.LoadJson (path);
 		}
 
-        public void RegisterCondition(string methodName, Func<object[], bool> func) {
+		public void RegisterCondition(string methodName, Func<Dictionary<string, object>, bool> func) {
 			m_ConditionMethods [methodName] = func;
 		}
 
-		public void RegisterExcuteMethod(string methodName, Action<object[]> func) {
+		public void RegisterExcuteMethod(string methodName, Action<Dictionary<string, object>> func) {
 			m_ExcuteMethods [methodName] = func;
 		}
 

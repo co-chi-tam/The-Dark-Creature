@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Effect;
 
 public class TDCItemController {
@@ -32,31 +33,30 @@ public class TDCItemController {
 		m_EffectManager.RegisterExcuteMethod("ExcuteEffect", ExcuteEffect);
 	}
 
-	internal virtual void PrintDebug(object[] pas)
+	internal virtual void PrintDebug(Dictionary<string, object> pars)
 	{
-		for (int i = 0; i < pas.Length; i+=2)
-		{
-			var name = pas[i];
-			var value = pas[i + 1];
-			Debug.LogError(string.Format ("[{0}] - {1}", name, value));
+#if UNITY_EDITOR
+		foreach (var item in pars) {
+			Debug.LogError(string.Format ("[{0}] - {1}", item.Key, item.Value));
 		}
+#endif
 	}
 
 	public virtual void ExcuteItem() {
 		m_EffectManager.ExcuteEffect();
 	}
 
-	protected virtual bool CanActiveEffect(object[] pas)
+	protected virtual bool CanActiveEffect(Dictionary<string, object> pars)
 	{
 		return m_Data.Amount > 0 && m_Data.Owner != null;
 	}
 
-	protected virtual void ExcuteEffect(object[] pas)
+	protected virtual void ExcuteEffect(Dictionary<string, object> pars)
 	{
 #if UNITY_EDITOR
-		for (int i = 0; i < pas.Length; i+=2)
+		foreach (var item in pars)
 		{
-			UnityEngine.Debug.LogError (pas[i] + " / "+ pas[i + 1]);
+			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
 		}
 #endif
 

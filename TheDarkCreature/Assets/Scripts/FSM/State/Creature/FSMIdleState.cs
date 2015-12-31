@@ -12,6 +12,7 @@ public class FSMIdleState : FSMBaseState {
 	public override void StartState() {
         m_Controller.SetAnimation(EAnimation.Idle);
 		m_Controller.SetActive (true);
+		m_Controller.CallBackEvent("OnIdle");
     }
 
 	public override void UpdateState() {

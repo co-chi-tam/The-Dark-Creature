@@ -9,7 +9,9 @@ public class FSMDestroySkillState : FSMBaseState {
 	}
 
 	public override void StartState() {
+		m_Controller.ResetObject();
 		m_Controller.SetActive(false);
+		Debug.LogError("FSMDestroySkillState");
 	}
 
 	public override void UpdateState() {

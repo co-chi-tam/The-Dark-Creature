@@ -31,8 +31,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.FSMPath = instance.FSMPath;
 		tmp.AttackRange = instance.AttackRange;
 		tmp.DetectRange = instance.DetectRange;
-		tmp.WalkSpeed = instance.WalkSpeed;
-		tmp.RunSpeed = instance.RunSpeed;
+		tmp.MoveSpeed = instance.MoveSpeed;
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
 		tmp.MinDamage = instance.MinDamage;
@@ -55,8 +54,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.GameType = lh.GameType;
 		tmp.Description = lh.Description;
 		tmp.ModelPath = lh.ModelPath;
-		tmp.WalkSpeed = (lh.WalkSpeed + rh.WalkSpeed) / 2;
-		tmp.RunSpeed = (lh.RunSpeed + rh.RunSpeed) / 2;
+		tmp.MoveSpeed = (lh.MoveSpeed + rh.MoveSpeed) / 2;
 		tmp.CurrentHP = (lh.CurrentHP + rh.CurrentHP) / 2;
 		tmp.MaxHP = (lh.MaxHP + rh.MaxHP) / 2;
 		tmp.MinDamage = (lh.MinDamage + rh.MinDamage) / 2;

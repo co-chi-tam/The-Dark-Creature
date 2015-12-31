@@ -28,11 +28,7 @@ public class UIInventory : MonoBehaviour {
 	public static UIInventory GetInstance() {
 		return m_Instance;
 	}
-	
-	public UIInventory ()
-	{
-		m_Instance = this;
-	}
+
 	#endregion
 
 	#region Properties
@@ -51,6 +47,10 @@ public class UIInventory : MonoBehaviour {
 	#endregion
 
 	#region Implementation Monobehaviour
+
+	void Awake() {
+		m_Instance = this;
+	}
 
 	void Start() {
 		m_SortButton.onClick.AddListener(() =>

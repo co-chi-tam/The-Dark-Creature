@@ -10,11 +10,15 @@ public class FSMChaseState : FSMBaseState {
 	
 	public override void StartState() {
 		m_Controller.SetAnimation(EAnimation.Run);
+		m_Controller.CallBackEvent("OnMove");
 	}
 	
 	public override void UpdateState() {
-		var enemyPos = m_Controller.GetEnemyPosition();
-		m_Controller.RunPosition(enemyPos);
+		if (m_Controller.GetEnemyController() != null)
+		{
+			var enemyPos = m_Controller.GetEnemyPosition();
+			m_Controller.MovePosition(enemyPos);
+		}
 	}
 	
 	public override void ExitState()

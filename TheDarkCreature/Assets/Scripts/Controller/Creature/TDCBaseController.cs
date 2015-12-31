@@ -1,5 +1,7 @@
 using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using FSM;
 
 public enum EAnimation:int {
@@ -27,8 +29,10 @@ public class TDCBaseController : TDCMonoBehaviour
     protected bool m_IsActive = true;
 	protected float m_WaitingTimeInterval = 3f;
 	protected TDCBaseGroupController m_GroupController;
-	protected SphereCollider m_Collider;
+	protected CapsuleCollider m_Collider;
 	protected TDCBaseData m_BaseData;
+	protected Vector3 m_TargetPosition;
+	protected Dictionary<string, Action> m_TriggerEvents;
 
     public Vector3 TransformPosition {
 		get { return m_Transform.position; }
@@ -40,17 +44,32 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	#endregion
 
+	#region Event 
+
+	public event Action OnIdleEvent;
+	public event Action OnFindRandomEvent;
+	public event Action OnMoveEvent;
+	public event Action OnApplyDamageEvent;
+	public event Action OnAttackEvent;
+	public event Action OnAvoidEvent;
+	public event Action OnDeathEvent;
+
+	#endregion
+
 	#region Implement Mono
 
 	public virtual void Init() {
 		m_Transform	= this.transform;
 		m_StartPosition = m_Transform.position;
+		m_TargetPosition = m_StartPosition;
+		m_TriggerEvents = new Dictionary<string, Action>();
 		SetActive (true);
+		LoadEventCallBack();
 	}
 
 	public virtual void Start()
 	{
-		m_Collider = this.GetComponent<SphereCollider> ();
+		m_Collider = this.GetComponent<CapsuleCollider> ();
     }
 
 	public virtual void Update() {
@@ -84,11 +103,11 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	#region Main Method
 
-	public virtual void WalkPosition(Vector3 position) {
-
+	public virtual void ActiveSkill() {
+		
 	}
-	
-	public virtual void RunPosition(Vector3 position) {
+
+	public virtual void MovePosition(Vector3 position) {
 
 	}
 	
@@ -97,16 +116,82 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 
 	public virtual void ApplyDamage(int damage, TDCBaseController attacker) {
-		
+		CallBackEvent("OnApplyDamage");
 	}
 
 	public virtual void ResetObject() {
 	
 	}
 
-    #endregion
+	public virtual void CallBackEvent(string name) {
+		if (m_TriggerEvents.ContainsKey(name))
+		{
+			var evnt = m_TriggerEvents[name];
+			if (evnt != null)
+			{
+				evnt.Invoke();
+			}
+		}
+	}
+
+	public virtual bool AddEventListener(string name, Action evnt) {
+		if (m_TriggerEvents.ContainsKey(name))
+		{
+			m_TriggerEvents[name] += evnt;
+			return true;
+		}
+		return false;
+	}
+
+	public virtual bool RemoveEventListener(string name, Action evnt) {
+		if (m_TriggerEvents.ContainsKey(name))
+		{
+			m_TriggerEvents[name] -= evnt;
+			return true;
+		}
+		return false;
+	}
+
+	public virtual void LoadEventCallBack() {
+		m_TriggerEvents.Add("OnIdle", OnIdleEvent);
+		m_TriggerEvents.Add("OnFindRandom", OnFindRandomEvent);
+		m_TriggerEvents.Add("OnMove", OnMoveEvent);
+		m_TriggerEvents.Add("OnApplyDamage", OnApplyDamageEvent);
+		m_TriggerEvents.Add("OnAttack", OnAttackEvent);
+		m_TriggerEvents.Add("OnAvoid", OnAvoidEvent);
+		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
+	}
+
+	#endregion
+		
+	#region FSM
+
+	internal virtual bool HaveEnemy()
+	{
+		return false;  
+	}
+
+	internal virtual bool MoveToTarget()
+	{
+		return true;  
+	}
+
+	internal virtual bool MoveToEnemy()
+	{
+		return true;
+	}
+
+	#endregion
 
     #region Getter & Setter
+
+	public virtual void SetTriggerEvent(string name, Action evnt) {
+		m_TriggerEvents.Add(name, evnt);
+	}
+
+	public virtual Action GetTriggerEvent(string name) {
+		return m_TriggerEvents[name];
+	}
 
 	public virtual float GetColliderRadius() {
 		if (m_Collider == null)
@@ -175,11 +260,11 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 	
 	public virtual Vector3 GetTargetPosition() {
-		return TransformPosition;
+		return m_TargetPosition;
 	}
 	
 	public virtual void SetTargetPosition(Vector3 pos) {
-
+		m_TargetPosition = pos;
 	}
 	
 	public virtual float GetDetectEnemyRange() {

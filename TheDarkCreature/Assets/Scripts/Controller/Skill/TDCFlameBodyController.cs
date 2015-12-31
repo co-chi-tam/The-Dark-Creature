@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using Effect;
 
 public class TDCFlameBodyController : TDCSkillController {
@@ -34,20 +35,21 @@ public class TDCFlameBodyController : TDCSkillController {
 
 	#region Effect
 
-	internal override bool CanActiveEffect(object[] pars)
+	internal override bool CanActiveEffect(Dictionary<string, object> pars)
 	{
 		return GetActive();
 	}
 
-	internal override void ExcuteStatusEffect(object[] pars)
-	{
-		base.ExcuteStatusEffect(pars);
-		var nameParam = pars[0].ToString();
-		var valueParam = int.Parse(pars[1].ToString());
-		for (int i = 0; i < m_ControllersInRadius.Length; i++)
-		{
-			m_ControllersInRadius[i].SetHeat (valueParam);
-		}
+	internal override void AddValueEffect(Dictionary<string, object> pars) {
+		base.AddValueEffect(pars);
+	}
+
+	internal virtual void SubtractValueEffect(Dictionary<string, object> pars) {
+		base.SubtractValueEffect(pars);
+	}
+
+	internal virtual void ApplyDamageEffect(Dictionary<string, object> pars) {
+		base.ApplyDamageEffect(pars);
 	}
 
 	#endregion

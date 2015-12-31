@@ -100,18 +100,17 @@ namespace Effect
 			return null;
 		}
 
-        private object[] ParseStringToObjects (string data, out string methodName) {
+		private Dictionary<string, object> ParseStringToObjects (string data, out string methodName) {
             var dataMethod = data.Split('(');
             methodName = dataMethod [0];
             var paramsName = dataMethod [1].Remove (dataMethod [1].Length - 1, 1);
             var paramsDatas = paramsName.Split (',');
-            var result = new object[paramsDatas.Length * 2];
+			var result = new Dictionary<string, object>();
             if (string.IsNullOrEmpty (paramsDatas[0]))
                 return null;
-            for (int i = 0, j = 0; i < result.Length; i+=2, j++) {
+			for (int i = 0, j = 0; i < paramsDatas.Length * 2; i+=2, j++) {
                 var argument = paramsDatas[j].Split(':');
-                result[i] = argument[0];
-                result[i + 1] = argument[1]; 
+				result.Add (argument[0], argument[1])	; 
             }
             return result;
         }

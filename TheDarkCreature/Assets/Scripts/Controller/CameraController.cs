@@ -42,12 +42,11 @@ public class CameraController : MonoBehaviour
 		return Instance;
 	}
 	
-	public CameraController()
-	{
+	#endregion
+
+	void Awake() {
 		m_Instance = this;
 	}
-	
-	#endregion
 
     void Start()
     {

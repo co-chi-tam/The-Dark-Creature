@@ -15,12 +15,13 @@ public class FSMAvoidState : FSMBaseState
         var newTarget = m_Controller.TransformPosition + direction.normalized 
                             * (m_Controller.GetDetectEnemyRange() + 10f);
         m_Controller.SetTargetPosition(newTarget);
+		m_Controller.CallBackEvent("OnAvoid");
     }
 
     public override void UpdateState()
     {
         var target = m_Controller.GetTargetPosition();
-        m_Controller.RunPosition(target);
+        m_Controller.MovePosition(target);
     }
 
     public override void ExitState()

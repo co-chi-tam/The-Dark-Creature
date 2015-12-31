@@ -15,9 +15,29 @@
 			"TimeDelay": 3,
 			"TimeEffect": 0,
 			"RepeatSkill": true,
+			"TriggerEvent": "OnActive",
 			"ModelPath": ["Prefabs/Blank"],
 			"FSMPath": "FSM/Skill/FlameBodyFSM"
 			"EffectPath": "Effect/Skill/FlameBodyEffect"
+		},{
+			"ID": 1,
+			"Name": "Normal range attack",
+			"Description": "",
+			"GameType": 502,
+			"IconPath": "NormalRangeAttack",
+			"SkillLevel": 1,
+			"SkillType": 2,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"EffectRadius": 3,
+			"TimeDelay": 1,
+			"TimeEffect": 0,
+			"RepeatSkill": false,
+			"TriggerEvent": "OnActive",
+			"ModelPath": ["Prefabs/NormalRangeAttack"],
+			"FSMPath": "FSM/Skill/NormalRangeAttackFSM"
+			"EffectPath": "Effect/Skill/NormalRangeAttackEffect"
 		}
 	]
 }

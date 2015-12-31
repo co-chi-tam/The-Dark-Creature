@@ -6,8 +6,6 @@ using FSM;
 public class TDCEasyAIController : TDCCreatureController
 {
     #region Properties
-    
-	private LayerMask m_ColliderLayerMask;
 
     #endregion
 
@@ -18,8 +16,7 @@ public class TDCEasyAIController : TDCCreatureController
 		base.Start ();
 
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
-
-		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
+	
 		m_FSMManager.LoadFSM(m_CreatureData.FSMPath);
     }
 	
@@ -62,12 +59,7 @@ public class TDCEasyAIController : TDCCreatureController
 	}
 
 	internal override bool IsEnemyDie() {
-		var enemy = m_EnemyController.GetHealth() <= 0 || m_EnemyController.GetActive() == false;
-		if (enemy)
-		{
-			SetEnemyController(null);
-		}
-		return enemy;
+		return base.IsEnemyDie();
 	}
 
 	internal override bool IsDeath() {
@@ -80,58 +72,24 @@ public class TDCEasyAIController : TDCCreatureController
 
 	internal override bool MoveToTarget()
 	{
-		return (TransformPosition - m_TargetPosition).sqrMagnitude < 0.5f; 
+		return base.MoveToTarget(); 
 	}
 
 	internal override bool MoveToEnemy()
 	{
-		var distance = (TransformPosition - GetEnemyPosition()).sqrMagnitude;
-		var range = GetEnemyController().GetColliderRadius() + m_CreatureData.AttackRange;
-		return distance < range * range; 
+		return base.MoveToEnemy();
 	}
 
 	internal override bool CountdownWaitingTime() {
-        m_WaitingTimeInterval -= Time.deltaTime;
-		return m_WaitingTimeInterval <= 0;   
+		return base.CountdownWaitingTime();
     }
 
 	internal override bool FoundEnemy() {
-		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
-		for (int i = 0; i < colliders.Length; i++) {
-			var target = m_GameManager.GetControllerByName (colliders[i].name);
-			if (target == null || target.GetActive () == false || target == this) {
-				continue;
-			} else {
-				if (GetTypeEnemies().IndexOf (target.GetGameType()) != -1) {
-					SetEnemyController(target);
-					return true;
-				}
-			}
-        }
-        return false;
+		return base.FoundEnemy();
     }
 
 	internal override bool FoundFood() {
-		if (GetEnemyController() != null)
-		{
-			return true;
-		}
-		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
-		for (int i = 0; i < colliders.Length; i++) {
-			var food = m_GameManager.GetControllerByName (colliders[i].name);
-			if (food == null || food.GetActive () == false || food == this) {
-				continue;
-			} else {
-				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1) {
-					if (GetEnemyController() == null)
-					{
-						SetEnemyController(food);
-					}
-					return true;
-				}
-			}
-		}
-		return false;
+		return base.FoundFood();
 	}
 
 	#endregion

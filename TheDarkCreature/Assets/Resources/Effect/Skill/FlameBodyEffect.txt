@@ -7,7 +7,7 @@
 		{
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["ExcuteStatusEffect(HeatPoint:10)"]
+	        "ExcuteMethods": ["AddValueEffect(HeatPoint:10)"]
 	    }
     ],
     "NoMethods": [

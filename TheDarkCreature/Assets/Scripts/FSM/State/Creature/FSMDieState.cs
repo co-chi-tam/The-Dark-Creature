@@ -42,6 +42,7 @@ public class FSMDieState : FSMBaseState
 				}
 			}
 		}
+		m_Controller.CallBackEvent("OnDealth");
 	}
 
     public override void UpdateState()

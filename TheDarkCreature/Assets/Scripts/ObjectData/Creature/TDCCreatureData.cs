@@ -6,8 +6,7 @@ public class TDCCreatureData : TDCBaseData {
 	private TDCEnum.ECreatureType m_CreatureType;
     private TDCItemController[] m_Inventory;
 	private float m_RotationSpeed;
-	private TDCObjectProperty<float> m_WalkSpeed;
-	private TDCObjectProperty<float> m_RunSpeed;
+	private TDCObjectProperty<float> m_MoveSpeed;
 	private TDCObjectProperty<int> m_CurrentHP;
 	private TDCObjectProperty<int> m_MaxHP;
 	private TDCObjectProperty<int> m_MinDamage;
@@ -29,14 +28,9 @@ public class TDCCreatureData : TDCBaseData {
 		set { m_Inventory = value; }
 	}
 
-	public float WalkSpeed {
-		get { return m_WalkSpeed.GetValue(); }
-		set { m_WalkSpeed.SetValue (value); }
-	}
-
-	public float RunSpeed {
-		get { return m_RunSpeed.Value; }
-		set { m_RunSpeed.Value = value; }
+	public float MoveSpeed {
+		get { return m_MoveSpeed.GetValue(); }
+		set { m_MoveSpeed.SetValue (value); }
 	}
 
 	public float RotationSpeed {
@@ -121,8 +115,7 @@ public class TDCCreatureData : TDCBaseData {
 
     public TDCCreatureData() : base()
 	{
-		m_WalkSpeed = new TDCObjectProperty<float>("WalkSpeed");
-		m_RunSpeed = new TDCObjectProperty<float>("RunSpeed");
+		m_MoveSpeed = new TDCObjectProperty<float>("MoveSpeed");
 		m_RotationSpeed = 5f;
 		m_CurrentHP = new TDCObjectProperty<int>("CurrentHP");
 		m_MaxHP = new TDCObjectProperty<int>("MaxHP");
@@ -148,7 +141,6 @@ public class TDCCreatureData : TDCBaseData {
 		RegisterProperty(m_MaxHungerPoint);
 		RegisterProperty(m_CurrentSanityPoint);
 		RegisterProperty(m_MaxSanityPoint);
-		RegisterProperty(m_WalkSpeed);
 		RegisterProperty(m_CurrentHP);
 		RegisterProperty(m_MaxHP);
 		RegisterProperty(m_MinDamage);
@@ -166,8 +158,7 @@ public class TDCCreatureData : TDCBaseData {
 		tmp.FSMPath = instance.FSMPath;
 		tmp.MinDamage = instance.MinDamage;
 		tmp.MaxDamage = instance.MaxDamage;
-		tmp.WalkSpeed = instance.WalkSpeed;
-		tmp.RunSpeed = instance.RunSpeed;
+		tmp.MoveSpeed = instance.MoveSpeed;
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
 		tmp.CurrentHeatPoint = instance.CurrentHeatPoint;
