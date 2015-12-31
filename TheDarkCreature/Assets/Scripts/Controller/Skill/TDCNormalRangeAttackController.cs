@@ -12,7 +12,7 @@ public class TDCNormalRangeAttackController : TDCSkillController {
 		base.Init();
 	}
 
-	public override void Start()
+	protected override void Start()
 	{
 		base.Start();
 	}
@@ -24,8 +24,7 @@ public class TDCNormalRangeAttackController : TDCSkillController {
 	internal override bool CanActiveSkill()
 	{
 		base.CanActiveSkill();
-		var active = m_SkillData.Owner.GetEnemyController() != null;
-		return active;
+		return GetEnemyController() != null;
 	}
 
 	internal override bool IsRepeatSkill()

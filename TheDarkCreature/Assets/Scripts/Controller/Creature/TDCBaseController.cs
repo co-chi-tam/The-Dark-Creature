@@ -33,6 +33,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	protected TDCBaseData m_BaseData;
 	protected Vector3 m_TargetPosition;
 	protected Dictionary<string, Action> m_TriggerEvents;
+	protected TDCBaseController m_EnemyController;
 
     public Vector3 TransformPosition {
 		get { return m_Transform.position; }
@@ -67,20 +68,20 @@ public class TDCBaseController : TDCMonoBehaviour
 		LoadEventCallBack();
 	}
 
-	public virtual void Start()
+	protected virtual void Start()
 	{
 		m_Collider = this.GetComponent<CapsuleCollider> ();
     }
 
-	public virtual void Update() {
+	protected virtual void Update() {
 
 	}
 
-	public virtual void LateUpdate() {
+	protected virtual void LateUpdate() {
 
 	}
 
-	public virtual void FixedUpdate() {
+	protected virtual void FixedUpdate() {
 		
 	}
 
@@ -92,7 +93,19 @@ public class TDCBaseController : TDCMonoBehaviour
 			
 	}
 
-	public virtual void OnDrawGizmos() {
+	protected virtual void OnDestroy() {
+		
+	}
+
+	protected virtual void OnApplicationQuit() {
+		
+	}
+
+	protected virtual void OnApplicationFocus(bool focus) {
+		
+	}
+
+	protected virtual void OnDrawGizmos() {
 		Gizmos.color = Color.cyan;
 		Gizmos.DrawWireSphere (TransformPosition, GetColliderRadius());
 		Gizmos.color = Color.magenta;
@@ -152,7 +165,7 @@ public class TDCBaseController : TDCMonoBehaviour
 		return false;
 	}
 
-	public virtual void LoadEventCallBack() {
+	protected virtual void LoadEventCallBack() {
 		m_TriggerEvents.Add("OnIdle", OnIdleEvent);
 		m_TriggerEvents.Add("OnFindRandom", OnFindRandomEvent);
 		m_TriggerEvents.Add("OnMove", OnMoveEvent);
@@ -242,17 +255,17 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 	
 	public virtual Vector3 GetEnemyPosition() {
-		return TransformPosition;
+		return m_EnemyController.TransformPosition;
 	}
 	
 	public virtual void SetEnemyController(TDCBaseController controller)
 	{
-
+		m_EnemyController = controller;
 	}
 	
 	public virtual TDCBaseController GetEnemyController()
 	{
-		return null;
+		return m_EnemyController;
 	}
 	
 	public virtual void SetAnimation(EAnimation anim) {

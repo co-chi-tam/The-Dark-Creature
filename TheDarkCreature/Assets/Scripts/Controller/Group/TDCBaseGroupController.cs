@@ -19,7 +19,7 @@ public class TDCBaseGroupController : TDCBaseController
 		m_MemberPool = new TDCObjectPool<TDCBaseController> ();
 	}
 
-    public override void Start()
+	protected override void Start()
     {
 		base.Start();
 
@@ -42,7 +42,7 @@ public class TDCBaseGroupController : TDCBaseController
 		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
     }
 
-	public override void OnDrawGizmos() {
+	protected override void OnDrawGizmos() {
 		base.OnDrawGizmos();
 		Gizmos.color = Color.yellow;
 		Gizmos.DrawWireSphere (TransformPosition, GetRadius());

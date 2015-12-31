@@ -24,14 +24,9 @@ public class TDCPlayerController : TDCCreatureController
 	public override void Init ()
 	{
 		base.Init ();
-
-		AddEventListener("OnAttack", () =>
-			{
-				Debug.LogError ("Attacking");
-			});
 	}
 
-    public override void Start()
+	protected override void Start()
 	{
 		base.Start ();
 			
@@ -44,20 +39,20 @@ public class TDCPlayerController : TDCCreatureController
 		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeAttack, this);
 	}
 
-	public override void FixedUpdate()
+	protected override void FixedUpdate()
 	{
 		base.FixedUpdate();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
 	}
 
-	public override void Update()
+	protected override void Update()
 	{
 		base.Update();
 		m_SkillSlot.UpdateSkill(Time.deltaTime);
 	}
 
-	public override void LateUpdate () {
+	protected override void LateUpdate () {
 		HeatPoint = m_PlayerData.CurrentHeatPoint;
 #if UNITY_EDITOR
 		if (Input.GetMouseButtonUp(0)) {
@@ -105,18 +100,26 @@ public class TDCPlayerController : TDCCreatureController
 
 	private void PlayerAction(RaycastHit hitInfo) {
 		var hitGameObject = hitInfo.collider.gameObject;
-		var controller = hitGameObject.GetComponent<TDCBaseController>();
-		var point = hitInfo.point;
-		point.y = 0f;
-		switch (hitGameObject.layer) {
-		case (int) TDCEnum.ELayer.LayerPlane: {
-			SetTargetPosition (point);
-			SetEnemyController(null);
-		} break;
-		case (int) TDCEnum.ELayer.LayerCreature:
-		case (int) TDCEnum.ELayer.LayerEnviroment: {
-			SetEnemyController (controller);
-		} break;
+		var controller = m_GameManager.GetControllerByName(hitGameObject.name);
+		if (controller != this)
+		{
+			var point = hitInfo.point;
+			point.y = 0f;
+			switch (hitGameObject.layer)
+			{
+				case (int) TDCEnum.ELayer.LayerPlane:
+					{
+						SetTargetPosition(point);
+						SetEnemyController(null);
+					}
+					break;
+				case (int) TDCEnum.ELayer.LayerCreature:
+				case (int) TDCEnum.ELayer.LayerEnviroment:
+					{
+						SetEnemyController(controller);
+					}
+					break;
+			}
 		}
 	}
 

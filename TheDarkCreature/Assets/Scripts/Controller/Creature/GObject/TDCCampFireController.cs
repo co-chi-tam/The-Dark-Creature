@@ -19,7 +19,7 @@ public class TDCCampFireController : TDCBaseController {
 	
 	#region Implementation Mono
 
-	public override void Start()
+	protected override void Start()
 	{
 		base.Start();
 
@@ -56,7 +56,7 @@ public class TDCCampFireController : TDCBaseController {
 		m_IsFireActive = true;
 	}
 	
-	public override void FixedUpdate() {
+	protected override void FixedUpdate() {
 		base.FixedUpdate ();
 		m_FSMMamager.UpdateState();
 		StateName = m_FSMMamager.StateCurrentName;

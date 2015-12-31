@@ -36,19 +36,19 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectManager.LoadEffect(m_SkillData.EffectPath);
 	}
 
-	public override void Start()
+	protected override void Start()
 	{
 		base.Start();
 	}
 
-	public override void FixedUpdate()
+	protected override void FixedUpdate()
 	{
 		base.FixedUpdate();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
 	}
 
-	public override void OnDrawGizmos()
+	protected override void OnDrawGizmos()
 	{
 		base.OnDrawGizmos();
 		Gizmos.color = Color.red;
@@ -138,6 +138,10 @@ public class TDCSkillController : TDCBaseController {
 
 	#region Getter & Setter
 
+	public virtual void SetOwner(TDCBaseController owner) {
+		m_SkillData.Owner = owner;
+	}
+
 	public override TDCBaseController GetEnemyController()
 	{
 		return m_SkillData.Owner.GetEnemyController();
@@ -148,12 +152,13 @@ public class TDCSkillController : TDCBaseController {
 		return m_SkillData.Owner.GetEnemyPosition();
 	}
 
-	public virtual void SetSlot(TDCSkillSlot slot) {
-		m_Slot = slot;
+	public override Vector3 GetTargetPosition()
+	{
+		return m_SkillData.Owner.GetTargetPosition(); 
 	}
 
-	public virtual void SetOwner(TDCBaseController owner) {
-		m_SkillData.Owner = owner;
+	public virtual void SetSlot(TDCSkillSlot slot) {
+		m_Slot = slot;
 	}
 
 	public override void SetData(TDCBaseData data)

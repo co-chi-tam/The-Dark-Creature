@@ -14,8 +14,6 @@ public class TDCCreatureController : TDCBaseController {
 	private int m_SanityPoint = 0;
 
 	protected Animator m_AnimatorController;
-	protected Rigidbody m_Rigidbody;
-	protected TDCBaseController m_EnemyController;
 	protected bool m_CanMove = true;
 	protected int m_DamageTake = 0;
 	protected LayerMask m_ColliderLayerMask;
@@ -32,13 +30,12 @@ public class TDCCreatureController : TDCBaseController {
 	public override void Init ()
 	{
 		base.Init ();
-		m_Rigidbody	= this.GetComponent<Rigidbody>();
 		m_AnimatorController = this.GetComponent<Animator> ();
 		m_GameManager = TDCGameManager.GetInstance();
 		m_TargetPosition = m_Transform.position;
 	}
 	
-	public override void Start()
+	protected override void Start()
 	{
 		base.Start ();
 
@@ -81,7 +78,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
 	}
 
-	public override void Update ()
+	protected override void Update ()
 	{
 		base.Update ();
 		if (m_CreatureData != null) {
@@ -121,7 +118,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_Collider.enabled = false;
 	}
 
-	public override void OnDrawGizmos()
+	protected override void OnDrawGizmos()
 	{
 		base.OnDrawGizmos();
 		Gizmos.color = Color.red;
@@ -371,19 +368,17 @@ public class TDCCreatureController : TDCBaseController {
 	}
 	
 	public override Vector3 GetEnemyPosition() {
-		return m_EnemyController.TransformPosition;
+		return base.GetEnemyPosition();
 	}
 	
 	public override void SetEnemyController(TDCBaseController controller)
 	{
 		base.SetEnemyController (controller);
-		m_EnemyController = controller;
 	}
 	
 	public override TDCBaseController GetEnemyController()
 	{
-		base.GetEnemyController();
-		return m_EnemyController;
+		return base.GetEnemyController();
 	}
 
 	public override void SetAnimation(EAnimation anim) {

@@ -17,14 +17,14 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		m_GameManager = TDCGameManager.GetInstance();
 	}
 
-    public override void Start()
+	protected override void Start()
     {
         base.Start();
 
         m_FSMManager.LoadFSM(m_GroupData.FSMPath);
     }
 
-	public override void FixedUpdate() {
+	protected override void FixedUpdate() {
 		base.FixedUpdate ();
         m_FSMManager.UpdateState();
         StateName = m_FSMManager.StateCurrentName;

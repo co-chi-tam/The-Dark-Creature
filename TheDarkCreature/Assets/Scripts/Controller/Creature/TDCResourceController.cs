@@ -11,7 +11,8 @@ public class TDCResourceController : TDCCreatureController {
 	#endregion
 	
 	#region Implementation Mono
-	public override void Start()
+
+	protected override void Start()
 	{
 		base.Start();
 
@@ -21,7 +22,7 @@ public class TDCResourceController : TDCCreatureController {
 		
 	}
 	
-	public override void FixedUpdate() {
+	protected override void FixedUpdate() {
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;

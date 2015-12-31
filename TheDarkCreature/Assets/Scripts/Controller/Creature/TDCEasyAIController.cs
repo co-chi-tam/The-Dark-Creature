@@ -11,7 +11,7 @@ public class TDCEasyAIController : TDCCreatureController
 
     #region Implementation Mono
 
-    public override void Start()
+	protected override void Start()
     {
 		base.Start ();
 
@@ -20,7 +20,7 @@ public class TDCEasyAIController : TDCCreatureController
 		m_FSMManager.LoadFSM(m_CreatureData.FSMPath);
     }
 	
-	public override void FixedUpdate () {
+	protected override void FixedUpdate () {
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;

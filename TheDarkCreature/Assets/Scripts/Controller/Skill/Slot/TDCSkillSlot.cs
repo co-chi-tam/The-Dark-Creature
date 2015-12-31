@@ -19,6 +19,7 @@ public class TDCSkillSlot {
 		m_SkillPool = new TDCObjectPool<TDCSkillController>();
 		m_GameManager = TDCGameManager.GetInstance();
 		m_SkillData = m_GameManager.GetSkillData(skillType);
+		m_SkillData.Owner = owner;
 		m_Owner = owner;
 		m_TimeDelay = 0f;
 		m_TimeEffect = 0f;
@@ -32,7 +33,6 @@ public class TDCSkillSlot {
 			var skill = m_GameManager.CreateSkill(m_SkillData, m_SkillData.GameType, Vector3.zero, Quaternion.identity);
 			skill.Init();
 			skill.SetSlot(this);
-			skill.SetOwner(m_Owner);
 			skill.SetActive(false);
 			m_SkillPool.Create(skill);
 		}
@@ -46,6 +46,7 @@ public class TDCSkillSlot {
 			if (m_SkillPool.Get(ref skill))
 			{
 				skill.SetActive(true);
+				skill.SetOwner(m_Owner);
 				skill.StartSkill(m_Owner.TransformPosition, m_Owner.TransformRotation, true);
 			}
 		}
@@ -65,5 +66,9 @@ public class TDCSkillSlot {
 		{
 			m_TimeDelay -= dt;
 		}
+	}
+
+	public void SetOwner(TDCBaseController owner) {
+		m_SkillData.Owner = owner;
 	}
 }

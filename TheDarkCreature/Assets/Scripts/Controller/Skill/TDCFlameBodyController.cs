@@ -12,7 +12,7 @@ public class TDCFlameBodyController : TDCSkillController {
 		base.Init();
 	}
 
-	public override void Start()
+	protected override void Start()
 	{
 		base.Start();
 	}
