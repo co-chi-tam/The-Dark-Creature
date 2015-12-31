@@ -15,8 +15,8 @@
 			"TimeDelay": 3,
 			"TimeEffect": 0,
 			"RepeatSkill": true,
-			"TriggerEvent": "OnActive",
-			"ModelPath": ["Prefabs/Blank"],
+			"TriggerEvent": "OnAttack",
+			"ModelPath": ["Prefabs/FlameBody"],
 			"FSMPath": "FSM/Skill/FlameBodyFSM"
 			"EffectPath": "Effect/Skill/FlameBodyEffect"
 		},{

@@ -98,8 +98,8 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	public virtual void StartSkill(Vector3 position, Quaternion rotation, bool active = true) {
-		this.transform.position = position;
-		this.transform.rotation = rotation;
+		TransformPosition = position;
+		TransformRotation = rotation;
 		SetActive(active);
 	}
 

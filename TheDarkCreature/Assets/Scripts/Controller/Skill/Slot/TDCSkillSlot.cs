@@ -9,41 +9,38 @@ public class TDCSkillSlot {
 	private TDCEnum.EGameType m_SkillType;
 	private TDCSkillData m_SkillData;
 	private TDCGameManager m_GameManager;
-	private TDCObjectPool<TDCSkillController> m_SkillPool;
 
 	private float m_TimeDelay;
 	private float m_TimeEffect;
 
 	public TDCSkillSlot(TDCEnum.EGameType skillType, TDCBaseController owner)
 	{
-		m_SkillPool = new TDCObjectPool<TDCSkillController>();
 		m_GameManager = TDCGameManager.GetInstance();
 		m_SkillData = m_GameManager.GetSkillData(skillType);
 		m_SkillData.Owner = owner;
 		m_Owner = owner;
 		m_TimeDelay = 0f;
 		m_TimeEffect = 0f;
-
+		m_Owner.AddEventListener(m_SkillData.TriggerEnvent, ActiveSkill);
 		CreateSkillPool();
 	}
 
 	private void CreateSkillPool() {
-		for (int i = 0; i < 5; i++)
+		for (int i = 0; i < 2; i++)
 		{
 			var skill = m_GameManager.CreateSkill(m_SkillData, m_SkillData.GameType, Vector3.zero, Quaternion.identity);
 			skill.Init();
 			skill.SetSlot(this);
 			skill.SetActive(false);
-			m_SkillPool.Create(skill);
 		}
 	}
 
 	public void ActiveSkill() {
-		TDCSkillController skill = null;
 		if (DidEndTimeDelay())
 		{
 			m_TimeDelay = m_SkillData.TimeDelay;
-			if (m_SkillPool.Get(ref skill))
+			TDCSkillController skill = m_GameManager.GetSkillPool();
+			if (skill != null)
 			{
 				skill.SetActive(true);
 				skill.SetOwner(m_Owner);
@@ -53,8 +50,8 @@ public class TDCSkillSlot {
 	}
 
 	public void DeactiveSkill(TDCSkillController member) {
-		member.SetActive(false);
-		m_SkillPool.Set(member);
+		member.SetOwner(null);
+		m_GameManager.SetSkillPool(member);
 	}
 
 	public bool DidEndTimeDelay() {

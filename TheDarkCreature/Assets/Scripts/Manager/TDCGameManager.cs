@@ -33,6 +33,7 @@ public class TDCGameManager : MonoBehaviour {
 
 	private TDCDataReader m_DataReader;
 	private Dictionary<string, TDCBaseController> m_ListController;
+	private TDCObjectPool<TDCSkillController> m_SkillPool;
 
     #endregion
 
@@ -44,6 +45,7 @@ public class TDCGameManager : MonoBehaviour {
 		DontDestroyOnLoad(this.gameObject);
 		m_DataReader = new TDCDataReader();
 		m_ListController = new Dictionary<string, TDCBaseController>();
+		m_SkillPool = new TDCObjectPool<TDCSkillController>();
 
 #if UNITY_ANDROID	
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -73,11 +75,28 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public TDCBaseController GetControllerByName(string name) {
-		return m_ListController[name];
+		if (m_ListController.ContainsKey(name))
+		{
+			return m_ListController[name];
+		}
+		return null;
 	}
 
 	public TDCSkillData GetSkillData(TDCEnum.EGameType skill) {
 		return m_DataReader.GetSkillData(skill);
+	}
+
+	public TDCSkillController GetSkillPool() {
+		TDCSkillController skill = null;
+		if (m_SkillPool.Get(ref skill))
+		{
+			return skill;
+		}
+		return null;
+	}
+
+	public void SetSkillPool(TDCSkillController skill) {
+		m_SkillPool.Set(skill);
 	}
 
 	#endregion
@@ -251,6 +270,7 @@ public class TDCGameManager : MonoBehaviour {
 			gObject.transform.SetParent(this.transform);
 		}
 		m_ListController.Add(controller.name, controller);
+		m_SkillPool.Create(controller);
 		return controller;
 	}
 

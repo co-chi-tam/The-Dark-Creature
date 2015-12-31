@@ -48,7 +48,7 @@
 			"MinDamage": 2,
 			"MaxDamage": 3,
 			"Enemies": [],
-			"Foods": [5,52],
+			"Foods": [5,52,54],
 			"Inventory": []
 		}
 	]

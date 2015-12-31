@@ -18,12 +18,21 @@ public class TDCEasyAIController : TDCCreatureController
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
 	
 		m_FSMManager.LoadFSM(m_CreatureData.FSMPath);
+
+		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.FlameBody, this);
     }
 	
 	protected override void FixedUpdate () {
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
+	}
+
+	protected override void Update()
+	{
+		base.Update();
+
+		m_SkillSlot.UpdateSkill(Time.deltaTime);
 	}
 
     #endregion

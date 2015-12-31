@@ -19,7 +19,6 @@ public class TDCResourceController : TDCCreatureController {
 		m_FSMManager.RegisterCondition("IsDie", IsDeath);
 
 		m_FSMManager.LoadFSM(m_ResourceData.FSMPath);
-		
 	}
 	
 	protected override void FixedUpdate() {

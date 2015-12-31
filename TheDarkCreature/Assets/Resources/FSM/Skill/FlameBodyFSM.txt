@@ -18,22 +18,22 @@
 								{
 									"condition_name": "IsFinishSkill",
 									"condition_value": true,
-									"state_name": "EndSkillState",
+									"state_name": "DestroySkillState",
 									"states": [
 										{
-											"condition_name": "IsRepeatSkill",
+											"condition_name": "CanActiveSkill",
 											"condition_value": true,
 											"state_name": "StartSkillState",
-											"states": []
-										},{
-											"condition_name": "IsRepeatSkill",
-											"condition_value": false,
-											"state_name": "DestroySkillState",
 											"states": []
 										}
 									]
 								}
 							]
+						},{
+							"condition_name": "HaveCreatureAroundOwner",
+							"condition_value": false,
+							"state_name": "DestroySkillState",
+							"states": []
 						}
 					]
 				} 

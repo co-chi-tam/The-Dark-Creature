@@ -131,8 +131,8 @@ public class TDCCreatureController : TDCBaseController {
 	
 	#region Main Method
 
-	public override void ActiveSkill() {
-		base.ActiveSkill();
+	public override void ActiveSkill(int index) {
+		base.ActiveSkill(index);
 	}
 
 	public override void ApplyDamage (int damage, TDCBaseController attacker)

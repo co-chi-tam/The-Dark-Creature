@@ -12,7 +12,7 @@ public class FSMDieState : FSMBaseState
 
     public override void StartState()
     {
-        m_Controller.SetAnimation(EAnimation.Die);
+        m_Controller.SetAnimation(EAnimation.Death);
 		m_Controller.SetActive (false);
 		var group = m_Controller.GetGroupController();
 		if (group != null)

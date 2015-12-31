@@ -14,7 +14,7 @@ public enum EAnimation:int {
 	Attack2 = 6,
     Hiden   = 7,
 	// TODO
-	Die     = 10
+	Death     = 10
 }
 
 public class TDCBaseController : TDCMonoBehaviour
@@ -37,10 +37,12 @@ public class TDCBaseController : TDCMonoBehaviour
 
     public Vector3 TransformPosition {
 		get { return m_Transform.position; }
+		set { m_Transform.position = value; }
 	}
 
 	public Quaternion TransformRotation {
 		get { return m_Transform.rotation; }
+		set { m_Transform.rotation = value; }
 	}
 
 	#endregion
@@ -116,7 +118,7 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	#region Main Method
 
-	public virtual void ActiveSkill() {
+	public virtual void ActiveSkill(int index) {
 		
 	}
 

@@ -36,7 +36,7 @@ public class TDCPlayerController : TDCCreatureController
 
 		m_FSMManager.LoadFSM(m_PlayerData.FSMPath);
 
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeAttack, this);
+		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.FlameBody, this);
 	}
 
 	protected override void FixedUpdate()
@@ -49,6 +49,7 @@ public class TDCPlayerController : TDCCreatureController
 	protected override void Update()
 	{
 		base.Update();
+
 		m_SkillSlot.UpdateSkill(Time.deltaTime);
 	}
 
@@ -92,10 +93,9 @@ public class TDCPlayerController : TDCCreatureController
 
     #region Main method
 
-	public override void ActiveSkill()
+	public override void ActiveSkill(int index)
 	{
-		base.ActiveSkill();
-		m_SkillSlot.ActiveSkill();
+		base.ActiveSkill(index);
 	}
 
 	private void PlayerAction(RaycastHit hitInfo) {
