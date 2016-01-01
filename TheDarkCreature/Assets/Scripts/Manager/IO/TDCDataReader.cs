@@ -15,6 +15,7 @@ public class TDCDataReader {
 	private Dictionary<TDCEnum.EGameType, TDCGroupData> m_ListGroupData;
 	private Dictionary<TDCEnum.EGameType, TDCSkillData> m_ListSkillData;
 	private Dictionary<string, List<MapObjectData>> m_MapData;
+	private List<TDCObjectPoolData> m_ListObjectPoolData;
 
 	#endregion
 
@@ -27,6 +28,7 @@ public class TDCDataReader {
 		m_ListItemData = new Dictionary<TDCEnum.EGameType, TDCItemData> ();
 		m_ListSkillData = new Dictionary<TDCEnum.EGameType, TDCSkillData>();
 		m_MapData = new Dictionary<string, List<MapObjectData>>();
+		m_ListObjectPoolData = new List<TDCObjectPoolData>();
 
 		LoadData ();
 	}
@@ -45,6 +47,7 @@ public class TDCDataReader {
 		var objectTextAsset = Resources.Load<TextAsset> ("Data/Creature/ObjectData");
 		var skillTextAsset = Resources.Load<TextAsset>("Data/Skill/SkillData");
 		var mapTextAsset = Resources.Load<TextAsset>("Data/Map/WorldMap");
+		var poolTextAsset = Resources.Load<TextAsset>("ObjectPool/ObjectPoolData");
 
 		var jsonItem = Json.Deserialize (itemAsset.text) as Dictionary<string, object>;
 		var jsonCreature = Json.Deserialize (creatureAsset.text) as Dictionary<string, object>;
@@ -56,6 +59,7 @@ public class TDCDataReader {
 		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
 		var jsonSkill = Json.Deserialize (skillTextAsset.text) as Dictionary<string, object>;
 		var jsonMap = Json.Deserialize(mapTextAsset.text) as Dictionary<string, object>;
+		var jsonPool = Json.Deserialize(poolTextAsset.text) as Dictionary<string, object>;
 
 		LoadItem(jsonItem["items"] as List<object>);
 		LoadFood (jsonfood["foods"] as List<object>);
@@ -67,6 +71,7 @@ public class TDCDataReader {
 		LoadPlayer (jsonPlayer["players"] as List<object>);
 		LoadSkill(jsonSkill["skills"] as List<object>);
 		LoadMap(jsonMap["map"] as List<object>);
+		LoadObjectPool(jsonPool);
 	}
 
 	private void LoadCreature(List<object> values) {
@@ -342,9 +347,38 @@ public class TDCDataReader {
 		return item;
 	}
 
+	private void LoadObjectPool(Dictionary<string, object> data) {
+		foreach (var item in data)
+		{
+			var obj = new TDCObjectPoolData();
+			obj.GameType = (TDCEnum.EGameType) Enum.Parse(typeof (TDCEnum.EGameType), item.Key.ToString());
+			obj.Amount = int.Parse(item.Value.ToString());
+			m_ListObjectPoolData.Add(obj);
+		}
+	}
+
 	#endregion
 
 	#region Getter 
+
+	public List<TDCObjectPoolData> GetObjectPoolData() {
+		return m_ListObjectPoolData;
+	}
+
+	public TDCObjectPoolData GetObjectPoolData(int index) {
+		return m_ListObjectPoolData[index];
+	}
+
+	public TDCObjectPoolData GetObjectPoolData(TDCEnum.EGameType type) {
+		for (int i = 0; i < m_ListObjectPoolData.Count; i++)
+		{
+			if (m_ListObjectPoolData[i].GameType == type)
+			{
+				return m_ListObjectPoolData[i];
+			}
+		}
+		return null;
+	}
 
 	public TDCSkillData GetSkillData(TDCEnum.EGameType skill) {
 		var skillData = TDCSkillData.Parse (m_ListSkillData[skill] as TDCSkillData);

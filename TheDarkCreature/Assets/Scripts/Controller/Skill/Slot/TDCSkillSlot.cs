@@ -23,25 +23,16 @@ public class TDCSkillSlot {
 		m_TimeDelay = 0f;
 		m_TimeEffect = 0f;
 		m_Owner.AddEventListener(m_SkillData.TriggerEnvent, ActiveSkill);
-		CreateSkillPool();
-	}
-
-	private void CreateSkillPool() {
-		for (int i = 0; i < 2; i++)
-		{
-			var skill = m_GameManager.CreateSkill(m_SkillType, Vector3.zero, Quaternion.identity);
-			skill.SetSlot(this);
-			skill.SetActive(false);
-		}
 	}
 
 	public void ActiveSkill() {
 		if (DidEndTimeDelay())
 		{
 			m_TimeDelay = m_SkillData.TimeDelay;
-			m_SkillController = m_GameManager.GetSkillPool();
+			m_SkillController = m_GameManager.GetObjectPool(m_SkillType) as TDCSkillController;
 			if (m_SkillController != null)
 			{
+				m_SkillController.SetSlot(this);
 				m_SkillController.SetActive(true);
 				m_SkillController.SetOwner(m_Owner);
 				m_SkillController.SetTimeDelay(m_SkillData.TimeDelay);
@@ -55,7 +46,7 @@ public class TDCSkillSlot {
 
 	public void DeactiveSkill(TDCSkillController member) {
 		member.SetOwner(null);
-		m_GameManager.SetSkillPool(member);
+		m_GameManager.SetObjectPool(member);
 	}
 
 	public bool DidEndTimeDelay() {

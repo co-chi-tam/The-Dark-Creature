@@ -33,7 +33,7 @@ public class TDCGameManager : MonoBehaviour {
 
 	private TDCDataReader m_DataReader;
 	private Dictionary<string, TDCBaseController> m_ListController;
-	private TDCObjectPool<TDCSkillController> m_SkillPool;
+	private Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCBaseController>> m_ObjectPool;
 
     #endregion
 
@@ -45,7 +45,7 @@ public class TDCGameManager : MonoBehaviour {
 		DontDestroyOnLoad(this.gameObject);
 		m_DataReader = new TDCDataReader();
 		m_ListController = new Dictionary<string, TDCBaseController>();
-		m_SkillPool = new TDCObjectPool<TDCSkillController>();
+		m_ObjectPool = new Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCBaseController>>();
 
 #if UNITY_ANDROID	
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -54,11 +54,28 @@ public class TDCGameManager : MonoBehaviour {
 
 	void Start() {
 		LoadMap("World1");
+		LoadObjectPool();
     }
 
     #endregion
 
     #region Main method
+
+	public void LoadObjectPool() {
+		if (m_ObjectPool.Count > 0)
+			return; // Once times
+		var objPool = m_DataReader.GetObjectPoolData();
+		for (int i = 0; i < objPool.Count; i++)
+		{
+			var poolData = objPool[i];
+			m_ObjectPool.Add(poolData.GameType, new TDCObjectPool<TDCBaseController>());
+			for (int x = 0; x < poolData.Amount; x++) {
+				var obj = CreateCreature(poolData.GameType, Vector3.zero, Quaternion.identity, this.gameObject);
+				obj.SetActive(false);
+				m_ObjectPool[poolData.GameType].Create(obj);
+			}
+		}
+	}
 
 	public void LoadMap(string mapName) {
 		CreatePlayer (TDCEnum.EGameType.Satla, Vector3.zero, Quaternion.identity);
@@ -86,17 +103,18 @@ public class TDCGameManager : MonoBehaviour {
 		return m_DataReader.GetSkillData(skill);
 	}
 
-	public TDCSkillController GetSkillPool() {
-		TDCSkillController skill = null;
-		if (m_SkillPool.Get(ref skill))
+	public TDCBaseController GetObjectPool(TDCEnum.EGameType obj) {
+		TDCBaseController skill = null;
+		if (m_ObjectPool[obj].Get(ref skill))
 		{
 			return skill;
 		}
 		return null;
 	}
 
-	public void SetSkillPool(TDCSkillController skill) {
-		m_SkillPool.Set(skill);
+	public void SetObjectPool(TDCBaseController obj) {
+		var gameType = obj.GetData().GameType;
+		m_ObjectPool[gameType].Set(obj);
 	}
 
 	#endregion
@@ -189,7 +207,7 @@ public class TDCGameManager : MonoBehaviour {
 	                                        Vector3 position, 
 	                                        Quaternion rotation, 
 	                                        GameObject parent = null) {
-		TDCCreatureData data = null;
+		TDCBaseData data = null;
 		GameObject gObject = null;
 		TDCBaseController controller = null;
 		var random = Random.Range (0, 9999);
@@ -220,6 +238,16 @@ public class TDCGameManager : MonoBehaviour {
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent <TDCCampFireController>();
 			break;
+		case TDCEnum.EGameType.FlameBody:
+			data = m_DataReader.GetSkillData (type);	
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCFlameBodyController>();
+			break;
+		case TDCEnum.EGameType.NormalRangeAttack:
+			data = m_DataReader.GetSkillData (type);	
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCNormalRangeAttackController>();
+			break;
 		default:
 
 			break;
@@ -236,42 +264,7 @@ public class TDCGameManager : MonoBehaviour {
 		return controller;
 	}
 
-	public TDCSkillController CreateSkill(	TDCEnum.EGameType skillType,  
-											Vector3 position, 
-											Quaternion rotation, 
-											GameObject parent = null) {
-		TDCSkillData data = m_DataReader.GetSkillData(skillType);
-		TDCSkillController controller = null;
-		var gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
-		gObject.transform.position = position;
-		gObject.transform.rotation = rotation;
-		gObject.name = string.Format("{0}-{1}", skillType, m_ListController.Count);
-		switch (skillType)
-		{
-			case TDCEnum.EGameType.FlameBody:
-				controller = gObject.AddComponent<TDCFlameBodyController>();
-				break;
-			case TDCEnum.EGameType.NormalRangeAttack:
-				controller = gObject.AddComponent<TDCNormalRangeAttackController>();
-				break;
-			default:
-				controller = gObject.AddComponent<TDCSkillController>();
-				break;
-		}
-		controller.SetData(data);
-		controller.Init();
-		if (parent != null)
-		{
-			gObject.transform.SetParent(parent.transform);		
-		}
-		else
-		{
-			gObject.transform.SetParent(this.transform);
-		}
-		m_ListController.Add(controller.name, controller);
-		m_SkillPool.Create(controller);
-		return controller;
-	}
-
     #endregion
+
+
 }
