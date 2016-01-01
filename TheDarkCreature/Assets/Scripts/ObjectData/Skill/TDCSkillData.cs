@@ -9,11 +9,11 @@ public class TDCSkillData : TDCBaseData
 	private int m_CostSanityPoint;
 	private float m_TimeDelay;
 	private float m_TimeEffect;
+	private float m_EffectPerTime;
 	private float m_EffectRadius;
 	private string m_EffectPath;
 	private bool m_RepeatSkill;
 	private string m_TriggerEvent;
-	private TDCBaseController m_Owner;
 
 	public int SkillLevel
 	{
@@ -57,6 +57,12 @@ public class TDCSkillData : TDCBaseData
 		set { m_TimeEffect = value; }
 	}
 
+	public float EffectPerTime
+	{
+		get { return m_EffectPerTime; }
+		set { m_EffectPerTime = value; }
+	}
+
 	public float EffectRadius
 	{
 		get { return m_EffectRadius; }
@@ -81,12 +87,6 @@ public class TDCSkillData : TDCBaseData
 		set { m_TriggerEvent = value; }
 	}
 
-	public TDCBaseController Owner
-	{
-		get { return m_Owner; }
-		set { m_Owner = value; }
-	}
-
 	public TDCSkillData(): base()
 	{
 		this.m_SkillLevel = 0;
@@ -96,6 +96,7 @@ public class TDCSkillData : TDCBaseData
 		this.m_CostSanityPoint = 0;
 		this.m_TimeDelay = 0f;
 		this.m_TimeEffect = 0f;
+		this.m_EffectPerTime = 0f;
 		this.m_EffectRadius = 0f;
 		this.m_EffectPath = string.Empty;
 		this.m_RepeatSkill = false;
@@ -116,13 +117,13 @@ public class TDCSkillData : TDCBaseData
 		tmp.CostSanityPoint = instance.CostHeatPoint;
 		tmp.TimeDelay = instance.TimeDelay;
 		tmp.TimeEffect = instance.TimeEffect;
+		tmp.EffectPerTime = instance.EffectPerTime;
 		tmp.EffectRadius = instance.EffectRadius;
 		tmp.FSMPath = instance.FSMPath;
 		tmp.EffectPath = instance.EffectPath;
 		tmp.ModelPath = instance.ModelPath;
 		tmp.RepeatSkill = instance.RepeatSkill;
 		tmp.TriggerEnvent = instance.TriggerEnvent;
-		tmp.Owner = instance.Owner;
 		return tmp;
 	}
 }

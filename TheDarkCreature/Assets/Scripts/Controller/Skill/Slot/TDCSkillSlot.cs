@@ -9,6 +9,7 @@ public class TDCSkillSlot {
 	private TDCEnum.EGameType m_SkillType;
 	private TDCSkillData m_SkillData;
 	private TDCGameManager m_GameManager;
+	private TDCSkillController m_SkillController;
 
 	private float m_TimeDelay;
 	private float m_TimeEffect;
@@ -17,7 +18,7 @@ public class TDCSkillSlot {
 	{
 		m_GameManager = TDCGameManager.GetInstance();
 		m_SkillData = m_GameManager.GetSkillData(skillType);
-		m_SkillData.Owner = owner;
+		m_SkillType = skillType;
 		m_Owner = owner;
 		m_TimeDelay = 0f;
 		m_TimeEffect = 0f;
@@ -28,8 +29,7 @@ public class TDCSkillSlot {
 	private void CreateSkillPool() {
 		for (int i = 0; i < 2; i++)
 		{
-			var skill = m_GameManager.CreateSkill(m_SkillData, m_SkillData.GameType, Vector3.zero, Quaternion.identity);
-			skill.Init();
+			var skill = m_GameManager.CreateSkill(m_SkillType, Vector3.zero, Quaternion.identity);
 			skill.SetSlot(this);
 			skill.SetActive(false);
 		}
@@ -39,12 +39,16 @@ public class TDCSkillSlot {
 		if (DidEndTimeDelay())
 		{
 			m_TimeDelay = m_SkillData.TimeDelay;
-			TDCSkillController skill = m_GameManager.GetSkillPool();
-			if (skill != null)
+			m_SkillController = m_GameManager.GetSkillPool();
+			if (m_SkillController != null)
 			{
-				skill.SetActive(true);
-				skill.SetOwner(m_Owner);
-				skill.StartSkill(m_Owner.TransformPosition, m_Owner.TransformRotation, true);
+				m_SkillController.SetActive(true);
+				m_SkillController.SetOwner(m_Owner);
+				m_SkillController.SetTimeDelay(m_SkillData.TimeDelay);
+				m_SkillController.SetTimeEffect(m_SkillData.TimeEffect);
+				m_SkillController.SetEffectPerTime(m_SkillData.EffectPerTime);
+				m_SkillController.SetEffectRadius(m_SkillData.EffectRadius);
+				m_SkillController.StartSkill(m_Owner.TransformPosition, m_Owner.TransformRotation, true);
 			}
 		}
 	}
@@ -63,9 +67,13 @@ public class TDCSkillSlot {
 		{
 			m_TimeDelay -= dt;
 		}
+		if (m_SkillController != null)
+		{
+			m_SkillController.UpdateSkill(dt);
+		}
 	}
 
 	public void SetOwner(TDCBaseController owner) {
-		m_SkillData.Owner = owner;
+		m_Owner = owner;
 	}
 }

@@ -15,6 +15,11 @@ public class TDCSkillController : TDCBaseController {
 	protected EffectManager m_EffectManager;
 	protected TDCBaseController[] m_ControllersInRadius;
 	protected bool m_IsFinishSkill = false;
+	protected TDCBaseController m_Owner;
+	protected float m_TimeDelay = 0f;
+	protected float m_TimeEffect = 0f;
+	protected float m_EffectPerTime = 0f;
+	protected float m_EffectRadius = 0f;
 
 	#endregion
 
@@ -113,6 +118,10 @@ public class TDCSkillController : TDCBaseController {
 		base.ResetObject();
 		m_IsFinishSkill = false;
 		m_Slot.DeactiveSkill(this);
+		m_TimeDelay = m_SkillData.TimeDelay;
+		m_TimeEffect = m_SkillData.TimeEffect;
+		m_EffectPerTime = m_SkillData.EffectPerTime;
+		m_EffectRadius = m_SkillData.EffectRadius;
 	}
 
 	public override void MovePosition(Vector3 position)
@@ -134,27 +143,51 @@ public class TDCSkillController : TDCBaseController {
 		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, Time.deltaTime * 3f);
 	}
 
+	public virtual void UpdateSkill(float dt)
+	{
+		if (m_TimeEffect > 0f)
+		{
+			m_TimeEffect -= dt;
+		}
+	}
+
 	#endregion
 
 	#region Getter & Setter
 
+	public virtual void SetEffectRadius(float radius) {
+		m_EffectRadius = radius;
+	}
+
+	public virtual void SetTimeDelay(float timeDelay) {
+		m_TimeDelay = timeDelay;
+	}
+
+	public virtual void SetTimeEffect(float timeEffect) {
+		m_TimeEffect = timeEffect;
+	}
+
+	public virtual void SetEffectPerTime(float time) {
+		m_EffectPerTime = time;
+	}
+
 	public virtual void SetOwner(TDCBaseController owner) {
-		m_SkillData.Owner = owner;
+		m_Owner = owner;
 	}
 
 	public override TDCBaseController GetEnemyController()
 	{
-		return m_SkillData.Owner.GetEnemyController();
+		return m_Owner.GetEnemyController();
 	}
 
 	public override Vector3 GetEnemyPosition()
 	{
-		return m_SkillData.Owner.GetEnemyPosition();
+		return m_Owner.GetEnemyPosition();
 	}
 
 	public override Vector3 GetTargetPosition()
 	{
-		return m_SkillData.Owner.GetTargetPosition(); 
+		return m_Owner.GetTargetPosition(); 
 	}
 
 	public virtual void SetSlot(TDCSkillSlot slot) {
@@ -179,13 +212,13 @@ public class TDCSkillController : TDCBaseController {
 
 	internal override bool HaveEnemy()
 	{
-		return m_SkillData.Owner.HaveEnemy();
+		return m_Owner.HaveEnemy();
 	}
 
 	internal override bool MoveToEnemy()
 	{
 		base.MoveToEnemy();
-		var enemy = m_SkillData.Owner.GetEnemyController();
+		var enemy = m_Owner.GetEnemyController();
 		if (enemy != null)
 		{
 			var distance = (TransformPosition - enemy.TransformPosition).sqrMagnitude;

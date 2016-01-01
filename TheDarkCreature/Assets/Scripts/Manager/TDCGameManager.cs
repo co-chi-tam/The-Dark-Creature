@@ -236,11 +236,11 @@ public class TDCGameManager : MonoBehaviour {
 		return controller;
 	}
 
-	public TDCSkillController CreateSkill(	TDCSkillData data,
-											TDCEnum.EGameType skillType,  
+	public TDCSkillController CreateSkill(	TDCEnum.EGameType skillType,  
 											Vector3 position, 
 											Quaternion rotation, 
 											GameObject parent = null) {
+		TDCSkillData data = m_DataReader.GetSkillData(skillType);
 		TDCSkillController controller = null;
 		var gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
 		gObject.transform.position = position;
@@ -258,7 +258,6 @@ public class TDCGameManager : MonoBehaviour {
 				controller = gObject.AddComponent<TDCSkillController>();
 				break;
 		}
-		data.Owner = null;
 		controller.SetData(data);
 		controller.Init();
 		if (parent != null)

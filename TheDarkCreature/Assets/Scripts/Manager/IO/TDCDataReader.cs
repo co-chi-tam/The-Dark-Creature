@@ -294,6 +294,7 @@ public class TDCDataReader {
 			skillData.EffectRadius = float.Parse(skill["EffectRadius"].ToString());
 			skillData.TimeDelay = float.Parse(skill["TimeDelay"].ToString());
 			skillData.TimeEffect = float.Parse(skill["TimeEffect"].ToString());
+			skillData.EffectPerTime = float.Parse(skill["EffectPerTime"].ToString());
 			skillData.RepeatSkill = bool.Parse(skill["RepeatSkill"].ToString());
 			skillData.ModelPath = ConvertTo<string> (skill["ModelPath"] as List<object>);
 			skillData.FSMPath = skill["FSMPath"].ToString();

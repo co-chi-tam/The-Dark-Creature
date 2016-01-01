@@ -3,11 +3,9 @@ using FSM;
 
 public class FSMAttackState : FSMBaseState {
 
-	private TDCCreatureData m_CreatureData;
-
 	public FSMAttackState(TDCBaseController controller) : base (controller)
 	{
-		m_CreatureData = controller.GetData () as TDCCreatureData;
+
 	}
 	
 	public override void StartState() {
@@ -32,7 +30,7 @@ public class FSMAttackState : FSMBaseState {
 	}
 
 	public void AttackEnemy() {
-		var damage = Random.Range(m_CreatureData.MinDamage, m_CreatureData.MaxDamage);
+		var damage = Random.Range(m_Controller.GetMinDamage(), m_Controller.GetMaxDamage());
 		m_Controller.GetEnemyController().ApplyDamage(damage, m_Controller);
 	}
 }

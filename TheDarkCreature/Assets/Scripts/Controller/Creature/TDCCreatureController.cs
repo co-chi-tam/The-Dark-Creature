@@ -340,6 +340,18 @@ public class TDCCreatureController : TDCBaseController {
 	
 	#region Getter & Setter
 
+	public override int GetMinDamage()
+	{
+		base.GetMinDamage();
+		return m_CreatureData.MinDamage;
+	}
+
+	public override int GetMaxDamage()
+	{
+		base.GetMaxDamage();
+		return m_CreatureData.MaxDamage;
+	}
+
 	public override void SetHeat(int value)
 	{
 		base.SetHeat(value);

@@ -200,6 +200,14 @@ public class TDCBaseController : TDCMonoBehaviour
 
     #region Getter & Setter
 
+	public virtual int GetMinDamage() {
+		return 0;
+	}
+
+	public virtual int GetMaxDamage() {
+		return 0;
+	}
+
 	public virtual void SetTriggerEvent(string name, Action evnt) {
 		m_TriggerEvents.Add(name, evnt);
 	}
