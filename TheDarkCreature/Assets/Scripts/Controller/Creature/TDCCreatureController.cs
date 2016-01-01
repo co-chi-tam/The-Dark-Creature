@@ -19,7 +19,6 @@ public class TDCCreatureController : TDCBaseController {
 	protected LayerMask m_ColliderLayerMask;
 
 	protected TDCCreatureData m_CreatureData;
-	protected TDCGameManager m_GameManager;
 
 	protected TDCSkillSlot m_SkillSlot;
 
@@ -31,15 +30,14 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.Init ();
 		m_AnimatorController = this.GetComponent<Animator> ();
-		m_GameManager = TDCGameManager.GetInstance();
 		m_TargetPosition = m_Transform.position;
+
+		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
 	}
 	
 	protected override void Start()
 	{
 		base.Start ();
-
-		m_FSMManager    = new FSMManager();
 
 		var idleState   	= new FSMIdleState(this);
 		var moveState   	= new FSMMoveState(this);
@@ -48,9 +46,6 @@ public class TDCCreatureController : TDCBaseController {
 		var chaseState  	= new FSMChaseState(this);
 		var attackState  	= new FSMAttackState(this);
 		var dieState    	= new FSMDieState(this);
-		var waiting 		= new FSMWaitingState (this);
-		var waitingOne 		= new FSMWaitingOneSecondState (this);
-		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
 
 		m_FSMManager.RegisterState("IdleState", idleState);
 		m_FSMManager.RegisterState("MoveState", moveState);
@@ -58,14 +53,10 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("AvoidState", avoidState);
 		m_FSMManager.RegisterState("ChaseState", chaseState);
 		m_FSMManager.RegisterState("AttackState", attackState);
-		m_FSMManager.RegisterState("WaitingState", waiting);
-		m_FSMManager.RegisterState("WaitingOneSecondState", waitingOne);
-		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
 		m_FSMManager.RegisterState("DieState", dieState);
 
 		m_FSMManager.RegisterCondition("IsActive", GetActive);
 		m_FSMManager.RegisterCondition("CanMove", CanMove);
-		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
 		m_FSMManager.RegisterCondition("MoveToEnemy", MoveToEnemy);
 		m_FSMManager.RegisterCondition("FoundEnemy", FoundEnemy);
@@ -75,7 +66,6 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
 
-		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
 	}
 
 	protected override void Update ()
@@ -153,38 +143,10 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	public virtual int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount) {
-		var inventory = m_CreatureData.Inventory;
-		var indexItemInInventory = FindItemSlot(gameType);
-		var emptySlot = FindEmptySlot();
-		if (emptySlot == -1)
-			return -1;
-		switch (itemType)
-		{
-			case TDCEnum.EItemType.Food:
-			case TDCEnum.EItemType.Item:
-				{
-					if (indexItemInInventory != -1)
-					{
-						inventory[indexItemInInventory].GetData().Amount++;
-						return indexItemInInventory;
-					}
-					else
-					{
-						inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
-					}
-				}
-				break;
-			case TDCEnum.EItemType.GObject:
-			case TDCEnum.EItemType.Weapon:
-				{
-					inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
-				}
-				break;
-		}
-		return emptySlot;
+		return 0;
 	}
 
-	private int FindEmptySlot() {
+	protected int FindEmptySlot() {
 		var inventory = m_CreatureData.Inventory;
 		for (int i = 0; i < inventory.Length; i++)
 		{
@@ -194,7 +156,7 @@ public class TDCCreatureController : TDCBaseController {
 		return -1;
 	}
 
-	private int FindItemSlot(TDCEnum.EGameType gameType) {
+	protected int FindItemSlot(TDCEnum.EGameType gameType) {
 		var inventory = m_CreatureData.Inventory;
 		for (int i = 0; i < inventory.Length; i++)
 		{
@@ -292,9 +254,8 @@ public class TDCCreatureController : TDCBaseController {
 		return true;
 	}
 
-	internal virtual bool CountdownWaitingTime() {
-		m_WaitingTimeInterval -= Time.deltaTime;
-		return m_WaitingTimeInterval <= 0;     
+	internal override bool CountdownWaitingTime() {
+		return base.CountdownWaitingTime();     
 	}
 
 	internal virtual bool FoundEnemy() {

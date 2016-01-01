@@ -34,6 +34,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	protected Vector3 m_TargetPosition;
 	protected Dictionary<string, Action> m_TriggerEvents;
 	protected TDCBaseController m_EnemyController;
+	protected TDCGameManager m_GameManager;
 
     public Vector3 TransformPosition {
 		get { return m_Transform.position; }
@@ -59,20 +60,31 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	#endregion
 
-	#region Implement Mono
+	#region Implement Monobehaviour
 
 	public virtual void Init() {
 		m_Transform	= this.transform;
 		m_StartPosition = m_Transform.position;
 		m_TargetPosition = m_StartPosition;
 		m_TriggerEvents = new Dictionary<string, Action>();
+		m_Collider = this.GetComponent<CapsuleCollider> ();
+		m_GameManager = TDCGameManager.GetInstance();
+		m_FSMManager = new FSMManager();
 		SetActive (true);
 		LoadEventCallBack();
 	}
 
 	protected virtual void Start()
 	{
-		m_Collider = this.GetComponent<CapsuleCollider> ();
+		var waiting 		= new FSMWaitingState (this);
+		var waitingOne 		= new FSMWaitingOneSecondState (this);
+		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
+
+		m_FSMManager.RegisterState("WaitingState", waiting);
+		m_FSMManager.RegisterState("WaitingOneSecondState", waitingOne);
+		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
+
+		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
     }
 
 	protected virtual void Update() {
@@ -177,9 +189,18 @@ public class TDCBaseController : TDCMonoBehaviour
 		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
 	}
 
+	public virtual void ReturnObject() {
+		
+	}
+
 	#endregion
 		
 	#region FSM
+
+	internal virtual bool CountdownWaitingTime() {
+		m_WaitingTimeInterval -= Time.deltaTime;
+		return m_WaitingTimeInterval <= 0;     
+	}
 
 	internal virtual bool HaveEnemy()
 	{

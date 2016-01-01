@@ -27,7 +27,7 @@
 			"MemberType": 6,
 			"MinMember": 2,
 			"MaxMember": 5,
-			"TimeRespawnMember": 60
+			"TimeRespawnMember": 10
 		},{
 			"ID": 3,
 			"Name": "GroupGrass",
@@ -41,7 +41,7 @@
 			"MemberType": 53,
 			"MinMember": 10,
 			"MaxMember": 20,
-			"TimeRespawnMember": 60
+			"TimeRespawnMember": 10
 		},{
 			"ID": 4,
 			"Name": "GroupMushRoom",
@@ -55,7 +55,7 @@
 			"MemberType": 52,
 			"MinMember": 10,
 			"MaxMember": 20,
-			"TimeRespawnMember": 60
+			"TimeRespawnMember": 10
 		},{
 			"ID": 5,
 			"Name": "GroupBush",
@@ -69,7 +69,7 @@
 			"MemberType": 54,
 			"MinMember": 10,
 			"MaxMember": 20,
-			"TimeRespawnMember": 120
+			"TimeRespawnMember": 10
 		},{
 			"ID": 6,
 			"Name": "GroupBlueBerry",
@@ -83,7 +83,7 @@
 			"MemberType": 55,
 			"MinMember": 1,
 			"MaxMember": 2,
-			"TimeRespawnMember": 180
+			"TimeRespawnMember": 10
 		}
 	]
 }

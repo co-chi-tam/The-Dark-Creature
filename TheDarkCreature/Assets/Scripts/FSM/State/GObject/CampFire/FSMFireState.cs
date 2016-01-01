@@ -12,7 +12,7 @@ public class FSMFireState : FSMBaseState {
 	}
 	
 	public override void StartState() {
-		m_CampFireController.Init ();
+		
 	}
 	
 	public override void UpdateState() {

@@ -4,16 +4,18 @@ using FSM;
 
 public class FSMDisableState : FSMBaseState {
 
-	private TDCCampFireController m_CampFireController;
-
 	public FSMDisableState(TDCBaseController controller) : base (controller)
 	{
-		m_CampFireController = controller as TDCCampFireController;
+
 	}
 	
 	public override void StartState() {
-		m_CampFireController.SetActive (false);
-		m_CampFireController.DestroyGameObject();
+		m_Controller.SetActive(false);
+		m_Controller.ResetObject();
+		if (m_Controller.GetGroupController() == null)
+		{
+			m_Controller.ReturnObject();
+		}
 	}
 	
 	public override void UpdateState() {

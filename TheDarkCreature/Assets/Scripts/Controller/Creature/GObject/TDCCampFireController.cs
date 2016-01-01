@@ -8,7 +8,6 @@ public class TDCCampFireController : TDCBaseController {
 	private ParticleSystem m_ParticleSystem;
 	private Light m_Light;
 	
-	private FSMManager m_FSMMamager;
 	private TDCGObjectData m_GObjectData;
 	private float m_CurrentIntensity;
 	private float m_CurrentStartSize;
@@ -19,24 +18,27 @@ public class TDCCampFireController : TDCBaseController {
 	
 	#region Implementation Mono
 
+	public override void Init ()
+	{
+		base.Init ();
+	}
+
 	protected override void Start()
 	{
 		base.Start();
 
+		m_FirePower = m_GObjectData.Duration;
 		m_IsFireActive = true;
-
-		m_FSMMamager = new FSMManager();
 
 		var fireState = new FSMFireState(this);
 		var disableState = new FSMDisableState(this);
 		
-		m_FSMMamager.RegisterState("FireState", fireState);
-		m_FSMMamager.RegisterState("DisableState", disableState);
+		m_FSMManager.RegisterState("FireState", fireState);
+		m_FSMManager.RegisterState("DisableState", disableState);
 		
-		m_FSMMamager.RegisterCondition("IsFireActive", IsFireActive);
+		m_FSMManager.RegisterCondition("IsFireActive", IsFireActive);
 
-		m_GObjectData = GetData () as TDCGObjectData;
-		m_FSMMamager.LoadFSM (m_GObjectData.FSMPath);
+		m_FSMManager.LoadFSM (m_GObjectData.FSMPath);
 
 		var fireParticle = this.transform.FindChild ("FireParticle");
 		var pointLight = this.transform.FindChild ("PointLight");
@@ -47,19 +49,11 @@ public class TDCCampFireController : TDCBaseController {
 		m_CurrentIntensity = m_Light.intensity;
 		m_CurrentStartSize = m_ParticleSystem.startSize;
 	}
-
-	public override void Init ()
-	{
-		base.Init ();
-		m_GObjectData = GetData () as TDCGObjectData;
-		m_FirePower = m_GObjectData.Duration;
-		m_IsFireActive = true;
-	}
 	
 	protected override void FixedUpdate() {
 		base.FixedUpdate ();
-		m_FSMMamager.UpdateState();
-		StateName = m_FSMMamager.StateCurrentName;
+		m_FSMManager.UpdateState();
+		StateName = m_FSMManager.StateCurrentName;
 	}
 	
 	#endregion
@@ -80,8 +74,18 @@ public class TDCCampFireController : TDCBaseController {
 		m_FirePower += Mathf.Abs(value);
 	}
 
-	public void DestroyGameObject() {
-		DestroyImmediate(this.gameObject);
+	public override void ReturnObject()
+	{
+		base.ReturnObject();
+		m_GameManager.SetObjectPool(this);
+	}
+
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		m_FirePower = m_GObjectData.Duration;
+		m_Light.intensity = m_CurrentIntensity;
+		m_ParticleSystem.startSize = m_CurrentStartSize;
 	}
 
 	#endregion
@@ -94,6 +98,17 @@ public class TDCCampFireController : TDCBaseController {
 
 	public void SetParticleSize(float value) {
 		m_ParticleSystem.startSize = value / m_GObjectData.Duration * (m_CurrentStartSize - 5) + 5;  
+	}
+
+	public override void SetData(TDCBaseData data)
+	{
+		base.SetData(data);
+		m_GObjectData = data as TDCGObjectData;
+	}
+
+	public override TDCBaseData GetData()
+	{
+		return m_GObjectData;
 	}
 
 	#endregion

@@ -56,7 +56,7 @@
 				},
 				{
 					"GameType": 301,
-					"Amount": 1
+					"Amount": 50
 				}
 			]
 		}

@@ -137,14 +137,41 @@ public class TDCPlayerController : TDCCreatureController
 
 	public override int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
 	{
-		var itemIndex = base.AddItem(gameType, itemType, amount);
-		if (itemIndex != -1)
+		var inventory = m_CreatureData.Inventory;
+		var indexItemInInventory = FindItemSlot(gameType);
+		var emptySlot = FindEmptySlot();
+		if (emptySlot == -1)
+			return -1;
+		switch (itemType)
 		{
-			var item = GetInventory()[itemIndex];
-			m_Inventory.AddItem(itemIndex, item);
+			case TDCEnum.EItemType.Food:
+			case TDCEnum.EItemType.Item:
+				{
+					if (indexItemInInventory != -1)
+					{
+						inventory[indexItemInInventory].GetData().Amount++;
+						return indexItemInInventory;
+					}
+					else
+					{
+						inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
+					}
+				}
+				break;
+			case TDCEnum.EItemType.GObject:
+			case TDCEnum.EItemType.Weapon:
+				{
+					inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
+				}
+				break;
+		}
+		if (emptySlot != -1)
+		{
+			var item = GetInventory()[emptySlot];
+			m_Inventory.AddItem(emptySlot, item);
 		}
 
-		return itemIndex;
+		return emptySlot;
 	}
 
 	#endregion

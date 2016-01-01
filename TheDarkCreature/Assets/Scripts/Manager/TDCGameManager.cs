@@ -103,13 +103,21 @@ public class TDCGameManager : MonoBehaviour {
 		return m_DataReader.GetSkillData(skill);
 	}
 
-	public TDCBaseController GetObjectPool(TDCEnum.EGameType obj) {
-		TDCBaseController skill = null;
-		if (m_ObjectPool[obj].Get(ref skill))
+	public TDCBaseController GetObjectPool(TDCEnum.EGameType type) {
+		TDCBaseController result = null;
+		if (m_ObjectPool[type].Get(ref result))
 		{
-			return skill;
+			return result;
 		}
 		return null;
+	}
+
+	public bool GetObjectPool(TDCEnum.EGameType type, ref TDCBaseController obj) {
+		if (m_ObjectPool[type].Get(ref obj))
+		{
+			return true;
+		}
+		return false;
 	}
 
 	public void SetObjectPool(TDCBaseController obj) {
@@ -160,7 +168,6 @@ public class TDCGameManager : MonoBehaviour {
 		groupController.CreatePoolMember ();
 		gObject.transform.position = position;
 		gObject.transform.rotation = rotation;
-		controller.SetData (data);
 		controller.name = string.Format("{0}-{1}", type, m_ListController.Count);
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		

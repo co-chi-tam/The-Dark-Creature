@@ -11,7 +11,6 @@ public class TDCSkillController : TDCBaseController {
 	protected TDCSkillSlot m_Slot;
 	protected int m_LayerEffect;
 	protected TDCSkillData m_SkillData;
-	protected TDCGameManager m_GameManager;
 	protected EffectManager m_EffectManager;
 	protected TDCBaseController[] m_ControllersInRadius;
 	protected bool m_IsFinishSkill = false;
@@ -28,22 +27,21 @@ public class TDCSkillController : TDCBaseController {
 	public override void Init()
 	{
 		base.Init();
-		m_GameManager = TDCGameManager.GetInstance();
-		m_FSMManager = new FSMManager();
+
 		m_EffectManager = new EffectManager();
 
 		m_LayerEffect = 1 << 8 | 1 << 10 | 1 << 31;
+	}
+
+	protected override void Start()
+	{
+		base.Start();
 
 		LoadFSM();
 		LoadEffect();
 
 		m_FSMManager.LoadFSM(m_SkillData.FSMPath);
 		m_EffectManager.LoadEffect(m_SkillData.EffectPath);
-	}
-
-	protected override void Start()
-	{
-		base.Start();
 	}
 
 	protected override void FixedUpdate()

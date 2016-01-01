@@ -18,13 +18,20 @@
 								{
 									"condition_name": "IsFinishSkill",
 									"condition_value": true,
-									"state_name": "DestroySkillState",
+									"state_name": "WaitingOneSecondState",
 									"states": [
 										{
-											"condition_name": "CanActiveSkill",
+											"condition_name": "CountdownWaitingTime",
 											"condition_value": true,
-											"state_name": "StartSkillState",
-											"states": []
+											"state_name": "DestroySkillState",
+											"states": [
+												{
+													"condition_name": "CanActiveSkill",
+													"condition_value": true,
+													"state_name": "StartSkillState",
+													"states": []
+												}
+											]
 										}
 									]
 								}

@@ -11,7 +11,7 @@ public class FSMWaitingOneSecondState : FSMBaseState
 	public override void StartState()
 	{
 		m_Controller.SetAnimation(EAnimation.Action1);
-		m_Controller.SetWaitingTimeInterval (0.5f);
+		m_Controller.SetWaitingTimeInterval (1f);
 	}
 	
 	public override void UpdateState()

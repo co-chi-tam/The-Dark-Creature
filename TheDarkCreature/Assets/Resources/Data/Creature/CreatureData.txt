@@ -22,9 +22,9 @@
 			"MaxSanityPoint": 50,
 			"MinDamage": 1,
 			"MaxDamage": 1,
-			"Enemies": [6],
+			"Enemies": [],
 			"Foods": [52,53],
-			"Inventory": []
+			"Inventory": [{"GameType":51,"Amount":1}]
 		},{
 			"ID": 2,
 			"Name": "Satla",
@@ -49,7 +49,7 @@
 			"MaxDamage": 3,
 			"Enemies": [],
 			"Foods": [5,52,54],
-			"Inventory": []
+			"Inventory": [{"GameType":51,"Amount":1}]
 		}
 	]
 }
