@@ -9,8 +9,7 @@ public class TDCCreatureData : TDCBaseData {
 	private TDCObjectProperty<float> m_MoveSpeed;
 	private TDCObjectProperty<int> m_CurrentHP;
 	private TDCObjectProperty<int> m_MaxHP;
-	private TDCObjectProperty<int> m_MinDamage;
-	private TDCObjectProperty<int> m_MaxDamage;
+	private TDCObjectProperty<int> m_Damage;
 	private TDCObjectProperty<int> m_CurrentHeatPoint;
 	private TDCObjectProperty<int> m_MaxHeatPoint;
 
@@ -34,14 +33,9 @@ public class TDCCreatureData : TDCBaseData {
 		set { m_RotationSpeed = value; }
 	}
 
-	public int MinDamage {
-		get { return m_MinDamage.GetValue(); }
-		set { m_MinDamage.SetValue (value); }
-	}
-
-	public int MaxDamage {
-		get { return m_MaxDamage.GetValue(); }
-		set { m_MaxDamage.SetValue(value); }
+	public int Damage {
+		get { return m_Damage.GetValue(); }
+		set { m_Damage.SetValue(value); }
 	}
 
 	public int CurrentHP {
@@ -97,8 +91,7 @@ public class TDCCreatureData : TDCBaseData {
 		m_RotationSpeed = 5f;
 		m_CurrentHP = new TDCObjectProperty<int>("CurrentHP");
 		m_MaxHP = new TDCObjectProperty<int>("MaxHP");
-		m_MinDamage = new TDCObjectProperty<int> ("MinDamage");
-		m_MaxDamage = new TDCObjectProperty<int>("MaxDamage");
+		m_Damage = new TDCObjectProperty<int>("Damage");
 		m_CurrentHeatPoint = new TDCObjectProperty<int>("CurrentHeatPoint");
 		m_MaxHeatPoint = new TDCObjectProperty<int>("MaxHeatPoint");
 
@@ -113,8 +106,7 @@ public class TDCCreatureData : TDCBaseData {
 		RegisterProperty(m_MaxHeatPoint);
 		RegisterProperty(m_CurrentHP);
 		RegisterProperty(m_MaxHP);
-		RegisterProperty(m_MinDamage);
-		RegisterProperty(m_MaxDamage);
+		RegisterProperty(m_Damage);
     }
 
 	public static TDCCreatureData Clone (TDCCreatureData instance) {
@@ -126,8 +118,7 @@ public class TDCCreatureData : TDCBaseData {
 		tmp.Description = instance.Description;
 		tmp.ModelPath = instance.ModelPath;
 		tmp.FSMPath = instance.FSMPath;
-		tmp.MinDamage = instance.MinDamage;
-		tmp.MaxDamage = instance.MaxDamage;
+		tmp.Damage = instance.Damage;
 		tmp.MoveSpeed = instance.MoveSpeed;
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;

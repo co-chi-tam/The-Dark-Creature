@@ -41,14 +41,9 @@ public class TDCSkillSlot {
 				m_SkillController.SetTimeEffect(m_SkillData.TimeEffect);
 				m_SkillController.SetEffectPerTime(m_SkillData.EffectPerTime);
 				m_SkillController.SetEffectRadius(m_SkillData.EffectRadius);
-				m_SkillController.StartSkill(m_Owner.TransformPosition, m_Owner.TransformRotation, true);
+				m_SkillController.StartSkill(m_Owner.TransformPosition, m_Owner.TransformRotation);
 			}
 		}
-	}
-
-	public void DeactiveSkill(TDCSkillController member) {
-		member.SetOwner(null);
-		m_GameManager.SetObjectPool(member);
 	}
 
 	public bool DidEndTimeDelay() {

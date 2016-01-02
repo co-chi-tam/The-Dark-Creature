@@ -241,11 +241,7 @@ public class TDCBaseController : TDCMonoBehaviour
 
     #region Getter & Setter
 
-	public virtual int GetMinDamage() {
-		return 0;
-	}
-
-	public virtual int GetMaxDamage() {
+	public virtual int GetDamage() {
 		return 0;
 	}
 
@@ -269,7 +265,7 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual void SetActive(bool value) {
 		m_IsActive = value;
-        gameObject.SetActive(value);
+		this.gameObject.SetActive(value);
     }
 
     public virtual bool GetActive() {

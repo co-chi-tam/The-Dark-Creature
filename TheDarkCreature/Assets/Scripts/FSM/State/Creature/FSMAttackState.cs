@@ -20,7 +20,7 @@ public class FSMAttackState : FSMBaseState {
 			m_Controller.LookAtRotation(enemyPos);
 			m_Controller.ActiveSkill(0);
 			// Test
-			AttackEnemy();
+//			AttackEnemy();
 		}
 	}
 	
@@ -30,7 +30,7 @@ public class FSMAttackState : FSMBaseState {
 	}
 
 	public void AttackEnemy() {
-		var damage = Random.Range(m_Controller.GetMinDamage(), m_Controller.GetMaxDamage());
-		m_Controller.GetEnemyController().ApplyDamage(1, m_Controller);
+		var damage = m_Controller.GetDamage();
+		m_Controller.GetEnemyController().ApplyDamage(damage, m_Controller);
 	}
 }

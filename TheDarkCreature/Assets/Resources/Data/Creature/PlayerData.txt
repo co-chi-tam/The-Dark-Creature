@@ -20,8 +20,7 @@
 			"MaxHungerPoint": 50,
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 50,
-			"MinDamage": 3,
-			"MaxDamage": 5,
+			"Damage": 2,
 			"Level": 1,
 			"Inventory": [
 				
@@ -46,8 +45,7 @@
 			"MaxHungerPoint": 50,
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 50,
-			"MinDamage": 5,
-			"MaxDamage": 10,
+			"Damage": 3,
 			"Level": 1,
 			"Inventory": [
 				{

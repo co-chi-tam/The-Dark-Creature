@@ -88,8 +88,7 @@ public class TDCDataReader {
 			creature.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			creature.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			creature.MaxHP = int.Parse (instance["MaxHP"].ToString());
-			creature.MinDamage = int.Parse (instance["MinDamage"].ToString());
-			creature.MaxDamage = int.Parse (instance["MaxDamage"].ToString());
+			creature.Damage = int.Parse (instance["Damage"].ToString());
 			creature.CurrentHeatPoint = int.Parse (instance["CurrentHeatPoint"].ToString());
 			creature.MaxHeatPoint = int.Parse (instance["MaxHeatPoint"].ToString());
 			creature.DetectRange = float.Parse (instance["DetectRange"].ToString());
@@ -230,8 +229,7 @@ public class TDCDataReader {
 			player.MaxHungerPoint = int.Parse (instance["MaxHungerPoint"].ToString());
 			player.CurrentSanityPoint = int.Parse (instance["CurrentSanityPoint"].ToString());
 			player.MaxSanityPoint = int.Parse (instance["MaxSanityPoint"].ToString());
-			player.MinDamage = int.Parse (instance["MinDamage"].ToString());
-			player.MaxDamage = int.Parse (instance["MaxDamage"].ToString());
+			player.Damage = int.Parse (instance["Damage"].ToString());
 			player.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
 			player.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			player.DetectRange = float.Parse (instance["DetectRange"].ToString());

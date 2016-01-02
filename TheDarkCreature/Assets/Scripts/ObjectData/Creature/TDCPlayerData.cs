@@ -64,8 +64,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.MoveSpeed = instance.MoveSpeed;
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
-		tmp.MinDamage = instance.MinDamage;
-		tmp.MaxDamage = instance.MaxDamage;
+		tmp.Damage = instance.Damage;
 		tmp.CurrentHeatPoint = instance.CurrentHeatPoint;
 		tmp.MaxHeatPoint = instance.MaxHeatPoint;
 		tmp.CurrentHungerPoint = instance.CurrentHungerPoint;
@@ -87,8 +86,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.MoveSpeed = (lh.MoveSpeed + rh.MoveSpeed) / 2;
 		tmp.CurrentHP = (lh.CurrentHP + rh.CurrentHP) / 2;
 		tmp.MaxHP = (lh.MaxHP + rh.MaxHP) / 2;
-		tmp.MinDamage = (lh.MinDamage + rh.MinDamage) / 2;
-		tmp.MaxDamage = (lh.MaxDamage + rh.MaxDamage) / 2;
+		tmp.Damage = (lh.Damage + rh.Damage) / 2;
 		tmp.CurrentHeatPoint = (lh.CurrentHeatPoint + rh.CurrentHeatPoint) / 2;
 		tmp.MaxHeatPoint = (lh.MaxHeatPoint + rh.MaxHeatPoint) / 2;
 		tmp.CurrentHungerPoint = (lh.CurrentHungerPoint + rh.CurrentHungerPoint) / 2;

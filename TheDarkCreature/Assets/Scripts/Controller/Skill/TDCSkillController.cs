@@ -109,10 +109,9 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
 	}
 
-	public virtual void StartSkill(Vector3 position, Quaternion rotation, bool active = true) {
+	public virtual void StartSkill(Vector3 position, Quaternion rotation) {
 		TransformPosition = position;
 		TransformRotation = rotation;
-		SetActive(active);
 	}
 
 	public virtual void ExcuteEffect() {
@@ -124,7 +123,7 @@ public class TDCSkillController : TDCBaseController {
 	{
 		base.ResetObject();
 		m_IsFinishSkill = 1f;
-		m_Slot.DeactiveSkill(this);
+		m_GameManager.SetObjectPool(this);
 		m_TimeDelay = m_SkillData.TimeDelay;
 		m_TimeEffect = m_SkillData.TimeEffect;
 		m_EffectPerTime = m_SkillData.EffectPerTime;
@@ -174,22 +173,6 @@ public class TDCSkillController : TDCBaseController {
 		m_Owner = owner;
 	}
 
-	public override void SetEnemyController(TDCBaseController controller)
-	{
-		base.SetEnemyController(controller);
-		m_EnemyController = controller;
-	}
-
-	public override TDCBaseController GetEnemyController()
-	{
-		return m_EnemyController;
-	}
-
-	public override Vector3 GetEnemyPosition()
-	{
-		return m_EnemyController.TransformPosition;
-	}
-
 	public virtual void SetSlot(TDCSkillSlot slot) {
 		m_Slot = slot;
 	}
@@ -206,24 +189,24 @@ public class TDCSkillController : TDCBaseController {
 		return m_SkillData;
 	}
 
-	public override int GetMinDamage()
+	public override int GetDamage()
 	{
-		return m_Owner.GetMinDamage();
-	}
-
-	public override int GetMaxDamage()
-	{
-		return m_Owner.GetMaxDamage();
+		return m_Owner.GetDamage();
 	}
 
 	#endregion
 
 	#region FSM
 
+	internal override bool HaveEnemy()
+	{
+		return GetEnemyController() != null && GetEnemyController().GetActive();
+	}
+
 	internal override bool MoveToEnemy()
 	{
 		base.MoveToEnemy();
-		var enemy = m_Owner.GetEnemyController();
+		var enemy = GetEnemyController();
 		if (enemy != null)
 		{
 			var distance = (TransformPosition - enemy.TransformPosition).sqrMagnitude;
@@ -234,7 +217,6 @@ public class TDCSkillController : TDCBaseController {
 		{
 			return MoveToTarget();
 		}
-		return true;
 	}
 
 	internal override bool MoveToTarget()
@@ -309,6 +291,8 @@ public class TDCSkillController : TDCBaseController {
 			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
 		}
 #endif
+		var damage = int.Parse (pars["Damage"].ToString());
+		m_EnemyController.ApplyDamage(damage + GetDamage(), m_Owner);
 	}
 
 	internal virtual bool CanActiveEffect(Dictionary<string, object> pars) {

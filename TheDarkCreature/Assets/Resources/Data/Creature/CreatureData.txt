@@ -16,8 +16,7 @@
 			"MaxHP": 10,
 			"CurrentHeatPoint": 50,
 			"MaxHeatPoint": 50,
-			"MinDamage": 1,
-			"MaxDamage": 1,
+			"Damage": 1,
 			"Enemies": [],
 			"Foods": [52,53],
 			"Inventory": [{"GameType":51,"Amount":1}]
@@ -37,8 +36,7 @@
 			"MaxHP": 50,
 			"CurrentHeatPoint": 50,
 			"MaxHeatPoint": 50,
-			"MinDamage": 2,
-			"MaxDamage": 3,
+			"Damage": 2,
 			"Enemies": [],
 			"Foods": [5,52,54],
 			"Inventory": [{"GameType":51,"Amount":1}]
