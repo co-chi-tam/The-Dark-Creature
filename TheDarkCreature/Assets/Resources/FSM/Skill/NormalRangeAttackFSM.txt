@@ -41,11 +41,6 @@
 							"condition_value": true,
 							"state_name": "ExcuteEffectSkillState",
 							"states": []
-						},{
-							"condition_name": "HaveEnemy",
-							"condition_value": false,
-							"state_name": "DestroySkillState",
-							"states": []
 						}
 					]
 				},{

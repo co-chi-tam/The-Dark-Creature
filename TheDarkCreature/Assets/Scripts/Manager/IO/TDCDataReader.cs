@@ -92,10 +92,6 @@ public class TDCDataReader {
 			creature.MaxDamage = int.Parse (instance["MaxDamage"].ToString());
 			creature.CurrentHeatPoint = int.Parse (instance["CurrentHeatPoint"].ToString());
 			creature.MaxHeatPoint = int.Parse (instance["MaxHeatPoint"].ToString());
-			creature.CurrentHungerPoint = int.Parse (instance["CurrentHungerPoint"].ToString());
-			creature.MaxHungerPoint = int.Parse (instance["MaxHungerPoint"].ToString());
-			creature.CurrentSanityPoint = int.Parse (instance["CurrentSanityPoint"].ToString());
-			creature.MaxSanityPoint = int.Parse (instance["MaxSanityPoint"].ToString());
 			creature.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			creature.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			creature.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());

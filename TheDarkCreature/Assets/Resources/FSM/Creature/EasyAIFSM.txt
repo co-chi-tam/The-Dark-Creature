@@ -41,8 +41,8 @@
                   "state_name": "AttackState",
                   "states": [
                     {
-                      "condition_name": "IsEnemyDie",
-                      "condition_value": true,
+                      "condition_name": "HaveEnemy",
+                      "condition_value": false,
                       "state_name": "IdleState",
                       "states": []
                     },

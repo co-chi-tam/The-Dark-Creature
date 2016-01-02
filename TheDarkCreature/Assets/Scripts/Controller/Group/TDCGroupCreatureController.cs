@@ -50,7 +50,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 	}
 
 	public override void ReturnMember(TDCBaseController member) {
-		member.gameObject.SetActive (false);
+		member.SetActive(false);
 		m_MemberPool.Set (member);
 	}
 

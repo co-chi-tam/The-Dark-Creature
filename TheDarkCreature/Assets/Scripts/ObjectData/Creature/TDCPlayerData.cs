@@ -4,7 +4,11 @@ using System.Collections.Generic;
 using System.Linq;
 
 public class TDCPlayerData : TDCCreatureData {
-	
+
+	private TDCObjectProperty<int> m_CurrentHungerPoint;
+	private TDCObjectProperty<int> m_MaxHungerPoint;
+	private TDCObjectProperty<int> m_CurrentSanityPoint;
+	private TDCObjectProperty<int> m_MaxSanityPoint;
 	private TDCObjectProperty<int> m_Level;
 
 	public int Level {
@@ -12,12 +16,38 @@ public class TDCPlayerData : TDCCreatureData {
 		set { m_Level.Value = value; }
 	}
 
+	public int CurrentHungerPoint {
+		get { return m_CurrentHungerPoint.Value; }
+		set { m_CurrentHungerPoint.Value = value; }
+	}
 
+	public int MaxHungerPoint {
+		get { return m_MaxHungerPoint.Value; }
+		set { m_MaxHungerPoint.Value = value; }
+	}
+
+	public int CurrentSanityPoint {
+		get { return m_CurrentSanityPoint.Value; }
+		set { m_CurrentSanityPoint.Value = value; }
+	}
+
+	public int MaxSanityPoint {
+		get { return m_MaxSanityPoint.Value; }
+		set { m_MaxSanityPoint.Value = value; }
+	}
 
 	public TDCPlayerData () : base ()
 	{
+		m_CurrentHungerPoint = new TDCObjectProperty<int>("CurrentHungerPoint");
+		m_MaxHungerPoint = new TDCObjectProperty<int>("MaxHungerPoint");
+		m_CurrentSanityPoint = new TDCObjectProperty<int>("CurrentSanityPoint");
+		m_MaxSanityPoint = new TDCObjectProperty<int>("MaxSanityPoint");
 		m_Level = new TDCObjectProperty<int> ("Level");
 
+		RegisterProperty(m_CurrentHungerPoint);
+		RegisterProperty(m_MaxHungerPoint);
+		RegisterProperty(m_CurrentSanityPoint);
+		RegisterProperty(m_MaxSanityPoint);
 		RegisterProperty (m_Level);
 	}
 

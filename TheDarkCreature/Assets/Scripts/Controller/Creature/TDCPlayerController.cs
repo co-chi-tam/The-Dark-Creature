@@ -15,9 +15,6 @@ public class TDCPlayerController : TDCCreatureController
 	private UIInventory m_Inventory;
 	private bool m_TouchedUI = false;
 
-	[SerializeField]
-	private float HeatPoint = 0f;
-
     #endregion
 
     #region Implementation Mono
@@ -36,7 +33,7 @@ public class TDCPlayerController : TDCCreatureController
 
 		m_FSMManager.LoadFSM(m_PlayerData.FSMPath);
 
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.FlameBody, this);
+		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeAttack, this);
 	}
 
 	protected override void FixedUpdate()
@@ -49,12 +46,10 @@ public class TDCPlayerController : TDCCreatureController
 	protected override void Update()
 	{
 		base.Update();
-
 		m_SkillSlot.UpdateSkill(Time.deltaTime);
 	}
 
 	protected override void LateUpdate () {
-		HeatPoint = m_PlayerData.CurrentHeatPoint;
 #if UNITY_EDITOR
 		if (Input.GetMouseButtonUp(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -96,6 +91,7 @@ public class TDCPlayerController : TDCCreatureController
 	public override void ActiveSkill(int index)
 	{
 		base.ActiveSkill(index);
+		m_SkillSlot.ActiveSkill();
 	}
 
 	private void PlayerAction(RaycastHit hitInfo) {
@@ -175,30 +171,6 @@ public class TDCPlayerController : TDCCreatureController
 	}
 
 	#endregion
-
-	#region FSM
-
-	internal override bool CanMove() {
-		return true;
-	}
-	
-	internal override bool MoveToTarget()
-	{
-		return base.MoveToTarget();
-	}
-
-	internal override bool MoveToEnemy()
-	{
-		return base.MoveToEnemy();
-	}
-
-	internal override bool HaveEnemy() {
-		base.HaveEnemy();
-		var enemy = this.GetEnemyController ();
-		return enemy != null && enemy.GetActive();
-	}
-
-    #endregion
 
     #region Getter & Setter
 

@@ -13,7 +13,7 @@ public class TDCSkillController : TDCBaseController {
 	protected TDCSkillData m_SkillData;
 	protected EffectManager m_EffectManager;
 	protected TDCBaseController[] m_ControllersInRadius;
-	protected bool m_IsFinishSkill = false;
+	protected float m_IsFinishSkill = 1f;
 	protected TDCBaseController m_Owner;
 	protected float m_TimeDelay = 0f;
 	protected float m_TimeEffect = 0f;
@@ -49,6 +49,15 @@ public class TDCSkillController : TDCBaseController {
 		base.FixedUpdate();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
+	}
+
+	protected override void Update()
+	{
+		base.Update();
+		if (m_TimeEffect > 0f)
+		{
+			m_TimeEffect -= Time.deltaTime;
+		}
 	}
 
 	protected override void OnDrawGizmos()
@@ -108,13 +117,13 @@ public class TDCSkillController : TDCBaseController {
 
 	public virtual void ExcuteEffect() {
 		m_EffectManager.ExcuteEffect();
-		m_IsFinishSkill = true;
+		m_IsFinishSkill = 1f;
 	}
 
 	public override void ResetObject()
 	{
 		base.ResetObject();
-		m_IsFinishSkill = false;
+		m_IsFinishSkill = 1f;
 		m_Slot.DeactiveSkill(this);
 		m_TimeDelay = m_SkillData.TimeDelay;
 		m_TimeEffect = m_SkillData.TimeEffect;
@@ -141,14 +150,6 @@ public class TDCSkillController : TDCBaseController {
 		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, Time.deltaTime * 3f);
 	}
 
-	public virtual void UpdateSkill(float dt)
-	{
-		if (m_TimeEffect > 0f)
-		{
-			m_TimeEffect -= dt;
-		}
-	}
-
 	#endregion
 
 	#region Getter & Setter
@@ -173,19 +174,20 @@ public class TDCSkillController : TDCBaseController {
 		m_Owner = owner;
 	}
 
+	public override void SetEnemyController(TDCBaseController controller)
+	{
+		base.SetEnemyController(controller);
+		m_EnemyController = controller;
+	}
+
 	public override TDCBaseController GetEnemyController()
 	{
-		return m_Owner.GetEnemyController();
+		return m_EnemyController;
 	}
 
 	public override Vector3 GetEnemyPosition()
 	{
-		return m_Owner.GetEnemyPosition();
-	}
-
-	public override Vector3 GetTargetPosition()
-	{
-		return m_Owner.GetTargetPosition(); 
+		return m_EnemyController.TransformPosition;
 	}
 
 	public virtual void SetSlot(TDCSkillSlot slot) {
@@ -204,14 +206,19 @@ public class TDCSkillController : TDCBaseController {
 		return m_SkillData;
 	}
 
+	public override int GetMinDamage()
+	{
+		return m_Owner.GetMinDamage();
+	}
+
+	public override int GetMaxDamage()
+	{
+		return m_Owner.GetMaxDamage();
+	}
+
 	#endregion
 
 	#region FSM
-
-	internal override bool HaveEnemy()
-	{
-		return m_Owner.HaveEnemy();
-	}
 
 	internal override bool MoveToEnemy()
 	{
@@ -223,6 +230,10 @@ public class TDCSkillController : TDCBaseController {
 			var range = enemy.GetColliderRadius();
 			return distance < range * range; 
 		}
+		else
+		{
+			return MoveToTarget();
+		}
 		return true;
 	}
 
@@ -232,7 +243,8 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	internal virtual bool IsFinishSkill() {
-		return m_IsFinishSkill;
+		m_IsFinishSkill -= Time.deltaTime;
+		return m_IsFinishSkill < 0f;
 	}
 
 	internal virtual bool CanActiveSkill() {

@@ -35,6 +35,8 @@ public class TDCSkillSlot {
 				m_SkillController.SetSlot(this);
 				m_SkillController.SetActive(true);
 				m_SkillController.SetOwner(m_Owner);
+				m_SkillController.SetTargetPosition(m_Owner.GetEnemyPosition());
+				m_SkillController.SetEnemyController(m_Owner.GetEnemyController());
 				m_SkillController.SetTimeDelay(m_SkillData.TimeDelay);
 				m_SkillController.SetTimeEffect(m_SkillData.TimeEffect);
 				m_SkillController.SetEffectPerTime(m_SkillData.EffectPerTime);
@@ -57,10 +59,6 @@ public class TDCSkillSlot {
 		if (m_TimeDelay > 0f)
 		{
 			m_TimeDelay -= dt;
-		}
-		if (m_SkillController != null)
-		{
-			m_SkillController.UpdateSkill(dt);
 		}
 	}
 

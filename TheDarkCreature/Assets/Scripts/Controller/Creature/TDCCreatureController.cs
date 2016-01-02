@@ -7,10 +7,12 @@ public class TDCCreatureController : TDCBaseController {
 
 	#region Property
 	[SerializeField]
-	private int HealthPoint = 0;
-
+	private int m_HealthPoint = 0;
+	[SerializeField]
 	private int m_HeatPoint = 0;
+	[SerializeField]
 	private int m_HungerPoint = 0;
+	[SerializeField]
 	private int m_SanityPoint = 0;
 
 	protected Animator m_AnimatorController;
@@ -60,7 +62,6 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
 		m_FSMManager.RegisterCondition("MoveToEnemy", MoveToEnemy);
 		m_FSMManager.RegisterCondition("FoundEnemy", FoundEnemy);
-		m_FSMManager.RegisterCondition("IsEnemyDie", IsEnemyDie);
 		m_FSMManager.RegisterCondition("IsDeath", IsDeath);
 		m_FSMManager.RegisterCondition("IsToFarGroup", IsToFarGroup);
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
@@ -71,27 +72,27 @@ public class TDCCreatureController : TDCBaseController {
 	protected override void Update ()
 	{
 		base.Update ();
+		m_HealthPoint = GetHealth();
 		if (m_CreatureData != null) {
-			m_CreatureData.CurrentHP -= m_DamageTake;
+			m_HealthPoint -= m_DamageTake;
 			m_DamageTake = 0;
-			// UI
-			HealthPoint = m_CreatureData.CurrentHP;
+			SetHealth(m_HealthPoint);
 		}
-		if (m_HungerPoint != 0)
-		{
-			m_CreatureData.CurrentHungerPoint += m_HungerPoint;
-			m_HungerPoint = 0;
-		}
-		if (m_SanityPoint != 0)
-		{
-			m_CreatureData.CurrentSanityPoint += m_SanityPoint;
-			m_SanityPoint = 0;
-		}
-		if (m_HeatPoint != 0)
-		{
-			m_CreatureData.CurrentHeatPoint += m_HeatPoint;
-			m_HeatPoint = 0;
-		}
+//		if (m_HungerPoint != 0)
+//		{
+//			m_CreatureData.CurrentHungerPoint += m_HungerPoint;
+//			m_HungerPoint = 0;
+//		}
+//		if (m_SanityPoint != 0)
+//		{
+//			m_CreatureData.CurrentSanityPoint += m_SanityPoint;
+//			m_SanityPoint = 0;
+//		}
+//		if (m_HeatPoint != 0)
+//		{
+//			m_CreatureData.CurrentHeatPoint += m_HeatPoint;
+//			m_HeatPoint = 0;
+//		}
 	}
 
 	public override void OnBecameVisible()
@@ -199,6 +200,7 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override void ResetObject ()
 	{
+		base.ResetObject();
 		SetHealth (GetMaxHealth());
 		SetEnemyController (null);
 	}
@@ -208,28 +210,17 @@ public class TDCCreatureController : TDCBaseController {
 	#region FSM
 
 	internal override bool HaveEnemy() {
-		return false;
+		base.HaveEnemy();
+		var enemyCtrl = GetEnemyController();
+		return enemyCtrl != null && enemyCtrl.GetActive();
 	}
 
 	internal virtual bool IsToFarGroup() {
 		return false;
 	}
 
-	internal virtual bool IsEnemyDie() {
-		if (m_EnemyController != null)
-		{
-			var enemy = m_EnemyController.GetHealth() <= 0 || m_EnemyController.GetActive() == false;
-			if (enemy)
-			{
-				SetEnemyController(null);
-			}
-			return enemy;
-		}
-		return true;
-	}
-
 	internal virtual bool IsDeath() {
-		return m_CreatureData.CurrentHP <= 0f || GetActive() == false;
+		return GetHealth() <= 0f || GetActive() == false;
 	}
 
 	internal virtual bool CanMove() {
@@ -339,20 +330,6 @@ public class TDCCreatureController : TDCBaseController {
 	public override bool GetCanMove() {
 		return m_CanMove;
 	}
-	
-	public override Vector3 GetEnemyPosition() {
-		return base.GetEnemyPosition();
-	}
-	
-	public override void SetEnemyController(TDCBaseController controller)
-	{
-		base.SetEnemyController (controller);
-	}
-	
-	public override TDCBaseController GetEnemyController()
-	{
-		return base.GetEnemyController();
-	}
 
 	public override void SetAnimation(EAnimation anim) {
 		base.SetAnimation (anim);
@@ -361,14 +338,6 @@ public class TDCCreatureController : TDCBaseController {
 		}
 	}
 	
-	public override Vector3 GetTargetPosition() {
-		return base.GetTargetPosition();
-	}
-	
-	public override void SetTargetPosition(Vector3 pos) {
-		base.SetTargetPosition (pos);
-	}
-
 	public override float GetDetectEnemyRange() {
 		return m_CreatureData.DetectRange;
 	}
@@ -388,7 +357,10 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override void SetHealth (int value)
 	{
+		base.SetHealth(value);
 		m_CreatureData.CurrentHP = value;
+		var percentHP = m_CreatureData.CurrentHP / m_CreatureData.MaxHP * 100;
+		CallBackEvent("OnHealthPoint" + percentHP);
 	}
 
 	public override int GetMaxHealth() {

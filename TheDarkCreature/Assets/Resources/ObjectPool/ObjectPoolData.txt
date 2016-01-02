@@ -1,4 +1,5 @@
 ﻿{
 	"FlameBody": 10,
+	"NormalRangeAttack": 10,
 	"CampFire": 5
 }

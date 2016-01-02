@@ -26,7 +26,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	protected FSMManager m_FSMManager;
 	protected Transform m_Transform;
 	protected Vector3 m_StartPosition;
-    protected bool m_IsActive = true;
+	protected bool m_IsActive = false;
 	protected float m_WaitingTimeInterval = 3f;
 	protected TDCBaseGroupController m_GroupController;
 	protected CapsuleCollider m_Collider;
@@ -54,8 +54,11 @@ public class TDCBaseController : TDCMonoBehaviour
 	public event Action OnFindRandomEvent;
 	public event Action OnMoveEvent;
 	public event Action OnApplyDamageEvent;
+	public event Action OnHealthPoint50Event;
+	public event Action OnHealthPoint25Event;
 	public event Action OnAttackEvent;
 	public event Action OnAvoidEvent;
+	public event Action OnAliveEvent;
 	public event Action OnDeathEvent;
 
 	#endregion
@@ -74,6 +77,14 @@ public class TDCBaseController : TDCMonoBehaviour
 		LoadEventCallBack();
 	}
 
+	protected virtual void OnEnable() {
+		
+	}
+
+	protected virtual void OnDisable() {
+	
+	}
+
 	protected virtual void Start()
 	{
 		var waiting 		= new FSMWaitingState (this);
@@ -88,15 +99,21 @@ public class TDCBaseController : TDCMonoBehaviour
     }
 
 	protected virtual void Update() {
-
+		if (GetActive())
+		{
+			CallBackEvent("OnAlive");
+		}
 	}
 
 	protected virtual void LateUpdate() {
-
+		
 	}
 
 	protected virtual void FixedUpdate() {
-		
+		if (!HaveEnemy())
+		{
+			SetEnemyController(null);
+		}
 	}
 
 	public virtual void OnBecameVisible() {
@@ -184,8 +201,11 @@ public class TDCBaseController : TDCMonoBehaviour
 		m_TriggerEvents.Add("OnFindRandom", OnFindRandomEvent);
 		m_TriggerEvents.Add("OnMove", OnMoveEvent);
 		m_TriggerEvents.Add("OnApplyDamage", OnApplyDamageEvent);
+		m_TriggerEvents.Add("OnHealthPoint50", OnHealthPoint50Event);
+		m_TriggerEvents.Add("OnHealthPoint25", OnHealthPoint25Event);
 		m_TriggerEvents.Add("OnAttack", OnAttackEvent);
 		m_TriggerEvents.Add("OnAvoid", OnAvoidEvent);
+		m_TriggerEvents.Add("OnAlive", OnAliveEvent);
 		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
 	}
 

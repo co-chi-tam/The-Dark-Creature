@@ -13,10 +13,6 @@ public class TDCCreatureData : TDCBaseData {
 	private TDCObjectProperty<int> m_MaxDamage;
 	private TDCObjectProperty<int> m_CurrentHeatPoint;
 	private TDCObjectProperty<int> m_MaxHeatPoint;
-	private TDCObjectProperty<int> m_CurrentHungerPoint;
-	private TDCObjectProperty<int> m_MaxHungerPoint;
-	private TDCObjectProperty<int> m_CurrentSanityPoint;
-	private TDCObjectProperty<int> m_MaxSanityPoint;
 
 	private float m_DetectRange;
 	private float m_AttackRange;
@@ -93,25 +89,7 @@ public class TDCCreatureData : TDCBaseData {
 		set { m_MaxHeatPoint.Value = value; }
 	}
 
-	public int CurrentHungerPoint {
-		get { return m_CurrentHungerPoint.Value; }
-		set { m_CurrentHungerPoint.Value = value; }
-	}
 
-	public int MaxHungerPoint {
-		get { return m_MaxHungerPoint.Value; }
-		set { m_MaxHungerPoint.Value = value; }
-	}
-
-	public int CurrentSanityPoint {
-		get { return m_CurrentSanityPoint.Value; }
-		set { m_CurrentSanityPoint.Value = value; }
-	}
-
-	public int MaxSanityPoint {
-		get { return m_MaxSanityPoint.Value; }
-		set { m_MaxSanityPoint.Value = value; }
-	}
 
     public TDCCreatureData() : base()
 	{
@@ -123,10 +101,6 @@ public class TDCCreatureData : TDCBaseData {
 		m_MaxDamage = new TDCObjectProperty<int>("MaxDamage");
 		m_CurrentHeatPoint = new TDCObjectProperty<int>("CurrentHeatPoint");
 		m_MaxHeatPoint = new TDCObjectProperty<int>("MaxHeatPoint");
-		m_CurrentHungerPoint = new TDCObjectProperty<int>("CurrentHungerPoint");
-		m_MaxHungerPoint = new TDCObjectProperty<int>("MaxHungerPoint");
-		m_CurrentSanityPoint = new TDCObjectProperty<int>("CurrentSanityPoint");
-		m_MaxSanityPoint = new TDCObjectProperty<int>("MaxSanityPoint");
 
 		m_DetectRange = 0f;
 		m_AttackRange = 0f;
@@ -137,10 +111,6 @@ public class TDCCreatureData : TDCBaseData {
 
 		RegisterProperty(m_CurrentHeatPoint);
 		RegisterProperty(m_MaxHeatPoint);
-		RegisterProperty(m_CurrentHungerPoint);
-		RegisterProperty(m_MaxHungerPoint);
-		RegisterProperty(m_CurrentSanityPoint);
-		RegisterProperty(m_MaxSanityPoint);
 		RegisterProperty(m_CurrentHP);
 		RegisterProperty(m_MaxHP);
 		RegisterProperty(m_MinDamage);
@@ -163,10 +133,6 @@ public class TDCCreatureData : TDCBaseData {
 		tmp.MaxHP = instance.MaxHP;
 		tmp.CurrentHeatPoint = instance.CurrentHeatPoint;
 		tmp.MaxHeatPoint = instance.MaxHeatPoint;
-		tmp.CurrentHungerPoint = instance.CurrentHungerPoint;
-		tmp.MaxHungerPoint = instance.MaxHungerPoint;
-		tmp.CurrentSanityPoint = instance.CurrentSanityPoint;
-		tmp.MaxSanityPoint = instance.MaxSanityPoint;
 		tmp.DetectRange = instance.DetectRange;
 		tmp.AttackRange = instance.AttackRange;
 		tmp.TypeEnemies = instance.TypeEnemies;

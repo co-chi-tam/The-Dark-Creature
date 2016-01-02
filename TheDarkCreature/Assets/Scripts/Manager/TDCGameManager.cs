@@ -163,6 +163,7 @@ public class TDCGameManager : MonoBehaviour {
 		var controller = gObject.AddComponent<TDCGroupCreatureController> ();
 		var groupController = controller as TDCGroupCreatureController;
 
+		controller.SetActive(true);
 		controller.SetData (data);
 		controller.Init ();
 		groupController.CreatePoolMember ();
@@ -177,10 +178,10 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public TDCBaseController CreatePlayer(TDCEnum.EGameType type, 
-		Vector3 position, 
-		Quaternion rotation, 
-		GameObject parent = null) {
-		TDCCreatureData data = null;
+											Vector3 position, 
+											Quaternion rotation, 
+											GameObject parent = null) {
+		TDCBaseData data = null;
 		GameObject gObject = null;
 		TDCBaseController controller = null;
 		var random = Random.Range (0, 9999);
@@ -199,6 +200,7 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		gObject.transform.position = position;
 		gObject.transform.rotation = rotation;
+		controller.SetActive(true);
 		controller.SetData (data);
 		controller.Init ();
 		controller.name = string.Format("{0}-{1}", type, m_ListController.Count);
@@ -206,7 +208,6 @@ public class TDCGameManager : MonoBehaviour {
 			gObject.transform.SetParent (parent.transform);		
 		}
 		m_ListController.Add(controller.name, controller);
-		controller.SetActive(true);
 		return controller;
 	}
 
@@ -261,6 +262,7 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		gObject.transform.position = position;
 		gObject.transform.rotation = rotation;
+		controller.SetActive(true);
 		controller.SetData (data);
 		controller.Init ();
 		controller.name = string.Format("{0}-{1}", type, m_ListController.Count);

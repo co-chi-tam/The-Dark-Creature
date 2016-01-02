@@ -18,21 +18,12 @@ public class TDCEasyAIController : TDCCreatureController
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
 	
 		m_FSMManager.LoadFSM(m_CreatureData.FSMPath);
-
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.FlameBody, this);
     }
 	
 	protected override void FixedUpdate () {
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
-	}
-
-	protected override void Update()
-	{
-		base.Update();
-
-		m_SkillSlot.UpdateSkill(Time.deltaTime);
 	}
 
     #endregion
@@ -42,7 +33,7 @@ public class TDCEasyAIController : TDCCreatureController
 	internal override bool HaveEnemy() {
 		var enemies = GetTypeEnemies();
 		var enemyCtrl = GetEnemyController();
-		return enemyCtrl != null && enemies.IndexOf (enemyCtrl.GetGameType()) == -1;
+		return base.HaveEnemy() && enemies.IndexOf (enemyCtrl.GetGameType()) == -1;
 	}
 
 	internal override bool IsToFarGroup() {
@@ -59,46 +50,7 @@ public class TDCEasyAIController : TDCCreatureController
 			distance = (TransformPosition - m_GroupController.TransformPosition).sqrMagnitude;
 			range = m_GroupController.GetRadius();
 		}
-		isFar = distance > range * range;
-		if (isFar)
-		{
-			SetEnemyController(null);
-		}
-		return isFar;
-	}
-
-	internal override bool IsEnemyDie() {
-		return base.IsEnemyDie();
-	}
-
-	internal override bool IsDeath() {
-		return base.IsDeath();
-	}
-
-	internal override bool CanMove() {
-        return m_CanMove;
-    }
-
-	internal override bool MoveToTarget()
-	{
-		return base.MoveToTarget(); 
-	}
-
-	internal override bool MoveToEnemy()
-	{
-		return base.MoveToEnemy();
-	}
-
-	internal override bool CountdownWaitingTime() {
-		return base.CountdownWaitingTime();
-    }
-
-	internal override bool FoundEnemy() {
-		return base.FoundEnemy();
-    }
-
-	internal override bool FoundFood() {
-		return base.FoundFood();
+		return distance > range * range;
 	}
 
 	#endregion

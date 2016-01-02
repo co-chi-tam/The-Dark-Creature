@@ -47,7 +47,10 @@ public class TDCNormalRangeAttackController : TDCSkillController {
 	internal override void ApplyDamageEffect(Dictionary<string, object> pars) {
 		base.ApplyDamageEffect(pars);
 		var paramValue = int.Parse(pars["Damage"].ToString());
-		GetEnemyController().ApplyDamage (paramValue, m_Owner);
+		var enemy = GetEnemyController();
+		if (enemy == null) {
+			enemy.ApplyDamage (paramValue, m_Owner);
+		}
 	}
 
 	internal override bool CanActiveEffect(Dictionary<string, object> pars)

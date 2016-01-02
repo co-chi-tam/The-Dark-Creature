@@ -8,22 +8,22 @@ namespace ObjectPool
     public class TDCObjectPool<T> where T : class
     {
         private LinkedList<T> m_ListUsing;
-		private Stack<T> m_ListWaiting;
+		private Queue<T> m_ListWaiting;
 
         public TDCObjectPool()
         {
 			m_ListUsing = new LinkedList<T>();
-			m_ListWaiting = new Stack<T>();
+			m_ListWaiting = new Queue<T>();
         }
 
         public void Create(T item)
         {
-			m_ListWaiting.Push(item);
+			m_ListWaiting.Enqueue(item);
         }
 
         public T Get()
         {
-			T tmp = m_ListWaiting.Pop();
+			T tmp = m_ListWaiting.Dequeue();
             m_ListUsing.AddFirst(tmp);
             return tmp;
 		}
@@ -32,7 +32,7 @@ namespace ObjectPool
 		{
 			if (m_ListWaiting.Count > 0)
 			{
-				value = m_ListWaiting.Pop();
+				value = m_ListWaiting.Dequeue();
 				m_ListUsing.AddFirst(value);
 				return true;
 			}
@@ -45,7 +45,7 @@ namespace ObjectPool
             T tmp = m_ListUsing.Find(item).Value;
             if (tmp == null) return;
             m_ListUsing.Remove(tmp);
-			m_ListWaiting.Push(tmp);
+			m_ListWaiting.Enqueue(tmp);
         }
 
 		public void Set(int index)
@@ -53,7 +53,7 @@ namespace ObjectPool
 			T tmp = m_ListUsing.ElementAt (index);
 			if (tmp == null) return;
 			m_ListUsing.Remove(tmp);
-			m_ListWaiting.Push(tmp);
+			m_ListWaiting.Enqueue(tmp);
 		}
 
 		public int Count() {
