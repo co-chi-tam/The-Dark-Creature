@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Effect;
 
-public class TDCNormalRangeAttackController : TDCSkillController {
+public class TDCActiveSkillController : TDCSkillController {
 
 	#region Implementation Monobehaviour
 
@@ -36,20 +36,12 @@ public class TDCNormalRangeAttackController : TDCSkillController {
 
 	#region Effect
 
-	internal override void AddValueEffect(Dictionary<string, object> pars) {
-		base.AddValueEffect(pars);
-	}
-
-	internal override void SubtractValueEffect(Dictionary<string, object> pars) {
-		base.SubtractValueEffect(pars);
-	}
-
 	internal override void ApplyDamageEffect(Dictionary<string, object> pars) {
 		base.ApplyDamageEffect(pars);
 		var paramValue = int.Parse(pars["Damage"].ToString());
 		var enemy = GetEnemyController();
-		if (enemy == null) {
-			enemy.ApplyDamage (paramValue, m_Owner);
+		if (enemy != null) {
+			enemy.ApplyDamage (paramValue + GetDamage(), m_Owner);
 		}
 	}
 

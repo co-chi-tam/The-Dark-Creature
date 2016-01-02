@@ -6,7 +6,7 @@
 			"GameType": 301,
 			"CreatureType": 3,
 			"Description": "",
-			"ModelPath": ["Prefabs/CampFire"],
+			"ModelPath": ["Prefabs/Creature/CampFire"],
 			"FSMPath": "FSM/Creature/CampFireFSM",
 			"IconPath": "CampFire",
 			"Duration": 120,

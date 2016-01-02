@@ -246,15 +246,16 @@ public class TDCGameManager : MonoBehaviour {
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent <TDCCampFireController>();
 			break;
-		case TDCEnum.EGameType.FlameBody:
+		case TDCEnum.EGameType.FlameBodySkill:
 			data = m_DataReader.GetSkillData (type);	
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCFlameBodyController>();
+			controller = gObject.AddComponent<TDCPasiveSkillController>();
 			break;
-		case TDCEnum.EGameType.NormalRangeAttack:
+		case TDCEnum.EGameType.NormalMeleeSkill:
+		case TDCEnum.EGameType.NormalRangeSkill:
 			data = m_DataReader.GetSkillData (type);	
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCNormalRangeAttackController>();
+			controller = gObject.AddComponent<TDCActiveSkillController>();
 			break;
 		default:
 

@@ -30,8 +30,9 @@ public class TDCEnum{
 		CampFire	= 301,
 
 		// Skill
-		FlameBody   = 501,
-		NormalRangeAttack = 502,
+		FlameBodySkill   = 501,
+		NormalRangeSkill = 502,
+		NormalMeleeSkill = 503,
 	}
 
 	public enum ESkillType : int {

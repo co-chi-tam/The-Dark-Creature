@@ -33,7 +33,7 @@ public class TDCPlayerController : TDCCreatureController
 
 		m_FSMManager.LoadFSM(m_PlayerData.FSMPath);
 
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeAttack, this);
+		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeSkill, this);
 	}
 
 	protected override void FixedUpdate()

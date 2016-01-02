@@ -234,7 +234,7 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	internal virtual bool IsRepeatSkill() {
-		return false;
+		return m_SkillData.RepeatSkill;
 	}
 
 	internal virtual bool HaveCreatureAroundOwner()
@@ -291,8 +291,6 @@ public class TDCSkillController : TDCBaseController {
 			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
 		}
 #endif
-		var damage = int.Parse (pars["Damage"].ToString());
-		m_EnemyController.ApplyDamage(damage + GetDamage(), m_Owner);
 	}
 
 	internal virtual bool CanActiveEffect(Dictionary<string, object> pars) {

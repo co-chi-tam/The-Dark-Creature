@@ -2,10 +2,10 @@
 	"skills": [
 		{
 			"ID": 0,
-			"Name": "FlameBody",
+			"Name": "FlameBodySkill",
 			"Description": "",
 			"GameType": 501,
-			"IconPath": "FlameFire",
+			"IconPath": "FlameFireSkill",
 			"SkillLevel": 1,
 			"SkillType": 1,
 			"CostHealthPoint": 0,
@@ -17,15 +17,15 @@
 			"EffectPerTime": 0,
 			"RepeatSkill": true,
 			"TriggerEvent": "OnAttack",
-			"ModelPath": ["Prefabs/FlameBody"],
-			"FSMPath": "FSM/Skill/FlameBodyFSM"
-			"EffectPath": "Effect/Skill/FlameBodyEffect"
+			"ModelPath": ["Prefabs/Skill/FlameBodySkill"],
+			"FSMPath": "FSM/Skill/FlameBodySkillFSM"
+			"EffectPath": "Effect/Skill/FlameBodySkillEffect"
 		},{
 			"ID": 1,
-			"Name": "Normal range attack",
+			"Name": "Normal range skill",
 			"Description": "",
 			"GameType": 502,
-			"IconPath": "NormalRangeAttack",
+			"IconPath": "NormalRangeSkill",
 			"SkillLevel": 1,
 			"SkillType": 2,
 			"CostHealthPoint": 0,
@@ -37,9 +37,29 @@
 			"EffectPerTime": 0,
 			"RepeatSkill": false,
 			"TriggerEvent": "OnActive",
-			"ModelPath": ["Prefabs/NormalRangeAttack"],
-			"FSMPath": "FSM/Skill/NormalRangeAttackFSM"
-			"EffectPath": "Effect/Skill/NormalRangeAttackEffect"
+			"ModelPath": ["Prefabs/Skill/NormalRangeSkill"],
+			"FSMPath": "FSM/Skill/NormalRangeSkillFSM"
+			"EffectPath": "Effect/Skill/NormalRangeSkillEffect"
+		},{
+			"ID": 2,
+			"Name": "Normal melee skill",
+			"Description": "",
+			"GameType": 503,
+			"IconPath": "NormalRangeSkill",
+			"SkillLevel": 1,
+			"SkillType": 2,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"EffectRadius": 3,
+			"TimeDelay": 1,
+			"TimeEffect": 0,
+			"EffectPerTime": 0,
+			"RepeatSkill": false,
+			"TriggerEvent": "OnActive",
+			"ModelPath": ["Prefabs/Skill/NormalMeleeSkill"],
+			"FSMPath": "FSM/Skill/InstanceSkillFSM"
+			"EffectPath": "Effect/Skill/NormalMeleeSkillEffect"
 		}
 	]
 }

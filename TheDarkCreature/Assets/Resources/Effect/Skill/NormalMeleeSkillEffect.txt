@@ -7,14 +7,14 @@
 		{
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["AddValueEffect(HeatPoint:10)"]
+	        "ExcuteMethods": ["ApplyDamageEffect(Damage:1)"]
 	    }
     ],
     "NoMethods": [
     	{
 	    	"ID": 2,
    			"Type": 10,
-	        "ExcuteMethods": ["PrintDebug(FlameBody:Can not active effect)"]
+	        "ExcuteMethods": ["PrintDebug(NormaleMeleeSkillEffect:Can not active effect)"]
 	    }
     ]
   }
