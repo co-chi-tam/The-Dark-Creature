@@ -52,7 +52,6 @@ public class TDCBaseController : TDCMonoBehaviour
 		m_Collider = this.GetComponent<CapsuleCollider> ();
 		m_GameManager = TDCGameManager.GetInstance();
 		m_FSMManager = new FSMManager();
-		SetActive (true);
 
 		var waiting 		= new FSMWaitingState (this);
 		var waitingOne 		= new FSMWaitingOneSecondState (this);
