@@ -39,7 +39,7 @@ public class UIInventory : MonoBehaviour {
 	[SerializeField]
 	private TDCCreatureController m_OwnerController;
 
-	private TDCCreatureData m_OwnerData;
+	private TDCEntity m_OwnerEnity;
 	private UISlot[] m_ItemSlots;
 
 	public delegate void SelectedSlot(int itemIndex);
@@ -64,7 +64,7 @@ public class UIInventory : MonoBehaviour {
 	#region Main method
 
 	private void SortInventory() {
-		var inventory = m_OwnerData.Inventory;
+		var inventory = m_OwnerEnity.GetInventory();
 		QuickSort.SimpleSort(inventory, (x, y) => {
 			var lh = (int) x.GetData().GameType;
 			var rh = (int) y.GetData().GameType;
@@ -75,14 +75,14 @@ public class UIInventory : MonoBehaviour {
 
 	public void SetPlayer(TDCCreatureController owner) {
 		m_OwnerController = owner;
-		m_OwnerData = m_OwnerController.GetData () as TDCCreatureData;
+		m_OwnerEnity = owner.GetEntity();
 		LoadAllSlots();	
 	}
 
 	public bool AddItem(int index, TDCItemController item) {
 		m_ItemSlots[index].OnSelectedSlot = m_OwnerController.OnSelectedItem;
 		m_ItemSlots[index].LoadSlot (index, item);
-		m_OwnerData.Inventory[index].GetData().Owner = m_OwnerController;
+		m_OwnerEnity.GetInventory()[index].GetData().Owner = m_OwnerController;
 		return true;
 	}
 
@@ -96,29 +96,31 @@ public class UIInventory : MonoBehaviour {
 	}
 
 	public void LoadAllSlots() {
-		if (m_OwnerData == null)
+		if (m_OwnerEnity == null)
 			return;
 		m_ItemSlots = null;
 		m_ItemSlots = new UISlot [this.transform.childCount];
-		for (int i = 0; i < m_OwnerData.Inventory.Length; i++) {
+		var inventory = m_OwnerEnity.GetInventory();
+		for (int i = 0; i < inventory.Length; i++) {
 			var child = this.transform.GetChild (i).GetComponent<UISlot>();
-			if (m_OwnerData.Inventory[i] != null) {
+			if (inventory[i] != null) {
 				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
-				child.LoadSlot (i, m_OwnerData.Inventory[i]);
-                m_OwnerData.Inventory[i].GetData().Owner = m_OwnerController;
+				child.LoadSlot (i, inventory[i]);
+				inventory[i].GetData().Owner = m_OwnerController;
 			}
 			m_ItemSlots[i] = child;
 		}
 	}
 
 	public void ReloadSlots() {
-		for (int i = 0; i < m_OwnerData.Inventory.Length; i++) {
+		var inventory = m_OwnerEnity.GetInventory();
+		for (int i = 0; i < inventory.Length; i++) {
 			var child = m_ItemSlots[i];
-			if (m_OwnerData.Inventory[i] != null)
+			if (inventory[i] != null)
 			{
 				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
-				child.LoadSlot(i, m_OwnerData.Inventory[i]);
-				m_OwnerData.Inventory[i].GetData().Owner = m_OwnerController;
+				child.LoadSlot(i, inventory[i]);
+				inventory[i].GetData().Owner = m_OwnerController;
 			}
 			else
 			{

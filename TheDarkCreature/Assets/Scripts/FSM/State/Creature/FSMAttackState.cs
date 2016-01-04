@@ -14,7 +14,7 @@ public class FSMAttackState : FSMBaseState {
 	}
 
 	public override void UpdateState() {
-		if (m_Controller.GetEnemyController() != null)
+		if (m_Controller.GetEnemyEntity() != null)
 		{
 			var enemyPos = m_Controller.GetEnemyPosition();
 			m_Controller.LookAtRotation(enemyPos);
@@ -31,6 +31,6 @@ public class FSMAttackState : FSMBaseState {
 
 	public void AttackEnemy() {
 		var damage = m_Controller.GetDamage();
-		m_Controller.GetEnemyController().ApplyDamage(damage, m_Controller);
+		m_Controller.GetEnemyEntity().ApplyDamage(damage, m_Controller.GetEntity());
 	}
 }

@@ -6,8 +6,7 @@ public class TDCBaseGroupController : TDCBaseController
 {
 	#region Properties
 
-	protected TDCObjectPool<TDCBaseController> m_MemberPool;
-	protected TDCGroupData m_GroupData;
+	protected TDCObjectPool<TDCEntity> m_MemberPool;
 
 	#endregion
 
@@ -16,7 +15,7 @@ public class TDCBaseGroupController : TDCBaseController
 	public override void Init ()
 	{
 		base.Init ();
-		m_MemberPool = new TDCObjectPool<TDCBaseController> ();
+		m_MemberPool = new TDCObjectPool<TDCEntity> ();
 	}
 
 	protected override void Start()
@@ -54,18 +53,18 @@ public class TDCBaseGroupController : TDCBaseController
 
 	public virtual float GetTimeRespawnMember ()
 	{
-		return m_GroupData.TimeRespawnMember;
+		return m_Entity.GetTimeRespawnMember();
 	}
 
 	public virtual void CreatePoolMember() {
 		
 	}
 
-	public virtual void ReturnMember(TDCBaseController member) {
+	public virtual void ReturnMember(TDCEntity member) {
 		
 	}
 
-	public virtual TDCBaseController SpawnMember() {
+	public virtual TDCEntity SpawnMember() {
 		return null;
 	}
 
@@ -83,7 +82,7 @@ public class TDCBaseGroupController : TDCBaseController
 
 	internal virtual bool IsActive()
 	{
-		return m_IsActive;
+		return GetActive();
 	}
 
 	internal virtual bool IsFullGroup() {
@@ -99,31 +98,20 @@ public class TDCBaseGroupController : TDCBaseController
 
 	#region Getter & Setter
 
-	public override void SetData (TDCBaseData data)
-	{
-		base.SetData (data);
-		m_GroupData = data as TDCGroupData;
-	}
-
-	public override TDCBaseData GetData ()
-	{
-		return m_GroupData as TDCBaseData;
-	}
-
 	public virtual int GetMinMember() {
-		return m_GroupData.MinMember;
+		return m_Entity.GetMinMember();
 	}
 
 	public virtual int GetMaxMember() {
-		return m_GroupData.MaxMember;
+		return m_Entity.GetMaxMember();
 	}
 
 	public virtual float GetRadius() {
-		return m_GroupData.Radius;
+		return m_Entity.GetRadius();
 	}
 
 	public virtual TDCEnum.EGameType GetGroupMemberType() {
-		return m_GroupData.MemberType;
+		return m_Entity.GetGroupMemberType();
 	}
 
 	#endregion

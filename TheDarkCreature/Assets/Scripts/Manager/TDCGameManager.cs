@@ -32,8 +32,9 @@ public class TDCGameManager : MonoBehaviour {
     #region Properties
 
 	private TDCDataReader m_DataReader;
-	private Dictionary<string, TDCBaseController> m_ListController;
-	private Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCBaseController>> m_ObjectPool;
+	private Dictionary<string, TDCBaseController> m_ListControllers;
+	private Dictionary<string, TDCEntity> m_ListEntities;
+	private Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCEntity>> m_ObjectPool;
 
     #endregion
 
@@ -44,8 +45,9 @@ public class TDCGameManager : MonoBehaviour {
 
 		DontDestroyOnLoad(this.gameObject);
 		m_DataReader = new TDCDataReader();
-		m_ListController = new Dictionary<string, TDCBaseController>();
-		m_ObjectPool = new Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCBaseController>>();
+		m_ListControllers = new Dictionary<string, TDCBaseController>();
+		m_ListEntities = new Dictionary<string, TDCEntity>();
+		m_ObjectPool = new Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCEntity>>();
 
 #if UNITY_ANDROID	
 		Screen.sleepTimeout = SleepTimeout.NeverSleep;
@@ -68,7 +70,7 @@ public class TDCGameManager : MonoBehaviour {
 		for (int i = 0; i < objPool.Count; i++)
 		{
 			var poolData = objPool[i];
-			m_ObjectPool.Add(poolData.GameType, new TDCObjectPool<TDCBaseController>());
+			m_ObjectPool.Add(poolData.GameType, new TDCObjectPool<TDCEntity>());
 			for (int x = 0; x < poolData.Amount; x++) {
 				var obj = CreateCreature(poolData.GameType, Vector3.zero, Quaternion.identity, this.gameObject);
 				obj.SetActive(false);
@@ -78,23 +80,37 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public void LoadMap(string mapName) {
-		CreatePlayer (TDCEnum.EGameType.Satla, Vector3.zero, Quaternion.identity);
+		var player = CreatePlayer (TDCEnum.EGameType.Satla, Vector3.zero, Quaternion.identity);
+		player.SetActive(true);
 		var map = m_DataReader.GetMap(mapName);
 		for (int i = 0; i < map.Count; i++)
 		{
 			var mapObj = map[i];
-			CreateGroup(mapObj.GameType, mapObj.Position, mapObj.Rotation);
+			var group = CreateGroup(mapObj.GameType, mapObj.Position, mapObj.Rotation);
+			group.SetActive(true);
 		}
 	}
 
 	public TDCBaseController GetControllerByIndex(int index) {
-		return m_ListController.ElementAt (index).Value;
+		return m_ListControllers.ElementAt (index).Value;
 	}
 
 	public TDCBaseController GetControllerByName(string name) {
-		if (m_ListController.ContainsKey(name))
+		if (m_ListControllers.ContainsKey(name))
 		{
-			return m_ListController[name];
+			return m_ListControllers[name];
+		}
+		return null;
+	}
+
+	public TDCEntity GetEntityByIndex(int index) {
+		return m_ListEntities.ElementAt (index).Value;
+	}
+
+	public TDCEntity GetEntityByName(string name) {
+		if (m_ListEntities.ContainsKey(name))
+		{
+			return m_ListEntities[name];
 		}
 		return null;
 	}
@@ -103,8 +119,8 @@ public class TDCGameManager : MonoBehaviour {
 		return m_DataReader.GetSkillData(skill);
 	}
 
-	public TDCBaseController GetObjectPool(TDCEnum.EGameType type) {
-		TDCBaseController result = null;
+	public TDCEntity GetObjectPool(TDCEnum.EGameType type) {
+		TDCEntity result = null;
 		if (m_ObjectPool[type].Get(ref result))
 		{
 			return result;
@@ -112,7 +128,7 @@ public class TDCGameManager : MonoBehaviour {
 		return null;
 	}
 
-	public bool GetObjectPool(TDCEnum.EGameType type, ref TDCBaseController obj) {
+	public bool GetObjectPool(TDCEnum.EGameType type, ref TDCEntity obj) {
 		if (m_ObjectPool[type].Get(ref obj))
 		{
 			return true;
@@ -120,8 +136,8 @@ public class TDCGameManager : MonoBehaviour {
 		return false;
 	}
 
-	public void SetObjectPool(TDCBaseController obj) {
-		var gameType = obj.GetData().GameType;
+	public void SetObjectPool(TDCEntity obj) {
+		var gameType = obj.GetGameType();
 		m_ObjectPool[gameType].Set(obj);
 	}
 
@@ -153,7 +169,7 @@ public class TDCGameManager : MonoBehaviour {
 		return item;
 	}
 
-	public TDCGroupCreatureController CreateGroup(TDCEnum.EGameType type, 
+	public TDCEntity CreateGroup(TDCEnum.EGameType type, 
 	                                               Vector3 position, 
 	                                               Quaternion rotation, 
 	                                               GameObject parent = null) {
@@ -161,29 +177,28 @@ public class TDCGameManager : MonoBehaviour {
 		var data = m_DataReader.GetGroup (type);
 		var gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [random % data.ModelPath.Length]), position, rotation) as GameObject;
 		var controller = gObject.AddComponent<TDCGroupCreatureController> ();
-		var groupController = controller as TDCGroupCreatureController;
-
-		controller.SetActive(true);
-		controller.SetData (data);
+		var entity = new TDCGroup(controller, data);
+		entity.SetActive(false);
+		controller.SetEntity(entity);
 		controller.Init ();
-		groupController.CreatePoolMember ();
-		gObject.transform.position = position;
-		gObject.transform.rotation = rotation;
-		controller.name = string.Format("{0}-{1}", type, m_ListController.Count);
+		controller.CreatePoolMember ();
+		controller.name = string.Format("{0}-{1}", type, m_ListControllers.Count);
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
-		m_ListController.Add(controller.name, controller);
-		return controller;
+		m_ListEntities.Add(controller.name, entity);
+		m_ListControllers.Add(controller.name, controller);
+		return entity;
 	}
 
-	public TDCBaseController CreatePlayer(TDCEnum.EGameType type, 
+	public TDCEntity CreatePlayer(TDCEnum.EGameType type, 
 											Vector3 position, 
 											Quaternion rotation, 
 											GameObject parent = null) {
 		TDCBaseData data = null;
 		GameObject gObject = null;
 		TDCBaseController controller = null;
+		TDCEntity entity = null;
 		var random = Random.Range (0, 9999);
 		switch (type) { 
 			case TDCEnum.EGameType.Dodono:
@@ -198,26 +213,28 @@ public class TDCGameManager : MonoBehaviour {
 
 				break;
 		}
-		gObject.transform.position = position;
-		gObject.transform.rotation = rotation;
-		controller.SetActive(true);
-		controller.SetData (data);
+		entity = new TDCCreature(controller, data);
+		entity.SetActive(false);
+		controller.SetEntity(entity);
 		controller.Init ();
-		controller.name = string.Format("{0}-{1}", type, m_ListController.Count);
+		controller.name = string.Format("{0}-{1}", type, m_ListControllers.Count);
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
-		m_ListController.Add(controller.name, controller);
-		return controller;
+
+		m_ListEntities.Add(controller.name, entity);
+		m_ListControllers.Add(controller.name, controller);
+		return entity;
 	}
 
-	public TDCBaseController CreateCreature(TDCEnum.EGameType type, 
+	public TDCEntity CreateCreature(TDCEnum.EGameType type, 
 	                                        Vector3 position, 
 	                                        Quaternion rotation, 
 	                                        GameObject parent = null) {
 		TDCBaseData data = null;
-		GameObject gObject = null;
 		TDCBaseController controller = null;
+		TDCEntity entity = null;
+		GameObject gObject = null;
 		var random = Random.Range (0, 9999);
 		switch (type) { 
 		case TDCEnum.EGameType.Dodono: 
@@ -225,6 +242,7 @@ public class TDCGameManager : MonoBehaviour {
 			data = m_DataReader.GetCreature (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEasyAIController> ();
+			entity = new TDCCreature(controller, data);
 			break;
 		}
 		case TDCEnum.EGameType.Meat: 
@@ -238,40 +256,46 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.Bush: {
 			data = m_DataReader.GetResource (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCResourceController> ();
+			controller = gObject.AddComponent<TDCEnviromentController> ();
+			entity = new TDCEnviroment(controller, data);
 			break;
 		}
 		case TDCEnum.EGameType.CampFire:
 			data = m_DataReader.GetGObject (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent <TDCCampFireController>();
+			entity = new TDCObject(controller, data);
 			break;
 		case TDCEnum.EGameType.FlameBodySkill:
 			data = m_DataReader.GetSkillData (type);	
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCPasiveSkillController>();
+			entity = new TDCSkill(controller, data);
 			break;
 		case TDCEnum.EGameType.NormalMeleeSkill:
 		case TDCEnum.EGameType.NormalRangeSkill:
+		case TDCEnum.EGameType.EffectPerSecondSkill:
+		case TDCEnum.EGameType.EffectUpdateSkill:
 			data = m_DataReader.GetSkillData (type);	
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCActiveSkillController>();
+			entity = new TDCSkill(controller, data);
 			break;
 		default:
 
 			break;
 		}
-		gObject.transform.position = position;
-		gObject.transform.rotation = rotation;
-		controller.SetActive(true);
-		controller.SetData (data);
+		entity.SetActive(false);
+		controller.SetEntity(entity);
 		controller.Init ();
-		controller.name = string.Format("{0}-{1}", type, m_ListController.Count);
+		controller.name = string.Format("{0}-{1}", type, m_ListControllers.Count);
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
-		m_ListController.Add(controller.name, controller);
-		return controller;
+
+		m_ListEntities.Add(controller.name, entity);
+		m_ListControllers.Add(controller.name, controller);
+		return entity;
 	}
 
     #endregion

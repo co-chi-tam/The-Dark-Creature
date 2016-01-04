@@ -11,7 +11,6 @@ public class TDCPlayerController : TDCCreatureController
 {
     #region Property
 
-	private TDCPlayerData m_PlayerData;
 	private UIInventory m_Inventory;
 	private bool m_TouchedUI = false;
 
@@ -21,6 +20,10 @@ public class TDCPlayerController : TDCCreatureController
 	public override void Init ()
 	{
 		base.Init ();
+
+		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
+
+		m_FSMManager.LoadFSM(m_Entity.GetFSMPath());
 	}
 
 	protected override void Start()
@@ -29,11 +32,9 @@ public class TDCPlayerController : TDCCreatureController
 			
 		m_Inventory 	= UIInventory.GetInstance ();
 
-		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
+		m_Inventory.SetPlayer(this);
 
-		m_FSMManager.LoadFSM(m_PlayerData.FSMPath);
-
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeSkill, this);
+		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.FlameBodySkill, this.GetEntity());
 	}
 
 	protected override void FixedUpdate()
@@ -96,8 +97,8 @@ public class TDCPlayerController : TDCCreatureController
 
 	private void PlayerAction(RaycastHit hitInfo) {
 		var hitGameObject = hitInfo.collider.gameObject;
-		var controller = m_GameManager.GetControllerByName(hitGameObject.name);
-		if (controller != this)
+		var entity = m_GameManager.GetEntityByName(hitGameObject.name);
+		if (entity != this.GetEntity())
 		{
 			var point = hitInfo.point;
 			point.y = 0f;
@@ -106,13 +107,13 @@ public class TDCPlayerController : TDCCreatureController
 				case (int) TDCEnum.ELayer.LayerPlane:
 					{
 						SetTargetPosition(point);
-						SetEnemyController(null);
+						SetEnemyEntity(null);
 					}
 					break;
 				case (int) TDCEnum.ELayer.LayerCreature:
 				case (int) TDCEnum.ELayer.LayerEnviroment:
 					{
-						SetEnemyController(controller);
+						SetEnemyEntity(entity);
 					}
 					break;
 			}
@@ -122,18 +123,18 @@ public class TDCPlayerController : TDCCreatureController
 	public override void OnSelectedItem (int itemIndex)
 	{
 		base.OnSelectedItem (itemIndex);
-		var item = m_CreatureData.Inventory[itemIndex];
+		var item = m_Entity.GetInventory()[itemIndex];
 		item.ExcuteItem();
 		if (item.GetData().Amount == 0)
 		{
 			m_Inventory.RemoveItem(itemIndex);
-			m_CreatureData.Inventory[itemIndex] = null;
+			m_Entity.GetInventory()[itemIndex] = null;
 		}
 	}
 
 	public override int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
 	{
-		var inventory = m_CreatureData.Inventory;
+		var inventory = m_Entity.GetInventory();
 		var indexItemInInventory = FindItemSlot(gameType);
 		var emptySlot = FindEmptySlot();
 		if (emptySlot == -1)
@@ -173,17 +174,6 @@ public class TDCPlayerController : TDCCreatureController
 	#endregion
 
     #region Getter & Setter
-
-	public override TDCBaseData GetData ()
-	{
-		return m_PlayerData;
-	}
-
-	public override void SetData(TDCBaseData value) {
-		base.SetData (value);
-		m_PlayerData = m_CreatureData as TDCPlayerData;
-		UIInventory.Instance.SetPlayer (this);
-	}
 
     #endregion
 

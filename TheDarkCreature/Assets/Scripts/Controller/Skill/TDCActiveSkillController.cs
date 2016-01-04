@@ -24,12 +24,12 @@ public class TDCActiveSkillController : TDCSkillController {
 	internal override bool CanActiveSkill()
 	{
 		base.CanActiveSkill();
-		return GetEnemyController() != null;
+		return GetEnemyEntity() != null;
 	}
 
 	internal override bool IsRepeatSkill()
 	{
-		return m_SkillData.RepeatSkill;
+		return m_Entity.GetRepeatSkill();
 	}
 
 	#endregion
@@ -39,9 +39,21 @@ public class TDCActiveSkillController : TDCSkillController {
 	internal override void ApplyDamageEffect(Dictionary<string, object> pars) {
 		base.ApplyDamageEffect(pars);
 		var paramValue = int.Parse(pars["Damage"].ToString());
-		var enemy = GetEnemyController();
+		var enemy = GetEnemyEntity();
 		if (enemy != null) {
-			enemy.ApplyDamage (paramValue + GetDamage(), m_Owner);
+			enemy.ApplyDamage (paramValue + GetDamage(), m_Entity.GetOwnerEntity());
+		}
+	}
+
+	internal override void SetValueEffect(Dictionary<string, object> pars)
+	{
+		base.SetValueEffect(pars);
+		var toTarget = pars["ToTarget"];
+		var valueName = pars["ValueName"].ToString();
+		var toValue = float.Parse (pars["ToValue"].ToString());
+		var enemy = GetEnemyEntity();
+		if (enemy != null) {
+			enemy.SetProperty(valueName, toValue);
 		}
 	}
 

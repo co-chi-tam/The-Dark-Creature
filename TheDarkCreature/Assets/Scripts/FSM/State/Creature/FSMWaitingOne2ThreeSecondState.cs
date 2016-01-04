@@ -12,7 +12,7 @@ public class FSMWaitingOne2ThreeSecondState : FSMBaseState
 	{
 		m_Controller.SetAnimation(EAnimation.Action1);
 		var random = Random.Range (1f, 3f);
-		m_Controller.SetWaitingTimeInterval (random);
+		m_Controller.SetWaitingTime (random);
 	}
 	
 	public override void UpdateState()

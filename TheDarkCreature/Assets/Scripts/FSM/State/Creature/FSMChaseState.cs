@@ -14,7 +14,7 @@ public class FSMChaseState : FSMBaseState {
 	}
 	
 	public override void UpdateState() {
-		if (m_Controller.GetEnemyController() != null)
+		if (m_Controller.GetEnemyEntity() != null)
 		{
 			var enemyPos = m_Controller.GetEnemyPosition();
 			m_Controller.MovePosition(enemyPos);

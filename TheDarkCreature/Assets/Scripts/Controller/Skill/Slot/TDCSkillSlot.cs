@@ -5,16 +5,16 @@ using ObjectPool;
 
 public class TDCSkillSlot {
 
-	private TDCBaseController m_Owner;
+	private TDCEntity m_Owner;
 	private TDCEnum.EGameType m_SkillType;
 	private TDCSkillData m_SkillData;
 	private TDCGameManager m_GameManager;
-	private TDCSkillController m_SkillController;
+	private TDCEntity m_SkillEntity;
 
 	private float m_TimeDelay;
 	private float m_TimeEffect;
 
-	public TDCSkillSlot(TDCEnum.EGameType skillType, TDCBaseController owner)
+	public TDCSkillSlot(TDCEnum.EGameType skillType, TDCEntity owner)
 	{
 		m_GameManager = TDCGameManager.GetInstance();
 		m_SkillData = m_GameManager.GetSkillData(skillType);
@@ -29,19 +29,15 @@ public class TDCSkillSlot {
 		if (DidEndTimeDelay())
 		{
 			m_TimeDelay = m_SkillData.TimeDelay;
-			m_SkillController = m_GameManager.GetObjectPool(m_SkillType) as TDCSkillController;
-			if (m_SkillController != null)
+			m_SkillEntity = m_GameManager.GetObjectPool(m_SkillType);
+			if (m_SkillEntity != null)
 			{
-				m_SkillController.SetSlot(this);
-				m_SkillController.SetActive(true);
-				m_SkillController.SetOwner(m_Owner);
-				m_SkillController.SetTargetPosition(m_Owner.GetEnemyPosition());
-				m_SkillController.SetEnemyController(m_Owner.GetEnemyController());
-				m_SkillController.SetTimeDelay(m_SkillData.TimeDelay);
-				m_SkillController.SetTimeEffect(m_SkillData.TimeEffect);
-				m_SkillController.SetEffectPerTime(m_SkillData.EffectPerTime);
-				m_SkillController.SetEffectRadius(m_SkillData.EffectRadius);
-				m_SkillController.StartSkill(m_Owner.TransformPosition, m_Owner.TransformRotation);
+				m_SkillEntity.SetSlot(this);
+				m_SkillEntity.SetActive(true);
+				m_SkillEntity.SetOwnerEntity(m_Owner);
+				m_SkillEntity.SetTargetPosition(m_Owner.GetEnemyPosition());
+				m_SkillEntity.SetEnemyEntity(m_Owner.GetEnemyEntity());
+				(m_SkillEntity.GetController() as TDCSkillController).StartSkill(m_Owner.GetController().TransformPosition, m_Owner.GetController().TransformRotation);
 			}
 		}
 	}
@@ -57,7 +53,7 @@ public class TDCSkillSlot {
 		}
 	}
 
-	public void SetOwner(TDCBaseController owner) {
+	public void SetOwnerEntity(TDCEntity owner) {
 		m_Owner = owner;
 	}
 }

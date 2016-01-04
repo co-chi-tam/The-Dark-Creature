@@ -1,0 +1,21 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+		{
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["SetValueEffect(ToTarget:Enemy,ValueName:OffsetSpeed,ToValue:0)"]
+	    }
+    ],
+    "NoMethods": [
+    	{
+	    	"ID": 2,
+   			"Type": 10,
+	        "ExcuteMethods": ["PrintDebug(EffectPerSecondSkillEffect:Can not active effect)"]
+	    }
+    ]
+  }
+}

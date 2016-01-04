@@ -16,6 +16,8 @@
 			"TimeEffect": 0,
 			"EffectPerTime": 0,
 			"RepeatSkill": true,
+			"AttachOwner": false,
+			"AttachEnemy": false,
 			"TriggerEvent": "OnAttack",
 			"ModelPath": ["Prefabs/Skill/FlameBodySkill"],
 			"FSMPath": "FSM/Skill/FlameBodySkillFSM"
@@ -36,6 +38,8 @@
 			"TimeEffect": 0,
 			"EffectPerTime": 0,
 			"RepeatSkill": false,
+			"AttachOwner": false,
+			"AttachEnemy": false,
 			"TriggerEvent": "OnActive",
 			"ModelPath": ["Prefabs/Skill/NormalRangeSkill"],
 			"FSMPath": "FSM/Skill/NormalRangeSkillFSM"
@@ -47,7 +51,7 @@
 			"GameType": 503,
 			"IconPath": "NormalRangeSkill",
 			"SkillLevel": 1,
-			"SkillType": 2,
+			"SkillType": 3,
 			"CostHealthPoint": 0,
 			"CostHeatPoint": 0,
 			"CostSanityPoint": 0,
@@ -56,10 +60,56 @@
 			"TimeEffect": 0,
 			"EffectPerTime": 0,
 			"RepeatSkill": false,
+			"AttachOwner": false,
+			"AttachEnemy": true,
 			"TriggerEvent": "OnActive",
 			"ModelPath": ["Prefabs/Skill/NormalMeleeSkill"],
-			"FSMPath": "FSM/Skill/InstanceSkillFSM"
+			"FSMPath": "FSM/Skill/NormalMeleeSkillFSM"
 			"EffectPath": "Effect/Skill/NormalMeleeSkillEffect"
+		},{
+			"ID": 3,
+			"Name": "Effect per second skill",
+			"Description": "",
+			"GameType": 504,
+			"IconPath": "EffectPerSecondSkill",
+			"SkillLevel": 1,
+			"SkillType": 4,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"EffectRadius": 5,
+			"TimeDelay": 10,
+			"TimeEffect": 5,
+			"EffectPerTime": 1,
+			"RepeatSkill": false,
+			"AttachOwner": false,
+			"AttachEnemy": true,
+			"TriggerEvent": "OnActive",
+			"ModelPath": ["Prefabs/Skill/EffectPerSecondSkill"],
+			"FSMPath": "FSM/Skill/EffectPerSecondSkillFSM"
+			"EffectPath": "Effect/Skill/EffectPerSecondSkillEffect"
+		},{
+			"ID": 4,
+			"Name": "Effect Update Skill",
+			"Description": "",
+			"GameType": 505,
+			"IconPath": "EffectUpdateSkill",
+			"SkillLevel": 1,
+			"SkillType": 5,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"EffectRadius": 5,
+			"TimeDelay": 10,
+			"TimeEffect": 5,
+			"EffectPerTime": 0,
+			"RepeatSkill": false,
+			"AttachOwner": false,
+			"AttachEnemy": true,
+			"TriggerEvent": "OnActive",
+			"ModelPath": ["Prefabs/Skill/EffectUpdateSkill"],
+			"FSMPath": "FSM/Skill/EffectUpdateSkillFSM"
+			"EffectPath": "Effect/Skill/EffectUpdateSkillEffect"
 		}
 	]
 }

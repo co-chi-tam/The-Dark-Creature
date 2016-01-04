@@ -1,0 +1,43 @@
+﻿{
+	"fsm": [
+		{
+			"condition_name": "IsRoot",
+			"condition_value": true,
+			"state_name": "StartSkillState",
+			"states": [
+				{
+					"condition_name": "CanActiveSkill",
+					"condition_value": true,
+					"state_name": "UpdateSkillState",
+					"states": [
+						{
+							"condition_name": "HaveEndTimeEffect",
+							"condition_value": false,
+							"state_name": "ExcuteEffectSkillState",
+							"states": [
+								{
+									"condition_name": "HaveEndTimeEffect",
+									"condition_value": true,
+									"state_name": "DestroySkillState",
+									"states": [
+										{
+											"condition_name": "CanActiveSkill",
+											"condition_value": true,
+											"state_name": "StartSkillState",
+											"states": []
+										}
+									]
+								}
+							]
+						}
+					]
+				} 
+			]
+		},{
+			"condition_name": "IsAnyState",
+			"condition_value": true,
+			"state_name": "AnyState",
+			"states": []
+		}
+	]
+}

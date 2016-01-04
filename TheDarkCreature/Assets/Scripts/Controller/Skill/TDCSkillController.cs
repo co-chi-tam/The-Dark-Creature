@@ -8,17 +8,16 @@ public class TDCSkillController : TDCBaseController {
 
 	#region Properties
 
-	protected TDCSkillSlot m_Slot;
-	protected int m_LayerEffect;
-	protected TDCSkillData m_SkillData;
-	protected EffectManager m_EffectManager;
-	protected TDCBaseController[] m_ControllersInRadius;
-	protected float m_IsFinishSkill = 1f;
-	protected TDCBaseController m_Owner;
 	protected float m_TimeDelay = 0f;
 	protected float m_TimeEffect = 0f;
 	protected float m_EffectPerTime = 0f;
 	protected float m_EffectRadius = 0f;
+	protected float m_IsFinishSkill = 1f;
+
+	protected int m_LayerEffect;
+	protected EffectManager m_EffectManager;
+	protected Transform m_AttachTransform;
+	protected TDCBaseController[] m_ControllersInRadius;
 
 	#endregion
 
@@ -31,22 +30,27 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectManager = new EffectManager();
 
 		m_LayerEffect = 1 << 8 | 1 << 10 | 1 << 31;
+
+		LoadFSM();
+		LoadEffect();
+
+		m_FSMManager.LoadFSM(m_Entity.GetFSMPath());
+		m_EffectManager.LoadEffect(m_Entity.GetEffectPath());
+
+		m_EffectPerTime = m_Entity.GetEffectPerTime();
+		m_TimeDelay = m_Entity.GetTimeDelay();
+		m_TimeEffect = m_Entity.GetTimeEffect();
+		m_EffectRadius = m_Entity.GetEffectRadius();
 	}
 
 	protected override void Start()
 	{
 		base.Start();
-
-		LoadFSM();
-		LoadEffect();
-
-		m_FSMManager.LoadFSM(m_SkillData.FSMPath);
-		m_EffectManager.LoadEffect(m_SkillData.EffectPath);
 	}
 
 	protected override void FixedUpdate()
 	{
-		base.FixedUpdate();
+		// base.FixedUpdate();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
 	}
@@ -58,13 +62,14 @@ public class TDCSkillController : TDCBaseController {
 		{
 			m_TimeEffect -= Time.deltaTime;
 		}
+		TransformPosition = m_AttachTransform.position;
 	}
 
 	protected override void OnDrawGizmos()
 	{
 		base.OnDrawGizmos();
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere(TransformPosition, m_SkillData.EffectRadius);
+		Gizmos.DrawWireSphere(TransformPosition, m_Entity.GetEffectRadius());
 	}
 
 	#endregion
@@ -95,6 +100,8 @@ public class TDCSkillController : TDCBaseController {
 		m_FSMManager.RegisterCondition("MoveToEnemy", MoveToEnemy);
 		m_FSMManager.RegisterCondition("IsFinishSkill", IsFinishSkill);
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
+		m_FSMManager.RegisterCondition("HaveEndEffectPerTime", HaveEndEffectPerTime);
+		m_FSMManager.RegisterCondition("HaveEndTimeEffect", HaveEndTimeEffect);
 	}
 
 	private void LoadEffect() {
@@ -106,12 +113,16 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectManager.RegisterExcuteMethod("ApplyDamageEffect", ApplyDamageEffect);
 		m_EffectManager.RegisterExcuteMethod("AddValueEffect", AddValueEffect);
 		m_EffectManager.RegisterExcuteMethod("SubtractValueEffect", SubtractValueEffect);
+		m_EffectManager.RegisterExcuteMethod("SetValueEffect", SetValueEffect);
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
 	}
 
 	public virtual void StartSkill(Vector3 position, Quaternion rotation) {
 		TransformPosition = position;
 		TransformRotation = rotation;
+
+		m_AttachTransform = m_Entity.GetAttachOwner() ? m_Entity.GetOwnerEntity().GetController().transform : m_Entity.GetAttachEnemy() ? GetEnemyEntity().GetController().transform : this.transform;
+		SetActive(true);
 	}
 
 	public virtual void ExcuteEffect() {
@@ -123,11 +134,11 @@ public class TDCSkillController : TDCBaseController {
 	{
 		base.ResetObject();
 		m_IsFinishSkill = 1f;
-		m_GameManager.SetObjectPool(this);
-		m_TimeDelay = m_SkillData.TimeDelay;
-		m_TimeEffect = m_SkillData.TimeEffect;
-		m_EffectPerTime = m_SkillData.EffectPerTime;
-		m_EffectRadius = m_SkillData.EffectRadius;
+		m_GameManager.SetObjectPool(this.GetEntity());
+		m_EffectPerTime = m_Entity.GetEffectPerTime();
+		m_TimeDelay = m_Entity.GetTimeDelay();
+		m_TimeEffect = m_Entity.GetTimeEffect();
+		m_EffectRadius = m_Entity.GetEffectRadius();
 	}
 
 	public override void MovePosition(Vector3 position)
@@ -153,6 +164,10 @@ public class TDCSkillController : TDCBaseController {
 
 	#region Getter & Setter
 
+	public virtual TDCEnum.ESkillType GetSkillType() {
+		return m_Entity.GetSkillType();
+	}
+
 	public virtual void SetEffectRadius(float radius) {
 		m_EffectRadius = radius;
 	}
@@ -170,46 +185,49 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	public virtual void SetOwner(TDCBaseController owner) {
-		m_Owner = owner;
+		m_Entity.SetOwnerEntity (owner.GetEntity());
 	}
 
 	public virtual void SetSlot(TDCSkillSlot slot) {
-		m_Slot = slot;
-	}
-
-	public override void SetData(TDCBaseData data)
-	{
-		base.SetData(data);
-		m_SkillData = data as TDCSkillData;
-	}
-
-	public override TDCBaseData GetData()
-	{
-		base.GetData();
-		return m_SkillData;
+		m_Entity.SetSlot(slot);
 	}
 
 	public override int GetDamage()
 	{
-		return m_Owner.GetDamage();
+		return m_Entity.GetDamage();
 	}
 
 	#endregion
 
 	#region FSM
 
+	internal virtual bool HaveEndEffectPerTime() {
+		m_EffectPerTime -= Time.deltaTime;
+		if (m_EffectPerTime <= 0f)
+		{
+			m_EffectPerTime = m_Entity.GetEffectPerTime();
+			return true;
+		}
+		return false;
+	}
+
+	internal virtual bool HaveEndTimeEffect() {
+		m_TimeEffect -= Time.deltaTime;
+		return m_TimeEffect <= 0f;
+	}
+
 	internal override bool HaveEnemy()
 	{
-		return GetEnemyController() != null && GetEnemyController().GetActive();
+		return GetEnemyEntity() != null && GetEnemyEntity().GetActive();
 	}
 
 	internal override bool MoveToEnemy()
 	{
 		base.MoveToEnemy();
-		var enemy = GetEnemyController();
+		var enemy = GetEnemyEntity();
 		if (enemy != null)
 		{
-			var distance = (TransformPosition - enemy.TransformPosition).sqrMagnitude;
+			var distance = (TransformPosition - enemy.GetController().TransformPosition).sqrMagnitude;
 			var range = enemy.GetColliderRadius();
 			return distance < range * range; 
 		}
@@ -221,7 +239,7 @@ public class TDCSkillController : TDCBaseController {
 
 	internal override bool MoveToTarget()
 	{
-		return (TransformPosition - m_TargetPosition).sqrMagnitude < 0.5f * 0.5f;  
+		return (TransformPosition - GetTargetPosition()).sqrMagnitude < 0.5f * 0.5f;  
 	}
 
 	internal virtual bool IsFinishSkill() {
@@ -234,12 +252,12 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	internal virtual bool IsRepeatSkill() {
-		return m_SkillData.RepeatSkill;
+		return m_Entity.GetRepeatSkill();
 	}
 
 	internal virtual bool HaveCreatureAroundOwner()
 	{
-		var collider = Physics.OverlapSphere(TransformPosition, m_SkillData.EffectRadius, m_LayerEffect);
+		var collider = Physics.OverlapSphere(TransformPosition, m_Entity.GetEffectRadius(), m_LayerEffect);
 		var haveCollider = collider.Length > 0;
 		if (haveCollider)
 		{
@@ -291,6 +309,15 @@ public class TDCSkillController : TDCBaseController {
 			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
 		}
 #endif
+	}
+
+	internal virtual void SetValueEffect(Dictionary<string, object> pars) {
+//#if UNITY_EDITOR
+//		foreach (var item in pars)
+//		{
+//			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
+//		}
+//#endif
 	}
 
 	internal virtual bool CanActiveEffect(Dictionary<string, object> pars) {

@@ -2,5 +2,7 @@
 	"FlameBodySkill": 10,
 	"NormalRangeSkill": 10,
 	"NormalMeleeSkill": 10,
+	"EffectPerSecondSkill": 10,
+	"EffectUpdateSkill": 10,
 	"CampFire": 5
 }

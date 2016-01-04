@@ -6,22 +6,9 @@ using FSM;
 public class TDCCreatureController : TDCBaseController {
 
 	#region Property
-	[SerializeField]
-	private int m_HealthPoint = 0;
-	[SerializeField]
-	private int m_HeatPoint = 0;
-	[SerializeField]
-	private int m_HungerPoint = 0;
-	[SerializeField]
-	private int m_SanityPoint = 0;
 
 	protected Animator m_AnimatorController;
-	protected bool m_CanMove = true;
-	protected int m_DamageTake = 0;
 	protected LayerMask m_ColliderLayerMask;
-
-	protected TDCCreatureData m_CreatureData;
-
 	protected TDCSkillSlot m_SkillSlot;
 
 	#endregion
@@ -32,14 +19,8 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.Init ();
 		m_AnimatorController = this.GetComponent<Animator> ();
-		m_TargetPosition = m_Transform.position;
 
 		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
-	}
-	
-	protected override void Start()
-	{
-		base.Start ();
 
 		var idleState   	= new FSMIdleState(this);
 		var moveState   	= new FSMMoveState(this);
@@ -66,33 +47,12 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("IsToFarGroup", IsToFarGroup);
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
-
 	}
 
 	protected override void Update ()
 	{
 		base.Update ();
-		m_HealthPoint = GetHealth();
-		if (m_CreatureData != null) {
-			m_HealthPoint -= m_DamageTake;
-			m_DamageTake = 0;
-			SetHealth(m_HealthPoint);
-		}
-//		if (m_HungerPoint != 0)
-//		{
-//			m_CreatureData.CurrentHungerPoint += m_HungerPoint;
-//			m_HungerPoint = 0;
-//		}
-//		if (m_SanityPoint != 0)
-//		{
-//			m_CreatureData.CurrentSanityPoint += m_SanityPoint;
-//			m_SanityPoint = 0;
-//		}
-//		if (m_HeatPoint != 0)
-//		{
-//			m_CreatureData.CurrentHeatPoint += m_HeatPoint;
-//			m_HeatPoint = 0;
-//		}
+		m_Entity.Update(Time.deltaTime);
 	}
 
 	public override void OnBecameVisible()
@@ -113,7 +73,7 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.OnDrawGizmos();
 		Gizmos.color = Color.red;
-		Gizmos.DrawWireSphere (TransformPosition, m_CreatureData.AttackRange);
+		Gizmos.DrawWireSphere (TransformPosition, m_Entity.GetAttackRange());
 		Gizmos.color = Color.white;
 		Gizmos.DrawLine(TransformPosition, GetTargetPosition());
 	}
@@ -126,17 +86,10 @@ public class TDCCreatureController : TDCBaseController {
 		base.ActiveSkill(index);
 	}
 
-	public override void ApplyDamage (int damage, TDCBaseController attacker)
+	public override void ApplyDamage (int damage, TDCEntity attacker)
 	{
 		base.ApplyDamage(damage, attacker);
-		if (attacker.GetActive())
-		{
-			m_DamageTake += damage;
-		}
-		if (GetEnemyController() == null)
-		{
-			SetEnemyController(attacker);
-		}
+		m_Entity.ApplyDamage(damage, attacker);
 	}
 
 	public virtual void OnSelectedItem(int itemIndex) {
@@ -148,7 +101,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	protected int FindEmptySlot() {
-		var inventory = m_CreatureData.Inventory;
+		var inventory = m_Entity.GetInventory();
 		for (int i = 0; i < inventory.Length; i++)
 		{
 			if (inventory[i] == null)
@@ -158,7 +111,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	protected int FindItemSlot(TDCEnum.EGameType gameType) {
-		var inventory = m_CreatureData.Inventory;
+		var inventory = m_Entity.GetInventory();
 		for (int i = 0; i < inventory.Length; i++)
 		{
 			if (inventory[i] == null)
@@ -172,11 +125,6 @@ public class TDCCreatureController : TDCBaseController {
 		}
 		return -1;
 	}
-
-	public override void MovePosition(Vector3 position) {
-		base.MovePosition(position);
-		MovePosition(position, m_CreatureData.MoveSpeed);
-	}
 	
 	public override void LookAtRotation(Vector3 rotation)
 	{
@@ -185,16 +133,14 @@ public class TDCCreatureController : TDCBaseController {
 		rotation.y = 0f;
 		var direction = m_Transform.position - rotation;
 		Quaternion rot = Quaternion.LookRotation(direction);
-		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, 
-		                                        Time.deltaTime * m_CreatureData.RotationSpeed);
+		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, Time.deltaTime * m_Entity.GetRotationSpeed());
 	}
 	
-	protected void MovePosition(Vector3 position, float speed) {
+	public override void MovePosition(Vector3 position) {
 		position.y = 0f;
 		var direction = position - m_Transform.position;
 		//m_Rigidbody.MovePosition(m_Transform.position + direction.normalized * speed * Time.deltaTime);
-		m_Transform.position = m_Transform.position + direction.normalized * speed * Time.deltaTime;
-
+		m_Transform.position = m_Transform.position + direction.normalized * GetMoveSpeed() * Time.deltaTime;
 		LookAtRotation(position);
 	}
 
@@ -202,7 +148,7 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.ResetObject();
 		SetHealth (GetMaxHealth());
-		SetEnemyController (null);
+		SetEnemyEntity (null);
 	}
 	
 	#endregion
@@ -211,7 +157,7 @@ public class TDCCreatureController : TDCBaseController {
 
 	internal override bool HaveEnemy() {
 		base.HaveEnemy();
-		var enemyCtrl = GetEnemyController();
+		var enemyCtrl = GetEnemyEntity();
 		return enemyCtrl != null && enemyCtrl.GetActive();
 	}
 
@@ -224,22 +170,22 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool CanMove() {
-		return m_CanMove;
+		return m_Entity.GetCanMove();
 	}
 
 	internal override bool MoveToTarget()
 	{
 		base.MoveToTarget();
-		return (TransformPosition - m_TargetPosition).sqrMagnitude < 0.5f * 0.5f;  
+		return (TransformPosition - GetTargetPosition()).sqrMagnitude < 0.5f * 0.5f;  
 	}
 
 	internal override bool MoveToEnemy()
 	{
 		base.MoveToEnemy();
-		if (GetEnemyController() != null)
+		if (GetEnemyEntity() != null)
 		{
 			var distance = (TransformPosition - GetEnemyPosition()).sqrMagnitude;
-			var range = GetEnemyController().GetColliderRadius() + m_CreatureData.AttackRange;
+			var range = GetEnemyEntity().GetColliderRadius() + m_Entity.GetAttackRange();
 			return distance < range * range; 
 		}
 		return true;
@@ -252,12 +198,12 @@ public class TDCCreatureController : TDCBaseController {
 	internal virtual bool FoundEnemy() {
 		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
-			var target = m_GameManager.GetControllerByName (colliders[i].name);
-			if (target == null || target.GetActive () == false || target == this) {
+			var target = m_GameManager.GetEntityByName (colliders[i].name);
+			if (target == null || target.GetActive () == false || target == this.GetEntity()) {
 				continue;
 			} else {
 				if (GetTypeEnemies().IndexOf (target.GetGameType()) != -1) {
-					SetEnemyController(target);
+					SetEnemyEntity(target);
 					return true;
 				}
 			}
@@ -266,20 +212,20 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool FoundFood() {
-		if (GetEnemyController() != null)
+		if (GetEnemyEntity() != null)
 		{
 			return true;
 		}
 		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
-			var food = m_GameManager.GetControllerByName (colliders[i].name);
-			if (food == null || food.GetActive () == false || food == this) {
+			var food = m_GameManager.GetEntityByName (colliders[i].name);
+			if (food == null || food.GetActive () == false || food == this.GetEntity()) {
 				continue;
 			} else {
 				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1) {
-					if (GetEnemyController() == null)
+					if (GetEnemyEntity() == null)
 					{
-						SetEnemyController(food);
+						SetEnemyEntity(food);
 					}
 					return true;
 				}
@@ -292,37 +238,33 @@ public class TDCCreatureController : TDCBaseController {
 	
 	#region Getter & Setter
 
+	public override float GetMoveSpeed()
+	{
+		return m_Entity.GetMoveSpeed();
+	}
+
 	public override int GetDamage()
 	{
 		base.GetDamage();
-		return m_CreatureData.Damage;
+		return m_Entity.GetDamage();
 	}
 
 	public override void SetHeat(int value)
 	{
 		base.SetHeat(value);
-		m_HeatPoint += value;
+		m_Entity.SetHeat(value);
 	}
 
 	public override float GetColliderRadius() {
 		return base.GetColliderRadius();
 	}
 	
-	public override void SetData(TDCBaseData data) {
-		base.SetData (data);
-		m_CreatureData = data as TDCCreatureData;
-	}
-
-	public override TDCBaseData GetData() {
-		return m_CreatureData as TDCBaseData;
-	}
-	
 	public override void SetCanMove(bool value) {
-		m_CanMove = value;
+		m_Entity.SetCanMove(value);
 	}
 	
 	public override bool GetCanMove() {
-		return m_CanMove;
+		return m_Entity.GetCanMove();
 	}
 
 	public override void SetAnimation(EAnimation anim) {
@@ -333,37 +275,35 @@ public class TDCCreatureController : TDCBaseController {
 	}
 	
 	public override float GetDetectEnemyRange() {
-		return m_CreatureData.DetectRange;
+		return m_Entity.GetDetectEnemyRange();
 	}
 
 	public virtual List<TDCEnum.EGameType> GetTypeEnemies() {
-		return m_CreatureData.TypeEnemies;
+		return m_Entity.GetTypeEnemies();
 	}
 
 	public virtual List<TDCEnum.EGameType> GetTypeFoods() {
-		return m_CreatureData.TypeFoods;
+		return m_Entity.GetTypeFoods();
 	}
 
 	public override int GetHealth ()
 	{
-		return m_CreatureData.CurrentHP;
+		return m_Entity.GetHealth();
 	}
 
 	public override void SetHealth (int value)
 	{
 		base.SetHealth(value);
-		m_CreatureData.CurrentHP = value;
-		var percentHP = m_CreatureData.CurrentHP / m_CreatureData.MaxHP * 100;
-		CallBackEvent("OnHealthPoint" + percentHP);
+		m_Entity.SetHealth(value);
 	}
 
 	public override int GetMaxHealth() {
-		return m_CreatureData.MaxHP;
+		return m_Entity.GetMaxHealth();
 	}
 
 	public override TDCItemController[] GetInventory()
 	{
-		return m_CreatureData.Inventory;
+		return m_Entity.GetInventory();
 	}
 	
 	#endregion

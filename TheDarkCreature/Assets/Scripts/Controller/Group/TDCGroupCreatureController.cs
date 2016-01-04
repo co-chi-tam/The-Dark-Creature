@@ -10,6 +10,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
     #endregion
 
     #region Implementation Mono
+
 	public override void Init()
 	{
 		base.Init();
@@ -21,7 +22,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
     {
         base.Start();
 
-        m_FSMManager.LoadFSM(m_GroupData.FSMPath);
+		m_FSMManager.LoadFSM(m_Entity.GetFSMPath());
     }
 
 	protected override void FixedUpdate() {
@@ -39,27 +40,28 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		for (int i = 0; i < GetMaxMember(); i++) {
 			var randomPosition = Random.insideUnitCircle * GetRadius();
 			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y);
-			var controller = m_GameManager.CreateCreature ( m_GroupData.MemberType, 
+			var entity = m_GameManager.CreateCreature ( m_Entity.GetMemberType(), 
 															memPosition, 
 															Quaternion.identity, 
 															this.gameObject);
-			controller.SetGroupController (this);
-			controller.gameObject.SetActive (false);
-			m_MemberPool.Create (controller);
+			entity.SetGroupEntity (this.GetEntity());
+			entity.SetActive(false);
+			m_MemberPool.Create (entity);
 		}
 	}
 
-	public override void ReturnMember(TDCBaseController member) {
+	public override void ReturnMember(TDCEntity member) {
+		base.ReturnMember(member);
 		member.SetActive(false);
 		m_MemberPool.Set (member);
 	}
 
-	public override TDCBaseController SpawnMember ()
+	public override TDCEntity SpawnMember ()
 	{
 		if (m_MemberPool.CountUnuse () == 0)
 			return null;
 		var member = m_MemberPool.Get ();
-		member.ResetObject ();
+		member.GetController().ResetObject ();
 		member.SetActive (true);
 		return member;
 	}
@@ -90,7 +92,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
 	internal override bool IsActive()
     {
-        return m_IsActive;
+		return GetActive();
     }
 
 	internal override bool IsFullGroup() {
@@ -99,8 +101,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
 	internal override bool CountdownWaitingTime()
     {
-        m_WaitingTimeInterval -= Time.deltaTime;
-        return m_WaitingTimeInterval <= 0;
+		return base.CountdownWaitingTime();
     }
 
     #endregion

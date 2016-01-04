@@ -33,13 +33,17 @@ public class TDCEnum{
 		FlameBodySkill   = 501,
 		NormalRangeSkill = 502,
 		NormalMeleeSkill = 503,
+		EffectPerSecondSkill = 504,
+		EffectUpdateSkill = 505
 	}
 
 	public enum ESkillType : int {
 		None 		= 0,
 		Passive 	= 1,
 		Range 		= 2,
-		Melee 		= 3
+		Melee 		= 3,
+		EffectPerSecond	= 4,
+		EffectUpdate = 5
 	}
 
 	public enum EItemType : int {

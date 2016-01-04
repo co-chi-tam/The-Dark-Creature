@@ -23,18 +23,12 @@ public class TDCBaseController : TDCMonoBehaviour
 	[SerializeField]
 	protected string StateName = "";
 
+	protected TDCEntity m_Entity;
 	protected FSMManager m_FSMManager;
 	protected Transform m_Transform;
-	protected Vector3 m_StartPosition;
-	protected bool m_IsActive = false;
-	protected float m_WaitingTimeInterval = 3f;
-	protected TDCBaseGroupController m_GroupController;
 	protected CapsuleCollider m_Collider;
-	protected TDCBaseData m_BaseData;
-	protected Vector3 m_TargetPosition;
-	protected Dictionary<string, Action> m_TriggerEvents;
-	protected TDCBaseController m_EnemyController;
 	protected TDCGameManager m_GameManager;
+	protected float m_WaitingTime = 3f;
 
     public Vector3 TransformPosition {
 		get { return m_Transform.position; }
@@ -48,33 +42,27 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	#endregion
 
-	#region Event 
-
-	public event Action OnIdleEvent;
-	public event Action OnFindRandomEvent;
-	public event Action OnMoveEvent;
-	public event Action OnApplyDamageEvent;
-	public event Action OnHealthPoint50Event;
-	public event Action OnHealthPoint25Event;
-	public event Action OnAttackEvent;
-	public event Action OnAvoidEvent;
-	public event Action OnAliveEvent;
-	public event Action OnDeathEvent;
-
-	#endregion
-
 	#region Implement Monobehaviour
 
 	public virtual void Init() {
 		m_Transform	= this.transform;
-		m_StartPosition = m_Transform.position;
-		m_TargetPosition = m_StartPosition;
-		m_TriggerEvents = new Dictionary<string, Action>();
+		SetStartPosition (m_Transform.position);
+		SetTargetPosition (m_Transform.position);
+
 		m_Collider = this.GetComponent<CapsuleCollider> ();
 		m_GameManager = TDCGameManager.GetInstance();
 		m_FSMManager = new FSMManager();
 		SetActive (true);
-		LoadEventCallBack();
+
+		var waiting 		= new FSMWaitingState (this);
+		var waitingOne 		= new FSMWaitingOneSecondState (this);
+		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
+
+		m_FSMManager.RegisterState("WaitingState", waiting);
+		m_FSMManager.RegisterState("WaitingOneSecondState", waitingOne);
+		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
+
+		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
 	}
 
 	protected virtual void OnEnable() {
@@ -87,32 +75,26 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	protected virtual void Start()
 	{
-		var waiting 		= new FSMWaitingState (this);
-		var waitingOne 		= new FSMWaitingOneSecondState (this);
-		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
-
-		m_FSMManager.RegisterState("WaitingState", waiting);
-		m_FSMManager.RegisterState("WaitingOneSecondState", waitingOne);
-		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
-
-		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
+		if (GetActive() == false)
+			return;
     }
 
 	protected virtual void Update() {
-		if (GetActive())
-		{
-			CallBackEvent("OnAlive");
-		}
+		if (GetActive() == false)
+			return;
 	}
 
 	protected virtual void LateUpdate() {
-		
+		if (GetActive() == false)
+			return;
 	}
 
 	protected virtual void FixedUpdate() {
+		if (GetActive() == false)
+			return;
 		if (!HaveEnemy())
 		{
-			SetEnemyController(null);
+			SetEnemyEntity(null);
 		}
 	}
 
@@ -159,58 +141,20 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	}
 
-	public virtual void ApplyDamage(int damage, TDCBaseController attacker) {
-		CallBackEvent("OnApplyDamage");
+	public virtual void ApplyDamage(int damage, TDCEntity attacker) {
+		
 	}
 
 	public virtual void ResetObject() {
 	
 	}
 
-	public virtual void CallBackEvent(string name) {
-		if (m_TriggerEvents.ContainsKey(name))
-		{
-			var evnt = m_TriggerEvents[name];
-			if (evnt != null)
-			{
-				evnt.Invoke();
-			}
-		}
-	}
-
-	public virtual bool AddEventListener(string name, Action evnt) {
-		if (m_TriggerEvents.ContainsKey(name))
-		{
-			m_TriggerEvents[name] += evnt;
-			return true;
-		}
-		return false;
-	}
-
-	public virtual bool RemoveEventListener(string name, Action evnt) {
-		if (m_TriggerEvents.ContainsKey(name))
-		{
-			m_TriggerEvents[name] -= evnt;
-			return true;
-		}
-		return false;
-	}
-
-	protected virtual void LoadEventCallBack() {
-		m_TriggerEvents.Add("OnIdle", OnIdleEvent);
-		m_TriggerEvents.Add("OnFindRandom", OnFindRandomEvent);
-		m_TriggerEvents.Add("OnMove", OnMoveEvent);
-		m_TriggerEvents.Add("OnApplyDamage", OnApplyDamageEvent);
-		m_TriggerEvents.Add("OnHealthPoint50", OnHealthPoint50Event);
-		m_TriggerEvents.Add("OnHealthPoint25", OnHealthPoint25Event);
-		m_TriggerEvents.Add("OnAttack", OnAttackEvent);
-		m_TriggerEvents.Add("OnAvoid", OnAvoidEvent);
-		m_TriggerEvents.Add("OnAlive", OnAliveEvent);
-		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
-	}
-
 	public virtual void ReturnObject() {
 		
+	}
+
+	public virtual void CallBackEvent(string name) {
+		m_Entity.CallBackEvent(name);
 	}
 
 	#endregion
@@ -218,8 +162,8 @@ public class TDCBaseController : TDCMonoBehaviour
 	#region FSM
 
 	internal virtual bool CountdownWaitingTime() {
-		m_WaitingTimeInterval -= Time.deltaTime;
-		return m_WaitingTimeInterval <= 0;     
+		m_WaitingTime -= Time.deltaTime;
+		return m_WaitingTime <= 0;     
 	}
 
 	internal virtual bool HaveEnemy()
@@ -241,56 +185,46 @@ public class TDCBaseController : TDCMonoBehaviour
 
     #region Getter & Setter
 
+	public virtual void SetEntity(TDCEntity entity) {
+		m_Entity = entity;
+	}
+
+	public virtual TDCEntity GetEntity() {
+		return m_Entity;
+	}
+
 	public virtual int GetDamage() {
 		return 0;
 	}
-
-	public virtual void SetTriggerEvent(string name, Action evnt) {
-		m_TriggerEvents.Add(name, evnt);
-	}
-
-	public virtual Action GetTriggerEvent(string name) {
-		return m_TriggerEvents[name];
-	}
-
 	public virtual float GetColliderRadius() {
 		if (m_Collider == null)
 			return 0;
 		return m_Collider.radius;
 	}
 
-	public virtual void SetData(TDCBaseData data) {
-		m_BaseData = data;
-	}
-
 	public virtual void SetActive(bool value) {
-		m_IsActive = value;
-		this.gameObject.SetActive(value);
+		m_Entity.SetActive(value);
     }
 
     public virtual bool GetActive() {
-		return m_IsActive;
+		return m_Entity.GetActive();
     }
 
 	public virtual void SetStartPosition(Vector3 pos) {
-		m_StartPosition = pos;
+		m_Entity.SetStartPosition(pos);
 		this.transform.position = pos;
 	}
 
 	public virtual Vector3 GetStartPosition() {
-		return m_StartPosition;
+		return m_Entity.GetStartPosition();
 	}
 
 	public virtual TDCEnum.EGameType GetGameType() {
-		return m_BaseData.GameType;
+		return m_Entity.GetGameType();
 	}
 	
-	public virtual void SetWaitingTimeInterval(float time) {
-		m_WaitingTimeInterval = time;
-	}
-	
-	public virtual TDCBaseData GetData() {
-		return m_BaseData;
+	public virtual void SetWaitingTime(float time) {
+		m_WaitingTime = time;
 	}
 	
 	public virtual void SetCanMove(bool value) {
@@ -302,17 +236,17 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 	
 	public virtual Vector3 GetEnemyPosition() {
-		return m_EnemyController.TransformPosition;
+		return m_Entity.GetEnemyPosition();
 	}
 	
-	public virtual void SetEnemyController(TDCBaseController controller)
+	public virtual void SetEnemyEntity(TDCEntity entity)
 	{
-		m_EnemyController = controller;
+		m_Entity.SetEnemyEntity(entity);
 	}
 	
-	public virtual TDCBaseController GetEnemyController()
+	public virtual TDCEntity GetEnemyEntity()
 	{
-		return m_EnemyController;
+		return m_Entity.GetEnemyEntity();
 	}
 	
 	public virtual void SetAnimation(EAnimation anim) {
@@ -320,23 +254,23 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 	
 	public virtual Vector3 GetTargetPosition() {
-		return m_TargetPosition;
+		return m_Entity.GetTargetPosition();
 	}
 	
 	public virtual void SetTargetPosition(Vector3 pos) {
-		m_TargetPosition = pos;
+		m_Entity.SetTargetPosition (pos);
 	}
 	
 	public virtual float GetDetectEnemyRange() {
-		return 0f;
+		return m_Entity.GetDetectEnemyRange();
 	}
 
-	public virtual void SetGroupController(TDCBaseGroupController group) {
-		m_GroupController = group;
+	public virtual void SetGroupEntity(TDCEntity group) {
+		m_Entity.SetGroupEntity (group);
 	}
 
-	public virtual TDCBaseGroupController GetGroupController() {
-		return m_GroupController;
+	public virtual TDCEntity GetGroupEntity() {
+		return m_Entity.GetGroupEntity();
 	}
 
 	public virtual int GetHealth() {
@@ -365,6 +299,10 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual TDCItemController[] GetInventory() {
 		return null;
+	}
+
+	public virtual float GetMoveSpeed() {
+		return 0f;
 	}
 
 	#endregion

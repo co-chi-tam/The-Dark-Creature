@@ -79,10 +79,10 @@ public class TDCItemController {
 			case TDCEnum.EItemType.Item:
 				{
 					var owner = m_Data.Owner;
-					TDCBaseController obj = null;
+					TDCEntity obj = null;
 					if (m_GameManager.GetObjectPool(m_Data.GameType, ref obj))
 					{
-						obj.TransformPosition = owner.TransformPosition;
+						obj.GetController().TransformPosition = owner.TransformPosition;
 						obj.SetActive(true);
 					}
 					m_Data.Amount--;

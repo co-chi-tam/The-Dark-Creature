@@ -43,7 +43,7 @@ public class TDCDataReader {
 		var groupAsset = Resources.Load<TextAsset> ("Data/Group/GroupData");
 		var creatureAsset = Resources.Load<TextAsset> ("Data/Creature/CreatureData");
 		var playerAsset = Resources.Load<TextAsset> ("Data/Creature/PlayerData");
-		var resourceTextAsset = Resources.Load<TextAsset> ("Data/Creature/ResourceData");
+		var enviromentTextAsset = Resources.Load<TextAsset> ("Data/Creature/EnviromentData");
 		var objectTextAsset = Resources.Load<TextAsset> ("Data/Creature/ObjectData");
 		var skillTextAsset = Resources.Load<TextAsset>("Data/Skill/SkillData");
 		var mapTextAsset = Resources.Load<TextAsset>("Data/Map/WorldMap");
@@ -55,7 +55,7 @@ public class TDCDataReader {
 		var jsonGroup = Json.Deserialize (groupAsset.text) as Dictionary<string, object>;
 		var jsonPlayer = Json.Deserialize (playerAsset.text) as Dictionary<string, object>;
 		var jsonWeapon = Json.Deserialize (weaponAsset.text) as Dictionary<string, object>;
-		var jsonResource = Json.Deserialize (resourceTextAsset.text) as Dictionary<string, object>;
+		var jsonResource = Json.Deserialize (enviromentTextAsset.text) as Dictionary<string, object>;
 		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
 		var jsonSkill = Json.Deserialize (skillTextAsset.text) as Dictionary<string, object>;
 		var jsonMap = Json.Deserialize(mapTextAsset.text) as Dictionary<string, object>;
@@ -64,7 +64,7 @@ public class TDCDataReader {
 		LoadItem(jsonItem["items"] as List<object>);
 		LoadFood (jsonfood["foods"] as List<object>);
 		LoadWeapon (jsonWeapon["weapons"] as List<object>);
-		LoadResource (jsonResource["resources"] as List<object>);
+		LoadEnviroment (jsonResource["enviroments"] as List<object>);
 		LoadCreature (jsonCreature["creatures"] as List<object>);
 		LoadObject (jsonObject["objects"] as List<object>);
 		LoadGroup (jsonGroup["groups"] as List<object>);
@@ -181,10 +181,10 @@ public class TDCDataReader {
 		}
 	}
 
-	private void LoadResource (List<object> values) {
+	private void LoadEnviroment (List<object> values) {
 		for (int i = 0; i < values.Count; i++) {
 			var instance = values [i] as Dictionary<string, object>;
-			var resource = new TDCResourceData ();
+			var resource = new TDCEnviromentData ();
 			resource.ID = int.Parse (instance ["ID"].ToString ());
 			resource.Name = instance ["Name"].ToString ();
 			resource.Description = instance ["Description"].ToString ();
@@ -295,6 +295,8 @@ public class TDCDataReader {
 			skillData.TimeEffect = float.Parse(skill["TimeEffect"].ToString());
 			skillData.EffectPerTime = float.Parse(skill["EffectPerTime"].ToString());
 			skillData.RepeatSkill = bool.Parse(skill["RepeatSkill"].ToString());
+			skillData.AttachOwner = bool.Parse(skill["AttachOwner"].ToString());
+			skillData.AttachEnemy = bool.Parse(skill["AttachEnemy"].ToString());
 			skillData.ModelPath = ConvertTo<string> (skill["ModelPath"] as List<object>);
 			skillData.FSMPath = skill["FSMPath"].ToString();
 			skillData.EffectPath = skill["EffectPath"].ToString();
@@ -417,8 +419,8 @@ public class TDCDataReader {
 		return weapondata;
 	}
 
-	public TDCResourceData GetResource(TDCEnum.EGameType resource) {
-		var resourceData = TDCResourceData.Clone (m_ListCreatureData[resource] as TDCResourceData);
+	public TDCEnviromentData GetResource(TDCEnum.EGameType resource) {
+		var resourceData = TDCEnviromentData.Clone (m_ListCreatureData[resource] as TDCEnviromentData);
 		return resourceData;
 	}
 

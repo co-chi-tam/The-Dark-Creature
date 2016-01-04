@@ -2,13 +2,12 @@
 using System.Collections;
 using FSM;
 
-public class TDCCampFireController : TDCBaseController {
+public class TDCCampFireController : TDCObjectController {
 
 	#region Property
 	private ParticleSystem m_ParticleSystem;
 	private Light m_Light;
 	
-	private TDCGObjectData m_GObjectData;
 	private float m_CurrentIntensity;
 	private float m_CurrentStartSize;
 	private bool m_IsFireActive = true;
@@ -27,7 +26,7 @@ public class TDCCampFireController : TDCBaseController {
 	{
 		base.Start();
 
-		m_FirePower = m_GObjectData.Duration;
+		m_FirePower = m_Entity.GetDuration();
 		m_IsFireActive = true;
 
 		var fireState = new FSMFireState(this);
@@ -38,7 +37,7 @@ public class TDCCampFireController : TDCBaseController {
 		
 		m_FSMManager.RegisterCondition("IsFireActive", IsFireActive);
 
-		m_FSMManager.LoadFSM (m_GObjectData.FSMPath);
+		m_FSMManager.LoadFSM (m_Entity.GetFSMPath());
 
 		var fireParticle = this.transform.FindChild ("FireParticle");
 		var pointLight = this.transform.FindChild ("PointLight");
@@ -77,13 +76,13 @@ public class TDCCampFireController : TDCBaseController {
 	public override void ReturnObject()
 	{
 		base.ReturnObject();
-		m_GameManager.SetObjectPool(this);
+		m_GameManager.SetObjectPool(this.GetEntity());
 	}
 
 	public override void ResetObject()
 	{
 		base.ResetObject();
-		m_FirePower = m_GObjectData.Duration;
+		m_FirePower = m_Entity.GetDuration();
 		m_Light.intensity = m_CurrentIntensity;
 		m_ParticleSystem.startSize = m_CurrentStartSize;
 	}
@@ -97,18 +96,7 @@ public class TDCCampFireController : TDCBaseController {
 	}
 
 	public void SetParticleSize(float value) {
-		m_ParticleSystem.startSize = value / m_GObjectData.Duration * (m_CurrentStartSize - 5) + 5;  
-	}
-
-	public override void SetData(TDCBaseData data)
-	{
-		base.SetData(data);
-		m_GObjectData = data as TDCGObjectData;
-	}
-
-	public override TDCBaseData GetData()
-	{
-		return m_GObjectData;
+		m_ParticleSystem.startSize = value / m_Entity.GetDuration() * (m_CurrentStartSize - 5) + 5;  
 	}
 
 	#endregion

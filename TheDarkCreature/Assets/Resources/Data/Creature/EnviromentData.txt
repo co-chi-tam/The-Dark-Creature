@@ -1,5 +1,5 @@
 {
-	"resources": [
+	"enviroments": [
 		{
 			"ID": 1,
 			"Name": "Object Grass",
@@ -7,7 +7,7 @@
 			"CreatureType": 3,
 			"Description": "",
 			"ModelPath": ["Prefabs/Enviroment/Grass1","Prefabs/Enviroment/Grass2","Prefabs/Enviroment/Grass3"],
-			"FSMPath": "FSM/Creature/ResourceFSM",
+			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"IconPath": "",
@@ -19,7 +19,7 @@
 			"CreatureType": 3,
 			"Description": "",
 			"ModelPath": ["Prefabs/Enviroment/Mushroom1","Prefabs/Enviroment/Mushroom2"],
-			"FSMPath": "FSM/Creature/ResourceFSM",
+			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"IconPath": "",
@@ -31,7 +31,7 @@
 			"CreatureType": 3,
 			"Description": "",
 			"ModelPath": ["Prefabs/Enviroment/Bush"],
-			"FSMPath": "FSM/Creature/ResourceFSM",
+			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"IconPath": "",
@@ -43,7 +43,7 @@
 			"CreatureType": 3,
 			"Description": "",
 			"ModelPath": ["Prefabs/Enviroment/BlueBerry"],
-			"FSMPath": "FSM/Creature/ResourceFSM",
+			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"IconPath": "",

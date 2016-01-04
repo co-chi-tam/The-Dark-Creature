@@ -78,19 +78,18 @@ public class TDCPropertyReflection {
         }
     }
 
-//	public Type GetType(string name) {
-//		try
-//		{
-//			var propObj     = this.m_Properties[name];
-//			var propInfo    = propObj.GetType().GetProperty("Value");
-//			var propValue   = propInfo.GetValue(propObj, null);
-//			return propValue.GetType();
-//		}
-//		catch (Exception ex)
-//		{
-//			throw new Exception(ex.Message);
-//		}
-//		return null;
-//	}
-
+	public void ResetProperty(string name)
+	{
+		try
+		{
+			var propObj     = this.m_Properties[name];
+			var propInfo    = propObj.GetType().GetProperty("DefaultValue");
+			var propValue   = propInfo.GetValue(propObj, null);
+			SetProperty (name, propValue);
+		}
+		catch (Exception ex)
+		{
+			throw new Exception(ex.Message);
+		}
+	}
 }

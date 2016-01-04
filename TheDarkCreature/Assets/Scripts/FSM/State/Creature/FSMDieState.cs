@@ -15,10 +15,10 @@ public class FSMDieState : FSMBaseState
         m_Controller.SetAnimation(EAnimation.Death);
 		m_Controller.ResetObject();
 		m_Controller.SetActive(false);
-		var group = m_Controller.GetGroupController();
+		var group = m_Controller.GetGroupEntity();
 		if (group != null)
 		{
-			group.ReturnMember(m_Controller);
+			group.ReturnMember(m_Controller.GetEntity());
 		}
 		m_Controller.CallBackEvent("OnDealth");
 	}

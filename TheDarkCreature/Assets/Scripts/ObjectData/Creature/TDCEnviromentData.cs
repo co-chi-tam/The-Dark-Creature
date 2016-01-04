@@ -1,13 +1,13 @@
 ﻿
-public class TDCResourceData : TDCCreatureData {
+public class TDCEnviromentData : TDCCreatureData {
 
-	public TDCResourceData () : base ()
+	public TDCEnviromentData () : base ()
 	{
 
 	}
 	
-	public static TDCResourceData Clone (TDCResourceData instance) {
-		var tmp = new TDCResourceData ();
+	public static TDCEnviromentData Clone (TDCEnviromentData instance) {
+		var tmp = new TDCEnviromentData ();
 		tmp.ID = instance.ID;
 		tmp.Name = instance.Name;
 		tmp.GameType = instance.GameType;

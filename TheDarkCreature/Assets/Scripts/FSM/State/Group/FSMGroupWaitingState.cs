@@ -11,7 +11,7 @@ public class FSMGroupWaitingState : FSMBaseState {
 	}
 	
 	public override void StartState() {
-		m_Controller.SetWaitingTimeInterval (m_GroupController.GetTimeRespawnMember());
+		m_Controller.SetWaitingTime (m_GroupController.GetTimeRespawnMember());
 	}
 	
 	public override void UpdateState() {
