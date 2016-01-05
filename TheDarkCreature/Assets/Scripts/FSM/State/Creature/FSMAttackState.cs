@@ -9,7 +9,8 @@ public class FSMAttackState : FSMBaseState {
 	}
 	
 	public override void StartState() {
-		m_Controller.SetAnimation(EAnimation.Attack1);
+		var random = Random.Range(0, 9999) % 2;
+		m_Controller.SetAnimation(random < 1 ? EAnimation.Attack1 : EAnimation.Attack2);
 		m_Controller.CallBackEvent("OnAttack");
 	}
 

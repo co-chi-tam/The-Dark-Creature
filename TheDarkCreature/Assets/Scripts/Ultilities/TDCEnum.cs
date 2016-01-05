@@ -7,6 +7,7 @@ public class TDCEnum{
 		// Creature
 		Dodono 		= 5,
 		Satla 		= 6,
+		Taurot 		= 7,
 
 		// Object
 		Meat 		= 51,
@@ -25,6 +26,7 @@ public class TDCEnum{
 		GroupMushRoom = 205,
 		GroupBush 	= 206,
 		GroupBlueBerry = 207,
+		GroupTaurot = 208,
 
 		// Object
 		CampFire	= 301,

@@ -9,7 +9,7 @@
 			"ModelPath": ["Prefabs/Group/GroupCreature"],
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
-			"Radius": 50,
+			"Radius": 100,
 			"MemberType": 5,
 			"MinMember": 5,
 			"MaxMember": 10,
@@ -37,7 +37,7 @@
 			"ModelPath": ["Prefabs/Group/GroupCreature"],
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
-			"Radius": 50,
+			"Radius": 150,
 			"MemberType": 53,
 			"MinMember": 10,
 			"MaxMember": 20,
@@ -51,7 +51,7 @@
 			"ModelPath": ["Prefabs/Group/GroupCreature"],
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupFSM",
-			"Radius": 50,
+			"Radius": 150,
 			"MemberType": 52,
 			"MinMember": 10,
 			"MaxMember": 20,
@@ -83,6 +83,20 @@
 			"MemberType": 55,
 			"MinMember": 1,
 			"MaxMember": 2,
+			"TimeRespawnMember": 10
+		},{
+			"ID": 7,
+			"Name": "GroupTaurot",
+			"GameType": 208,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Group/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupFSM",
+			"Radius": 100,
+			"MemberType": 7,
+			"MinMember": 2,
+			"MaxMember": 5,
 			"TimeRespawnMember": 10
 		}
 	]

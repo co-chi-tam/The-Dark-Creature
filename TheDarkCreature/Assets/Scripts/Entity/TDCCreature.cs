@@ -251,11 +251,12 @@ public class TDCCreature : TDCEntity
 		if (enemy != null)
 		{
 			var creatureType = enemy.GetCreatureType();
-			return (creatureType != TDCEnum.ECreatureType.Enviroment &&
-			creatureType != TDCEnum.ECreatureType.GObject) ? 
-				m_Data.AttackRange : GetColliderRadius();
+			if (creatureType == TDCEnum.ECreatureType.Enviroment ||
+				creatureType == TDCEnum.ECreatureType.GObject) { 
+				return GetColliderRadius();
+			}
 		}
-		return m_Data.AttackRange;
+		return m_Data.AttackRange + GetColliderRadius();
 	}
 
 	#endregion

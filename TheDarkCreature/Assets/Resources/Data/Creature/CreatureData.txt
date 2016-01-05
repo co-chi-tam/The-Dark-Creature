@@ -11,7 +11,7 @@
 			"IconPath": "",
 			"MoveSpeed": 5,
 			"DetectRange": 20,
-			"AttackRange": 3,
+			"AttackRange": 1,
 			"CurrentHP": 10,
 			"MaxHP": 10,
 			"CurrentHeatPoint": 50,
@@ -31,7 +31,7 @@
 			"IconPath": "",
 			"MoveSpeed": 7,
 			"DetectRange": 20,
-			"AttackRange": 3,
+			"AttackRange": 1,
 			"CurrentHP": 25,
 			"MaxHP": 25,
 			"CurrentHeatPoint": 50,
@@ -40,6 +40,26 @@
 			"Enemies": [301],
 			"Foods": [5,52,54],
 			"Inventory": [{"GameType":51,"Amount":1}]
+		},{
+			"ID": 3,
+			"Name": "Taurot",
+			"GameType": 7,
+			"CreatureType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Creature/Taurot"],
+			"FSMPath": "FSM/Creature/EasyAIFSM",
+			"IconPath": "",
+			"MoveSpeed": 7,
+			"DetectRange": 20,
+			"AttackRange": 1,
+			"CurrentHP": 100,
+			"MaxHP": 100,
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 50,
+			"Damage": 5,
+			"Enemies": [301],
+			"Foods": [5,6,52,53,54],
+			"Inventory": [{"GameType":51,"Amount":2}]
 		}
 	]
 }

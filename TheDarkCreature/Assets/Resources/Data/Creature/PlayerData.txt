@@ -45,6 +45,38 @@
 			"MaxHungerPoint": 50,
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 50,
+			"Damage": 7,
+			"Level": 1,
+			"Inventory": [
+				{
+					"GameType": 51,
+					"Amount": 5
+				},
+				{
+					"GameType": 301,
+					"Amount": 50
+				}
+			]
+		},{
+			"ID": 3,
+			"Name": "PlayerTaurot",
+			"GameType": 7,
+			"CreatureType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Creature/Taurot"],
+			"FSMPath": "FSM/Creature/PlayerFSM",
+			"IconPath": "",
+			"MoveSpeed": 10,
+			"DetectRange": 25,
+			"AttackRange": 10,
+			"CurrentHP": 120,
+			"MaxHP": 120,
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 50,
+			"CurrentHungerPoint": 50,
+			"MaxHungerPoint": 50,
+			"CurrentSanityPoint": 50,
+			"MaxSanityPoint": 50,
 			"Damage": 3,
 			"Level": 1,
 			"Inventory": [

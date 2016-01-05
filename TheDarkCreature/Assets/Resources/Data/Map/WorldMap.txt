@@ -39,6 +39,12 @@
 					"GameType": 207,
 					"Position": "-50,0,50",
 					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 7,
+					"GameType": 208,
+					"Position": "50,0,-50",
+					"Rotation": "0,0,0"
 				}
 			]
 		}

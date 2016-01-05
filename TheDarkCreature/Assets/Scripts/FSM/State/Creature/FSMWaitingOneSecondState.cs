@@ -10,7 +10,8 @@ public class FSMWaitingOneSecondState : FSMBaseState
 	
 	public override void StartState()
 	{
-		m_Controller.SetAnimation(EAnimation.Action1);
+		var random = Random.Range(0, 9999) % 2;
+		m_Controller.SetAnimation(random < 1 ? EAnimation.Action1 : EAnimation.Action2);
 		m_Controller.SetWaitingTime (1f);
 	}
 	

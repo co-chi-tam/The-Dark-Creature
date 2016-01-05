@@ -99,7 +99,7 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public IEnumerator LoadMap(string mapName, Action complete = null) {
-		var player = CreatePlayer (TDCEnum.EGameType.Satla, Vector3.zero, Quaternion.identity);
+		var player = CreatePlayer (TDCEnum.EGameType.Taurot, Vector3.zero, Quaternion.identity);
 		player.SetActive(true);
 		var map = m_DataReader.GetMap(mapName);
 		for (int i = 0; i < map.Count; i++)
@@ -225,19 +225,10 @@ public class TDCGameManager : MonoBehaviour {
 		TDCBaseController controller = null;
 		TDCEntity entity = null;
 		var random = UnityEngine.Random.Range (0, 9999);
-		switch (type) { 
-			case TDCEnum.EGameType.Dodono:
-			case TDCEnum.EGameType.Satla: {
-					data = m_DataReader.GetPlayer (type);
-					gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-					controller = gObject.AddComponent<TDCPlayerController> ();
-					CameraController.Instance.Target = gObject.transform;
-					break;
-				}
-			default:
-
-				break;
-		}
+		data = m_DataReader.GetPlayer (type);
+		gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+		controller = gObject.AddComponent<TDCPlayerController> ();
+		CameraController.Instance.Target = gObject.transform;
 		entity = new TDCCreature(controller, data);
 		entity.SetActive(false);
 		controller.SetEntity(entity);
@@ -263,7 +254,8 @@ public class TDCGameManager : MonoBehaviour {
 		var random = UnityEngine.Random.Range (0, 9999);
 		switch (type) { 
 		case TDCEnum.EGameType.Dodono: 
-		case TDCEnum.EGameType.Satla: {
+		case TDCEnum.EGameType.Satla: 
+			case TDCEnum.EGameType.Taurot: {
 			data = m_DataReader.GetCreature (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEasyAIController> ();
