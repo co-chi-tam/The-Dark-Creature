@@ -49,9 +49,9 @@ public class TDCBaseController : TDCMonoBehaviour
 		SetStartPosition (m_Transform.position);
 		SetTargetPosition (m_Transform.position);
 
-		m_Collider = this.GetComponent<CapsuleCollider> ();
-		m_GameManager = TDCGameManager.GetInstance();
-		m_FSMManager = new FSMManager();
+		m_Collider 		= this.GetComponent<CapsuleCollider> ();
+		m_GameManager 	= TDCGameManager.GetInstance();
+		m_FSMManager 	= new FSMManager();
 
 		var waiting 		= new FSMWaitingState (this);
 		var waitingOne 		= new FSMWaitingOneSecondState (this);
@@ -74,27 +74,22 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	protected virtual void Start()
 	{
-		if (GetActive() == false)
-			return;
+		
     }
 
-	protected virtual void Update() {
-		if (GetActive() == false)
-			return;
-	}
-
-	protected virtual void LateUpdate() {
-		if (GetActive() == false)
-			return;
-	}
-
 	protected virtual void FixedUpdate() {
-		if (GetActive() == false)
-			return;
 		if (!HaveEnemy())
 		{
 			SetEnemyEntity(null);
 		}
+	}
+
+	protected virtual void Update() {
+		
+	}
+
+	protected virtual void LateUpdate() {
+		
 	}
 
 	public virtual void OnBecameVisible() {
@@ -102,7 +97,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 
 	public virtual void OnBecameInvisible() {
-			
+		
 	}
 
 	protected virtual void OnDestroy() {
@@ -120,8 +115,6 @@ public class TDCBaseController : TDCMonoBehaviour
 	protected virtual void OnDrawGizmos() {
 		Gizmos.color = Color.cyan;
 		Gizmos.DrawWireSphere (TransformPosition, GetColliderRadius());
-		Gizmos.color = Color.magenta;
-		Gizmos.DrawWireSphere (TransformPosition, GetDetectEnemyRange());
 	}
 
 	#endregion
@@ -226,14 +219,6 @@ public class TDCBaseController : TDCMonoBehaviour
 		m_WaitingTime = time;
 	}
 	
-	public virtual void SetCanMove(bool value) {
-
-	}
-	
-	public virtual bool GetCanMove() {
-		return false;
-	}
-	
 	public virtual Vector3 GetEnemyPosition() {
 		return m_Entity.GetEnemyPosition();
 	}
@@ -249,7 +234,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 	
 	public virtual void SetAnimation(EAnimation anim) {
-
+		
 	}
 	
 	public virtual Vector3 GetTargetPosition() {

@@ -53,14 +53,9 @@ public class TDCSkillController : TDCBaseController {
 		// base.FixedUpdate();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
-	}
-
-	protected override void Update()
-	{
-		base.Update();
 		if (m_TimeEffect > 0f)
 		{
-			m_TimeEffect -= Time.deltaTime;
+			m_TimeEffect -= Time.fixedDeltaTime;
 		}
 		TransformPosition = m_AttachTransform.position;
 	}
@@ -118,10 +113,11 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	public virtual void StartSkill(Vector3 position, Quaternion rotation) {
+		m_AttachTransform = m_Entity.GetAttachOwner() ? m_Entity.GetOwnerEntity().GetController().transform : m_Entity.GetAttachEnemy() ? GetEnemyEntity().GetController().transform : this.transform;
+
 		TransformPosition = position;
 		TransformRotation = rotation;
 
-		m_AttachTransform = m_Entity.GetAttachOwner() ? m_Entity.GetOwnerEntity().GetController().transform : m_Entity.GetAttachEnemy() ? GetEnemyEntity().GetController().transform : this.transform;
 		SetActive(true);
 	}
 

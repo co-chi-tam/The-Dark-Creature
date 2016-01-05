@@ -12,7 +12,6 @@ public class TDCSkillSlot {
 	private TDCEntity m_SkillEntity;
 
 	private float m_TimeDelay;
-	private float m_TimeEffect;
 
 	public TDCSkillSlot(TDCEnum.EGameType skillType, TDCEntity owner)
 	{
@@ -21,7 +20,6 @@ public class TDCSkillSlot {
 		m_SkillType = skillType;
 		m_Owner = owner;
 		m_TimeDelay = 0f;
-		m_TimeEffect = 0f;
 		m_Owner.AddEventListener(m_SkillData.TriggerEnvent, ActiveSkill);
 	}
 

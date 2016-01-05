@@ -27,4 +27,8 @@ public static class TDCUltilities {
 		returnVetor.y = randomRadius * Mathf.Cos(angleRadian);
 		return returnVetor;
 	}
+
+	public static Vector3 V3Forward(this Transform trans, float length = 1f) {
+		return trans.position + trans.rotation * Vector3.forward * length;
+	}
 }

@@ -34,7 +34,7 @@ public class TDCPlayerController : TDCCreatureController
 
 		m_Inventory.SetPlayer(this);
 
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.FlameBodySkill, this.GetEntity());
+		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeSkill, this.GetEntity());
 	}
 
 	protected override void FixedUpdate()
@@ -42,12 +42,8 @@ public class TDCPlayerController : TDCCreatureController
 		base.FixedUpdate();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
-	}
 
-	protected override void Update()
-	{
-		base.Update();
-		m_SkillSlot.UpdateSkill(Time.deltaTime);
+		m_SkillSlot.UpdateSkill(Time.fixedDeltaTime);
 	}
 
 	protected override void LateUpdate () {
@@ -114,6 +110,11 @@ public class TDCPlayerController : TDCCreatureController
 				case (int) TDCEnum.ELayer.LayerEnviroment:
 					{
 						SetEnemyEntity(entity);
+					}
+					break;
+				case (int) TDCEnum.ELayer.LayerGObject:
+					{
+
 					}
 					break;
 			}

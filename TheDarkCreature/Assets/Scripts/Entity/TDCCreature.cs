@@ -12,17 +12,17 @@ public class TDCCreature : TDCEntity
 	private int m_HungerPoint = 0;
 	private int m_SanityPoint = 0;
 	private int m_DamageTake = 0;
-	private bool m_CanMove = true;
 	private float m_TimeReset = 0f;
 	private TDCCreatureController m_Controller;
 	private TDCCreatureData m_Data;
 
 	protected TDCEntity m_GroupEntity;
 	protected TDCEntity m_EnemyEntity;
-	protected TDCObjectProperty<float> m_OffsetSpeed;
 
 	protected Vector3 m_TargetPosition;
 	protected Vector3 m_StartPosition;
+
+	protected TDCObjectProperty<float> m_OffsetSpeed;
 
 	#endregion
 
@@ -127,6 +127,11 @@ public class TDCCreature : TDCEntity
 		return m_Data.GameType;
 	}
 
+	public override TDCEnum.ECreatureType GetCreatureType()
+	{
+		return m_Data.CreatureType;
+	}
+
 	public override Vector3 GetStartPosition()
 	{
 		return m_StartPosition;
@@ -203,14 +208,6 @@ public class TDCCreature : TDCEntity
 		m_Data = data as TDCCreatureData;
 	}
 
-	public override void SetCanMove(bool value) {
-		m_CanMove = value;
-	}
-
-	public override bool GetCanMove() {
-		return m_CanMove;
-	}
-
 	public override void SetAnimation(EAnimation anim) {
 		m_Controller.SetAnimation (anim);
 	}
@@ -250,6 +247,14 @@ public class TDCCreature : TDCEntity
 
 	public override float GetAttackRange()
 	{
+		var enemy = GetEnemyEntity();
+		if (enemy != null)
+		{
+			var creatureType = enemy.GetCreatureType();
+			return (creatureType != TDCEnum.ECreatureType.Enviroment &&
+			creatureType != TDCEnum.ECreatureType.GObject) ? 
+				m_Data.AttackRange : GetColliderRadius();
+		}
 		return m_Data.AttackRange;
 	}
 

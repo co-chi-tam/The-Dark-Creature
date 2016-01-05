@@ -58,7 +58,8 @@ public class TDCEnum{
 		None		= 0,
 		Creature	= 1,
 		Player 		= 2,
-		Resource	= 3
+		Enviroment	= 3,
+		GObject		= 4
 	}
 
 	public enum EGroupType : int {
@@ -71,6 +72,7 @@ public class TDCEnum{
 		LayerCreature 	= 8,
 		LayerPlane 		= 9,
 		LayerEnviroment = 10,
+		LayerGObject	= 11,
 		LayerPlayer		= 31
 	}
 

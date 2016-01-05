@@ -144,6 +144,11 @@ public class TDCEntity : TDCPropertyReflection {
 
 	#region Creature
 
+	public virtual TDCEnum.ECreatureType GetCreatureType()
+	{
+		return TDCEnum.ECreatureType.None;
+	}
+
 	public virtual Vector3 GetEnemyPosition()
 	{
 		return Vector3.zero;
@@ -204,14 +209,6 @@ public class TDCEntity : TDCPropertyReflection {
 		return 0f;
 	}
 
-	public virtual void SetCanMove(bool value) {
-		
-	}
-
-	public virtual bool GetCanMove() {
-		return false;
-	}
-
 	public virtual void SetAnimation(EAnimation anim) {
 		
 	}
@@ -256,6 +253,11 @@ public class TDCEntity : TDCPropertyReflection {
 
 	#region Group
 
+	public virtual TDCEnum.EGroupType GetGroupType()
+	{
+		return TDCEnum.EGroupType.None;
+	}
+
 	public virtual int GetMinMember() {
 		return 0;
 	}
@@ -288,7 +290,8 @@ public class TDCEntity : TDCPropertyReflection {
 
 	#region Skill
 
-	public virtual TDCEnum.ESkillType GetSkillType() {
+	public virtual TDCEnum.ESkillType GetSkillType()
+	{
 		return TDCEnum.ESkillType.None;
 	}
 
@@ -342,6 +345,15 @@ public class TDCEntity : TDCPropertyReflection {
 
 	public virtual float GetDuration() {
 		return 0f;
+	}
+
+	#endregion
+
+	#region Item
+
+	public virtual TDCEnum.EItemType GetItemType()
+	{
+		return TDCEnum.EItemType.None;
 	}
 
 	#endregion

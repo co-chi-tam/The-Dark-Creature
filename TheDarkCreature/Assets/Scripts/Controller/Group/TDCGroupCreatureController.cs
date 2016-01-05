@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using FSM;
 
 public class TDCGroupCreatureController : TDCBaseGroupController {
@@ -38,7 +39,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 	public override void CreatePoolMember() {
 		base.CreatePoolMember ();
 		for (int i = 0; i < GetMaxMember(); i++) {
-			var randomPosition = Random.insideUnitCircle * GetRadius();
+			var randomPosition = UnityEngine.Random.insideUnitCircle * GetRadius();
 			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y);
 			var entity = m_GameManager.CreateCreature ( m_Entity.GetMemberType(), 
 															memPosition, 

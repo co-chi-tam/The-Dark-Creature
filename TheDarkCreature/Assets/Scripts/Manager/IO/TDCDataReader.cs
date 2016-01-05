@@ -184,17 +184,17 @@ public class TDCDataReader {
 	private void LoadEnviroment (List<object> values) {
 		for (int i = 0; i < values.Count; i++) {
 			var instance = values [i] as Dictionary<string, object>;
-			var resource = new TDCEnviromentData ();
-			resource.ID = int.Parse (instance ["ID"].ToString ());
-			resource.Name = instance ["Name"].ToString ();
-			resource.Description = instance ["Description"].ToString ();
-			resource.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
-			resource.FSMPath = instance["FSMPath"].ToString ();
-			resource.Icon = instance["IconPath"].ToString();
-			resource.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
-			resource.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
-			resource.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
-			resource.MaxHP = int.Parse (instance["MaxHP"].ToString());
+			var enviroment = new TDCEnviromentData ();
+			enviroment.ID = int.Parse (instance ["ID"].ToString ());
+			enviroment.Name = instance ["Name"].ToString ();
+			enviroment.Description = instance ["Description"].ToString ();
+			enviroment.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
+			enviroment.FSMPath = instance["FSMPath"].ToString ();
+			enviroment.Icon = instance["IconPath"].ToString();
+			enviroment.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
+			enviroment.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
+			enviroment.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
+			enviroment.MaxHP = int.Parse (instance["MaxHP"].ToString());
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
 				var invenData = inventory[x] as Dictionary<string, object>;
@@ -202,10 +202,10 @@ public class TDCDataReader {
 				var amount = int.Parse (invenData["Amount"].ToString());
 				var itemType = m_ListItemData [gameType].ItemType;
 				var item = LoadItemData(itemType, gameType);
-				resource.Inventory[x] = new TDCItemController (item);
-				resource.Inventory[x].GetData().Amount = amount;
+				enviroment.Inventory[x] = new TDCItemController (item);
+				enviroment.Inventory[x].GetData().Amount = amount;
 			}
-			m_ListCreatureData.Add (resource.GameType, resource);
+			m_ListCreatureData.Add (enviroment.GameType, enviroment);
 		}
 	}
 

@@ -82,7 +82,7 @@ public class TDCItemController {
 					TDCEntity obj = null;
 					if (m_GameManager.GetObjectPool(m_Data.GameType, ref obj))
 					{
-						obj.GetController().TransformPosition = owner.TransformPosition;
+						obj.GetController().TransformPosition = owner.transform.V3Forward(-owner.GetColliderRadius());
 						obj.SetActive(true);
 					}
 					m_Data.Amount--;

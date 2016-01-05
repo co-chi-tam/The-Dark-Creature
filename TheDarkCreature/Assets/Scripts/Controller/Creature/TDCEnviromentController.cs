@@ -34,7 +34,7 @@ public class TDCEnviromentController : TDCCreatureController {
 	
 	#region Main method
 
-	internal virtual bool IsDeath() {
+	internal override bool IsDeath() {
 		return m_Entity.GetHealth() <= 0f;
 	}
 

@@ -73,5 +73,15 @@ public class TDCGroup : TDCEntity
 		m_Controller.ReturnMember (member);
 	}
 
+	public override TDCEnum.EGameType GetGameType()
+	{
+		return m_Data.GameType;
+	}
+
+	public override TDCEnum.EGroupType GetGroupType()
+	{
+		return m_Data.GroupType;
+	}
+
 }
 

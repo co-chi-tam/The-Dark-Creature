@@ -89,9 +89,9 @@ public class TDCBaseGroupController : TDCBaseController
 		return false;
 	}
 
-	internal virtual bool CountdownWaitingTime()
+	internal override bool CountdownWaitingTime()
 	{
-		return false;
+		return base.CountdownWaitingTime();
 	}
 
 	#endregion

@@ -15,6 +15,7 @@ public class TDCEnviromentData : TDCCreatureData {
 		tmp.ModelPath = instance.ModelPath;
 		tmp.FSMPath = instance.FSMPath;
 		tmp.Icon = instance.Icon;
+		tmp.CreatureType = instance.CreatureType;
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
 		tmp.Inventory = instance.Inventory;

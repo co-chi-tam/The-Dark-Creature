@@ -31,12 +31,8 @@ public class TDCEasyAIController : TDCCreatureController
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
-	}
 
-	protected override void Update()
-	{
-		base.Update();
-		m_SkillSlot.UpdateSkill(Time.deltaTime);
+		m_SkillSlot.UpdateSkill(Time.fixedDeltaTime);
 	}
 
     #endregion
@@ -62,7 +58,6 @@ public class TDCEasyAIController : TDCCreatureController
 	internal override bool IsToFarGroup() {
 		var distance = 0f;
 		var range = 0f;
-		var isFar = false;
 		if (GetGroupEntity() == null)
 		{
 			distance = (TransformPosition - GetStartPosition()).sqrMagnitude;

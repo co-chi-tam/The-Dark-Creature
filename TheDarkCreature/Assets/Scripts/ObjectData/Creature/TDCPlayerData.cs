@@ -59,6 +59,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.Description = instance.Description;
 		tmp.ModelPath = instance.ModelPath;
 		tmp.FSMPath = instance.FSMPath;
+		tmp.CreatureType = instance.CreatureType;
 		tmp.AttackRange = instance.AttackRange;
 		tmp.DetectRange = instance.DetectRange;
 		tmp.MoveSpeed = instance.MoveSpeed;

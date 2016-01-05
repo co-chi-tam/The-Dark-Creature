@@ -47,6 +47,16 @@ public class TDCObject : TDCEntity
 		return m_Data.FSMPath;
 	}
 
+	public override TDCEnum.EGameType GetGameType()
+	{
+		return m_Data.GameType;
+	}
+
+	public override TDCEnum.ECreatureType GetCreatureType()
+	{
+		return m_Data.CreatureType;
+	}
+
 }
 
 

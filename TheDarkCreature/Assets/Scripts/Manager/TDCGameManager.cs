@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System;
 using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -55,17 +56,29 @@ public class TDCGameManager : MonoBehaviour {
     }
 
 	void Start() {
-		LoadMap("World1");
-		LoadObjectPool();
+		Debug.LogError ("Loading " + Time.time);
+		HandleLoadMap("World1", () => {
+			HandleLoadObjectPool(() => {
+				Debug.LogError ("Complete " + Time.time);
+			});
+		});
     }
 
     #endregion
 
     #region Main method
 
-	public void LoadObjectPool() {
+	private void HandleLoadMap(string name, Action complete = null) {
+		StartCoroutine (LoadMap(name, complete));
+	}
+
+	private void HandleLoadObjectPool(Action complete = null) {
+		StartCoroutine (LoadObjectPool(complete));
+	}
+
+	public IEnumerator LoadObjectPool(Action complete = null) {
 		if (m_ObjectPool.Count > 0)
-			return; // Once times
+			yield break; // Once times
 		var objPool = m_DataReader.GetObjectPoolData();
 		for (int i = 0; i < objPool.Count; i++)
 		{
@@ -75,11 +88,17 @@ public class TDCGameManager : MonoBehaviour {
 				var obj = CreateCreature(poolData.GameType, Vector3.zero, Quaternion.identity, this.gameObject);
 				obj.SetActive(false);
 				m_ObjectPool[poolData.GameType].Create(obj);
+				yield return obj != null;
 			}
+		}
+		yield return null;
+		if (complete != null)
+		{
+			complete();
 		}
 	}
 
-	public void LoadMap(string mapName) {
+	public IEnumerator LoadMap(string mapName, Action complete = null) {
 		var player = CreatePlayer (TDCEnum.EGameType.Satla, Vector3.zero, Quaternion.identity);
 		player.SetActive(true);
 		var map = m_DataReader.GetMap(mapName);
@@ -88,6 +107,12 @@ public class TDCGameManager : MonoBehaviour {
 			var mapObj = map[i];
 			var group = CreateGroup(mapObj.GameType, mapObj.Position, mapObj.Rotation);
 			group.SetActive(true);
+			yield return group != null;
+		}
+		yield return null;
+		if (complete != null)
+		{
+			complete();
 		}
 	}
 
@@ -173,7 +198,7 @@ public class TDCGameManager : MonoBehaviour {
 	                                               Vector3 position, 
 	                                               Quaternion rotation, 
 	                                               GameObject parent = null) {
-		var random = Random.Range (0, 9999);
+		var random = UnityEngine.Random.Range (0, 9999);
 		var data = m_DataReader.GetGroup (type);
 		var gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [random % data.ModelPath.Length]), position, rotation) as GameObject;
 		var controller = gObject.AddComponent<TDCGroupCreatureController> ();
@@ -199,7 +224,7 @@ public class TDCGameManager : MonoBehaviour {
 		GameObject gObject = null;
 		TDCBaseController controller = null;
 		TDCEntity entity = null;
-		var random = Random.Range (0, 9999);
+		var random = UnityEngine.Random.Range (0, 9999);
 		switch (type) { 
 			case TDCEnum.EGameType.Dodono:
 			case TDCEnum.EGameType.Satla: {
@@ -235,7 +260,7 @@ public class TDCGameManager : MonoBehaviour {
 		TDCBaseController controller = null;
 		TDCEntity entity = null;
 		GameObject gObject = null;
-		var random = Random.Range (0, 9999);
+		var random = UnityEngine.Random.Range (0, 9999);
 		switch (type) { 
 		case TDCEnum.EGameType.Dodono: 
 		case TDCEnum.EGameType.Satla: {

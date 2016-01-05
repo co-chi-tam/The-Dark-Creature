@@ -48,7 +48,7 @@ public class TDCActiveSkillController : TDCSkillController {
 	internal override void SetValueEffect(Dictionary<string, object> pars)
 	{
 		base.SetValueEffect(pars);
-		var toTarget = pars["ToTarget"];
+//		var toTarget = pars["ToTarget"];
 		var valueName = pars["ValueName"].ToString();
 		var toValue = float.Parse (pars["ToValue"].ToString());
 		var enemy = GetEnemyEntity();

@@ -20,7 +20,7 @@ public class TDCCreatureController : TDCBaseController {
 		base.Init ();
 		m_AnimatorController = this.GetComponent<Animator> ();
 
-		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 31;
+		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 31;
 
 		var idleState   	= new FSMIdleState(this);
 		var moveState   	= new FSMMoveState(this);
@@ -39,7 +39,6 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("DieState", dieState);
 
 		m_FSMManager.RegisterCondition("IsActive", GetActive);
-		m_FSMManager.RegisterCondition("CanMove", CanMove);
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
 		m_FSMManager.RegisterCondition("MoveToEnemy", MoveToEnemy);
 		m_FSMManager.RegisterCondition("FoundEnemy", FoundEnemy);
@@ -49,10 +48,10 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
 	}
 
-	protected override void Update ()
+	protected override void FixedUpdate ()
 	{
-		base.Update ();
-		m_Entity.Update(Time.deltaTime);
+		base.FixedUpdate ();
+		m_Entity.Update(Time.fixedDeltaTime);
 	}
 
 	public override void OnBecameVisible()
@@ -72,6 +71,8 @@ public class TDCCreatureController : TDCBaseController {
 	protected override void OnDrawGizmos()
 	{
 		base.OnDrawGizmos();
+		Gizmos.color = Color.magenta;
+		Gizmos.DrawWireSphere (TransformPosition, GetDetectEnemyRange());
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere (TransformPosition, m_Entity.GetAttackRange());
 		Gizmos.color = Color.white;
@@ -169,10 +170,6 @@ public class TDCCreatureController : TDCBaseController {
 		return GetHealth() <= 0f || GetActive() == false;
 	}
 
-	internal virtual bool CanMove() {
-		return m_Entity.GetCanMove();
-	}
-
 	internal override bool MoveToTarget()
 	{
 		base.MoveToTarget();
@@ -257,14 +254,6 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override float GetColliderRadius() {
 		return base.GetColliderRadius();
-	}
-	
-	public override void SetCanMove(bool value) {
-		m_Entity.SetCanMove(value);
-	}
-	
-	public override bool GetCanMove() {
-		return m_Entity.GetCanMove();
 	}
 
 	public override void SetAnimation(EAnimation anim) {

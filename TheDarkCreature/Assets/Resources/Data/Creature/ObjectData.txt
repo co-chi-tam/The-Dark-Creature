@@ -4,7 +4,7 @@
 			"ID": 1,
 			"Name": "CampFire",
 			"GameType": 301,
-			"CreatureType": 3,
+			"CreatureType": 4,
 			"Description": "",
 			"ModelPath": ["Prefabs/Creature/CampFire"],
 			"FSMPath": "FSM/Creature/CampFireFSM",
