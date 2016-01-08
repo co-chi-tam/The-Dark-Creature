@@ -26,6 +26,6 @@ public class FSMAvoidState : FSMBaseState
 
     public override void ExitState()
     {
-
+		m_Controller.SetEnemyEntity(null);
     }
 }

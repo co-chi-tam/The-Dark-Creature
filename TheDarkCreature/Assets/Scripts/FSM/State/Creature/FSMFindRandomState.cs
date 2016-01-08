@@ -22,7 +22,7 @@ public class FSMFindRandomState : FSMBaseState
 		}
 		var random = Random.insideUnitCircle * groupRadius; // TDCUltilities.RandomAround(groupRadius);
 		m_Controller.SetTargetPosition (groupPosition + new Vector3(random.x, 0f, random.y));
-		m_Controller.SetWaitingTime (Random.Range (1f, 3f));
+		m_Controller.SetWaitingTime (0.5f);
 		m_Controller.CallBackEvent("OnFindRandom");
     }
 

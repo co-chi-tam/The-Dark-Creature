@@ -49,7 +49,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("IsDeath", IsDeath);
 		m_FSMManager.RegisterCondition("IsToFarGroup", IsToFarGroup);
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
-		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
+		m_FSMManager.RegisterCondition("IsEnemyDeath", IsEnemyDeath);
 		m_FSMManager.RegisterCondition("IsLandingFinish", IsLandingFinish);
 	}
 
@@ -165,10 +165,17 @@ public class TDCCreatureController : TDCBaseController {
 		return TransformPosition.y < 0.001f;
 	}
 
-	internal override bool HaveEnemy() {
-		base.HaveEnemy();
+	internal override bool IsEnemyDeath() {
+		base.IsEnemyDeath();
 		var enemyCtrl = GetEnemyEntity();
-		return enemyCtrl != null && enemyCtrl.GetActive();
+		if (enemyCtrl == null)
+			return true;
+		var isEnemyDeath = enemyCtrl != null && enemyCtrl.GetActive() == false;
+		if (isEnemyDeath)
+		{
+			SetEnemyEntity(null);
+		}
+		return isEnemyDeath;
 	}
 
 	internal virtual bool IsToFarGroup() {
@@ -207,7 +214,6 @@ public class TDCCreatureController : TDCBaseController {
 
 	internal virtual bool FoundEnemy() {
 		var mPos = TransformPosition;
-		mPos.y = 0f;
 		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
 			var target = m_GameManager.GetEntityByName (colliders[i].name);
@@ -224,7 +230,8 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool FoundFood() {
-		if (GetEnemyEntity() != null)
+		var enemy = GetEnemyEntity();
+		if (enemy != null)
 		{
 			return true;
 		}
@@ -250,6 +257,11 @@ public class TDCCreatureController : TDCBaseController {
 	#endregion
 	
 	#region Getter & Setter
+
+	public override void SetEnemyEntity(TDCEntity entity)
+	{
+		m_Entity.SetEnemyEntity(entity);
+	}
 
 	public override float GetMoveSpeed()
 	{

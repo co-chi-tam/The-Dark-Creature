@@ -12,9 +12,14 @@ public class FSMDisableState : FSMBaseState {
 	public override void StartState() {
 		m_Controller.SetActive(false);
 		m_Controller.ResetObject();
-		if (m_Controller.GetGroupEntity() == null)
+		var group = m_Controller.GetGroupEntity();
+		if (group != null)
 		{
-			m_Controller.ReturnObject();
+			group.ReturnMember(m_Controller.GetEntity());
+		}
+		else
+		{
+			m_Controller.ReturnObject(m_Controller.GetEntity());
 		}
 	}
 	

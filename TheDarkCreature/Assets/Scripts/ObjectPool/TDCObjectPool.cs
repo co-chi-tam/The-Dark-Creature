@@ -42,10 +42,10 @@ namespace ObjectPool
         public void Set(T item)
         {
             if (item == null) return;
-            T tmp = m_ListUsing.Find(item).Value;
-            if (tmp == null) return;
-            m_ListUsing.Remove(tmp);
-			m_ListWaiting.Enqueue(tmp);
+			if (m_ListUsing.Contains(item)) {
+				m_ListUsing.Remove(item);
+			}
+			m_ListWaiting.Enqueue(item);
         }
 
 		public void Set(int index)

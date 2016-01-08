@@ -14,8 +14,7 @@
               "condition_name": "CountdownWaitingTime",
               "condition_value": true,
               "state_name": "FlyState",
-              "states": [
-              	{
+              "states": [{
               	  "condition_name": "FoundFood",
                   "condition_value": true,
                   "state_name": "LandingState",
@@ -36,8 +35,8 @@
 				                  "state_name": "AttackState",
 				                  "states": [
 				                    {
-				                      "condition_name": "HaveEnemy",
-				                      "condition_value": false,
+				                      "condition_name": "IsEnemyDeath",
+				                      "condition_value": true,
 				                      "state_name": "IdleState",
 				                      "states": []
 				                    },
@@ -48,7 +47,12 @@
 				                      "states": []
 				                    }
 				                  ]
-				                }
+				                },{
+	                              "condition_name": "IsEnemyDeath",
+	                              "condition_value": true,
+	                              "state_name": "IdleState",
+	                              "states": []
+	                            }
 				              ]
 				            },
 				            {
@@ -92,6 +96,18 @@
             {
               "condition_name": "IsDeath",
               "condition_value": false,
+              "state_name": "IdleState",
+              "states": []
+            }
+          ]
+        },{
+          "condition_name": "FoundEnemy",
+          "condition_value": true,
+          "state_name": "AvoidState",
+          "states": [
+            {
+              "condition_name": "MoveToTarget",
+              "condition_value": true,
               "state_name": "IdleState",
               "states": []
             }

@@ -97,6 +97,11 @@ public class TDCBaseGroupController : TDCBaseController
 
 	public virtual void SetCurrentMember(int value) {
 		m_Entity.SetCurrentMember(value);
+#if UNITY_EDITOR
+		if (m_Entity.GetCurrentMember() < 0) {
+			Debug.LogError ("[GroupController] Something wrong");
+		}
+#endif
 	}
 
 	public virtual int GetCurrentMember() {

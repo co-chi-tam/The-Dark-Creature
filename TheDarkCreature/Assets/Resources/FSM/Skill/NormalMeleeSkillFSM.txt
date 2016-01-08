@@ -32,7 +32,7 @@
 			"state_name": "AnyState",
 			"states": [
 				{
-					"condition_name": "HaveEnemy",
+					"condition_name": "IsEnemyDeath",
 					"condition_value": false,
 					"state_name": "DestroySkillState",
 					"states": []

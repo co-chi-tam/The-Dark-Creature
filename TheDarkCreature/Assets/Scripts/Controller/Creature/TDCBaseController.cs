@@ -79,10 +79,7 @@ public class TDCBaseController : TDCMonoBehaviour
     }
 
 	protected virtual void FixedUpdate() {
-		if (!HaveEnemy())
-		{
-			SetEnemyEntity(null);
-		}
+		
 	}
 
 	protected virtual void Update() {
@@ -150,8 +147,8 @@ public class TDCBaseController : TDCMonoBehaviour
 	
 	}
 
-	public virtual void ReturnObject() {
-		
+	public virtual void ReturnObject(TDCEntity obj) {
+		m_GameManager.SetObjectPool(obj);
 	}
 
 	public virtual void CallBackEvent(string name) {
@@ -176,7 +173,7 @@ public class TDCBaseController : TDCMonoBehaviour
 		return m_WaitingTime <= 0;     
 	}
 
-	internal virtual bool HaveEnemy()
+	internal virtual bool IsEnemyDeath()
 	{
 		return false;  
 	}

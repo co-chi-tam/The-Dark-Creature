@@ -59,7 +59,8 @@ public class TDCFlyAIController : TDCEasyAIController
 	#region FSM
 
 	internal override bool FoundFood() {
-		if (GetEnemyEntity() != null)
+		var enemy = GetEnemyEntity();
+		if (enemy != null)
 		{
 			return true;
 		}
@@ -72,7 +73,7 @@ public class TDCFlyAIController : TDCEasyAIController
 				continue;
 			} else {
 				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1) {
-					if (GetEnemyEntity() == null)
+					if (enemy == null)
 					{
 						SetEnemyEntity(food);
 					}

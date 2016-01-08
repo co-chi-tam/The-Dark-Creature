@@ -94,7 +94,7 @@ public class TDCSkillController : TDCBaseController {
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
 		m_FSMManager.RegisterCondition("MoveToEnemy", MoveToEnemy);
 		m_FSMManager.RegisterCondition("IsFinishSkill", IsFinishSkill);
-		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
+		m_FSMManager.RegisterCondition("IsEnemyDeath", IsEnemyDeath);
 		m_FSMManager.RegisterCondition("HaveEndEffectPerTime", HaveEndEffectPerTime);
 		m_FSMManager.RegisterCondition("HaveEndTimeEffect", HaveEndTimeEffect);
 	}
@@ -212,7 +212,7 @@ public class TDCSkillController : TDCBaseController {
 		return m_TimeEffect <= 0f;
 	}
 
-	internal override bool HaveEnemy()
+	internal override bool IsEnemyDeath()
 	{
 		return GetEnemyEntity() != null && GetEnemyEntity().GetActive();
 	}

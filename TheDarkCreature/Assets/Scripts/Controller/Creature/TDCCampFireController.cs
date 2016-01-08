@@ -73,10 +73,10 @@ public class TDCCampFireController : TDCObjectController {
 		m_FirePower += Mathf.Abs(value);
 	}
 
-	public override void ReturnObject()
+	public override void ReturnObject(TDCEntity obj)
 	{
-		base.ReturnObject();
-		m_GameManager.SetObjectPool(this.GetEntity());
+		base.ReturnObject(obj);
+		m_GameManager.SetObjectPool(obj);
 	}
 
 	public override void ResetObject()

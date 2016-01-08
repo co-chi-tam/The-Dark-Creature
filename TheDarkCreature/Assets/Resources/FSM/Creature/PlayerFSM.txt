@@ -6,8 +6,8 @@
 			"state_name": "IdleState",
 			"states": [
 				{
-		          "condition_name": "HaveEnemy",
-		          "condition_value": true,
+		          "condition_name": "IsEnemyDeath",
+		          "condition_value": false,
 		          "state_name": "ChaseState",
 		          "states": [
 		            {
@@ -21,8 +21,8 @@
 		                  "state_name": "AttackState",
 		                  "states": [
 		                    {
-		                      "condition_name": "HaveEnemy",
-		                      "condition_value": false,
+		                      "condition_name": "IsEnemyDeath",
+		                      "condition_value": true,
 		                      "state_name": "IdleState",
 		                      "states": []
 		                    },
@@ -33,16 +33,14 @@
 		                      "states": []
 		                    }
 		                  ]
-		                }
+		                },{
+                          "condition_name": "IsEnemyDeath",
+                          "condition_value": true,
+                          "state_name": "IdleState",
+                          "states": []
+                        }
 		              ]
-		            }, {
-				          "condition_name": "HaveEnemy",
-				          "condition_value": false,
-				          "state_name": "IdleState",
-				          "states": [
-				          	
-				          ]
-			          }
+		            }
 		          ]
 		        },
 	            {

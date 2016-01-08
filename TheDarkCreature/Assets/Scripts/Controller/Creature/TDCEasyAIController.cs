@@ -15,7 +15,7 @@ public class TDCEasyAIController : TDCCreatureController
 	{
 		base.Init();
 
-		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
+		m_FSMManager.RegisterCondition("HaveEnemy", IsEnemyDeath);
 
 		m_FSMManager.LoadFSM(m_Entity.GetFSMPath());
 	}
@@ -48,12 +48,6 @@ public class TDCEasyAIController : TDCCreatureController
 	#endregion
 
     #region FSM
-
-	internal override bool HaveEnemy() {
-		var enemies = GetTypeEnemies();
-		var enemyCtrl = GetEnemyEntity();
-		return base.HaveEnemy() && enemies.IndexOf (enemyCtrl.GetGameType()) == -1;
-	}
 
 	internal override bool IsToFarGroup() {
 		var distance = 0f;

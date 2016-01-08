@@ -56,10 +56,10 @@ public class TDCGameManager : MonoBehaviour {
     }
 
 	void Start() {
-		Debug.LogError ("Loading " + Time.time);
+		Debug.Log ("Loading " + Time.time);
 		HandleLoadObjectPool(() => {
 			HandleLoadMap("World1", () => {
-				Debug.LogError ("Complete " + Time.time);
+				Debug.Log ("Complete " + Time.time);
 			});
 		});
     }
@@ -105,9 +105,9 @@ public class TDCGameManager : MonoBehaviour {
 		for (int i = 0; i < map.Count; i++)
 		{
 			var mapObj = map[i];
-			var group = CreateCreature(mapObj.GameType, mapObj.Position, mapObj.Rotation);
-			group.SetActive(true);
-			yield return group != null;
+			var obj = CreateCreature(mapObj.GameType, mapObj.Position, mapObj.Rotation);
+			obj.SetActive(true);
+			yield return obj != null;
 		}
 		yield return null;
 		if (complete != null)
@@ -163,7 +163,16 @@ public class TDCGameManager : MonoBehaviour {
 
 	public void SetObjectPool(TDCEntity obj) {
 		var gameType = obj.GetGameType();
+		if (m_ObjectPool.ContainsKey(gameType))
+		{
+			// TODO
+		}
+		else
+		{
+			m_ObjectPool[gameType] = new TDCObjectPool<TDCEntity>();
+		}
 		m_ObjectPool[gameType].Set(obj);
+		obj.GetController().transform.SetParent(this.transform);
 	}
 
 	#endregion

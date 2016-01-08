@@ -63,6 +63,9 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		member.SetActive(false);
 		member.SetGroupEntity (null);
 		m_GameManager.SetObjectPool(member);
+		var memberCount = GetCurrentMember();
+		memberCount -= 1;
+		SetCurrentMember(memberCount);
 	}
 
 	public override TDCEntity SpawnMember ()
