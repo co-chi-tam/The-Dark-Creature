@@ -125,8 +125,8 @@
 			"MemberType": 8,
 			"MinMember": 5,
 			"MaxMember": 10,
-			"CurrentHP": 9999,
-			"MaxHP": 9999,
+			"CurrentHP": 9,
+			"MaxHP": 9,
 			"TimeRespawnMember": 10
 		}
 	]

@@ -15,7 +15,14 @@ public class FSMDisableState : FSMBaseState {
 		var group = m_Controller.GetGroupEntity();
 		if (group != null)
 		{
-			group.ReturnMember(m_Controller.GetEntity());
+			if (group.GetActive())
+			{
+				group.ReturnMember(m_Controller.GetEntity());
+			}
+			else
+			{
+				m_Controller.ReturnObject(m_Controller.GetEntity());
+			}
 		}
 		else
 		{

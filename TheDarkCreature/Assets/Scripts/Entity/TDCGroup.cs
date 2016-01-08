@@ -143,6 +143,11 @@ public class TDCGroup : TDCEntity
 		return m_Data.GroupType;
 	}
 
+	public override float GetColliderRadius()
+	{
+		return m_Controller.GetColliderRadius();
+	}
+
 	#endregion
 
 }

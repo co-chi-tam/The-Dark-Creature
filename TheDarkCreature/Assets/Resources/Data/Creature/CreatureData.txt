@@ -17,7 +17,7 @@
 			"CurrentHeatPoint": 50,
 			"MaxHeatPoint": 50,
 			"Damage": 1,
-			"Enemies": [301],
+			"Enemies": [301,6,8],
 			"Foods": [52,53,54,55],
 			"Inventory": [{"GameType":51,"Amount":1}]
 		},{
@@ -58,7 +58,7 @@
 			"MaxHeatPoint": 50,
 			"Damage": 5,
 			"Enemies": [301],
-			"Foods": [5,6,55],
+			"Foods": [6,53,55],
 			"Inventory": [{"GameType":51,"Amount":2}]
 		},{
 			"ID": 3,
