@@ -66,9 +66,14 @@ public class TDCEasyAIController : TDCCreatureController
 		else
 		{
 			distance = (TransformPosition - GetGroupEntity().GetController().TransformPosition).sqrMagnitude;
-			range = GetGroupEntity().GetRadius();
+			range = GetGroupEntity().GetGroupRadius();
 		}
-		return distance > range * range;
+		var result = distance > range * range;
+		if (result)
+		{
+			SetEnemyEntity(null);
+		}
+		return result;
 	}
 
 	#endregion

@@ -61,6 +61,7 @@ public class TDCBaseController : TDCMonoBehaviour
 		m_FSMManager.RegisterState("WaitingOneSecondState", waitingOne);
 		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
 
+		m_FSMManager.RegisterCondition("IsActive", IsActive);
 		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
 	}
 
@@ -128,6 +129,14 @@ public class TDCBaseController : TDCMonoBehaviour
 	public virtual void MovePosition(Vector3 position) {
 
 	}
+
+	public virtual void FlyPosition(Vector3 position) {
+
+	}
+
+	public virtual void LandingPosition(Vector3 position) {
+
+	}
 	
 	public virtual void LookAtRotation(Vector3 rotation) {
 
@@ -152,6 +161,15 @@ public class TDCBaseController : TDCMonoBehaviour
 	#endregion
 		
 	#region FSM
+
+	internal virtual bool IsActive()
+	{
+		return GetActive();
+	}
+
+	internal virtual bool IsDeath() {
+		return GetActive() == false;
+	}
 
 	internal virtual bool CountdownWaitingTime() {
 		m_WaitingTime -= Time.deltaTime;

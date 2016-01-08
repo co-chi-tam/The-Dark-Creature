@@ -8,6 +8,7 @@ public class TDCEnum{
 		Dodono 		= 5,
 		Satla 		= 6,
 		Taurot 		= 7,
+		Vulbat 		= 8,
 
 		// Object
 		Meat 		= 51,
@@ -27,6 +28,7 @@ public class TDCEnum{
 		GroupBush 	= 206,
 		GroupBlueBerry = 207,
 		GroupTaurot = 208,
+		GroupVulbat = 209,
 
 		// Object
 		CampFire	= 301,
@@ -58,15 +60,18 @@ public class TDCEnum{
 
 	public enum ECreatureType : int {
 		None		= 0,
-		Creature	= 1,
+		GroundCreature	= 1,
 		Player 		= 2,
 		Enviroment	= 3,
-		GObject		= 4
+		GObject		= 4,
+		FlyCreature	= 5,
+		FlyPlayer	= 6,
 	}
 
 	public enum EGroupType : int {
 		None			= 0,
-		GroupCreature	= 1
+		GroupCreature	= 1,
+		GroupNestCreature = 2
 	}
 
 	public enum ELayer: int {

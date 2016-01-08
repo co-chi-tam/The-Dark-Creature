@@ -12,7 +12,9 @@ public class CameraController : MonoBehaviour
     private float _minUpdownRange = 40f;
     private float _x;
     private float _y;
-    private float _distance = 40f;
+	[SerializeField]
+    private float _distance = 50f;
+	[SerializeField]
     private float _zoom = 5f;
     private float _minZoom = 10f;
     private const float _maxZoom = 60f;

@@ -29,6 +29,8 @@ public class TDCCreatureController : TDCBaseController {
 		var chaseState  	= new FSMChaseState(this);
 		var attackState  	= new FSMAttackState(this);
 		var dieState    	= new FSMDieState(this);
+		var flyState 		= new FSMFlyState(this);
+		var landingState 	= new FSMLandingState(this);
 
 		m_FSMManager.RegisterState("IdleState", idleState);
 		m_FSMManager.RegisterState("MoveState", moveState);
@@ -37,6 +39,8 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("ChaseState", chaseState);
 		m_FSMManager.RegisterState("AttackState", attackState);
 		m_FSMManager.RegisterState("DieState", dieState);
+		m_FSMManager.RegisterState("FlyState", flyState);
+		m_FSMManager.RegisterState("LandingState", landingState);
 
 		m_FSMManager.RegisterCondition("IsActive", GetActive);
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
@@ -46,6 +50,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("IsToFarGroup", IsToFarGroup);
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
 		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
+		m_FSMManager.RegisterCondition("IsLandingFinish", IsLandingFinish);
 	}
 
 	protected override void FixedUpdate ()
@@ -130,9 +135,10 @@ public class TDCCreatureController : TDCBaseController {
 	public override void LookAtRotation(Vector3 rotation)
 	{
 		base.LookAtRotation(rotation);
-		//Look at and dampen the rotation
 		rotation.y = 0f;
-		var direction = m_Transform.position - rotation;
+		var mPos = m_Transform.position;
+		mPos.y = 0f;
+		var direction = mPos - rotation;
 		Quaternion rot = Quaternion.LookRotation(direction);
 		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, Time.deltaTime * m_Entity.GetRotationSpeed());
 	}
@@ -140,7 +146,6 @@ public class TDCCreatureController : TDCBaseController {
 	public override void MovePosition(Vector3 position) {
 		position.y = 0f;
 		var direction = position - m_Transform.position;
-		//m_Rigidbody.MovePosition(m_Transform.position + direction.normalized * speed * Time.deltaTime);
 		m_Transform.position = m_Transform.position + direction.normalized * GetMoveSpeed() * Time.deltaTime;
 		LookAtRotation(position);
 	}
@@ -156,6 +161,10 @@ public class TDCCreatureController : TDCBaseController {
 
 	#region FSM
 
+	internal bool IsLandingFinish() {
+		return TransformPosition.y < 0.001f;
+	}
+
 	internal override bool HaveEnemy() {
 		base.HaveEnemy();
 		var enemyCtrl = GetEnemyEntity();
@@ -166,14 +175,18 @@ public class TDCCreatureController : TDCBaseController {
 		return false;
 	}
 
-	internal virtual bool IsDeath() {
+	internal override bool IsDeath() {
 		return GetHealth() <= 0f || GetActive() == false;
 	}
 
 	internal override bool MoveToTarget()
 	{
 		base.MoveToTarget();
-		return (TransformPosition - GetTargetPosition()).sqrMagnitude < 0.5f * 0.5f;  
+		var mPosition = TransformPosition;
+		var target = GetTargetPosition();
+		mPosition.y = 0f;
+		target.y = 0f;
+		return (mPosition - target).sqrMagnitude < 0.5f * 0.5f;  
 	}
 
 	internal override bool MoveToEnemy()
@@ -193,7 +206,9 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool FoundEnemy() {
-		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
+		var mPos = TransformPosition;
+		mPos.y = 0f;
+		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
 			var target = m_GameManager.GetEntityByName (colliders[i].name);
 			if (target == null || target.GetActive () == false || target == this.GetEntity()) {
@@ -213,7 +228,8 @@ public class TDCCreatureController : TDCBaseController {
 		{
 			return true;
 		}
-		var colliders = Physics.OverlapSphere(TransformPosition, GetDetectEnemyRange(), m_ColliderLayerMask);
+		var mPos = TransformPosition;
+		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
 			var food = m_GameManager.GetEntityByName (colliders[i].name);
 			if (food == null || food.GetActive () == false || food == this.GetEntity()) {

@@ -3,27 +3,27 @@
 		{
 			"condition_name": "IsRoot",
 			"condition_value": true,
-			"state_name": "SpawnMinMemberState",
+			"state_name": "GroupSpawnMinMemberState",
 			"states": [
 				{
 					"condition_name": "IsActive",
 					"condition_value": true,
-					"state_name": "IdleState",
+					"state_name": "GroupIdleState",
 					"states": [
 						{
-							"condition_name": "IsFullGroup",
+							"condition_name": "IsFullMinGroup",
 							"condition_value": false,
-							"state_name": "WaitingState",
+							"state_name": "GroupWaitingState",
 							"states": [
 								{
 									"condition_name": "CountdownWaitingTime",
 									"condition_value": true,
-									"state_name": "SpawnMemberState",
+									"state_name": "GroupSpawnMemberState",
 									"states": [
 										{
 											"condition_name": "IsActive",
 											"condition_value": true,
-											"state_name": "IdleState",
+											"state_name": "GroupIdleState",
 											"states": []
 										}
 									]

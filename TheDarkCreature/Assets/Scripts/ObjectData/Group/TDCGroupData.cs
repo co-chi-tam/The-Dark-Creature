@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TDCGroupData : TDCBaseData {
+public class TDCGroupData : TDCCreatureData {
 
 	private float m_Radius;
 	private TDCEnum.EGameType m_MemberType;
+	private int m_CurrentMember;
 	private int m_MinMember;
 	private int m_MaxMember;
 	private TDCEnum.EGroupType m_GroupType;
@@ -19,6 +20,11 @@ public class TDCGroupData : TDCBaseData {
 	{
 		get { return m_MemberType; }
 		set { m_MemberType = value; }
+	}
+
+	public int CurrentMember {
+		get { return m_CurrentMember; }
+		set { m_CurrentMember = value; }
 	}
 
 	public int MinMember {
@@ -44,6 +50,7 @@ public class TDCGroupData : TDCBaseData {
 	public TDCGroupData () : base ()
 	{
 		this.m_Radius = 0f;
+		this.m_CurrentMember = 0;
 		this.m_MinMember = 0;
 		this.m_MaxMember = 0;
 		this.m_GroupType = TDCEnum.EGroupType.None;
@@ -59,12 +66,15 @@ public class TDCGroupData : TDCBaseData {
 		tmp.GameType = instance.GameType;
 		tmp.Radius = instance.Radius;
 		tmp.MemberType = instance.MemberType;
+		tmp.CurrentMember = instance.CurrentMember;
 		tmp.MinMember = instance.MinMember;
 		tmp.MaxMember = instance.MaxMember;
 		tmp.GroupType = instance.GroupType;
 		tmp.Icon = instance.Icon;
 		tmp.TimeRespawnMember = instance.TimeRespawnMember;
 		tmp.FSMPath = instance.FSMPath;
+		tmp.CurrentHP = instance.CurrentHP;
+		tmp.MaxHP = instance.MaxHP;
 		return tmp;
 	}
 }

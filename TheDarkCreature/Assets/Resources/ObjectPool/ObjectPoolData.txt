@@ -4,5 +4,13 @@
 	"NormalMeleeSkill": 10,
 	"EffectPerSecondSkill": 10,
 	"EffectUpdateSkill": 10,
+	"Dodono": 20,
+	"Satla": 20,
+	"Taurot": 20,
+	"Vulbat": 20,
+	"Mushroom": 20,
+	"Grass": 20,
+	"Bush": 20,
+	"BlueBerry": 20,
 	"CampFire": 5
 }

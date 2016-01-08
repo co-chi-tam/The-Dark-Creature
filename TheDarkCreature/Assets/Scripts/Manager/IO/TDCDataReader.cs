@@ -177,6 +177,8 @@ public class TDCDataReader {
 			group.MinMember = int.Parse (instance ["MinMember"].ToString());
 			group.MaxMember = int.Parse (instance ["MaxMember"].ToString());
 			group.TimeRespawnMember = float.Parse (instance ["TimeRespawnMember"].ToString ());
+			group.CurrentHP = int.Parse (instance ["CurrentHP"].ToString ());
+			group.MaxHP = int.Parse (instance ["MaxHP"].ToString ());
 			m_ListGroupData.Add (group.GameType, group);
 		}
 	}

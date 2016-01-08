@@ -258,6 +258,14 @@ public class TDCEntity : TDCPropertyReflection {
 		return TDCEnum.EGroupType.None;
 	}
 
+	public virtual int GetCurrentMember() {
+		return 0;
+	}
+
+	public virtual void SetCurrentMember(int value) {
+		
+	}
+
 	public virtual int GetMinMember() {
 		return 0;
 	}
@@ -266,7 +274,7 @@ public class TDCEntity : TDCPropertyReflection {
 		return 0;
 	}
 
-	public virtual float GetRadius() {
+	public virtual float GetGroupRadius() {
 		return 0;
 	}
 

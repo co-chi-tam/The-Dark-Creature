@@ -1,12 +1,15 @@
 ﻿using UnityEngine;
 using System;
+using System.Collections;
+using System.Collections.Generic;
 using FSM;
 
 public class TDCGroupCreatureController : TDCBaseGroupController {
 
     #region Properties
     
-	private TDCGameManager m_GameManager;
+	private List<Vector3> m_ListMemberPosition;
+	private int m_PositionIndex = -1;
 
     #endregion
 
@@ -15,8 +18,9 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 	public override void Init()
 	{
 		base.Init();
-
-		m_GameManager = TDCGameManager.GetInstance();
+		m_ListMemberPosition = new List<Vector3>();
+		m_PositionIndex = -1;
+		CreatePositionMember();
 	}
 
 	protected override void Start()
@@ -29,49 +33,58 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 	protected override void FixedUpdate() {
 		base.FixedUpdate ();
         m_FSMManager.UpdateState();
-        StateName = m_FSMManager.StateCurrentName;
+		StateName = m_FSMManager.StateCurrentName;
+
+		m_Entity.Update(Time.fixedDeltaTime);
     }
 
     #endregion
 
     #region Main method
 
-	public override void CreatePoolMember() {
-		base.CreatePoolMember ();
+	protected override void CreatePositionMember() {
+		base.CreatePositionMember ();
 		for (int i = 0; i < GetMaxMember(); i++) {
-			var randomPosition = UnityEngine.Random.insideUnitCircle * GetRadius();
+			var randomPosition = UnityEngine.Random.insideUnitCircle * GetGroupRadius();
 			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y);
-			var entity = m_GameManager.CreateCreature ( m_Entity.GetMemberType(), 
-															memPosition, 
-															Quaternion.identity, 
-															this.gameObject);
-			entity.SetGroupEntity (this.GetEntity());
-			entity.SetActive(false);
-			m_MemberPool.Create (entity);
+			m_ListMemberPosition.Add(memPosition);
 		}
+	}
+
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		m_PositionIndex = -1;
+		SetCurrentMember(0);
 	}
 
 	public override void ReturnMember(TDCEntity member) {
 		base.ReturnMember(member);
 		member.SetActive(false);
-		m_MemberPool.Set (member);
+		member.SetGroupEntity (null);
+		m_GameManager.SetObjectPool(member);
 	}
 
 	public override TDCEntity SpawnMember ()
 	{
-		if (m_MemberPool.CountUnuse () == 0)
-			return null;
-		var member = m_MemberPool.Get ();
-		member.GetController().ResetObject ();
-		member.SetActive (true);
+		TDCEntity member = null;
+		if (m_GameManager.GetObjectPool (m_Entity.GetMemberType(), ref member))
+		{
+			m_PositionIndex = (m_PositionIndex + 1) % m_ListMemberPosition.Count;
+			member.GetController().TransformPosition = m_ListMemberPosition[m_PositionIndex];
+			member.SetGroupEntity(this.GetEntity());
+			member.GetController().ResetObject();
+			member.SetActive(true);
+			var memberCount = GetCurrentMember();
+			memberCount += 1;
+			SetCurrentMember(memberCount);
+		}
 		return member;
 	}
 
 	public override void SpawnMinMember ()
 	{
 		base.SpawnMinMember ();
-		if (m_MemberPool.CountUnuse () == 0)
-			return;
 		for (int i = 0; i < GetMinMember (); i++) {
 			SpawnMember ();
 		}
@@ -80,8 +93,6 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 	public override void SpawnMaxMember ()
 	{
 		base.SpawnMaxMember ();
-		if (m_MemberPool.CountUnuse () == 0)
-			return;
 		for (int i = 0; i < GetMaxMember (); i++) {
 			SpawnMember ();
 		}
@@ -91,14 +102,13 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
 	#region FSM
 
-	internal override bool IsActive()
-    {
-		return GetActive();
+	internal override bool IsFullMinGroup() {
+		return GetCurrentMember() == GetMinMember();
     }
 
-	internal override bool IsFullGroup() {
-		return m_MemberPool.Count() == GetMinMember();
-    }
+	internal override bool IsFullMaxGroup() {
+		return GetCurrentMember() == GetMaxMember();
+	}
 
 	internal override bool CountdownWaitingTime()
     {

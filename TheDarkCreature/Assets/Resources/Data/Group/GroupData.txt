@@ -13,6 +13,8 @@
 			"MemberType": 5,
 			"MinMember": 5,
 			"MaxMember": 10,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
 			"TimeRespawnMember": 10
 		},{
 			"ID": 2,
@@ -27,6 +29,8 @@
 			"MemberType": 6,
 			"MinMember": 2,
 			"MaxMember": 5,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
 			"TimeRespawnMember": 10
 		},{
 			"ID": 3,
@@ -41,6 +45,8 @@
 			"MemberType": 53,
 			"MinMember": 10,
 			"MaxMember": 20,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
 			"TimeRespawnMember": 10
 		},{
 			"ID": 4,
@@ -55,6 +61,8 @@
 			"MemberType": 52,
 			"MinMember": 10,
 			"MaxMember": 20,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
 			"TimeRespawnMember": 10
 		},{
 			"ID": 5,
@@ -69,6 +77,8 @@
 			"MemberType": 54,
 			"MinMember": 10,
 			"MaxMember": 20,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
 			"TimeRespawnMember": 10
 		},{
 			"ID": 6,
@@ -83,6 +93,8 @@
 			"MemberType": 55,
 			"MinMember": 1,
 			"MaxMember": 2,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
 			"TimeRespawnMember": 10
 		},{
 			"ID": 7,
@@ -97,6 +109,24 @@
 			"MemberType": 7,
 			"MinMember": 2,
 			"MaxMember": 5,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
+			"TimeRespawnMember": 10
+		},{
+			"ID": 8,
+			"Name": "GroupVulbat",
+			"GameType": 209,
+			"GroupType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Group/NestVulbat"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupNestFSM",
+			"Radius": 150,
+			"MemberType": 8,
+			"MinMember": 5,
+			"MaxMember": 10,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
 			"TimeRespawnMember": 10
 		}
 	]

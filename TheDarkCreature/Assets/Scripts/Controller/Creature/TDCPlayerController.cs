@@ -21,8 +21,6 @@ public class TDCPlayerController : TDCCreatureController
 	{
 		base.Init ();
 
-		m_FSMManager.RegisterCondition("HaveEnemy", HaveEnemy);
-
 		m_FSMManager.LoadFSM(m_Entity.GetFSMPath());
 	}
 
@@ -34,7 +32,7 @@ public class TDCPlayerController : TDCCreatureController
 
 		m_Inventory.SetPlayer(this);
 
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalRangeSkill, this.GetEntity());
+		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalMeleeSkill, this.GetEntity());
 	}
 
 	protected override void FixedUpdate()
@@ -173,9 +171,4 @@ public class TDCPlayerController : TDCCreatureController
 	}
 
 	#endregion
-
-    #region Getter & Setter
-
-    #endregion
-
 }

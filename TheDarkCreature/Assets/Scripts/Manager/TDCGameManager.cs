@@ -57,8 +57,8 @@ public class TDCGameManager : MonoBehaviour {
 
 	void Start() {
 		Debug.LogError ("Loading " + Time.time);
-		HandleLoadMap("World1", () => {
-			HandleLoadObjectPool(() => {
+		HandleLoadObjectPool(() => {
+			HandleLoadMap("World1", () => {
 				Debug.LogError ("Complete " + Time.time);
 			});
 		});
@@ -99,13 +99,13 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public IEnumerator LoadMap(string mapName, Action complete = null) {
-		var player = CreatePlayer (TDCEnum.EGameType.Taurot, Vector3.zero, Quaternion.identity);
+		var player = CreatePlayer (TDCEnum.EGameType.Satla, Vector3.zero, Quaternion.identity);
 		player.SetActive(true);
 		var map = m_DataReader.GetMap(mapName);
 		for (int i = 0; i < map.Count; i++)
 		{
 			var mapObj = map[i];
-			var group = CreateGroup(mapObj.GameType, mapObj.Position, mapObj.Rotation);
+			var group = CreateCreature(mapObj.GameType, mapObj.Position, mapObj.Rotation);
 			group.SetActive(true);
 			yield return group != null;
 		}
@@ -194,28 +194,6 @@ public class TDCGameManager : MonoBehaviour {
 		return item;
 	}
 
-	public TDCEntity CreateGroup(TDCEnum.EGameType type, 
-	                                               Vector3 position, 
-	                                               Quaternion rotation, 
-	                                               GameObject parent = null) {
-		var random = UnityEngine.Random.Range (0, 9999);
-		var data = m_DataReader.GetGroup (type);
-		var gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [random % data.ModelPath.Length]), position, rotation) as GameObject;
-		var controller = gObject.AddComponent<TDCGroupCreatureController> ();
-		var entity = new TDCGroup(controller, data);
-		entity.SetActive(false);
-		controller.SetEntity(entity);
-		controller.Init ();
-		controller.CreatePoolMember ();
-		controller.name = string.Format("{0}-{1}", type, m_ListControllers.Count);
-		if (parent != null) {
-			gObject.transform.SetParent (parent.transform);		
-		}
-		m_ListEntities.Add(controller.name, entity);
-		m_ListControllers.Add(controller.name, controller);
-		return entity;
-	}
-
 	public TDCEntity CreatePlayer(TDCEnum.EGameType type, 
 											Vector3 position, 
 											Quaternion rotation, 
@@ -255,16 +233,45 @@ public class TDCGameManager : MonoBehaviour {
 		switch (type) { 
 		case TDCEnum.EGameType.Dodono: 
 		case TDCEnum.EGameType.Satla: 
-			case TDCEnum.EGameType.Taurot: {
+		case TDCEnum.EGameType.Taurot: 
+		case TDCEnum.EGameType.Vulbat:{
 			data = m_DataReader.GetCreature (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCEasyAIController> ();
+			switch ((data as TDCCreatureData).CreatureType){
+			case TDCEnum.ECreatureType.GroundCreature:
+				controller = gObject.AddComponent<TDCEasyAIController> ();
+				break;
+			case TDCEnum.ECreatureType.FlyCreature:
+				controller = gObject.AddComponent<TDCFlyAIController> ();
+				break;
+			}
 			entity = new TDCCreature(controller, data);
 			break;
 		}
 		case TDCEnum.EGameType.Meat: 
 		case TDCEnum.EGameType.Trap: {
 			//TODO
+			break;
+		}
+		case TDCEnum.EGameType.GroupDodono:
+		case TDCEnum.EGameType.GroupSatla: 
+		case TDCEnum.EGameType.GroupTaurot: 
+		case TDCEnum.EGameType.GroupVulbat: 
+		case TDCEnum.EGameType.GroupGrass:
+		case TDCEnum.EGameType.GroupMushRoom:
+		case TDCEnum.EGameType.GroupBlueBerry: 
+		case TDCEnum.EGameType.GroupBush:{
+			data = m_DataReader.GetGroup(type);
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			switch ((data as TDCGroupData).GroupType) {
+			case TDCEnum.EGroupType.GroupNestCreature:
+				controller = gObject.AddComponent<TDCNestGroupCreatureController> ();
+				break;
+			case TDCEnum.EGroupType.GroupCreature:
+				controller = gObject.AddComponent<TDCGroupCreatureController> ();
+				break;
+			}
+			entity = new TDCGroup(controller, data);
 			break;
 		}
 		case TDCEnum.EGameType.Grass:
