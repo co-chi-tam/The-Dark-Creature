@@ -67,7 +67,7 @@
 				{
 					"condition_name": "IsDeath",
 					"condition_value": true,
-					"state_name": "DieState",
+					"state_name": "PlayerDeathState",
 					"states": [
 						
 					]

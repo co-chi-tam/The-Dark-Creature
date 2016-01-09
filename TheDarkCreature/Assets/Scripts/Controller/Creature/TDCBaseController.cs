@@ -26,6 +26,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	protected TDCEntity m_Entity;
 	protected FSMManager m_FSMManager;
 	protected Transform m_Transform;
+	protected Animator m_AnimatorController;
 	protected CapsuleCollider m_Collider;
 	protected TDCGameManager m_GameManager;
 	protected float m_WaitingTime = 3f;
@@ -49,6 +50,7 @@ public class TDCBaseController : TDCMonoBehaviour
 		SetStartPosition (m_Transform.position);
 		SetTargetPosition (m_Transform.position);
 
+		m_AnimatorController = this.GetComponent<Animator> ();
 		m_Collider 		= this.GetComponent<CapsuleCollider> ();
 		m_GameManager 	= TDCGameManager.GetInstance();
 		m_FSMManager 	= new FSMManager();

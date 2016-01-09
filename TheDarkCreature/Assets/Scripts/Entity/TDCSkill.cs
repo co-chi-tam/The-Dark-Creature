@@ -1,19 +1,39 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TDCSkill : TDCCreature
+public class TDCSkill : TDCEntity
 {
+	#region Properties
 
 	protected TDCSkillSlot m_Slot;
 	protected TDCEntity m_Owner;
+	protected TDCEntity m_EnemyEntity;
 
 	private TDCSkillController m_Controller;
 	private TDCSkillData m_Data;
+
+	#endregion
+
+	#region Contructor
 
 	public TDCSkill(TDCBaseController ctrl, TDCBaseData data): base(ctrl, data)
 	{
 		m_Controller = ctrl as TDCSkillController;
 		m_Data = data as TDCSkillData;
+	}
+
+	#endregion
+
+	#region Getter && Setter
+
+	public override void SetEnemyEntity(TDCEntity entity)
+	{
+		m_EnemyEntity = entity;
+	}
+
+	public override TDCEntity GetEnemyEntity()
+	{
+		return m_EnemyEntity;
 	}
 
 	public override void SetData(TDCBaseData data) {
@@ -108,5 +128,11 @@ public class TDCSkill : TDCCreature
 		return m_Owner != null ? m_Owner.GetDamage() : 0;
 	}
 
+	public override Vector3 GetEnemyPosition()
+	{
+		return m_EnemyEntity.GetController().TransformPosition;
+	}
+
+	#endregion
 }
 

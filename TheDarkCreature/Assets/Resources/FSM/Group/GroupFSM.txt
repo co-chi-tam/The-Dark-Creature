@@ -3,7 +3,7 @@
 		{
 			"condition_name": "IsRoot",
 			"condition_value": true,
-			"state_name": "GroupSpawnMinMemberState",
+			"state_name": "GroupSpawnAllMemberState",
 			"states": [
 				{
 					"condition_name": "IsActive",
@@ -11,7 +11,7 @@
 					"state_name": "GroupIdleState",
 					"states": [
 						{
-							"condition_name": "IsFullMinGroup",
+							"condition_name": "IsFullGroup",
 							"condition_value": false,
 							"state_name": "GroupWaitingState",
 							"states": [

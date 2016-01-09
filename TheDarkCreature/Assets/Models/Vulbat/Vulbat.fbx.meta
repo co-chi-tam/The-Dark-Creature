@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 7685a8ff7e14dde4e87bdf97d3a6e546
-timeCreated: 1452096977
+guid: 18938f77f985370488b1bf441f5954a6
+timeCreated: 1452332587
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -39,13 +39,15 @@ ModelImporter:
     7400008: Vulbat_Attack.002
     7400010: Vulbat_Action.001
     7400012: Vulbat_Death
-    7400014: Armature|Vulbat_Action.001
-    7400016: Armature|Vulbat_Attack.001
-    7400018: Armature|Vulbat_Attack.002
-    7400020: Armature|Vulbat_Death
-    7400022: Armature|Vulbat_Idle.001
-    7400024: Armature|Vulbat_Run
-    7400026: Armature|Vulbat_Walk
+    7400014: Vulbat_Action.002
+    7400016: Armature|Vulbat_Action.001
+    7400018: Armature|Vulbat_Action.002
+    7400020: Armature|Vulbat_Attack.001
+    7400022: Armature|Vulbat_Attack.002
+    7400024: Armature|Vulbat_Death
+    7400026: Armature|Vulbat_Idle.001
+    7400028: Armature|Vulbat_Run
+    7400030: Armature|Vulbat_Walk
     9500000: //RootNode
     13700000: Vulbat
   materials:
@@ -447,10 +449,64 @@ ModelImporter:
       maskType: 0
       maskSource: {instanceID: 0}
       additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Vulbat_Action.002
+      takeName: Vulbat_Action.002
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Head.001
+        weight: 1
+      - path: Armature/Root/Bone.Head.001/Bone.Head.002
+        weight: 1
+      - path: Armature/Root/Bone.L.Wing.001
+        weight: 1
+      - path: Armature/Root/Bone.L.Wing.001/Bone.L.Wing.002
+        weight: 1
+      - path: Armature/Root/Bone.Leg
+        weight: 1
+      - path: Armature/Root/Bone.Leg/Bone.Leg.002
+        weight: 1
+      - path: Armature/Root/Bone.Leg/Bone.Leg.002/Bone.Leg.003
+        weight: 1
+      - path: Armature/Root/Bone.R.Wing.001
+        weight: 1
+      - path: Armature/Root/Bone.R.Wing.001/Bone.R.Wing.002
+        weight: 1
+      - path: Vulbat
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
     isReadable: 1
   meshes:
     lODScreenPercentages: []
-    globalScale: 0.5
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     importBlendShapes: 1

@@ -17,14 +17,7 @@ public class FSMDieState : FSMBaseState
 		var group = m_Controller.GetGroupEntity();
 		if (group != null)
 		{
-			if (group.GetActive())
-			{
-				group.ReturnMember(m_Controller.GetEntity());
-			}
-			else
-			{
-				m_Controller.ReturnObject(m_Controller.GetEntity());
-			}
+			group.ReturnMember(m_Controller.GetEntity());
 		}
 		else
 		{

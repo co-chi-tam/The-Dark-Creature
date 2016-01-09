@@ -21,6 +21,7 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 50,
 			"Damage": 2,
+			"ActiveSkill": 503,
 			"Level": 1,
 			"Inventory": [
 				
@@ -36,7 +37,7 @@
 			"IconPath": "",
 			"MoveSpeed": 7,
 			"DetectRange": 20,
-			"AttackRange": 2,
+			"AttackRange": 15,
 			"CurrentHP": 50,
 			"MaxHP": 50,
 			"CurrentHeatPoint": 50,
@@ -46,6 +47,7 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 50,
 			"Damage": 7,
+			"ActiveSkill": 502,
 			"Level": 1,
 			"Inventory": [
 				{
@@ -78,6 +80,7 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 50,
 			"Damage": 3,
+			"ActiveSkill": 503,
 			"Level": 1,
 			"Inventory": [
 				{
@@ -110,6 +113,7 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 50,
 			"Damage": 9,
+			"ActiveSkill": 503,
 			"Level": 1,
 			"Inventory": [
 				

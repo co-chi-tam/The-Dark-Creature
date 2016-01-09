@@ -46,7 +46,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		base.CreatePositionMember ();
 		for (int i = 0; i < GetMaxMember(); i++) {
 			var randomPosition = UnityEngine.Random.insideUnitCircle * GetGroupRadius();
-			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y);
+			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y) + TransformPosition;
 			m_ListMemberPosition.Add(memPosition);
 		}
 	}
@@ -85,17 +85,9 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		return member;
 	}
 
-	public override void SpawnMinMember ()
+	public override void SpawnAllMember ()
 	{
-		base.SpawnMinMember ();
-		for (int i = 0; i < GetMinMember (); i++) {
-			SpawnMember ();
-		}
-	}
-
-	public override void SpawnMaxMember ()
-	{
-		base.SpawnMaxMember ();
+		base.SpawnAllMember ();
 		for (int i = 0; i < GetMaxMember (); i++) {
 			SpawnMember ();
 		}
@@ -105,13 +97,9 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
 	#region FSM
 
-	internal override bool IsFullMinGroup() {
-		return GetCurrentMember() == GetMinMember();
-    }
-
-	internal override bool IsFullMaxGroup() {
+	internal override bool IsFullGroup() {
 		return GetCurrentMember() == GetMaxMember();
-	}
+    }
 
 	internal override bool CountdownWaitingTime()
     {

@@ -9,7 +9,7 @@ public class FSMGroupIdleState : FSMBaseState {
 	}
 	
 	public override void StartState() {
-
+		m_Controller.SetAnimation(EAnimation.Idle);
 	}
 	
 	public override void UpdateState() {

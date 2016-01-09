@@ -8,6 +8,14 @@
 			"Description": "",
 			"IconPath": "CampFire",
 			"EffectPath": "Effect/Item/CampFireEffect"
+		},{
+			"ID": 2,
+			"Name": "Crystal",
+			"GameType": 56,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "Crystal",
+			"EffectPath": "Effect/Item/MeatEffect"
 		}
 	]
 }

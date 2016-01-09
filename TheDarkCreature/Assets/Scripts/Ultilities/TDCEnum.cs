@@ -16,6 +16,7 @@ public class TDCEnum{
 		Grass		= 53,
 		Bush		= 54,
 		BlueBerry	= 55,
+		Crystal		= 56,
 
 		// Weapon
 		Trap		= 71,
@@ -29,6 +30,7 @@ public class TDCEnum{
 		GroupBlueBerry = 207,
 		GroupTaurot = 208,
 		GroupVulbat = 209,
+		GroupCrystal = 210,
 
 		// Object
 		CampFire	= 301,

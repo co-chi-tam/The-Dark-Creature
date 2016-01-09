@@ -7,7 +7,13 @@ public class TDCCreature : TDCEntity
 {
 	#region Properties
 
-	private int m_HealthPoint = 0;
+	protected TDCObjectProperty<int> m_HealthPoint;
+	public int HealthPoint
+	{
+		get { return m_HealthPoint.Value; }
+		private set { m_HealthPoint.Value = value; }
+	}
+
 	private int m_HeatPoint = 0;
 	private int m_HungerPoint = 0;
 	private int m_SanityPoint = 0;
@@ -21,8 +27,11 @@ public class TDCCreature : TDCEntity
 
 	protected Vector3 m_TargetPosition;
 	protected Vector3 m_StartPosition;
+	protected Vector3 m_StartBattlePosition;
 
 	protected TDCObjectProperty<float> m_OffsetSpeed;
+
+	protected TDCSkillSlot m_ActiveSkill;
 
 	#endregion
 
@@ -34,8 +43,12 @@ public class TDCCreature : TDCEntity
 		m_Data = data as TDCCreatureData;
 
 		m_OffsetSpeed = new TDCObjectProperty<float>("OffsetSpeed", 1f);
+		m_HealthPoint = new TDCObjectProperty<int>("HealthPoint");
 
 		RegisterProperty(m_OffsetSpeed);
+		RegisterProperty(m_HealthPoint);
+
+		m_ActiveSkill = new TDCSkillSlot(m_Data.ActiveSkill, this);
 	}
 
 	#endregion
@@ -50,32 +63,26 @@ public class TDCCreature : TDCEntity
 			CallBackEvent("OnAlive");
 		}
 
+		m_ActiveSkill.UpdateSkill(Time.fixedDeltaTime);
+
 		if ((Time.time - m_TimeReset) > 1f)
 		{
 			m_OffsetSpeed.SetValue (1f);
 			m_TimeReset = Time.time;
 		}
-		m_HealthPoint = GetHealth();
-		if (m_Data != null) {
-			m_HealthPoint -= m_DamageTake;
-			m_DamageTake = 0;
-			SetHealth(m_HealthPoint);
+
+		var health = GetHealth();
+		if (HealthPoint != 0)
+		{
+			health += HealthPoint;
+			HealthPoint = 0;
+			SetHealth(health);
 		}
-//		if (m_HungerPoint != 0)
-//		{
-//			m_Data.CurrentHungerPoint += m_HungerPoint;
-//			m_HungerPoint = 0;
-//		}
-//		if (m_SanityPoint != 0)
-//		{
-//			m_Data.CurrentSanityPoint += m_SanityPoint;
-//			m_SanityPoint = 0;
-//		}
-//		if (m_HeatPoint != 0)
-//		{
-//			m_Data.CurrentHeatPoint += m_HeatPoint;
-//			m_HeatPoint = 0;
-//		}
+		if (m_DamageTake != 0) {
+			health -= m_DamageTake;
+			m_DamageTake = 0;
+			SetHealth(health);
+		}
 	}
 
 	public override void ApplyDamage(int damage, TDCEntity attacker)
@@ -92,6 +99,12 @@ public class TDCCreature : TDCEntity
 		{
 			SetEnemyEntity(attacker);
 		}
+	}
+
+	public override void ActiveSkill(int index)
+	{
+		base.ActiveSkill(index);
+		m_ActiveSkill.ActiveSkill();
 	}
 
 	#endregion
@@ -149,11 +162,22 @@ public class TDCCreature : TDCEntity
 	public override void SetEnemyEntity(TDCEntity enemy)
 	{
 		m_EnemyEntity = enemy;
+		SetStartBattlePosition(m_Controller.TransformPosition);
 	}
 
 	public override TDCEntity GetEnemyEntity()
 	{
 		return m_EnemyEntity;
+	}
+
+	public override void SetStartBattlePosition(Vector3 value)
+	{
+		m_StartBattlePosition = value;
+	}
+
+	public override Vector3 GetStartBattlePosition()
+	{
+		return m_StartBattlePosition;
 	}
 
 	public override void SetGroupEntity(TDCEntity group) {
@@ -231,6 +255,7 @@ public class TDCCreature : TDCEntity
 
 	public override void SetHealth (int value)
 	{
+		base.SetHealth(value);
 		m_Data.CurrentHP = value;
 		var percentHP = m_Data.CurrentHP / m_Data.MaxHP * 100;
 		CallBackEvent("OnHealthPoint" + percentHP);

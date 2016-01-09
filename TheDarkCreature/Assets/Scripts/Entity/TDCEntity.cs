@@ -26,6 +26,8 @@ public class TDCEntity : TDCPropertyReflection {
 	public event Action OnAliveEvent;
 	public event Action OnDeathEvent;
 
+	public event Action<int, int> OnHealthChange;
+
 	public virtual void CallBackEvent(string name) {
 		if (m_TriggerEvents.ContainsKey(name))
 		{
@@ -91,9 +93,21 @@ public class TDCEntity : TDCPropertyReflection {
 
 	}
 
+	public virtual void ActiveSkill(int index) {
+
+	}
+
 	#endregion
 
 	#region Common
+
+	public virtual void SetStartBattlePosition(Vector3 value) {
+	
+	}
+
+	public virtual Vector3 GetStartBattlePosition() {
+		return Vector3.zero;
+	}
 
 	public virtual void SetTriggerEvent(string name, Action evnt) {
 		m_TriggerEvents.Add(name, evnt);
@@ -232,7 +246,10 @@ public class TDCEntity : TDCPropertyReflection {
 
 	public virtual void SetHealth (int value)
 	{
-		
+		if (OnHealthChange != null)
+		{
+			OnHealthChange(GetHealth(), value);
+		}
 	}
 
 	public virtual int GetMaxHealth() {
@@ -264,10 +281,6 @@ public class TDCEntity : TDCPropertyReflection {
 
 	public virtual void SetCurrentMember(int value) {
 		
-	}
-
-	public virtual int GetMinMember() {
-		return 0;
 	}
 
 	public virtual int GetMaxMember() {

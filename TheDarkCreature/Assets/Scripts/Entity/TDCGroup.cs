@@ -43,9 +43,12 @@ public class TDCGroup : TDCEntity
 	public override void Update(float dt)
 	{
 		base.Update(dt);
-
+		if (GetActive())
+		{
+			CallBackEvent("OnAlive");
+		}
 		m_HealthPoint = GetHealth();
-		if (m_Data != null) {
+		if (m_DamageTake != 0) {
 			m_HealthPoint -= m_DamageTake;
 			m_DamageTake = 0;
 			SetHealth(m_HealthPoint);
@@ -63,6 +66,7 @@ public class TDCGroup : TDCEntity
 
 	public override void SetHealth(int value)
 	{
+		base.SetHealth(value);
 		m_Data.CurrentHP = value;
 		var percentHP = m_Data.CurrentHP / m_Data.MaxHP * 100;
 		CallBackEvent("OnHealthPoint" + percentHP);
@@ -105,10 +109,6 @@ public class TDCGroup : TDCEntity
 	public override void SetCurrentMember(int value)
 	{
 		m_Data.CurrentMember = value;
-	}
-
-	public override int GetMinMember() {
-		return m_Data.MinMember;
 	}
 
 	public override int GetMaxMember() {

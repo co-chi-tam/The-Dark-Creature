@@ -9,17 +9,19 @@ public class FSMGroupSpawnMemberState : FSMBaseState {
 	{
 		m_GroupController = controller as TDCBaseGroupController;
 	}
-	
+
 	public override void StartState() {
-		m_GroupController.SpawnMember ();
+		m_GroupController.SpawnMember();
+		m_GroupController.SetAnimation(EAnimation.Action1);
 	}
-	
+
 	public override void UpdateState() {
-		
+
 	}
-	
+
 	public override void ExitState()
 	{
-		
+
 	}
 }
+

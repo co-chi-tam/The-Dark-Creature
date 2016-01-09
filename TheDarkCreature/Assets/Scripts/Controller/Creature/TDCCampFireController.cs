@@ -51,6 +51,7 @@ public class TDCCampFireController : TDCObjectController {
 	
 	protected override void FixedUpdate() {
 		base.FixedUpdate ();
+		m_Entity.Update(Time.fixedDeltaTime);
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
 	}

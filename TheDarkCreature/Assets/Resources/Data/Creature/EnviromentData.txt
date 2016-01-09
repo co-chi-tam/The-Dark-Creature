@@ -48,6 +48,18 @@
 			"MaxHP": "5",
 			"IconPath": "",
 			"Inventory": [{ "GameType":55, "Amount":1 },{ "GameType":54, "Amount":1 }]
+		},{
+			"ID": 3,
+			"Name": "Object Crystal",
+			"GameType": 56,
+			"CreatureType": 3,
+			"Description": "",
+			"ModelPath": ["Prefabs/Enviroment/Crystal"],
+			"FSMPath": "FSM/Creature/EnviromentFSM",
+			"CurrentHP": "10",
+			"MaxHP": "10",
+			"IconPath": "",
+			"Inventory": [{ "GameType":56, "Amount":1 }]
 		}
 	]
 }

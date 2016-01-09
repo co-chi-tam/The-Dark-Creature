@@ -22,20 +22,17 @@ public class TDCBaseGroupController : TDCBaseController
 		var idleState = new FSMGroupIdleState(this);
 		var waitingState = new FSMGroupWaitingState(this);
 		var spawnMemberState = new FSMGroupSpawnMemberState(this);
-		var spawnMinMemberState = new FSMGroupSpawnMinMemberState(this);
-		var spawnMaxMemberState = new FSMGroupSpawnMaxMemberState(this);
+		var spawnAllMemberState = new FSMGroupSpawnAllMemberState(this);
 		var deathState = new FSMGroupDeathState(this);
 
 		m_FSMManager.RegisterState("GroupIdleState", idleState);
 		m_FSMManager.RegisterState("GroupWaitingState", waitingState);
 		m_FSMManager.RegisterState("GroupSpawnMemberState", spawnMemberState);
-		m_FSMManager.RegisterState("GroupSpawnMinMemberState", spawnMinMemberState);
-		m_FSMManager.RegisterState("GroupSpawnMaxMemberState", spawnMaxMemberState);
+		m_FSMManager.RegisterState("GroupSpawnAllMemberState", spawnAllMemberState);
 		m_FSMManager.RegisterState("GroupDeathState", deathState);
 
 		m_FSMManager.RegisterCondition("IsDeath", IsDeath);
-		m_FSMManager.RegisterCondition("IsFullMinGroup", IsFullMinGroup);
-		m_FSMManager.RegisterCondition("IsFullMaxGroup", IsFullMaxGroup);
+		m_FSMManager.RegisterCondition("IsFullGroup", IsFullGroup);
 		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
     }
 
@@ -66,23 +63,15 @@ public class TDCBaseGroupController : TDCBaseController
 		return null;
 	}
 
-	public virtual void SpawnMinMember() {
+	public virtual void SpawnAllMember() {
 		
-	}
-
-	public virtual void SpawnMaxMember() {
-
 	}
 
 	#endregion
 
 	#region FSM
 
-	internal virtual bool IsFullMinGroup() {
-		return false;
-	}
-
-	internal virtual bool IsFullMaxGroup() {
+	internal virtual bool IsFullGroup() {
 		return false;
 	}
 
@@ -106,10 +95,6 @@ public class TDCBaseGroupController : TDCBaseController
 
 	public virtual int GetCurrentMember() {
 		return m_Entity.GetCurrentMember();
-	}
-
-	public virtual int GetMinMember() {
-		return m_Entity.GetMinMember();
 	}
 
 	public virtual int GetMaxMember() {

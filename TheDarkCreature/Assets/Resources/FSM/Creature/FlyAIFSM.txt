@@ -56,7 +56,7 @@
 				              ]
 				            },
 				            {
-				              "condition_name": "IsToFarGroup",
+				              "condition_name": "IsToFarStartBattlePosition",
 				              "condition_value": true,
 				              "state_name": "FindRandomState",
 				              "states": []

@@ -94,6 +94,7 @@ public class TDCDataReader {
 			creature.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			creature.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			creature.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
+			creature.ActiveSkill = (TDCEnum.EGameType)int.Parse (instance["ActiveSkill"].ToString());
 			ConvertToEnum (instance["Enemies"] as List<object>, creature.TypeEnemies);
 			ConvertToEnum (instance["Foods"] as List<object>, creature.TypeFoods);
 			var inventory = instance["Inventory"] as List<object>;
@@ -174,7 +175,6 @@ public class TDCDataReader {
 			group.GroupType = (TDCEnum.EGroupType)int.Parse (instance ["GroupType"].ToString ());
 			group.Radius = float.Parse (instance ["Radius"].ToString ());
 			group.MemberType = (TDCEnum.EGameType) int.Parse (instance["MemberType"].ToString());
-			group.MinMember = int.Parse (instance ["MinMember"].ToString());
 			group.MaxMember = int.Parse (instance ["MaxMember"].ToString());
 			group.TimeRespawnMember = float.Parse (instance ["TimeRespawnMember"].ToString ());
 			group.CurrentHP = int.Parse (instance ["CurrentHP"].ToString ());
@@ -235,6 +235,7 @@ public class TDCDataReader {
 			player.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
 			player.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			player.DetectRange = float.Parse (instance["DetectRange"].ToString());
+			player.ActiveSkill = (TDCEnum.EGameType)int.Parse (instance["ActiveSkill"].ToString());
 			player.Level = int.Parse (instance["Level"].ToString());
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {

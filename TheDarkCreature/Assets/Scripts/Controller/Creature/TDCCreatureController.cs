@@ -7,9 +7,7 @@ public class TDCCreatureController : TDCBaseController {
 
 	#region Property
 
-	protected Animator m_AnimatorController;
 	protected LayerMask m_ColliderLayerMask;
-	protected TDCSkillSlot m_SkillSlot;
 
 	#endregion
 	
@@ -18,7 +16,6 @@ public class TDCCreatureController : TDCBaseController {
 	public override void Init ()
 	{
 		base.Init ();
-		m_AnimatorController = this.GetComponent<Animator> ();
 
 		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 31;
 
@@ -48,6 +45,8 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("FoundEnemy", FoundEnemy);
 		m_FSMManager.RegisterCondition("IsDeath", IsDeath);
 		m_FSMManager.RegisterCondition("IsToFarGroup", IsToFarGroup);
+		m_FSMManager.RegisterCondition("IsToFarStartBattlePosition", IsToFarStartBattlePosition);
+		m_FSMManager.RegisterCondition("IsToFarStartPosition", IsToFarStartPosition);
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
 		m_FSMManager.RegisterCondition("IsEnemyDeath", IsEnemyDeath);
 		m_FSMManager.RegisterCondition("IsLandingFinish", IsLandingFinish);
@@ -96,6 +95,10 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.ApplyDamage(damage, attacker);
 		m_Entity.ApplyDamage(damage, attacker);
+		if (GetEnemyEntity() == null)
+		{
+			SetEnemyEntity(attacker);
+		}
 	}
 
 	public virtual void OnSelectedItem(int itemIndex) {
@@ -179,7 +182,15 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool IsToFarGroup() {
-		return false;
+		return true;
+	}
+
+	internal virtual bool IsToFarStartBattlePosition() {
+		return true;
+	}
+
+	internal virtual bool IsToFarStartPosition() {
+		return true;
 	}
 
 	internal override bool IsDeath() {
@@ -237,6 +248,7 @@ public class TDCCreatureController : TDCBaseController {
 		}
 		var mPos = TransformPosition;
 		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
+		var groupEntity = GetGroupEntity() != null;
 		for (int i = 0; i < colliders.Length; i++) {
 			var food = m_GameManager.GetEntityByName (colliders[i].name);
 			if (food == null || food.GetActive () == false || food == this.GetEntity()) {

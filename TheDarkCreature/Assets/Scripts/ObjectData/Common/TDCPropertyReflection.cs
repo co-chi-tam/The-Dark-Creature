@@ -31,8 +31,9 @@ public class TDCPropertyReflection {
         {
             var propObj = this.m_Properties[name];
             var propInfo = propObj.GetType().GetProperty("Value");
+			var newValue = Convert.ChangeType(value, propInfo.PropertyType);
             MethodInfo methodInfo = propInfo.GetSetMethod();
-            methodInfo.Invoke(propObj, new object[] { value });
+			methodInfo.Invoke(propObj, new object[] { newValue });
         }
         catch (Exception ex)
         {

@@ -37,7 +37,7 @@
 								}
 							]
 						},{
-							"condition_name": "MoveToTarget",
+							"condition_name": "MoveToEnemy",
 							"condition_value": true,
 							"state_name": "ExcuteEffectSkillState",
 							"states": []

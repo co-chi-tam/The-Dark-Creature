@@ -6,7 +6,6 @@ public class TDCGroupData : TDCCreatureData {
 	private float m_Radius;
 	private TDCEnum.EGameType m_MemberType;
 	private int m_CurrentMember;
-	private int m_MinMember;
 	private int m_MaxMember;
 	private TDCEnum.EGroupType m_GroupType;
 	private float m_TimeRespawnMember;
@@ -25,11 +24,6 @@ public class TDCGroupData : TDCCreatureData {
 	public int CurrentMember {
 		get { return m_CurrentMember; }
 		set { m_CurrentMember = value; }
-	}
-
-	public int MinMember {
-		get { return m_MinMember; }
-		set { m_MinMember = value; }
 	}
 
 	public int MaxMember {
@@ -51,7 +45,6 @@ public class TDCGroupData : TDCCreatureData {
 	{
 		this.m_Radius = 0f;
 		this.m_CurrentMember = 0;
-		this.m_MinMember = 0;
 		this.m_MaxMember = 0;
 		this.m_GroupType = TDCEnum.EGroupType.None;
 		this.m_TimeRespawnMember = 0f;
@@ -67,7 +60,6 @@ public class TDCGroupData : TDCCreatureData {
 		tmp.Radius = instance.Radius;
 		tmp.MemberType = instance.MemberType;
 		tmp.CurrentMember = instance.CurrentMember;
-		tmp.MinMember = instance.MinMember;
 		tmp.MaxMember = instance.MaxMember;
 		tmp.GroupType = instance.GroupType;
 		tmp.Icon = instance.Icon;

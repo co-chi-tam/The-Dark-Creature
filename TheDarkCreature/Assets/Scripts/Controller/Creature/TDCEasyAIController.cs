@@ -23,16 +23,12 @@ public class TDCEasyAIController : TDCCreatureController
 	protected override void Start()
     {
 		base.Start ();
-
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalMeleeSkill, this.GetEntity());
     }
 	
 	protected override void FixedUpdate () {
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
-
-		m_SkillSlot.UpdateSkill(Time.fixedDeltaTime);
 	}
 
     #endregion
@@ -42,7 +38,7 @@ public class TDCEasyAIController : TDCCreatureController
 	public override void ActiveSkill(int index)
 	{
 		base.ActiveSkill(index);
-		m_SkillSlot.ActiveSkill();
+		m_Entity.ActiveSkill(index);
 	}
 
 	#endregion
@@ -62,6 +58,28 @@ public class TDCEasyAIController : TDCCreatureController
 			distance = (TransformPosition - GetGroupEntity().GetController().TransformPosition).sqrMagnitude;
 			range = GetGroupEntity().GetGroupRadius();
 		}
+		var result = distance > range * range;
+		if (result)
+		{
+			SetEnemyEntity(null);
+		}
+		return result;
+	}
+
+	internal override bool IsToFarStartBattlePosition() {
+		var distance = (TransformPosition - m_Entity.GetStartBattlePosition()).sqrMagnitude;
+		var range = 50f;
+		var result = distance > range * range;
+		if (result)
+		{
+			SetEnemyEntity(null);
+		}
+		return result;
+	}
+
+	internal override bool IsToFarStartPosition() {
+		var distance = (TransformPosition - m_Entity.GetStartPosition()).sqrMagnitude;
+		var range = 50f;
 		var result = distance > range * range;
 		if (result)
 		{

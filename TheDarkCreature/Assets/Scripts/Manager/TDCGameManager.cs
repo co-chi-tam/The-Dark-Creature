@@ -56,10 +56,13 @@ public class TDCGameManager : MonoBehaviour {
     }
 
 	void Start() {
+		var ui = UIManager.GetInstance();
+		ui.EnableLoadingScreen(true);
 		Debug.Log ("Loading " + Time.time);
 		HandleLoadObjectPool(() => {
 			HandleLoadMap("World1", () => {
 				Debug.Log ("Complete " + Time.time);
+				ui.EnableLoadingScreen(false);
 			});
 		});
     }
@@ -269,7 +272,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.GroupGrass:
 		case TDCEnum.EGameType.GroupMushRoom:
 		case TDCEnum.EGameType.GroupBlueBerry: 
-		case TDCEnum.EGameType.GroupBush:{
+		case TDCEnum.EGameType.GroupBush:
+		case TDCEnum.EGameType.GroupCrystal:{
 			data = m_DataReader.GetGroup(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCGroupData).GroupType) {
@@ -286,7 +290,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.Grass:
 		case TDCEnum.EGameType.Mushroom: 
 		case TDCEnum.EGameType.BlueBerry:		
-		case TDCEnum.EGameType.Bush: {
+		case TDCEnum.EGameType.Bush: 
+		case TDCEnum.EGameType.Crystal: {
 			data = m_DataReader.GetResource (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEnviromentController> ();
@@ -332,6 +337,5 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
     #endregion
-
 
 }

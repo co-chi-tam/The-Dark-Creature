@@ -7,7 +7,7 @@
 	    {
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["ExcuteEffect(HealthPoint:10,SpeedPoint:10)"]
+	        "ExcuteMethods": ["AddValueEffect(NameValue:HealthPoint,Value:10)"]
 	    }
     ],
     "NoMethods": [

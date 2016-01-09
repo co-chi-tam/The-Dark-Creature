@@ -21,6 +21,10 @@ public class TDCPlayerController : TDCCreatureController
 	{
 		base.Init ();
 
+		var playerDeathState = new FSMPlayerDeathState(this);
+
+		m_FSMManager.RegisterState("PlayerDeathState", playerDeathState);
+
 		m_FSMManager.LoadFSM(m_Entity.GetFSMPath());
 	}
 
@@ -32,7 +36,7 @@ public class TDCPlayerController : TDCCreatureController
 
 		m_Inventory.SetPlayer(this);
 
-		m_SkillSlot = new TDCSkillSlot(TDCEnum.EGameType.NormalMeleeSkill, this.GetEntity());
+		UIManager.Instance.Init(m_Entity);
 	}
 
 	protected override void FixedUpdate()
@@ -40,8 +44,6 @@ public class TDCPlayerController : TDCCreatureController
 		base.FixedUpdate();
 		m_FSMManager.UpdateState();
 		StateName = m_FSMManager.StateCurrentName;
-
-		m_SkillSlot.UpdateSkill(Time.fixedDeltaTime);
 	}
 
 	protected override void LateUpdate () {
@@ -86,7 +88,7 @@ public class TDCPlayerController : TDCCreatureController
 	public override void ActiveSkill(int index)
 	{
 		base.ActiveSkill(index);
-		m_SkillSlot.ActiveSkill();
+		m_Entity.ActiveSkill(index);
 	}
 
 	private void PlayerAction(RaycastHit hitInfo) {

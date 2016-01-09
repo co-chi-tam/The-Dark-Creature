@@ -29,6 +29,14 @@ public class TDCNestGroupCreatureController : TDCGroupCreatureController
 		m_Entity.ApplyDamage(damage, attacker);
 	}
 
+	public override void SetAnimation(EAnimation anim)
+	{
+		base.SetAnimation(anim);
+		if (m_AnimatorController.runtimeAnimatorController != null) {
+			m_AnimatorController.SetInteger ("AnimParam", (int)anim);
+		}
+	}
+
 	#endregion
 
 	#region FSM

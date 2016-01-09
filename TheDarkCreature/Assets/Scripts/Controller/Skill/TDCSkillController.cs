@@ -113,7 +113,11 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	public virtual void StartSkill(Vector3 position, Quaternion rotation) {
-		m_AttachTransform = m_Entity.GetAttachOwner() ? m_Entity.GetOwnerEntity().GetController().transform : m_Entity.GetAttachEnemy() ? GetEnemyEntity().GetController().transform : this.transform;
+		m_AttachTransform = m_Entity.GetAttachOwner() ? 
+							m_Entity.GetOwnerEntity().GetController().transform : 
+							m_Entity.GetAttachEnemy() ? 
+							GetEnemyEntity().GetController().transform : 
+							this.transform;
 
 		TransformPosition = position;
 		TransformRotation = rotation;
@@ -159,6 +163,16 @@ public class TDCSkillController : TDCBaseController {
 	#endregion
 
 	#region Getter & Setter
+
+	public override TDCEntity GetEnemyEntity()
+	{
+		return m_Entity.GetEnemyEntity();
+	}
+
+	public override void SetEnemyEntity(TDCEntity entity)
+	{
+		m_Entity.SetEnemyEntity(entity);
+	}
 
 	public virtual TDCEnum.ESkillType GetSkillType() {
 		return m_Entity.GetSkillType();
@@ -275,7 +289,7 @@ public class TDCSkillController : TDCBaseController {
 #if UNITY_EDITOR
 		foreach (var item in pars)
 		{
-			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
+			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
 		}
 #endif
 	}
@@ -293,7 +307,7 @@ public class TDCSkillController : TDCBaseController {
 #if UNITY_EDITOR
 		foreach (var item in pars)
 		{
-			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
+			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
 		}
 #endif
 	}
@@ -302,7 +316,7 @@ public class TDCSkillController : TDCBaseController {
 #if UNITY_EDITOR
 		foreach (var item in pars)
 		{
-			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
+			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
 		}
 #endif
 	}

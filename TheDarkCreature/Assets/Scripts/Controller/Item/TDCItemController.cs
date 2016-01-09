@@ -29,37 +29,13 @@ public class TDCItemController {
 		m_EffectManager = new EffectManager();
 		m_EffectManager.LoadEffect(m_Data.EffectPath);
 		m_EffectManager.RegisterCondition("CanActiveEffect", CanActiveEffect);
+
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
 		m_EffectManager.RegisterExcuteMethod("ExcuteEffect", ExcuteEffect);
+		m_EffectManager.RegisterExcuteMethod("AddValueEffect", AddValueEffect);
 	}
 
-	internal virtual void PrintDebug(Dictionary<string, object> pars)
-	{
-#if UNITY_EDITOR
-		foreach (var item in pars) {
-			Debug.LogError(string.Format ("[{0}] - {1}", item.Key, item.Value));
-		}
-#endif
-	}
-
-	public virtual void ExcuteItem() {
-		m_EffectManager.ExcuteEffect();
-	}
-
-	protected virtual bool CanActiveEffect(Dictionary<string, object> pars)
-	{
-		return m_Data.Amount > 0 && m_Data.Owner != null;
-	}
-
-	protected virtual void ExcuteEffect(Dictionary<string, object> pars)
-	{
-#if UNITY_EDITOR
-		foreach (var item in pars)
-		{
-			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
-		}
-#endif
-
+	private void UsedItem() {
 		var type = m_Data.ItemType;
 		switch (type)
 		{
@@ -89,6 +65,53 @@ public class TDCItemController {
 				}
 				break;
 		}
+	}
+
+	#endregion
+
+	#region Effect
+
+	internal virtual void PrintDebug(Dictionary<string, object> pars)
+	{
+#if UNITY_EDITOR
+		foreach (var item in pars) {
+			Debug.Log(string.Format ("[{0}] - {1}", item.Key, item.Value));
+		}
+#endif
+	}
+
+	public virtual void ExcuteItem() {
+		m_EffectManager.ExcuteEffect();
+	}
+
+	protected virtual bool CanActiveEffect(Dictionary<string, object> pars)
+	{
+		return m_Data.Amount > 0 && m_Data.Owner != null;
+	}
+
+	protected virtual void ExcuteEffect(Dictionary<string, object> pars)
+	{
+#if UNITY_EDITOR
+		foreach (var item in pars)
+		{
+			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+		}
+#endif
+		UsedItem();
+	}
+
+	protected virtual void AddValueEffect(Dictionary<string, object> pars)
+	{
+#if UNITY_EDITOR
+		foreach (var item in pars)
+		{
+			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+		}
+#endif
+		UsedItem();
+		var nameValue = pars["NameValue"].ToString();
+		var value = pars["Value"];
+		m_Data.Owner.GetEntity().SetProperty(nameValue, value);
 	}
 
 	#endregion

@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b461d0575b5b907458c8137ab38c4877
-timeCreated: 1450526662
+timeCreated: 1452343839
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -246,7 +246,7 @@ TextureImporter:
     21300478: 34x34icons180709_239
     21300480: 34x34icons180709_240
     21300482: 34x34icons180709_241
-    21300484: 34x34icons180709_242
+    21300484: Crystal
     21300486: 34x34icons180709_243
     21300488: 34x34icons180709_244
     21300490: 34x34icons180709_245
@@ -3391,7 +3391,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: 34x34icons180709_242
+    - name: Crystal
       rect:
         serializedVersion: 2
         x: 105

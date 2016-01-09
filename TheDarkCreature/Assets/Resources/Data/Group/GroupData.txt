@@ -11,8 +11,7 @@
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 100,
 			"MemberType": 5,
-			"MinMember": 5,
-			"MaxMember": 10,
+			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeRespawnMember": 10
@@ -27,8 +26,7 @@
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 100,
 			"MemberType": 6,
-			"MinMember": 2,
-			"MaxMember": 5,
+			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeRespawnMember": 10
@@ -43,8 +41,7 @@
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 150,
 			"MemberType": 53,
-			"MinMember": 10,
-			"MaxMember": 20,
+			"MaxMember": 10,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeRespawnMember": 10
@@ -59,8 +56,7 @@
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 150,
 			"MemberType": 52,
-			"MinMember": 10,
-			"MaxMember": 20,
+			"MaxMember": 10,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeRespawnMember": 10
@@ -75,8 +71,7 @@
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 100,
 			"MemberType": 54,
-			"MinMember": 10,
-			"MaxMember": 20,
+			"MaxMember": 10,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeRespawnMember": 10
@@ -91,8 +86,7 @@
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 100,
 			"MemberType": 55,
-			"MinMember": 1,
-			"MaxMember": 2,
+			"MaxMember": 1,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeRespawnMember": 10
@@ -107,8 +101,7 @@
 			"FSMPath": "FSM/Group/GroupFSM",
 			"Radius": 100,
 			"MemberType": 7,
-			"MinMember": 2,
-			"MaxMember": 5,
+			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeRespawnMember": 10
@@ -123,10 +116,24 @@
 			"FSMPath": "FSM/Group/GroupNestFSM",
 			"Radius": 150,
 			"MemberType": 8,
-			"MinMember": 5,
-			"MaxMember": 10,
-			"CurrentHP": 9,
-			"MaxHP": 9,
+			"MaxMember": 5,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
+			"TimeRespawnMember": 10
+		},{
+			"ID": 9,
+			"Name": "GroupCrystal",
+			"GameType": 210,
+			"GroupType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Group/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupFSM",
+			"Radius": 100,
+			"MemberType": 56,
+			"MaxMember": 5,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
 			"TimeRespawnMember": 10
 		}
 	]

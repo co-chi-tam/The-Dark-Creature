@@ -66,6 +66,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
 		tmp.Damage = instance.Damage;
+		tmp.ActiveSkill = instance.ActiveSkill;
 		tmp.CurrentHeatPoint = instance.CurrentHeatPoint;
 		tmp.MaxHeatPoint = instance.MaxHeatPoint;
 		tmp.CurrentHungerPoint = instance.CurrentHungerPoint;
