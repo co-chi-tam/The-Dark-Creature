@@ -49,6 +49,25 @@ public class TDCInventoryInspector : Editor
 	}
 }
 
+[CustomEditor(typeof(uObjectCurrentValue))]
+public class ObjectCurrentValueInspector : Editor 
+{
+	public override void OnInspectorGUI()
+	{
+		DrawDefaultInspector ();
+		var myTarget = (uObjectCurrentValue)target;
+		var ctrl = myTarget.GetComponent<TDCBaseController>();
+		if (ctrl != null)
+		{
+			var objectValues = ctrl.GetObjectCurrentValue();
+			foreach (var item in objectValues)
+			{
+				EditorGUILayout.LabelField(item.Key.ToString(), item.Value.ToString());
+			}
+		}
+	}
+}
+
 
 
 

@@ -103,7 +103,7 @@
         },{
           "condition_name": "FoundEnemy",
           "condition_value": true,
-          "state_name": "AvoidState",
+          "state_name": "FlyAvoidState",
           "states": [
             {
               "condition_name": "MoveToTarget",

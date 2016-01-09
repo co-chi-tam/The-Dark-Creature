@@ -8,7 +8,6 @@ public class TDCEntity : TDCPropertyReflection {
 	#region Properties
 
 	protected bool m_IsActive;
-
 	protected Dictionary<string, Action> m_TriggerEvents;
 
 	#endregion
@@ -77,7 +76,6 @@ public class TDCEntity : TDCPropertyReflection {
 	public TDCEntity(TDCBaseController ctrl, TDCBaseData data)
 	{
 		m_TriggerEvents = new Dictionary<string, Action>();
-
 		LoadEventCallBack();
 	}
 

@@ -144,7 +144,7 @@ public class TDCSkillController : TDCBaseController {
 	public override void MovePosition(Vector3 position)
 	{
 		base.MovePosition(position);
-		position.y = 0f;
+//		position.y = 0f;
 		var direction = position - m_Transform.position;
 		m_Transform.position = m_Transform.position + direction.normalized * 50f * Time.deltaTime;
 		LookAtRotation(position);

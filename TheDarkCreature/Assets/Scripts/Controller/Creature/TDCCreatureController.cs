@@ -23,6 +23,7 @@ public class TDCCreatureController : TDCBaseController {
 		var moveState   	= new FSMMoveState(this);
 		var findRandomState = new FSMFindRandomState(this);
 		var avoidState  	= new FSMAvoidState(this);
+		var flyAvoidState 	= new FSMFlyAvoidState(this);
 		var chaseState  	= new FSMChaseState(this);
 		var attackState  	= new FSMAttackState(this);
 		var dieState    	= new FSMDieState(this);
@@ -36,6 +37,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("ChaseState", chaseState);
 		m_FSMManager.RegisterState("AttackState", attackState);
 		m_FSMManager.RegisterState("DieState", dieState);
+		m_FSMManager.RegisterState("FlyAvoidState", flyAvoidState);
 		m_FSMManager.RegisterState("FlyState", flyState);
 		m_FSMManager.RegisterState("LandingState", landingState);
 

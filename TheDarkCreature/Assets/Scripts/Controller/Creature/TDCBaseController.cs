@@ -41,6 +41,8 @@ public class TDCBaseController : TDCMonoBehaviour
 		set { m_Transform.rotation = value; }
 	}
 
+	protected Dictionary<string, object> m_ObjectCurrentvalue;
+
 	#endregion
 
 	#region Implement Monobehaviour
@@ -52,6 +54,8 @@ public class TDCBaseController : TDCMonoBehaviour
 
 		m_AnimatorController = this.GetComponent<Animator> ();
 		m_Collider 		= this.GetComponent<CapsuleCollider> ();
+		m_ObjectCurrentvalue = new Dictionary<string, object>();
+
 		m_GameManager 	= TDCGameManager.GetInstance();
 		m_FSMManager 	= new FSMManager();
 
@@ -120,6 +124,13 @@ public class TDCBaseController : TDCMonoBehaviour
 	#endregion
 
 	#region Main Method
+
+	public virtual Dictionary<string, object> GetObjectCurrentValue() {
+		m_ObjectCurrentvalue["Active"] = GetActive();
+		m_ObjectCurrentvalue["HealthPoint"] = GetHealth();
+		m_ObjectCurrentvalue["EnemyName"] = GetEnemyEntity() != null ? GetEnemyEntity().GetController().name : "None";
+		return m_ObjectCurrentvalue;
+	}
 
 	public virtual void ActiveSkill(int index) {
 		
