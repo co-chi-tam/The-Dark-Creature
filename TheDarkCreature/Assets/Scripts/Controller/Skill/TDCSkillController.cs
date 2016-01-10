@@ -52,7 +52,6 @@ public class TDCSkillController : TDCBaseController {
 	{
 		// base.FixedUpdate();
 		m_FSMManager.UpdateState();
-		StateName = m_FSMManager.StateCurrentName;
 		if (m_TimeEffect > 0f)
 		{
 			m_TimeEffect -= Time.fixedDeltaTime;
@@ -158,6 +157,13 @@ public class TDCSkillController : TDCBaseController {
 		var direction = m_Transform.position - rotation;
 		Quaternion rot = Quaternion.LookRotation(direction);
 		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, Time.deltaTime * 3f);
+	}
+
+	public override Dictionary<string, object> GetObjectCurrentValue()
+	{
+		var curValue = base.GetObjectCurrentValue();
+		curValue["State"] = m_FSMManager.StateCurrentName;
+		return curValue;
 	}
 
 	#endregion

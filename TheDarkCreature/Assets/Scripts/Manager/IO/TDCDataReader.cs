@@ -42,7 +42,7 @@ public class TDCDataReader {
 		var itemAsset = Resources.Load<TextAsset> ("Data/Item/ItemData");
 		var groupAsset = Resources.Load<TextAsset> ("Data/Group/GroupData");
 		var creatureAsset = Resources.Load<TextAsset> ("Data/Creature/CreatureData");
-		var playerAsset = Resources.Load<TextAsset> ("Data/Creature/PlayerData");
+		var playerAsset = Resources.Load<TextAsset> ("Data/Player/PlayerData");
 		var enviromentTextAsset = Resources.Load<TextAsset> ("Data/Creature/EnviromentData");
 		var objectTextAsset = Resources.Load<TextAsset> ("Data/Creature/ObjectData");
 		var skillTextAsset = Resources.Load<TextAsset>("Data/Skill/SkillData");

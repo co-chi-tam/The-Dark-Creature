@@ -62,7 +62,7 @@ public class ObjectCurrentValueInspector : Editor
 			var objectValues = ctrl.GetObjectCurrentValue();
 			foreach (var item in objectValues)
 			{
-				EditorGUILayout.LabelField(item.Key.ToString(), item.Value.ToString());
+				EditorGUILayout.LabelField(item.Key.ToString(), item.Value == null ? "None" : item.Value.ToString());
 			}
 		}
 	}

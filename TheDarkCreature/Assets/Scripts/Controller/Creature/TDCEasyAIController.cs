@@ -28,7 +28,6 @@ public class TDCEasyAIController : TDCCreatureController
 	protected override void FixedUpdate () {
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
-		StateName = m_FSMManager.StateCurrentName;
 	}
 
     #endregion

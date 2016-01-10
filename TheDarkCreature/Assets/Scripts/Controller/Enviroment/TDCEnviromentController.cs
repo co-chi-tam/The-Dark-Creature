@@ -27,7 +27,6 @@ public class TDCEnviromentController : TDCCreatureController {
 	protected override void FixedUpdate() {
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
-		StateName = m_FSMManager.StateCurrentName;
 	}
 	
 	#endregion

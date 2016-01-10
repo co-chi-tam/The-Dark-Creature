@@ -20,8 +20,6 @@ public enum EAnimation:int {
 public class TDCBaseController : TDCMonoBehaviour
 {
 	#region Property
-	[SerializeField]
-	protected string StateName = "";
 
 	protected TDCEntity m_Entity;
 	protected FSMManager m_FSMManager;
@@ -204,6 +202,10 @@ public class TDCBaseController : TDCMonoBehaviour
 	#endregion
 
     #region Getter & Setter
+
+	public virtual string GetStateName() {
+		return string.Empty;
+	}
 
 	public virtual void SetEntity(TDCEntity entity) {
 		m_Entity = entity;

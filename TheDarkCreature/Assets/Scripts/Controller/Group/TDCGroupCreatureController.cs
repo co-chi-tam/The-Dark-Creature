@@ -33,7 +33,6 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 	protected override void FixedUpdate() {
 		base.FixedUpdate ();
         m_FSMManager.UpdateState();
-		StateName = m_FSMManager.StateCurrentName;
 
 		m_Entity.Update(Time.fixedDeltaTime);
     }
@@ -107,5 +106,14 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
     }
 
     #endregion
+
+	#region Getter & Setter
+
+	public override string GetStateName()
+	{
+		return m_FSMManager.StateCurrentName;
+	}
+
+	#endregion
 
 }

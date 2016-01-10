@@ -61,7 +61,7 @@ public class CameraController : MonoBehaviour
 			return;
 #if UNITY_EDITOR
         RotationAroundObjectByCamera();
-        ZoomCamera();
+//        ZoomCamera();
 #endif
         MoveCamera();
     }
@@ -209,8 +209,10 @@ public class CameraController : MonoBehaviour
 
     private void MoveCamera()
     {
-        _position = _rotation * new Vector3(0.0f, _commonY, -_distance) + _target.position;
-        transform.position = Vector3.Lerp(transform.position, _position, 5);
+		var target = _target.position;
+		target.y = 0f;
+        _position = _rotation * new Vector3(0.0f, _commonY, -_distance) + target;
+		transform.position = Vector3.Lerp(transform.position, _position, 5);
     }
 
     #region Get and Set basic

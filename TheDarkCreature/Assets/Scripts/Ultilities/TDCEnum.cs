@@ -63,7 +63,7 @@ public class TDCEnum{
 	public enum ECreatureType : int {
 		None		= 0,
 		GroundCreature	= 1,
-		Player 		= 2,
+		GroundPlayer 		= 2,
 		Enviroment	= 3,
 		GObject		= 4,
 		FlyCreature	= 5,

@@ -5,8 +5,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 
-using System.Text;
-
 public class TDCPlayerController : TDCCreatureController
 {
     #region Property
@@ -43,7 +41,6 @@ public class TDCPlayerController : TDCCreatureController
 	{
 		base.FixedUpdate();
 		m_FSMManager.UpdateState();
-		StateName = m_FSMManager.StateCurrentName;
 	}
 
 	protected override void LateUpdate () {
@@ -171,6 +168,10 @@ public class TDCPlayerController : TDCCreatureController
 
 		return emptySlot;
 	}
+
+	#endregion
+
+	#region Getter & Setter
 
 	#endregion
 }

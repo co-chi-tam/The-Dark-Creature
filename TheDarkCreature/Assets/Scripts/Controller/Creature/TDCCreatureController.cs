@@ -89,6 +89,13 @@ public class TDCCreatureController : TDCBaseController {
 	
 	#region Main Method
 
+	public override Dictionary<string, object> GetObjectCurrentValue()
+	{
+		var curValue = base.GetObjectCurrentValue();
+		curValue["State"] = m_FSMManager.StateCurrentName;
+		return curValue;
+	}
+
 	public override void ActiveSkill(int index) {
 		base.ActiveSkill(index);
 	}
@@ -271,6 +278,11 @@ public class TDCCreatureController : TDCBaseController {
 	#endregion
 	
 	#region Getter & Setter
+
+	public override string GetStateName()
+	{
+		return m_FSMManager.StateCurrentName;
+	}
 
 	public override void SetEnemyEntity(TDCEntity entity)
 	{

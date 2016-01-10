@@ -1,0 +1,96 @@
+﻿{
+  "fsm": [
+    {
+      "condition_name": "IsRoot",
+      "condition_value": true,
+      "state_name": "IdleState",
+      "states": [
+        {
+          "condition_name": "IsEnemyDeath",
+          "condition_value": false,
+          "state_name": "ChaseState",
+          "states": [
+            {
+              "condition_name": "MoveToEnemy",
+              "condition_value": true,
+              "state_name": "WaitingOneSecondState",
+              "states": [
+                {
+                  "condition_name": "CountdownWaitingTime",
+                  "condition_value": true,
+                  "state_name": "AttackState",
+                  "states": [
+                    {
+                      "condition_name": "IsEnemyDeath",
+                      "condition_value": true,
+                      "state_name": "IdleState",
+                      "states": []
+                    },
+                    {
+                      "condition_name": "MoveToEnemy",
+                      "condition_value": false,
+                      "state_name": "ChaseState",
+                      "states": []
+                    }
+                  ]
+                },
+                {
+                  "condition_name": "IsEnemyDeath",
+                  "condition_value": true,
+                  "state_name": "IdleState",
+                  "states": []
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "condition_name": "MoveToTarget",
+          "condition_value": false,
+          "state_name": "MoveState",
+          "states": [
+            {
+              "condition_name": "IsFarEnoughFly",
+              "condition_value": true,
+              "state_name": "FlyState",
+              "states": [
+                {
+                  "condition_name": "MoveToTarget",
+                  "condition_value": true,
+                  "state_name": "LandingState",
+                  "states": [
+                    {
+                      "condition_name": "IsLandingFinish",
+                      "condition_value": true,
+                      "state_name": "IdleState",
+                      "states": []
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "condition_name": "MoveToTarget",
+              "condition_value": true,
+              "state_name": "IdleState",
+              "states": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_name": "IsAnyState",
+      "condition_value": true,
+      "state_name": "AnyState",
+      "states": [
+        {
+          "condition_name": "IsDeath",
+          "condition_value": true,
+          "state_name": "PlayerDeathState",
+          "states": []
+        }
+      ]
+    }
+  ]
+}

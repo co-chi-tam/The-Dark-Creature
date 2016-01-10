@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using FSM;
 
 public class TDCCampFireController : TDCObjectController {
@@ -53,12 +55,18 @@ public class TDCCampFireController : TDCObjectController {
 		base.FixedUpdate ();
 		m_Entity.Update(Time.fixedDeltaTime);
 		m_FSMManager.UpdateState();
-		StateName = m_FSMManager.StateCurrentName;
 	}
 	
 	#endregion
 	
 	#region Main method
+
+	public override Dictionary<string, object> GetObjectCurrentValue()
+	{
+		var curValue = base.GetObjectCurrentValue();
+		curValue["State"] = m_FSMManager.StateCurrentName;
+		return curValue;
+	}
 	
 	private bool IsFireActive() {
 		return m_IsFireActive;
@@ -91,6 +99,11 @@ public class TDCCampFireController : TDCObjectController {
 	#endregion
 
 	#region Getter & Setter
+
+	public override string GetStateName()
+	{
+		return m_FSMManager.StateCurrentName;
+	}
 
 	public void SetIntensity(float value) {
 		m_Light.intensity = value * (m_CurrentIntensity - 1) + 1;

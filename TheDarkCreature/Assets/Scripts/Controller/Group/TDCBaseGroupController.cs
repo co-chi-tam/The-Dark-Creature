@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
-using ObjectPool;
+using System;
+using System.Collections;
+using System.Collections.Generic;
 using FSM;
 
 public class TDCBaseGroupController : TDCBaseController
@@ -45,6 +47,13 @@ public class TDCBaseGroupController : TDCBaseController
     #endregion
 
 	#region Main method
+
+	public override Dictionary<string, object> GetObjectCurrentValue()
+	{
+		var curValue = base.GetObjectCurrentValue();
+		curValue["State"] = m_FSMManager.StateCurrentName;
+		return curValue;
+	}
 
 	protected virtual void CreatePositionMember() {
 
