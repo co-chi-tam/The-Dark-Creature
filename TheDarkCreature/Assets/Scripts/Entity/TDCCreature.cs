@@ -7,31 +7,18 @@ public class TDCCreature : TDCEntity
 {
 	#region Properties
 
-	protected TDCObjectProperty<int> m_HealthPoint;
-	public int HealthPoint
-	{
-		get { return m_HealthPoint.Value; }
-		private set { m_HealthPoint.Value = value; }
-	}
-
-	private int m_HeatPoint = 0;
-	private int m_HungerPoint = 0;
-	private int m_SanityPoint = 0;
-	private int m_DamageTake = 0;
-	private float m_TimeReset = 0f;
-	private TDCCreatureController m_Controller;
-	private TDCCreatureData m_Data;
-
-	protected TDCEntity m_GroupEntity;
+	protected int m_DamageTake = 0;
+	protected float m_TimeReset = 0f;
 	protected TDCEntity m_EnemyEntity;
-
 	protected Vector3 m_TargetPosition;
 	protected Vector3 m_StartPosition;
 	protected Vector3 m_StartBattlePosition;
 
-	protected TDCObjectProperty<float> m_OffsetSpeed;
+	protected TDCSkillSlot m_NormalSkill;
 
-	protected TDCSkillSlot m_ActiveSkill;
+	private TDCEntity m_GroupEntity;
+	private TDCCreatureController m_Controller;
+	private TDCCreatureData m_Data;
 
 	#endregion
 
@@ -42,13 +29,7 @@ public class TDCCreature : TDCEntity
 		m_Controller = ctrl as TDCCreatureController;
 		m_Data = data as TDCCreatureData;
 
-		m_OffsetSpeed = new TDCObjectProperty<float>("OffsetSpeed", 1f);
-		m_HealthPoint = new TDCObjectProperty<int>("HealthPoint");
-
-		RegisterProperty(m_OffsetSpeed);
-		RegisterProperty(m_HealthPoint);
-
-		m_ActiveSkill = new TDCSkillSlot(m_Data.ActiveSkill, this);
+		m_NormalSkill = new TDCSkillSlot(m_Data.NormalSkill, this);
 	}
 
 	#endregion
@@ -62,8 +43,12 @@ public class TDCCreature : TDCEntity
 		{
 			CallBackEvent("OnAlive");
 		}
+		if (GetHeat() >= GetMaxHeat())
+		{
+			CallBackEvent("OnOverHeat");
+		}
 
-		m_ActiveSkill.UpdateSkill(Time.fixedDeltaTime);
+		m_NormalSkill.UpdateSkill(Time.fixedDeltaTime);
 
 		if ((Time.time - m_TimeReset) > 1f)
 		{
@@ -72,16 +57,23 @@ public class TDCCreature : TDCEntity
 		}
 
 		var health = GetHealth();
-		if (HealthPoint != 0)
+		if (m_HealthPoint.Value != 0)
 		{
-			health += HealthPoint;
-			HealthPoint = 0;
+			health += m_HealthPoint.Value;
+			m_HealthPoint.Value = 0;
 			SetHealth(health);
 		}
 		if (m_DamageTake != 0) {
 			health -= m_DamageTake;
 			m_DamageTake = 0;
 			SetHealth(health);
+		}
+
+		if (m_HeatPoint.Value != 0)
+		{
+			var heat = GetHeat() + m_HeatPoint.Value;
+			m_HeatPoint.Value = 0;
+			SetHeat(heat);
 		}
 	}
 
@@ -104,7 +96,14 @@ public class TDCCreature : TDCEntity
 	public override void ActiveSkill(int index)
 	{
 		base.ActiveSkill(index);
-		m_ActiveSkill.ActiveSkill();
+		if (index == 0)
+		{
+			m_NormalSkill.ActiveSkill();
+		}
+		else
+		{
+			// TODO
+		}
 	}
 
 	#endregion
@@ -156,6 +155,8 @@ public class TDCCreature : TDCEntity
 
 	public override Vector3 GetEnemyPosition()
 	{
+		if (m_EnemyEntity == null)
+			return base.GetEnemyPosition();
 		return m_EnemyEntity.GetController().TransformPosition;
 	}
 
@@ -217,12 +218,6 @@ public class TDCCreature : TDCEntity
 		return m_Data.Damage;
 	}
 
-	public override void SetHeat(int value)
-	{
-		base.SetHeat(value);
-		m_HeatPoint += value;
-	}
-
 	public override float GetColliderRadius() {
 		return m_Controller.GetColliderRadius();
 	}
@@ -248,6 +243,7 @@ public class TDCCreature : TDCEntity
 		return m_Data.TypeFoods;
 	}
 
+	// ======================= Status ================================
 	public override int GetHealth ()
 	{
 		return m_Data.CurrentHP;
@@ -255,14 +251,30 @@ public class TDCCreature : TDCEntity
 
 	public override void SetHealth (int value)
 	{
-		base.SetHealth(value);
-		m_Data.CurrentHP = value;
+		m_Data.CurrentHP = value > m_Data.MaxHP ? m_Data.MaxHP : value;
 		var percentHP = m_Data.CurrentHP / m_Data.MaxHP * 100;
 		CallBackEvent("OnHealthPoint" + percentHP);
+		base.SetHealth(m_Data.CurrentHP);
 	}
 
 	public override int GetMaxHealth() {
 		return m_Data.MaxHP;
+	}
+
+	public override void SetHeat(int value)
+	{
+		m_Data.CurrentHeatPoint = value > m_Data.MaxHeatPoint ? m_Data.MaxHeatPoint : value;
+		base.SetHeat(m_Data.CurrentHeatPoint);
+	}
+
+	public override int GetHeat()
+	{
+		return m_Data.CurrentHeatPoint;
+	}
+
+	public override int GetMaxHeat()
+	{
+		return m_Data.MaxHeatPoint;
 	}
 
 	public override TDCItemController[] GetInventory()

@@ -56,8 +56,8 @@
 			"Description": "",
 			"ModelPath": ["Prefabs/Enviroment/Crystal"],
 			"FSMPath": "FSM/Creature/EnviromentFSM",
-			"CurrentHP": "10",
-			"MaxHP": "10",
+			"CurrentHP": "100",
+			"MaxHP": "100",
 			"IconPath": "",
 			"Inventory": [{ "GameType":56, "Amount":1 }]
 		}

@@ -43,7 +43,8 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
 	protected override void CreatePositionMember() {
 		base.CreatePositionMember ();
-		for (int i = 0; i < GetMaxMember(); i++) {
+		var maxMember = GetMaxMember() * 4;
+		for (int i = 0; i < maxMember; i++) {
 			var randomPosition = UnityEngine.Random.insideUnitCircle * GetGroupRadius();
 			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y) + TransformPosition;
 			m_ListMemberPosition.Add(memPosition);
@@ -73,7 +74,9 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		if (m_GameManager.GetObjectPool (m_Entity.GetMemberType(), ref member))
 		{
 			m_PositionIndex = (m_PositionIndex + 1) % m_ListMemberPosition.Count;
-			member.GetController().TransformPosition = m_ListMemberPosition[m_PositionIndex];
+			var memberPos = m_ListMemberPosition[m_PositionIndex];
+			member.GetController().TransformPosition = memberPos;
+			member.SetStartPosition(memberPos);
 			member.SetGroupEntity(this.GetEntity());
 			member.GetController().ResetObject();
 			member.SetActive(true);

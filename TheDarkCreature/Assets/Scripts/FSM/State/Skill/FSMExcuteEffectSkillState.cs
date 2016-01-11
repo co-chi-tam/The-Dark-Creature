@@ -15,9 +15,7 @@ public class FSMExcuteEffectSkillState : FSMBaseState {
 	}
 
 	public override void UpdateState() {
-		if (m_SkillController.GetSkillType() == TDCEnum.ESkillType.EffectUpdate) {
-			m_SkillController.ExcuteEffect();
-		}
+		
 	}
 
 	public override void ExitState()

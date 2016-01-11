@@ -66,14 +66,13 @@ public class TDCFlyAIController : TDCEasyAIController
 		}
 		var mPos = TransformPosition;
 		mPos.y = 0f;
-		var groupEntity = GetGroupEntity() != null;
 		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
 			var food = m_GameManager.GetEntityByName (colliders[i].name);
 			if (food == null || food.GetActive () == false || food == this.GetEntity()) {
 				continue;
 			} else {
-				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1) {
+				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1 || (TDCUltilities.IsPlayer(food) && food.GetSanity() < 1)) {
 					if (GetEnemyEntity() == null)
 					{
 						SetEnemyEntity(food);

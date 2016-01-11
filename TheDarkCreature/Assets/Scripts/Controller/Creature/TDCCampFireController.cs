@@ -96,6 +96,12 @@ public class TDCCampFireController : TDCObjectController {
 		m_ParticleSystem.startSize = m_CurrentStartSize;
 	}
 
+	public override void ActiveSkill(int index)
+	{
+		base.ActiveSkill(index);
+		m_Entity.ActiveSkill(index);
+	}
+
 	#endregion
 
 	#region Getter & Setter

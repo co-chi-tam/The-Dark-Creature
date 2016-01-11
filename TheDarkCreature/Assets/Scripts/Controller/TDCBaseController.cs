@@ -125,8 +125,11 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual Dictionary<string, object> GetObjectCurrentValue() {
 		m_ObjectCurrentvalue["Active"] = GetActive();
-		m_ObjectCurrentvalue["HealthPoint"] = GetHealth();
 		m_ObjectCurrentvalue["EnemyName"] = GetEnemyEntity() != null ? GetEnemyEntity().GetController().name : "None";
+		m_ObjectCurrentvalue["HealthPoint"] = m_Entity.GetHealth();
+		m_ObjectCurrentvalue["HeatPoint"] = m_Entity.GetHeat();
+		m_ObjectCurrentvalue["SanityPoint"] = m_Entity.GetSanity();
+		m_ObjectCurrentvalue["HungerPoint"] = m_Entity.GetHunger();
 		return m_ObjectCurrentvalue;
 	}
 

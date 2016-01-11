@@ -3,15 +3,22 @@ using System.Collections;
 
 public class TDCObject : TDCEntity
 {
+	#region Properties
+	protected TDCObjectController m_Controller;
+	protected TDCGObjectData m_Data;
+	#endregion
 
-	private TDCObjectController m_Controller;
-	private TDCGObjectData m_Data;
+	#region Contructor
 
 	public TDCObject(TDCBaseController ctrl, TDCBaseData data): base(ctrl, data)
 	{
 		m_Controller = ctrl as TDCObjectController;
 		m_Data = data as TDCGObjectData;
 	}
+
+	#endregion
+
+	#region Getter && Setter
 
 	public override void SetData(TDCBaseData data)
 	{
@@ -57,6 +64,7 @@ public class TDCObject : TDCEntity
 		return m_Data.CreatureType;
 	}
 
+	#endregion;
 }
 
 

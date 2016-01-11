@@ -102,7 +102,8 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public IEnumerator LoadMap(string mapName, Action complete = null) {
-		var player = CreatePlayer (TDCEnum.EGameType.Vulbat, Vector3.zero, Quaternion.identity);
+		var playerType = TDCGameSetting.Instance.GetPlayerType();
+		var player = CreatePlayer (playerType, Vector3.zero, Quaternion.identity);
 		player.SetActive(true);
 		var map = m_DataReader.GetMap(mapName);
 		for (int i = 0; i < map.Count; i++)
@@ -227,7 +228,8 @@ public class TDCGameManager : MonoBehaviour {
 				break;
 		}
 		CameraController.Instance.Target = gObject.transform;
-		entity = new TDCCreature(controller, data);
+		data.ID = m_ListEntities.Count + 1;
+		entity = new TDCPlayer(controller, data);
 		entity.SetActive(false);
 		controller.SetEntity(entity);
 		controller.Init ();
@@ -254,7 +256,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.Dodono: 
 		case TDCEnum.EGameType.Satla: 
 		case TDCEnum.EGameType.Taurot: 
-		case TDCEnum.EGameType.Vulbat:{
+		case TDCEnum.EGameType.Vulbat:
+		case TDCEnum.EGameType.Crabystal: {
 			data = m_DataReader.GetCreature (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCCreatureData).CreatureType){
@@ -281,7 +284,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.GroupMushRoom:
 		case TDCEnum.EGameType.GroupBlueBerry: 
 		case TDCEnum.EGameType.GroupBush:
-		case TDCEnum.EGameType.GroupCrystal:{
+		case TDCEnum.EGameType.GroupCrystal:
+		case TDCEnum.EGameType.GroupCrabystal:{
 			data = m_DataReader.GetGroup(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCGroupData).GroupType) {
@@ -306,31 +310,35 @@ public class TDCGameManager : MonoBehaviour {
 			entity = new TDCEnviroment(controller, data);
 			break;
 		}
-		case TDCEnum.EGameType.CampFire:
-			data = m_DataReader.GetGObject (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath [0]), position, rotation) as GameObject;
+		case TDCEnum.EGameType.CampFire: {
+			data = m_DataReader.GetGObject(type);
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent <TDCCampFireController>();
-			entity = new TDCObject(controller, data);
+			entity = new TDCCampFire(controller, data);
 			break;
-		case TDCEnum.EGameType.FlameBodySkill:
-			data = m_DataReader.GetSkillData (type);	
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
+		}
+		case TDCEnum.EGameType.FlameBodySkill: 
+		case TDCEnum.EGameType.LifeNotEasySkill:
+		case TDCEnum.EGameType.BurnObjectSkill:{
+			data = m_DataReader.GetSkillData(type);	
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCPasiveSkillController>();
 			entity = new TDCSkill(controller, data);
 			break;
+		}
 		case TDCEnum.EGameType.NormalMeleeSkill:
-		case TDCEnum.EGameType.NormalRangeSkill:
-		case TDCEnum.EGameType.EffectPerSecondSkill:
-		case TDCEnum.EGameType.EffectUpdateSkill:
-			data = m_DataReader.GetSkillData (type);	
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[0]), position, rotation) as GameObject;
+		case TDCEnum.EGameType.NormalRangeSkill:{
+			data = m_DataReader.GetSkillData(type);	
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCActiveSkillController>();
 			entity = new TDCSkill(controller, data);
 			break;
+		}
 		default:
 
 			break;
 		}
+		data.ID = m_ListEntities.Count + 1;
 		entity.SetActive(false);
 		controller.SetEntity(entity);
 		controller.Init ();

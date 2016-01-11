@@ -10,6 +10,7 @@ public class TDCGroup : TDCEntity
 	private TDCGroupData m_Data;
 	private int m_HealthPoint = 0;
 	private int m_DamageTake = 0;
+	protected Vector3 m_StartPosition;
 
 	#endregion
 
@@ -58,6 +59,16 @@ public class TDCGroup : TDCEntity
 	#endregion
 
 	#region Getter && Setter
+
+	public override void SetStartPosition(Vector3 pos)
+	{
+		m_StartPosition = pos;
+	}
+
+	public override Vector3 GetStartPosition()
+	{
+		return m_StartPosition;
+	}
 
 	public override int GetHealth()
 	{

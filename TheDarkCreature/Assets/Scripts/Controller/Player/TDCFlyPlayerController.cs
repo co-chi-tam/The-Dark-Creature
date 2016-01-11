@@ -65,7 +65,7 @@ public class TDCFlyPlayerController : TDCPlayerController
 	internal virtual bool IsFarEnoughFly() {
 		var targetPos = GetTargetPosition();
 		var mPos = TransformPosition;
-		var distance = GetDetectEnemyRange();
+		var distance = 30f;
 		return (targetPos - mPos).sqrMagnitude > distance * distance;
 	}
 

@@ -14,7 +14,7 @@ public class TDCSkillController : TDCBaseController {
 	protected float m_EffectRadius = 0f;
 	protected float m_IsFinishSkill = 1f;
 
-	protected int m_LayerEffect;
+	protected LayerMask m_ColliderLayerMask;
 	protected EffectManager m_EffectManager;
 	protected Transform m_AttachTransform;
 	protected TDCBaseController[] m_ControllersInRadius;
@@ -29,7 +29,7 @@ public class TDCSkillController : TDCBaseController {
 
 		m_EffectManager = new EffectManager();
 
-		m_LayerEffect = 1 << 8 | 1 << 10 | 1 << 31;
+		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 31;
 
 		LoadFSM();
 		LoadEffect();
@@ -41,6 +41,8 @@ public class TDCSkillController : TDCBaseController {
 		m_TimeDelay = m_Entity.GetTimeDelay();
 		m_TimeEffect = m_Entity.GetTimeEffect();
 		m_EffectRadius = m_Entity.GetEffectRadius();
+
+		m_AttachTransform = this.transform;
 	}
 
 	protected override void Start()
@@ -111,7 +113,7 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
 	}
 
-	public virtual void StartSkill(Vector3 position, Quaternion rotation) {
+	public virtual void StartSkill(Vector3 position, Quaternion rotation, TDCEntity owner) {
 		m_AttachTransform = m_Entity.GetAttachOwner() ? 
 							m_Entity.GetOwnerEntity().GetController().transform : 
 							m_Entity.GetAttachEnemy() ? 
@@ -120,7 +122,7 @@ public class TDCSkillController : TDCBaseController {
 
 		TransformPosition = position;
 		TransformRotation = rotation;
-
+		SetOwnerEntity(owner);
 		SetActive(true);
 	}
 
@@ -138,12 +140,13 @@ public class TDCSkillController : TDCBaseController {
 		m_TimeDelay = m_Entity.GetTimeDelay();
 		m_TimeEffect = m_Entity.GetTimeEffect();
 		m_EffectRadius = m_Entity.GetEffectRadius();
+
+		SetOwnerEntity(null);
 	}
 
 	public override void MovePosition(Vector3 position)
 	{
 		base.MovePosition(position);
-//		position.y = 0f;
 		var direction = position - m_Transform.position;
 		m_Transform.position = m_Transform.position + direction.normalized * 50f * Time.deltaTime;
 		LookAtRotation(position);
@@ -169,6 +172,10 @@ public class TDCSkillController : TDCBaseController {
 	#endregion
 
 	#region Getter & Setter
+
+	public virtual float GetEffectRadius() {
+		return m_Entity.GetEffectRadius();
+	}
 
 	public override TDCEntity GetEnemyEntity()
 	{
@@ -200,8 +207,12 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectPerTime = time;
 	}
 
-	public virtual void SetOwner(TDCBaseController owner) {
-		m_Entity.SetOwnerEntity (owner.GetEntity());
+	public virtual void SetOwnerEntity(TDCEntity owner) {
+		m_Entity.SetOwnerEntity (owner);
+	}
+
+	public virtual TDCEntity GetOwnerEntity() {
+		return m_Entity.GetOwnerEntity ();
 	}
 
 	public virtual void SetSlot(TDCSkillSlot slot) {
@@ -273,14 +284,14 @@ public class TDCSkillController : TDCBaseController {
 
 	internal virtual bool HaveCreatureAroundOwner()
 	{
-		var collider = Physics.OverlapSphere(TransformPosition, m_Entity.GetEffectRadius(), m_LayerEffect);
-		var haveCollider = collider.Length > 0;
+		var colliders = Physics.OverlapSphere(TransformPosition, m_Entity.GetEffectRadius(), m_ColliderLayerMask);
+		var haveCollider = colliders.Length > 0;
 		if (haveCollider)
 		{
-			m_ControllersInRadius = new TDCBaseController[collider.Length];
-			for (int i = 0; i < collider.Length; i++)
+			m_ControllersInRadius = new TDCBaseController[colliders.Length];
+			for (int i = 0; i < colliders.Length; i++)
 			{
-				var gName = collider[i].name;
+				var gName = colliders[i].name;
 				m_ControllersInRadius[i] = m_GameManager.GetControllerByName(gName);
 			}
 		}
@@ -292,46 +303,46 @@ public class TDCSkillController : TDCBaseController {
 	#region Effect
 
 	internal virtual void PrintDebug(Dictionary<string, object> pars) {
-#if UNITY_EDITOR
-		foreach (var item in pars)
-		{
-			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-		}
-#endif
+//#if UNITY_EDITOR
+//		foreach (var item in pars)
+//		{
+//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+//		}
+//#endif
 	}
 
 	internal virtual void AddValueEffect(Dictionary<string, object> pars) {
-#if UNITY_EDITOR
-		foreach (var item in pars)
-		{
-			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
-		}
-#endif
+//#if UNITY_EDITOR
+//		foreach (var item in pars)
+//		{
+//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+//		}
+//#endif
 	}
 
 	internal virtual void SubtractValueEffect(Dictionary<string, object> pars) {
-#if UNITY_EDITOR
-		foreach (var item in pars)
-		{
-			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-		}
-#endif
+//#if UNITY_EDITOR
+//		foreach (var item in pars)
+//		{
+//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+//		}
+//#endif
 	}
 
 	internal virtual void ApplyDamageEffect(Dictionary<string, object> pars) {
-#if UNITY_EDITOR
-		foreach (var item in pars)
-		{
-			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-		}
-#endif
+//#if UNITY_EDITOR
+//		foreach (var item in pars)
+//		{
+//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+//		}
+//#endif
 	}
 
 	internal virtual void SetValueEffect(Dictionary<string, object> pars) {
 //#if UNITY_EDITOR
 //		foreach (var item in pars)
 //		{
-//			Debug.LogError(string.Format("[{0} : {1}]", item.Key, item.Value));
+//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
 //		}
 //#endif
 	}

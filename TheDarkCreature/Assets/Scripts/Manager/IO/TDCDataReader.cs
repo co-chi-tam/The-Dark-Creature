@@ -94,7 +94,7 @@ public class TDCDataReader {
 			creature.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			creature.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			creature.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
-			creature.ActiveSkill = (TDCEnum.EGameType)int.Parse (instance["ActiveSkill"].ToString());
+			creature.NormalSkill = (TDCEnum.EGameType)int.Parse (instance["NormalSkill"].ToString());
 			ConvertToEnum (instance["Enemies"] as List<object>, creature.TypeEnemies);
 			ConvertToEnum (instance["Foods"] as List<object>, creature.TypeFoods);
 			var inventory = instance["Inventory"] as List<object>;
@@ -235,7 +235,7 @@ public class TDCDataReader {
 			player.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
 			player.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			player.DetectRange = float.Parse (instance["DetectRange"].ToString());
-			player.ActiveSkill = (TDCEnum.EGameType)int.Parse (instance["ActiveSkill"].ToString());
+			player.NormalSkill = (TDCEnum.EGameType)int.Parse (instance["NormalSkill"].ToString());
 			player.Level = int.Parse (instance["Level"].ToString());
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
@@ -292,6 +292,7 @@ public class TDCDataReader {
 			skillData.SkillType = (TDCEnum.ESkillType)int.Parse(skill["SkillType"].ToString());
 			skillData.CostHealthPoint = int.Parse(skill["CostHealthPoint"].ToString());
 			skillData.CostHeatPoint = int.Parse(skill["CostHeatPoint"].ToString());
+			skillData.CostHungerPoint = int.Parse(skill["CostHungerPoint"].ToString());
 			skillData.CostSanityPoint = int.Parse(skill["CostSanityPoint"].ToString());
 			skillData.EffectRadius = float.Parse(skill["EffectRadius"].ToString());
 			skillData.TimeDelay = float.Parse(skill["TimeDelay"].ToString());

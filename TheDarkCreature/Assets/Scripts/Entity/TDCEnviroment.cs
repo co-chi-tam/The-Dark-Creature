@@ -3,6 +3,8 @@ using System.Collections;
 
 public class TDCEnviroment : TDCEntity
 {
+	protected TDCEntity m_GroupEntity;
+
 	private TDCEnviromentController m_Controller;
 	private TDCEnviromentData m_Data;
 	private int m_DamageTake = 0;
@@ -39,6 +41,16 @@ public class TDCEnviroment : TDCEntity
 		{
 			m_DamageTake += damage;
 		}
+	}
+
+	public override void SetGroupEntity(TDCEntity group)
+	{
+		m_GroupEntity = group;
+	}
+
+	public override TDCEntity GetGroupEntity()
+	{
+		return m_GroupEntity;
 	}
 
 	public override void SetHealth(int value)

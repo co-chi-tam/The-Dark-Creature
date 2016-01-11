@@ -38,22 +38,15 @@ public class TDCActiveSkillController : TDCSkillController {
 
 	internal override void ApplyDamageEffect(Dictionary<string, object> pars) {
 		base.ApplyDamageEffect(pars);
-		var paramValue = int.Parse(pars["Damage"].ToString());
-		var enemy = GetEnemyEntity();
-		if (enemy != null) {
-			enemy.ApplyDamage (paramValue + GetDamage(), m_Entity.GetOwnerEntity());
-		}
-	}
-
-	internal override void SetValueEffect(Dictionary<string, object> pars)
-	{
-		base.SetValueEffect(pars);
-//		var toTarget = pars["ToTarget"];
-		var valueName = pars["ValueName"].ToString();
-		var toValue = float.Parse (pars["ToValue"].ToString());
-		var enemy = GetEnemyEntity();
-		if (enemy != null) {
-			enemy.SetProperty(valueName, toValue);
+		var toEnemy = pars["ToTarget"];
+		if (toEnemy.Equals("Enemy"))
+		{
+			var damage = int.Parse(pars["Damage"].ToString());
+			var enemy = GetEnemyEntity();
+			if (enemy != null)
+			{
+				enemy.ApplyDamage(damage + GetDamage(), m_Entity.GetOwnerEntity());
+			}
 		}
 	}
 

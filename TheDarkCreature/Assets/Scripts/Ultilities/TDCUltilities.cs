@@ -31,4 +31,10 @@ public static class TDCUltilities {
 	public static Vector3 V3Forward(this Transform trans, float length = 1f) {
 		return trans.position + trans.rotation * Vector3.forward * length;
 	}
+
+	public static bool IsPlayer(TDCEntity entity) {
+		return entity.GetCreatureType() == TDCEnum.ECreatureType.GroundPlayer ||
+		entity.GetCreatureType() == TDCEnum.ECreatureType.FlyPlayer;
+	}
+
 }

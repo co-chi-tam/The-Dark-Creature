@@ -7,7 +7,7 @@
 		{
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["ApplyDamageEffect(Damage:1)"]
+	        "ExcuteMethods": ["ApplyDamageEffect(ToTarget:Enemy,Damage:1)"]
 	    }
     ],
     "NoMethods": [

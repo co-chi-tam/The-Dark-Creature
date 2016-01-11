@@ -25,10 +25,6 @@ public class UIManager : MonoBehaviour {
 		return m_Instance;
 	}
 
-	public UIManager ()
-	{
-		m_Instance = this;
-	}
 	#endregion
 
 	#region Properties
@@ -48,12 +44,29 @@ public class UIManager : MonoBehaviour {
 
 	#endregion
 
+	#region Implementation MonoBeahvour
+
+	void Awake() {
+		m_Instance = this;
+	}
+
+	#endregion
+
 	#region Main methods
 
 	public void Init(TDCEntity owner) {
 		m_Owner = owner;
 		UpdateUIHealthBar(m_Owner.GetHealth(), m_Owner.GetHealth());
+		UpdateUIHeatBar(m_Owner.GetHeat(), m_Owner.GetHeat());
+		UpdateUISanityBar(m_Owner.GetSanity(), m_Owner.GetSanity());
+		UpdateUIHungerBar(m_Owner.GetHunger(), m_Owner.GetHunger());
+
 		m_Owner.OnHealthChange += UpdateUIHealthBar;
+		m_Owner.OnHeatChange += UpdateUIHeatBar;
+		m_Owner.OnSanityChange += UpdateUISanityBar;
+		m_Owner.OnHungerChange += UpdateUIHungerBar;
+
+		m_Owner.OnDeathEvent += RemoveAllUIListener;
 	}
 
 	public void EnableLoadingScreen(bool value) {
@@ -61,10 +74,27 @@ public class UIManager : MonoBehaviour {
 	}
 
 	private void UpdateUIHealthBar(int source, int newValue) {
-		m_HealthPointText.text = newValue > 0f ? newValue.ToString() : "0";
+		m_HealthPointText.text = newValue > 0 ? newValue.ToString() : "0";
 	}
 
+	private void UpdateUIHeatBar(int source, int newValue) {
+		m_HeatPointText.text = newValue > 0 ? newValue.ToString() : "0";
+	}
 
+	private void UpdateUISanityBar(int source, int newValue) {
+		m_SanityPointText.text = newValue > 0 ? newValue.ToString() : "0";
+	}
+
+	private void UpdateUIHungerBar(int source, int newValue) {
+		m_HungerPointText.text = newValue > 0 ? newValue.ToString() : "0";
+	}
+
+	private void RemoveAllUIListener() {
+		m_Owner.OnHealthChange -= UpdateUIHealthBar;
+		m_Owner.OnHeatChange -= UpdateUIHeatBar;
+		m_Owner.OnSanityChange -= UpdateUISanityBar;
+		m_Owner.OnHungerChange -= UpdateUIHungerBar;
+	}
 
 	#endregion
 

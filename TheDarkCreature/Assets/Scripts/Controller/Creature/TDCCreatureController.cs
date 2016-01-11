@@ -203,7 +203,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal override bool IsDeath() {
-		return GetHealth() <= 0f || GetActive() == false;
+		return GetHealth() < 1 || GetActive() == false;
 	}
 
 	internal override bool MoveToTarget()
@@ -257,13 +257,12 @@ public class TDCCreatureController : TDCBaseController {
 		}
 		var mPos = TransformPosition;
 		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
-		var groupEntity = GetGroupEntity() != null;
 		for (int i = 0; i < colliders.Length; i++) {
 			var food = m_GameManager.GetEntityByName (colliders[i].name);
 			if (food == null || food.GetActive () == false || food == this.GetEntity()) {
 				continue;
 			} else {
-				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1) {
+				if (GetTypeFoods().IndexOf (food.GetGameType()) != -1 || (TDCUltilities.IsPlayer(food) && food.GetSanity() < 1)) {
 					if (GetEnemyEntity() == null)
 					{
 						SetEnemyEntity(food);

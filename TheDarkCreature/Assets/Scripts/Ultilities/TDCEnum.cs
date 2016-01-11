@@ -9,6 +9,7 @@ public class TDCEnum{
 		Satla 		= 6,
 		Taurot 		= 7,
 		Vulbat 		= 8,
+		Crabystal	= 9,
 
 		// Object
 		Meat 		= 51,
@@ -31,6 +32,7 @@ public class TDCEnum{
 		GroupTaurot = 208,
 		GroupVulbat = 209,
 		GroupCrystal = 210,
+		GroupCrabystal = 211,
 
 		// Object
 		CampFire	= 301,
@@ -39,17 +41,14 @@ public class TDCEnum{
 		FlameBodySkill   = 501,
 		NormalRangeSkill = 502,
 		NormalMeleeSkill = 503,
-		EffectPerSecondSkill = 504,
-		EffectUpdateSkill = 505
+		LifeNotEasySkill = 506,
+		BurnObjectSkill = 507
 	}
 
 	public enum ESkillType : int {
 		None 		= 0,
 		Passive 	= 1,
-		Range 		= 2,
-		Melee 		= 3,
-		EffectPerSecond	= 4,
-		EffectUpdate = 5
+		Active 		= 2,
 	}
 
 	public enum EItemType : int {
@@ -63,7 +62,7 @@ public class TDCEnum{
 	public enum ECreatureType : int {
 		None		= 0,
 		GroundCreature	= 1,
-		GroundPlayer 		= 2,
+		GroundPlayer	= 2,
 		Enviroment	= 3,
 		GObject		= 4,
 		FlyCreature	= 5,

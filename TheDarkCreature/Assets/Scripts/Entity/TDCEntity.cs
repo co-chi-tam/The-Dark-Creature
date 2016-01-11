@@ -8,6 +8,13 @@ public class TDCEntity : TDCPropertyReflection {
 	#region Properties
 
 	protected bool m_IsActive;
+
+	protected TDCObjectProperty<float> m_OffsetSpeed;
+	protected TDCObjectProperty<int> m_HealthPoint;
+	protected TDCObjectProperty<int> m_HeatPoint;
+	protected TDCObjectProperty<int> m_HungerPoint;
+	protected TDCObjectProperty<int> m_SanityPoint;
+
 	protected Dictionary<string, Action> m_TriggerEvents;
 
 	#endregion
@@ -18,14 +25,16 @@ public class TDCEntity : TDCPropertyReflection {
 	public event Action OnFindRandomEvent;
 	public event Action OnMoveEvent;
 	public event Action OnApplyDamageEvent;
-	public event Action OnHealthPoint50Event;
-	public event Action OnHealthPoint25Event;
 	public event Action OnAttackEvent;
 	public event Action OnAvoidEvent;
+	public event Action OnOverHeatdEvent;
 	public event Action OnAliveEvent;
 	public event Action OnDeathEvent;
 
 	public event Action<int, int> OnHealthChange;
+	public event Action<int, int> OnHeatChange;
+	public event Action<int, int> OnSanityChange;
+	public event Action<int, int> OnHungerChange;
 
 	public virtual void CallBackEvent(string name) {
 		if (m_TriggerEvents.ContainsKey(name))
@@ -61,10 +70,9 @@ public class TDCEntity : TDCPropertyReflection {
 		m_TriggerEvents.Add("OnFindRandom", OnFindRandomEvent);
 		m_TriggerEvents.Add("OnMove", OnMoveEvent);
 		m_TriggerEvents.Add("OnApplyDamage", OnApplyDamageEvent);
-		m_TriggerEvents.Add("OnHealthPoint50", OnHealthPoint50Event);
-		m_TriggerEvents.Add("OnHealthPoint25", OnHealthPoint25Event);
 		m_TriggerEvents.Add("OnAttack", OnAttackEvent);
 		m_TriggerEvents.Add("OnAvoid", OnAvoidEvent);
+		m_TriggerEvents.Add("OnOverHeat", OnOverHeatdEvent);
 		m_TriggerEvents.Add("OnAlive", OnAliveEvent);
 		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
 	}
@@ -77,6 +85,18 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		m_TriggerEvents = new Dictionary<string, Action>();
 		LoadEventCallBack();
+
+		m_OffsetSpeed = new TDCObjectProperty<float>("OffsetSpeed", 1f);
+		m_HealthPoint = new TDCObjectProperty<int>("HealthPoint");
+		m_HeatPoint = new TDCObjectProperty<int>("HeatPoint");
+		m_SanityPoint = new TDCObjectProperty<int>("SanityPoint");
+		m_HungerPoint = new TDCObjectProperty<int>("HungerPoint");
+
+		RegisterProperty(m_OffsetSpeed);
+		RegisterProperty(m_HealthPoint);
+		RegisterProperty(m_HeatPoint);
+		RegisterProperty(m_SanityPoint);
+		RegisterProperty(m_HungerPoint);
 	}
 
 	#endregion
@@ -211,12 +231,7 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		return 0;
 	}
-
-	public virtual void SetHeat(int value)
-	{
 		
-	}
-
 	public virtual float GetColliderRadius() {
 		return 0f;
 	}
@@ -252,6 +267,46 @@ public class TDCEntity : TDCPropertyReflection {
 
 	public virtual int GetMaxHealth() {
 		return 0;
+	}
+
+	public virtual int GetHeat() {
+		return 0;
+	}
+
+	public virtual int GetMaxHeat() {
+		return 0;
+	}
+
+	public virtual void SetHeat(int value)
+	{
+		if (OnHeatChange != null)
+		{
+			OnHeatChange(GetHeat(), value);
+		}
+	}
+
+	public virtual int GetSanity() {
+		return 0;
+	}
+
+	public virtual void SetSanity(int value)
+	{
+		if (OnSanityChange != null)
+		{
+			OnSanityChange(GetSanity(), value);
+		}
+	}
+
+	public virtual int GetHunger() {
+		return 0;
+	}
+
+	public virtual void SetHunger(int value)
+	{
+		if (OnHungerChange != null)
+		{
+			OnHungerChange(GetSanity(), value);
+		}
 	}
 
 	public virtual TDCItemController[] GetInventory()

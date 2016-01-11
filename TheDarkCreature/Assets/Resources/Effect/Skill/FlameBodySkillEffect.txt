@@ -7,7 +7,7 @@
 		{
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["AddValueEffect(HeatPoint:10)"]
+	        "ExcuteMethods": ["AddValueEffect(ToTarget:InRange,ValueName:HeatPoint,ToValue:1)"]
 	    }
     ],
     "NoMethods": [

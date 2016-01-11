@@ -135,6 +135,21 @@
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeRespawnMember": 10
+		},{
+			"ID": 10,
+			"Name": "GroupCrabystal",
+			"GameType": 211,
+			"GroupType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Group/NestCrabystal"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupNestFSM",
+			"Radius": 100,
+			"MemberType": 9,
+			"MaxMember": 5,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
+			"TimeRespawnMember": 10
 		}
 	]
 }

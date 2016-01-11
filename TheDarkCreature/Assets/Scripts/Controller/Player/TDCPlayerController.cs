@@ -174,4 +174,13 @@ public class TDCPlayerController : TDCCreatureController
 	#region Getter & Setter
 
 	#endregion
+
+	#region FSM
+
+	internal override bool IsDeath()
+	{
+		return base.IsDeath() || m_Entity.GetHunger() < 1;
+	}
+
+	#endregion
 }

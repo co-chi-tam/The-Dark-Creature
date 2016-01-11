@@ -16,7 +16,7 @@ public class TDCCreatureData : TDCBaseData {
 	private float m_AttackRange;
 	private List<TDCEnum.EGameType> m_TypeEnemies;
 	private List<TDCEnum.EGameType> m_TypeFoods;
-	private TDCEnum.EGameType m_ActiveSkill;
+	private TDCEnum.EGameType m_NormalSkill;
 
     public TDCItemController[] Inventory {
 		get { return m_Inventory; }
@@ -83,10 +83,10 @@ public class TDCCreatureData : TDCBaseData {
 		set { m_MaxHeatPoint.Value = value; }
 	}
 
-	public TDCEnum.EGameType ActiveSkill
+	public TDCEnum.EGameType NormalSkill
 	{
-		get { return m_ActiveSkill; }
-		set { m_ActiveSkill = value; }
+		get { return m_NormalSkill; }
+		set { m_NormalSkill = value; }
 	}
 
     public TDCCreatureData() : base()
@@ -105,7 +105,7 @@ public class TDCCreatureData : TDCBaseData {
 		m_TypeEnemies = new List<TDCEnum.EGameType> ();
 		m_TypeFoods = new List<TDCEnum.EGameType> ();
 		m_CreatureType = TDCEnum.ECreatureType.None;
-		m_ActiveSkill = TDCEnum.EGameType.None;
+		m_NormalSkill = TDCEnum.EGameType.None;
 
 		RegisterProperty(m_CurrentHeatPoint);
 		RegisterProperty(m_MaxHeatPoint);
@@ -131,7 +131,7 @@ public class TDCCreatureData : TDCBaseData {
 		tmp.MaxHeatPoint = instance.MaxHeatPoint;
 		tmp.DetectRange = instance.DetectRange;
 		tmp.AttackRange = instance.AttackRange;
-		tmp.ActiveSkill = instance.ActiveSkill;
+		tmp.NormalSkill = instance.NormalSkill;
 		tmp.TypeEnemies = instance.TypeEnemies;
 		tmp.TypeFoods = instance.TypeFoods;
 		tmp.Inventory = instance.Inventory;

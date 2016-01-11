@@ -7,6 +7,7 @@ public class TDCSkillData : TDCBaseData
 	private int m_CostHealthPoint;
 	private int m_CostHeatPoint;
 	private int m_CostSanityPoint;
+	private int m_CostHungerPoint;
 	private float m_TimeDelay;
 	private float m_TimeEffect;
 	private float m_EffectPerTime;
@@ -45,6 +46,12 @@ public class TDCSkillData : TDCBaseData
 	{
 		get { return m_CostSanityPoint; }
 		set { m_CostSanityPoint = value; }
+	}
+
+	public int CostHungerPoint
+	{
+		get { return m_CostHungerPoint; }
+		set { m_CostHungerPoint = value; }
 	}
 
 	public float TimeDelay
@@ -108,6 +115,7 @@ public class TDCSkillData : TDCBaseData
 		this.m_CostHealthPoint = 0;
 		this.m_CostHeatPoint = 0;
 		this.m_CostSanityPoint = 0;
+		this.m_CostHungerPoint = 0;
 		this.m_TimeDelay = 0f;
 		this.m_TimeEffect = 0f;
 		this.m_EffectPerTime = 0f;
@@ -131,6 +139,7 @@ public class TDCSkillData : TDCBaseData
 		tmp.CostHealthPoint = instance.CostHealthPoint;
 		tmp.CostHeatPoint = instance.CostHeatPoint;
 		tmp.CostSanityPoint = instance.CostHeatPoint;
+		tmp.CostHungerPoint = instance.CostHungerPoint;
 		tmp.TimeDelay = instance.TimeDelay;
 		tmp.TimeEffect = instance.TimeEffect;
 		tmp.EffectPerTime = instance.EffectPerTime;

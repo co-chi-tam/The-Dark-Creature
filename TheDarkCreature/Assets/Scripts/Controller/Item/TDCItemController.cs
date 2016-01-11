@@ -71,43 +71,43 @@ public class TDCItemController {
 
 	#region Effect
 
-	internal virtual void PrintDebug(Dictionary<string, object> pars)
-	{
-#if UNITY_EDITOR
-		foreach (var item in pars) {
-			Debug.Log(string.Format ("[{0}] - {1}", item.Key, item.Value));
-		}
-#endif
-	}
-
 	public virtual void ExcuteItem() {
 		m_EffectManager.ExcuteEffect();
 	}
 
 	protected virtual bool CanActiveEffect(Dictionary<string, object> pars)
 	{
-		return m_Data.Amount > 0 && m_Data.Owner != null;
+		return m_Data.Amount > 0 && m_Data.Owner != null && m_Data.Owner.GetStateName() != "FlyState";
+	}
+
+	internal virtual void PrintDebug(Dictionary<string, object> pars)
+	{
+//#if UNITY_EDITOR
+//		foreach (var item in pars) {
+//			Debug.Log(string.Format ("[{0}] - {1}", item.Key, item.Value));
+//		}
+//#endif
 	}
 
 	protected virtual void ExcuteEffect(Dictionary<string, object> pars)
 	{
-#if UNITY_EDITOR
-		foreach (var item in pars)
-		{
-			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-		}
-#endif
+//#if UNITY_EDITOR
+//		foreach (var item in pars)
+//		{
+//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+//		}
+//#endif
 		UsedItem();
 	}
 
 	protected virtual void AddValueEffect(Dictionary<string, object> pars)
 	{
-#if UNITY_EDITOR
-		foreach (var item in pars)
-		{
-			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-		}
-#endif
+//#if UNITY_EDITOR
+//		foreach (var item in pars)
+//		{
+//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+//		}
+//#endif
 		UsedItem();
 		var nameValue = pars["NameValue"].ToString();
 		var value = pars["Value"];
