@@ -1,0 +1,45 @@
+{
+	"foods": [
+		{
+			"ID": 1,
+			"Name": "Meat",
+			"GameType": 101,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "Meat",
+			"EffectPath": "Effect/Item/MeatEffect"
+		},{
+			"ID": 2,
+			"Name": "Mushroom",
+			"GameType": 102,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "Mushroom",
+			"EffectPath": "Effect/Item/MeatEffect"
+		},{
+			"ID": 3,
+			"Name": "Grass",
+			"GameType": 103,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "Grass",
+			"EffectPath": "Effect/Item/MeatEffect"
+		},{
+			"ID": 3,
+			"Name": "Bush",
+			"GameType": 104,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "Bush",
+			"EffectPath": "Effect/Item/MeatEffect"
+		},{
+			"ID": 4,
+			"Name": "BlueBerry",
+			"GameType": 105,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "BlueBerry",
+			"EffectPath": "Effect/Item/MeatEffect"
+		}
+	]
+}

@@ -1,0 +1,21 @@
+﻿{
+	"items": [
+		{
+			"ID": 0,
+			"Name": "CampFire",
+			"GameType": 301,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "CampFire",
+			"EffectPath": "Effect/Item/CampFireEffect"
+		},{
+			"ID": 2,
+			"Name": "Crystal",
+			"GameType": 106,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "Crystal",
+			"EffectPath": "Effect/Item/MeatEffect"
+		}
+	]
+}
