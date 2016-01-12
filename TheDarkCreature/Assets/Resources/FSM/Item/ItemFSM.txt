@@ -1,0 +1,31 @@
+﻿{
+	"fsm": [
+		{
+			"condition_name": "IsRoot",
+			"condition_value": true,
+			"state_name": "IdleState",
+			"states": [
+				{
+					"condition_name": "IsDeactive",
+					"condition_value": false,
+					"state_name": "DeactiveAndAddItemState",
+					"states": [
+						{
+							"condition_name": "IsDeactive",
+							"condition_value": true,
+							"state_name": "IdleState",
+							"states": [
+								
+							]
+						}
+					]
+				}
+			]
+		},{
+			"condition_name": "IsAnyState",
+			"condition_value": true,
+			"state_name": "AnyState",
+			"states": []
+		}
+	]
+}
