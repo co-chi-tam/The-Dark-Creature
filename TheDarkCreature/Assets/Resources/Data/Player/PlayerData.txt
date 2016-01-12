@@ -9,7 +9,7 @@
 			"ModelPath": ["Prefabs/Creature/Dodono"],
 			"FSMPath": "FSM/Player/PlayerFSM",
 			"IconPath": "",
-			"MoveSpeed": 5,
+			"MoveSpeed": 7,
 			"DetectRange": 20,
 			"AttackRange": 2,
 			"CurrentHP": 15,
@@ -25,7 +25,7 @@
 			"Level": 1,
 			"Inventory": [
 				{
-					"GameType": 51,
+					"GameType": 101,
 					"Amount": 5
 				},
 				{
@@ -42,7 +42,7 @@
 			"ModelPath": ["Prefabs/Creature/Satla"],
 			"FSMPath": "FSM/Player/PlayerFSM",
 			"IconPath": "",
-			"MoveSpeed": 7,
+			"MoveSpeed": 8,
 			"DetectRange": 20,
 			"AttackRange": 15,
 			"CurrentHP": 35,
@@ -58,7 +58,7 @@
 			"Level": 1,
 			"Inventory": [
 				{
-					"GameType": 51,
+					"GameType": 101,
 					"Amount": 5
 				},
 				{
@@ -75,7 +75,7 @@
 			"ModelPath": ["Prefabs/Creature/Taurot"],
 			"FSMPath": "FSM/Player/PlayerFSM",
 			"IconPath": "",
-			"MoveSpeed": 7,
+			"MoveSpeed": 9,
 			"DetectRange": 25,
 			"AttackRange": 2,
 			"CurrentHP": 175,
@@ -91,7 +91,7 @@
 			"Level": 1,
 			"Inventory": [
 				{
-					"GameType": 51,
+					"GameType": 101,
 					"Amount": 5
 				},
 				{
@@ -124,7 +124,7 @@
 			"Level": 1,
 			"Inventory": [
 				{
-					"GameType": 51,
+					"GameType": 101,
 					"Amount": 5
 				},
 				{
@@ -141,7 +141,7 @@
 			"ModelPath": ["Prefabs/Creature/Crabystal"],
 			"FSMPath": "FSM/Player/PlayerFSM",
 			"IconPath": "",
-			"MoveSpeed": 6,
+			"MoveSpeed": 9,
 			"DetectRange": 25,
 			"AttackRange": 12,
 			"CurrentHP": 75,
@@ -157,7 +157,7 @@
 			"Level": 1,
 			"Inventory": [
 				{
-					"GameType": 51,
+					"GameType": 101,
 					"Amount": 5
 				},
 				{
