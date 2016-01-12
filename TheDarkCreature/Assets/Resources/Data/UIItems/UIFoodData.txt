@@ -39,7 +39,7 @@
 			"ItemType": 1,
 			"Description": "",
 			"IconPath": "BlueBerry",
-			"EffectPath": "Effect/Item/MeatEffect"
+			"EffectPath": "Effect/Item/BlueBerryEffect"
 		}
 	]
 }

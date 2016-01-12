@@ -33,6 +33,7 @@ public class UIItemController {
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
 		m_EffectManager.RegisterExcuteMethod("ExcuteEffect", ExcuteEffect);
 		m_EffectManager.RegisterExcuteMethod("AddValueEffect", AddValueEffect);
+		m_EffectManager.RegisterExcuteMethod("SubtractValueEffect", SubtractValueEffect);
 	}
 
 	private void UsedItem() {
@@ -114,8 +115,22 @@ public class UIItemController {
 //		}
 //#endif
 		var nameValue = pars["NameValue"].ToString();
-		var value = pars["Value"];
-		m_Data.Owner.GetEntity().SetProperty(nameValue, value);
+		var toValue = float.Parse (pars["ToValue"].ToString());
+		m_Data.Owner.GetEntity().SetProperty(nameValue, toValue);
+	}
+
+	protected virtual void SubtractValueEffect(Dictionary<string, object> pars)
+	{
+//#if UNITY_EDITOR
+//		foreach (var item in pars)
+//		{
+//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+//		}
+//#endif
+		var nameValue = pars["NameValue"].ToString();
+		var value = pars["ToValue"];
+		var toValue = float.Parse (pars["ToValue"].ToString());
+		m_Data.Owner.GetEntity().SetProperty(nameValue, -toValue);
 	}
 
 	#endregion

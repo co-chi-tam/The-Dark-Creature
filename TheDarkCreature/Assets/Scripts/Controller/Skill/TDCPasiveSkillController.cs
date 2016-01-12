@@ -84,7 +84,7 @@ public class TDCPasiveSkillController : TDCSkillController {
 
 	internal override void SubtractValueEffect(Dictionary<string, object> pars)
 	{
-		base.SetValueEffect(pars);
+		base.SubtractValueEffect(pars);
 		var toTarget = pars["ToTarget"];
 		var valueName = pars["ValueName"].ToString();
 		var toValue = float.Parse (pars["ToValue"].ToString());

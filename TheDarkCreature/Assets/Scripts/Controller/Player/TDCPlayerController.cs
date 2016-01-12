@@ -135,24 +135,22 @@ public class TDCPlayerController : TDCCreatureController
 		{
 			case TDCEnum.EItemType.Food:
 			case TDCEnum.EItemType.Item:
+			case TDCEnum.EItemType.GObject: {
+				if (indexItemInInventory != -1)
 				{
-					if (indexItemInInventory != -1)
-					{
-						inventory[indexItemInInventory].GetData().Amount++;
-						return indexItemInInventory;
-					}
-					else
-					{
-						inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
-					}
+					inventory[indexItemInInventory].GetData().Amount++;
+					return indexItemInInventory;
 				}
-				break;
-			case TDCEnum.EItemType.GObject:
-			case TDCEnum.EItemType.Weapon:
+				else
 				{
 					inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
 				}
 				break;
+			}
+			case TDCEnum.EItemType.Weapon: {
+				inventory[emptySlot] = m_GameManager.CreateItem(gameType, itemType, this, amount);
+				break;
+			}
 		}
 		if (emptySlot != -1)
 		{

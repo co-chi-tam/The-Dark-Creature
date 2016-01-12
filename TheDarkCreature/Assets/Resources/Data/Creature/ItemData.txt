@@ -55,7 +55,7 @@
 			"Name": "Crystal",
 			"GameType": 106,
 			"CreatureType": 7,
-			"ItemType": 1,
+			"ItemType": 4,
 			"Description": "",
 			"ModelPath": ["Prefabs/Item/ItemCrystal"],
 			"FSMPath": "FSM/Item/ItemFSM",
