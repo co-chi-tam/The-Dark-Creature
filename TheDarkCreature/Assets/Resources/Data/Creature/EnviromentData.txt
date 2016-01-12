@@ -11,7 +11,7 @@
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"IconPath": "",
-			"Inventory": [{ "GameType":53, "Amount":1 }]
+			"Inventory": [{"GameType":103,"Amount":1}]
 		},{
 			"ID": 1,
 			"Name": "Object Mushroom",
@@ -23,7 +23,7 @@
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"IconPath": "",
-			"Inventory": [{ "GameType":52, "Amount":1 }]
+			"Inventory": [{"GameType":102,"Amount":1}]
 		},{
 			"ID": 2,
 			"Name": "Object Bush",
@@ -35,7 +35,7 @@
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"IconPath": "",
-			"Inventory": [{ "GameType":54, "Amount":1 }]
+			"Inventory": [{"GameType":104,"Amount":1}]
 		},{
 			"ID": 3,
 			"Name": "Object Blue berry",
@@ -47,7 +47,7 @@
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"IconPath": "",
-			"Inventory": [{ "GameType":55, "Amount":1 },{ "GameType":54, "Amount":1 }]
+			"Inventory": [{"GameType":105,"Amount":1}]
 		},{
 			"ID": 3,
 			"Name": "Object Crystal",
@@ -59,7 +59,7 @@
 			"CurrentHP": "100",
 			"MaxHP": "100",
 			"IconPath": "",
-			"Inventory": [{ "GameType":56, "Amount":1 }]
+			"Inventory": [{"GameType":106,"Amount":1}]
 		}
 	]
 }

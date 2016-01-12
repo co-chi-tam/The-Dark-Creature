@@ -1,0 +1,65 @@
+﻿{
+	"items": [
+		{
+			"ID": 1,
+			"Name": "Meat",
+			"GameType": 101,
+			"CreatureType": 7,
+			"ItemType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemMeat"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Meat"
+		},{
+			"ID": 2,
+			"Name": "Mushroom",
+			"GameType": 102,
+			"CreatureType": 7,
+			"ItemType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemMushroom"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Mushroom"
+		},{
+			"ID": 3,
+			"Name": "Grass",
+			"GameType": 103,
+			"CreatureType": 7,
+			"ItemType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemGrass"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Grass"
+		},{
+			"ID": 4,
+			"Name": "Bush",
+			"GameType": 104,
+			"CreatureType": 7,
+			"ItemType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemBush"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Bush"
+		},{
+			"ID": 5,
+			"Name": "BlueBerry",
+			"GameType": 105,
+			"CreatureType": 7,
+			"ItemType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemBlueBerry"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "BlueBerry"
+		},{
+			"ID": 6,
+			"Name": "Crystal",
+			"GameType": 106,
+			"CreatureType": 7,
+			"ItemType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemCrystal"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Crystal"
+		}
+	]
+}
