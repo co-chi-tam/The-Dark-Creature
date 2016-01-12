@@ -114,12 +114,12 @@ public class TDCCreatureController : TDCBaseController {
 		
 	}
 
-	public virtual int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount) {
+	public override int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount) {
 		return 0;
 	}
 
 	protected int FindEmptySlot() {
-		var inventory = m_Entity.GetInventory();
+		var inventory = m_Entity.GetItemInventory();
 		for (int i = 0; i < inventory.Length; i++)
 		{
 			if (inventory[i] == null)
@@ -129,7 +129,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	protected int FindItemSlot(TDCEnum.EGameType gameType) {
-		var inventory = m_Entity.GetInventory();
+		var inventory = m_Entity.GetItemInventory();
 		for (int i = 0; i < inventory.Length; i++)
 		{
 			if (inventory[i] == null)
@@ -166,7 +166,33 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.ResetObject();
 		SetHealth (GetMaxHealth());
+		SetHeat(m_Entity.GetHeat() / 3);
+		SetSanity(m_Entity.GetSanity() / 3);
+		SetHunger(m_Entity.GetHunger() / 3);
 		SetEnemyEntity (null);
+	}
+
+	public override void DropItem()
+	{
+		base.DropItem();
+		var inventory = GetInventory();
+		for (int i = 0; i < inventory.Length; i++)
+		{
+			if (inventory[i] == null)
+				continue;
+			var itemType = inventory[i].GetData().GameType;
+			var amount = inventory[i].GetData().Amount;
+
+			for (int x = 0; x < amount; x++) {
+				TDCEntity item = null;
+				if (m_GameManager.GetObjectPool(itemType, ref item))
+				{
+					var pos = TDCUltilities.RandomAround(GetColliderRadius());
+					item.GetController().TransformPosition = this.TransformPosition + new Vector3(pos.x, 0f, pos.y);
+					item.SetActive(true);
+				}
+			}
+		}
 	}
 	
 	#endregion
@@ -343,9 +369,9 @@ public class TDCCreatureController : TDCBaseController {
 		return m_Entity.GetMaxHealth();
 	}
 
-	public override TDCItemController[] GetInventory()
+	public override UIItemController[] GetInventory()
 	{
-		return m_Entity.GetInventory();
+		return m_Entity.GetItemInventory();
 	}
 	
 	#endregion

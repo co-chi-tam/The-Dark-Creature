@@ -11,7 +11,7 @@ public class TDCDataReader {
 
 	private Dictionary<TDCEnum.EGameType, TDCCreatureData> m_ListCreatureData;
 	private Dictionary<TDCEnum.EGameType, TDCPlayerData> m_ListPlayerData;
-	private Dictionary<TDCEnum.EGameType, TDCItemData> m_ListItemData;
+	private Dictionary<TDCEnum.EGameType, UIItemData> m_ListItemData;
 	private Dictionary<TDCEnum.EGameType, TDCGroupData> m_ListGroupData;
 	private Dictionary<TDCEnum.EGameType, TDCSkillData> m_ListSkillData;
 	private Dictionary<string, List<MapObjectData>> m_MapData;
@@ -25,7 +25,7 @@ public class TDCDataReader {
 		m_ListCreatureData = new Dictionary<TDCEnum.EGameType, TDCCreatureData> ();
 		m_ListPlayerData = new Dictionary<TDCEnum.EGameType, TDCPlayerData> ();
 		m_ListGroupData = new Dictionary<TDCEnum.EGameType, TDCGroupData> ();
-		m_ListItemData = new Dictionary<TDCEnum.EGameType, TDCItemData> ();
+		m_ListItemData = new Dictionary<TDCEnum.EGameType, UIItemData> ();
 		m_ListSkillData = new Dictionary<TDCEnum.EGameType, TDCSkillData>();
 		m_MapData = new Dictionary<string, List<MapObjectData>>();
 		m_ListObjectPoolData = new List<TDCObjectPoolData>();
@@ -37,38 +37,41 @@ public class TDCDataReader {
 
 	#region Main methods
 	private void LoadData() {
-		var foodAsset = Resources.Load<TextAsset> ("Data/Item/FoodData");
-		var weaponAsset = Resources.Load<TextAsset> ("Data/Item/WeaponData");
-		var itemAsset = Resources.Load<TextAsset> ("Data/Item/ItemData");
+		var uiFoodAsset = Resources.Load<TextAsset> ("Data/UIItems/UIFoodData");
+		var uiWeaponAsset = Resources.Load<TextAsset> ("Data/UIItems/UIWeaponData");
+		var uiItemAsset = Resources.Load<TextAsset> ("Data/UIItems/UIItemData");
 		var groupAsset = Resources.Load<TextAsset> ("Data/Group/GroupData");
 		var creatureAsset = Resources.Load<TextAsset> ("Data/Creature/CreatureData");
 		var playerAsset = Resources.Load<TextAsset> ("Data/Player/PlayerData");
 		var enviromentTextAsset = Resources.Load<TextAsset> ("Data/Creature/EnviromentData");
 		var objectTextAsset = Resources.Load<TextAsset> ("Data/Creature/ObjectData");
+		var itemTextAsset = Resources.Load<TextAsset> ("Data/Creature/ItemData");
 		var skillTextAsset = Resources.Load<TextAsset>("Data/Skill/SkillData");
 		var mapTextAsset = Resources.Load<TextAsset>("Data/Map/WorldMap");
 		var poolTextAsset = Resources.Load<TextAsset>("ObjectPool/ObjectPoolData");
 
-		var jsonItem = Json.Deserialize (itemAsset.text) as Dictionary<string, object>;
+		var jsonUIItem = Json.Deserialize (uiItemAsset.text) as Dictionary<string, object>;
+		var jsonUIFood = Json.Deserialize (uiFoodAsset.text) as Dictionary<string, object>;
+		var jsonUIWeapon = Json.Deserialize (uiWeaponAsset.text) as Dictionary<string, object>;
 		var jsonCreature = Json.Deserialize (creatureAsset.text) as Dictionary<string, object>;
-		var jsonfood = Json.Deserialize (foodAsset.text) as Dictionary<string, object>;
 		var jsonGroup = Json.Deserialize (groupAsset.text) as Dictionary<string, object>;
 		var jsonPlayer = Json.Deserialize (playerAsset.text) as Dictionary<string, object>;
-		var jsonWeapon = Json.Deserialize (weaponAsset.text) as Dictionary<string, object>;
 		var jsonResource = Json.Deserialize (enviromentTextAsset.text) as Dictionary<string, object>;
 		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
+		var jsonItem = Json.Deserialize (itemTextAsset.text) as Dictionary<string, object>;
 		var jsonSkill = Json.Deserialize (skillTextAsset.text) as Dictionary<string, object>;
 		var jsonMap = Json.Deserialize(mapTextAsset.text) as Dictionary<string, object>;
 		var jsonPool = Json.Deserialize(poolTextAsset.text) as Dictionary<string, object>;
 
-		LoadItem(jsonItem["items"] as List<object>);
-		LoadFood (jsonfood["foods"] as List<object>);
-		LoadWeapon (jsonWeapon["weapons"] as List<object>);
+		LoadUIItem(jsonUIItem["items"] as List<object>);
+		LoadUIFood (jsonUIFood["foods"] as List<object>);
+		LoadUIWeapon (jsonUIWeapon["weapons"] as List<object>);
 		LoadEnviroment (jsonResource["enviroments"] as List<object>);
 		LoadCreature (jsonCreature["creatures"] as List<object>);
 		LoadObject (jsonObject["objects"] as List<object>);
 		LoadGroup (jsonGroup["groups"] as List<object>);
 		LoadPlayer (jsonPlayer["players"] as List<object>);
+		LoadItem (jsonItem["items"] as List<object>);
 		LoadSkill(jsonSkill["skills"] as List<object>);
 		LoadMap(jsonMap["map"] as List<object>);
 		LoadObjectPool(jsonPool);
@@ -104,17 +107,17 @@ public class TDCDataReader {
 				var amount = int.Parse (invenData["Amount"].ToString());
 				var itemType = m_ListItemData [gameType].ItemType;
 				var item = LoadItemData(itemType, gameType);
-				creature.Inventory[x] = new TDCItemController (item);
+				creature.Inventory[x] = new UIItemController (item);
 				creature.Inventory[x].GetData().Amount = amount;
 			}
 			m_ListCreatureData.Add (creature.GameType, creature);
 		}
 	}
 
-	private void LoadItem(List<object> values) {
+	private void LoadUIItem(List<object> values) {
 		for (int i = 0; i < values.Count; i++) {
 			var instance = values [i] as Dictionary<string, object>;
-			var item = new TDCItemData ();
+			var item = new UIItemData ();
 			item.ID = int.Parse (instance ["ID"].ToString ());
 			item.Name = instance ["Name"].ToString ();
 			item.Description = instance ["Description"].ToString ();
@@ -126,10 +129,10 @@ public class TDCDataReader {
 		}
 	}
 
-	private void LoadFood(List<object> values) {
+	private void LoadUIFood(List<object> values) {
 		for (int i = 0; i < values.Count; i++) {
 			var instance = values [i] as Dictionary<string, object>;
-			var food = new TDCFoodData ();
+			var food = new UIFoodData ();
 			food.ID = int.Parse (instance ["ID"].ToString ());
 			food.Name = instance ["Name"].ToString ();
 			food.Description = instance ["Description"].ToString ();
@@ -141,10 +144,10 @@ public class TDCDataReader {
 		}
 	}
 
-	private void LoadWeapon(List<object> values) {
+	private void LoadUIWeapon(List<object> values) {
 		for (int i = 0; i < values.Count; i++) {
 			var instance = values [i] as Dictionary<string, object>;
-			var weapon = new TDCWeaponData ();
+			var weapon = new UIWeaponData ();
 			weapon.ID = int.Parse (instance ["ID"].ToString ());
 			weapon.Name = instance ["Name"].ToString ();
 			weapon.Description = instance ["Description"].ToString ();
@@ -204,7 +207,7 @@ public class TDCDataReader {
 				var amount = int.Parse (invenData["Amount"].ToString());
 				var itemType = m_ListItemData [gameType].ItemType;
 				var item = LoadItemData(itemType, gameType);
-				enviroment.Inventory[x] = new TDCItemController (item);
+				enviroment.Inventory[x] = new UIItemController (item);
 				enviroment.Inventory[x].GetData().Amount = amount;
 			}
 			m_ListCreatureData.Add (enviroment.GameType, enviroment);
@@ -244,7 +247,7 @@ public class TDCDataReader {
 				var amount = int.Parse (invenData["Amount"].ToString());
 				var itemType = m_ListItemData [gameType].ItemType;
 				var item = LoadItemData(itemType, gameType);
-                player.Inventory[x] = new TDCItemController (item);
+                player.Inventory[x] = new UIItemController (item);
                 player.Inventory[x].GetData().Amount = amount;
 			}
 			m_ListPlayerData.Add (player.GameType, player);
@@ -271,10 +274,27 @@ public class TDCDataReader {
 				var amount = int.Parse (invenData["Amount"].ToString());
 				var itemType = m_ListItemData [gameType].ItemType;
 				var item = LoadItemData(itemType, gameType);
-				gObject.Inventory[x] = new TDCItemController (item);
+				gObject.Inventory[x] = new UIItemController (item);
 				gObject.Inventory[x].GetData().Amount = amount;
 			}
 			m_ListCreatureData.Add (gObject.GameType, gObject);
+		}
+	}
+
+	public void LoadItem(List<object> values) {
+		for (int i = 0; i < values.Count; i++) {
+			var instance = values [i] as Dictionary<string, object>;
+			var item = new TDCItemData ();
+			item.ID = int.Parse (instance ["ID"].ToString ());
+			item.Name = instance ["Name"].ToString ();
+			item.Description = instance ["Description"].ToString ();
+			item.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
+			item.FSMPath = instance["FSMPath"].ToString();
+			item.Icon = instance["IconPath"].ToString();
+			item.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
+			item.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance ["CreatureType"].ToString ());
+			item.ItemType = (TDCEnum.EItemType)int.Parse (instance ["ItemType"].ToString ());
+			m_ListCreatureData.Add (item.GameType, item);
 		}
 	}
 
@@ -330,18 +350,18 @@ public class TDCDataReader {
 		}
 	}
 
-	private TDCItemData LoadItemData(TDCEnum.EItemType itemType, TDCEnum.EGameType gameType) {
-		TDCItemData item = null;
+	private UIItemData LoadItemData(TDCEnum.EItemType itemType, TDCEnum.EGameType gameType) {
+		UIItemData item = null;
 		switch (itemType) {
 			case TDCEnum.EItemType.Food:
-				item = GetFood (gameType);
+				item = GetUIFood (gameType);
 				break;
 			case TDCEnum.EItemType.Weapon:
-				item = GetWeapon (gameType);
+				item = GetUIWeapon (gameType);
 				break;
 			case TDCEnum.EItemType.GObject:
 			case TDCEnum.EItemType.Item:
-				item = GetItem(gameType);
+				item = GetUIItem(gameType);
 				break;
 		}
 		return item;
@@ -395,16 +415,22 @@ public class TDCDataReader {
 		return creatureData;
 	}
 
-	public TDCItemData GetItem (TDCEnum.EGameType item) {
-		var itemData = TDCItemData.Clone (m_ListItemData[item] as TDCItemData);
+	public UIItemData GetUIItem (TDCEnum.EGameType item) {
+		var itemData = UIItemData.Clone (m_ListItemData[item] as UIItemData);
 		itemData.Owner = null;
 		return itemData;
 	}
 
-	public TDCFoodData GetFood (TDCEnum.EGameType food) {
-		var foodData = TDCFoodData.Clone (m_ListItemData[food] as TDCFoodData);
+	public UIFoodData GetUIFood (TDCEnum.EGameType food) {
+		var foodData = UIFoodData.Clone (m_ListItemData[food] as UIFoodData);
 		foodData.Owner = null;
 		return foodData;
+	}
+
+	public UIWeaponData GetUIWeapon(TDCEnum.EGameType weapon) {
+		var weapondata = UIWeaponData.Clone (m_ListItemData[weapon] as UIWeaponData);
+		weapondata.Owner = null;
+		return weapondata;
 	}
 
 	public TDCGroupData GetGroup(TDCEnum.EGameType group) {
@@ -417,13 +443,12 @@ public class TDCDataReader {
 		return playerData;
 	}
 
-	public TDCWeaponData GetWeapon(TDCEnum.EGameType weapon) {
-		var weapondata = TDCWeaponData.Clone (m_ListItemData[weapon] as TDCWeaponData);
-		weapondata.Owner = null;
-		return weapondata;
+	public TDCItemData GetItem(TDCEnum.EGameType resource) {
+		var item = TDCItemData.Clone (m_ListCreatureData[resource] as TDCItemData);
+		return item;
 	}
 
-	public TDCEnviromentData GetResource(TDCEnum.EGameType resource) {
+	public TDCEnviromentData GetEnviroment(TDCEnum.EGameType resource) {
 		var resourceData = TDCEnviromentData.Clone (m_ListCreatureData[resource] as TDCEnviromentData);
 		return resourceData;
 	}

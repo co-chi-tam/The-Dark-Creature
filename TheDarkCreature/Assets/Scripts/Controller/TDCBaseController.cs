@@ -161,6 +161,14 @@ public class TDCBaseController : TDCMonoBehaviour
 	
 	}
 
+	public virtual int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount) {
+		return 0;
+	}
+
+	public virtual void DropItem() {
+
+	}
+
 	public virtual void ReturnObject(TDCEntity obj) {
 		m_GameManager.SetObjectPool(obj);
 	}
@@ -314,7 +322,7 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	}
 
-	public virtual TDCItemController[] GetInventory() {
+	public virtual UIItemController[] GetInventory() {
 		return null;
 	}
 

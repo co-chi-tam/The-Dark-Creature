@@ -277,7 +277,7 @@ public class TDCCreature : TDCEntity
 		return m_Data.MaxHeatPoint;
 	}
 
-	public override TDCItemController[] GetInventory()
+	public override UIItemController[] GetItemInventory()
 	{
 		return m_Data.Inventory;
 	}
@@ -289,7 +289,8 @@ public class TDCCreature : TDCEntity
 		{
 			var creatureType = enemy.GetCreatureType();
 			if (creatureType == TDCEnum.ECreatureType.Enviroment ||
-				creatureType == TDCEnum.ECreatureType.GObject) { 
+				creatureType == TDCEnum.ECreatureType.GObject || 
+				creatureType == TDCEnum.ECreatureType.Item) { 
 				return GetColliderRadius();
 			}
 		}

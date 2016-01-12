@@ -1,5 +1,5 @@
 ﻿
-public class TDCFoodData : TDCItemData {
+public class UIFoodData : UIItemData {
 
 	private TDCObjectProperty<int> m_FreshPoint;
 
@@ -9,15 +9,15 @@ public class TDCFoodData : TDCItemData {
 		set { m_FreshPoint = value; }
 	}
 
-	public TDCFoodData () : base ()
+	public UIFoodData () : base ()
 	{
 		m_FreshPoint = new TDCObjectProperty<int>("FreshPoint");
 
 		RegisterProperty(m_FreshPoint);
 	}
 
-	public static TDCFoodData Clone (TDCFoodData instance) {
-		var tmp = new TDCFoodData ();
+	public static UIFoodData Clone (UIFoodData instance) {
+		var tmp = new UIFoodData ();
 		tmp.ID = instance.ID;
 		tmp.Name = instance.Name;
 		tmp.Description = instance.Description;

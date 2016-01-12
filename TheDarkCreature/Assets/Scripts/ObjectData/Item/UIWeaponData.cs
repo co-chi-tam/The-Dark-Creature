@@ -1,5 +1,5 @@
 ﻿
-public class TDCWeaponData : TDCItemData {
+public class UIWeaponData : UIItemData {
 
 	private int m_MinDamage;
 	private int m_MaxDamage;
@@ -32,7 +32,7 @@ public class TDCWeaponData : TDCItemData {
 		set { m_DecreaseDuration = value; }
 	}
 
-	public TDCWeaponData () : base ()
+	public UIWeaponData () : base ()
 	{
 		m_MinDamage = 0;
 		m_MaxDamage = 0;
@@ -41,8 +41,8 @@ public class TDCWeaponData : TDCItemData {
 		m_DecreaseDuration = 0;
 	}
 
-	public static TDCWeaponData Clone (TDCWeaponData instance) {
-		var tmp = new TDCWeaponData ();
+	public static UIWeaponData Clone (UIWeaponData instance) {
+		var tmp = new UIWeaponData ();
 		tmp.ID = instance.ID;
 		tmp.Name = instance.Name;
 		tmp.GameType = instance.GameType;

@@ -64,7 +64,7 @@ public class UIInventory : MonoBehaviour {
 	#region Main method
 
 	private void SortInventory() {
-		var inventory = m_OwnerEnity.GetInventory();
+		var inventory = m_OwnerEnity.GetItemInventory();
 		QuickSort.SimpleSort(inventory, (x, y) => {
 			var lh = (int) x.GetData().GameType;
 			var rh = (int) y.GetData().GameType;
@@ -79,10 +79,10 @@ public class UIInventory : MonoBehaviour {
 		LoadAllSlots();	
 	}
 
-	public bool AddItem(int index, TDCItemController item) {
+	public bool AddItem(int index, UIItemController item) {
 		m_ItemSlots[index].OnSelectedSlot = m_OwnerController.OnSelectedItem;
 		m_ItemSlots[index].LoadSlot (index, item);
-		m_OwnerEnity.GetInventory()[index].GetData().Owner = m_OwnerController;
+		m_OwnerEnity.GetItemInventory()[index].GetData().Owner = m_OwnerController;
 		return true;
 	}
 
@@ -100,7 +100,7 @@ public class UIInventory : MonoBehaviour {
 			return;
 		m_ItemSlots = null;
 		m_ItemSlots = new UISlot [this.transform.childCount];
-		var inventory = m_OwnerEnity.GetInventory();
+		var inventory = m_OwnerEnity.GetItemInventory();
 		for (int i = 0; i < inventory.Length; i++) {
 			var child = this.transform.GetChild (i).GetComponent<UISlot>();
 			if (inventory[i] != null) {
@@ -113,7 +113,7 @@ public class UIInventory : MonoBehaviour {
 	}
 
 	public void ReloadSlots() {
-		var inventory = m_OwnerEnity.GetInventory();
+		var inventory = m_OwnerEnity.GetItemInventory();
 		for (int i = 0; i < inventory.Length; i++) {
 			var child = m_ItemSlots[i];
 			if (inventory[i] != null)

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class TDCCreatureData : TDCBaseData {
 
 	private TDCEnum.ECreatureType m_CreatureType;
-    private TDCItemController[] m_Inventory;
+    private UIItemController[] m_Inventory;
 	private float m_RotationSpeed;
 	private TDCObjectProperty<float> m_MoveSpeed;
 	private TDCObjectProperty<int> m_CurrentHP;
@@ -18,7 +18,7 @@ public class TDCCreatureData : TDCBaseData {
 	private List<TDCEnum.EGameType> m_TypeFoods;
 	private TDCEnum.EGameType m_NormalSkill;
 
-    public TDCItemController[] Inventory {
+    public UIItemController[] Inventory {
 		get { return m_Inventory; }
 		set { m_Inventory = value; }
 	}
@@ -101,7 +101,7 @@ public class TDCCreatureData : TDCBaseData {
 
 		m_DetectRange = 0f;
 		m_AttackRange = 0f;
-        this.m_Inventory = new TDCItemController[20];
+        m_Inventory = new UIItemController[20];
 		m_TypeEnemies = new List<TDCEnum.EGameType> ();
 		m_TypeFoods = new List<TDCEnum.EGameType> ();
 		m_CreatureType = TDCEnum.ECreatureType.None;

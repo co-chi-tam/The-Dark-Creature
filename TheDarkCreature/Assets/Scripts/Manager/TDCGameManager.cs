@@ -183,25 +183,25 @@ public class TDCGameManager : MonoBehaviour {
 
 	#region Create Game Creature
 
-	public TDCItemController CreateItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, TDCBaseController owner, int amount) {
-		TDCItemData itemData = null;
+	public UIItemController CreateItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, TDCBaseController owner, int amount) {
+		UIItemData itemData = null;
 		switch (itemType)
 		{
 			default:
 			case TDCEnum.EItemType.Food:
-				itemData = m_DataReader.GetFood(gameType);
+				itemData = m_DataReader.GetUIFood(gameType);
 				break;
 			case TDCEnum.EItemType.Weapon:
-				itemData = m_DataReader.GetWeapon(gameType);
+				itemData = m_DataReader.GetUIWeapon(gameType);
 				break;
 			case TDCEnum.EItemType.GObject:
 			case TDCEnum.EItemType.Item:
-				itemData = m_DataReader.GetItem(gameType);
+				itemData = m_DataReader.GetUIItem(gameType);
 				break;
 		}
 		if (itemData == null)
 			return null;
-		var item = new TDCItemController(itemData);
+		var item = new UIItemController(itemData);
 		item.GetData().Owner = owner;
 		item.GetData().Amount = amount;
 		return item;
@@ -271,7 +271,18 @@ public class TDCGameManager : MonoBehaviour {
 			entity = new TDCCreature(controller, data);
 			break;
 		}
-		case TDCEnum.EGameType.Meat: 
+		case TDCEnum.EGameType.ItemMeat: 
+		case TDCEnum.EGameType.ItemMushroom:
+		case TDCEnum.EGameType.ItemGrass:
+		case TDCEnum.EGameType.ItemBush:
+		case TDCEnum.EGameType.ItemBlueBerry:
+		case TDCEnum.EGameType.ItemCrystal: {
+			data = m_DataReader.GetItem(type);
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCItemController> ();
+			entity = new TDCItem(controller, data);
+			break;
+		}
 		case TDCEnum.EGameType.Trap: {
 			//TODO
 			break;
@@ -304,7 +315,7 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.BlueBerry:		
 		case TDCEnum.EGameType.Bush: 
 		case TDCEnum.EGameType.Crystal: {
-			data = m_DataReader.GetResource (type);
+			data = m_DataReader.GetEnviroment (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEnviromentController> ();
 			entity = new TDCEnviroment(controller, data);

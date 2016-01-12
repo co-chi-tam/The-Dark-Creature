@@ -37,6 +37,11 @@ public class TDCEnviromentController : TDCCreatureController {
 		return m_Entity.GetHealth() <= 0f;
 	}
 
+	public override UIItemController[] GetInventory()
+	{
+		return m_Entity.GetItemInventory();
+	}
+
 	#endregion
 
 	#region Getter & Setter 

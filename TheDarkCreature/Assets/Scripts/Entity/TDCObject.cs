@@ -64,6 +64,11 @@ public class TDCObject : TDCEntity
 		return m_Data.CreatureType;
 	}
 
+	public override UIItemController[] GetItemInventory()
+	{
+		return m_Data.Inventory;
+	}
+
 	#endregion;
 }
 

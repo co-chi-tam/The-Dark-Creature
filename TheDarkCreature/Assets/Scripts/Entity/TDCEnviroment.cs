@@ -3,18 +3,26 @@ using System.Collections;
 
 public class TDCEnviroment : TDCEntity
 {
+	#region Properties
 	protected TDCEntity m_GroupEntity;
 
 	private TDCEnviromentController m_Controller;
 	private TDCEnviromentData m_Data;
 	private int m_DamageTake = 0;
 	private int m_HealthPoint = 0;
+	#endregion
+
+	#region Contructor
 
 	public TDCEnviroment(TDCBaseController ctrl, TDCBaseData data): base(ctrl, data)
 	{
 		m_Controller = ctrl as TDCEnviromentController;
 		m_Data = data as TDCEnviromentData;
 	}
+
+	#endregion
+
+	#region Main methods
 
 	public override void Update(float dt)
 	{
@@ -42,6 +50,10 @@ public class TDCEnviroment : TDCEntity
 			m_DamageTake += damage;
 		}
 	}
+
+	#endregion
+
+	#region Getter && Setter
 
 	public override void SetGroupEntity(TDCEntity group)
 	{
@@ -114,6 +126,12 @@ public class TDCEnviroment : TDCEntity
 	{
 		return m_Controller.GetColliderRadius();
 	}
+
+	public override UIItemController[] GetItemInventory()
+	{
+		return m_Data.Inventory;
+	}
+	#endregion
 
 }
 

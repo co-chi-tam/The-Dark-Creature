@@ -25,7 +25,7 @@ public class UISlot : MonoBehaviour {
 	[SerializeField]
 	private Button m_ItemButton = null;
 
-	private TDCItemController m_ItemController;
+	private UIItemController m_ItemController;
 	private Sprite m_NoImage;
 
 	#endregion 
@@ -39,14 +39,14 @@ public class UISlot : MonoBehaviour {
 		m_NoImage = TDCUltilities.LoadImage ("NoImage");
 	}
 
-	public void LoadSlot(TDCItemController item) {
+	public void LoadSlot(UIItemController item) {
 		m_ItemController = item;
 		m_IconImage.sprite = TDCUltilities.LoadImage (m_ItemController.GetData().Icon);
 		m_ItemController.GetData().GetChangeValue<int> ("Amount", ChangeAmount);
 		m_AmountItem.text = m_ItemController.GetData().Amount.ToString ();
 	}
 
-    public void LoadSlot(int index, TDCItemController item) {
+    public void LoadSlot(int index, UIItemController item) {
 		m_SlotIndex = index;
 		LoadSlot(item);
 	}

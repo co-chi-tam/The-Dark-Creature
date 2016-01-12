@@ -309,7 +309,12 @@ public class TDCEntity : TDCPropertyReflection {
 		}
 	}
 
-	public virtual TDCItemController[] GetInventory()
+	public virtual int AddItemInventory(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
+	{
+		return 0;
+	}
+
+	public virtual UIItemController[] GetItemInventory()
 	{
 		return null;
 	}
@@ -424,6 +429,16 @@ public class TDCEntity : TDCPropertyReflection {
 	#endregion
 
 	#region Item
+
+	public virtual bool GetItemActive()
+	{
+		return false;
+	}
+
+	public virtual void SetItemActive(bool value)
+	{
+		
+	}
 
 	public virtual TDCEnum.EItemType GetItemType()
 	{

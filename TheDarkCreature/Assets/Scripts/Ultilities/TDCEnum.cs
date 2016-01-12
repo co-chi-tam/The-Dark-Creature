@@ -12,7 +12,6 @@ public class TDCEnum{
 		Crabystal	= 9,
 
 		// Object
-		Meat 		= 51,
 		Mushroom	= 52,
 		Grass		= 53,
 		Bush		= 54,
@@ -21,6 +20,14 @@ public class TDCEnum{
 
 		// Weapon
 		Trap		= 71,
+
+		// Item
+		ItemMeat 		= 101,
+		ItemMushroom	= 102,
+		ItemGrass 		= 103,
+		ItemBush 		= 104,
+		ItemBlueBerry	= 105,
+		ItemCrystal		= 106,
 
 		// Group
 		GroupDodono	= 201,
@@ -67,6 +74,7 @@ public class TDCEnum{
 		GObject		= 4,
 		FlyCreature	= 5,
 		FlyPlayer	= 6,
+		Item		= 7,
 	}
 
 	public enum EGroupType : int {

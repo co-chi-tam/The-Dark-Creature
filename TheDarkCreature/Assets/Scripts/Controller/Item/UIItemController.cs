@@ -3,25 +3,25 @@ using System.Collections;
 using System.Collections.Generic;
 using Effect;
 
-public class TDCItemController {
+public class UIItemController {
 
 	#region Properties
 
 	private TDCGameManager m_GameManager;
 	private EffectManager m_EffectManager;
-	private TDCItemData m_Data;
+	private UIItemData m_Data;
 
 	#endregion
 
 	#region Main methods
 
-	public TDCItemController()
+	public UIItemController()
 	{
 		m_Data = null;
 		m_EffectManager = null;
 	}
 
-	public TDCItemController(TDCItemData data)
+	public UIItemController(UIItemData data)
 	{
 		m_Data = data;
 		m_GameManager = TDCGameManager.GetInstance();
@@ -44,7 +44,7 @@ public class TDCItemController {
 				break;
 			case TDCEnum.EItemType.Weapon: 
 				{
-					var weaponData = m_Data as TDCWeaponData;
+					var weaponData = m_Data as UIWeaponData;
 					weaponData.Duration -= weaponData.DecreaseDuration;
 					if (weaponData.Duration < 0f)
 					{
@@ -72,12 +72,18 @@ public class TDCItemController {
 	#region Effect
 
 	public virtual void ExcuteItem() {
+		
 		m_EffectManager.ExcuteEffect();
 	}
 
 	protected virtual bool CanActiveEffect(Dictionary<string, object> pars)
 	{
-		return m_Data.Amount > 0 && m_Data.Owner != null && m_Data.Owner.GetStateName() != "FlyState";
+		var active = m_Data.Amount > 0 && m_Data.Owner != null && m_Data.Owner.GetStateName() != "FlyState";;
+		if (active)
+		{
+			UsedItem();
+		}
+		return active;
 	}
 
 	internal virtual void PrintDebug(Dictionary<string, object> pars)
@@ -97,7 +103,6 @@ public class TDCItemController {
 //			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
 //		}
 //#endif
-		UsedItem();
 	}
 
 	protected virtual void AddValueEffect(Dictionary<string, object> pars)
@@ -108,7 +113,6 @@ public class TDCItemController {
 //			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
 //		}
 //#endif
-		UsedItem();
 		var nameValue = pars["NameValue"].ToString();
 		var value = pars["Value"];
 		m_Data.Owner.GetEntity().SetProperty(nameValue, value);
@@ -118,7 +122,7 @@ public class TDCItemController {
 
 	#region Getter & Setter
 
-	public TDCItemData GetData() {
+	public UIItemData GetData() {
 		return m_Data;
 	}
 

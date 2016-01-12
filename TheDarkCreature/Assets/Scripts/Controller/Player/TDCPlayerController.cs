@@ -97,23 +97,17 @@ public class TDCPlayerController : TDCCreatureController
 			point.y = 0f;
 			switch (hitGameObject.layer)
 			{
-				case (int) TDCEnum.ELayer.LayerPlane:
-					{
-						SetTargetPosition(point);
-						SetEnemyEntity(null);
-					}
+				case (int) TDCEnum.ELayer.LayerPlane: {
+					SetTargetPosition(point);
+					SetEnemyEntity(null);
 					break;
+				}
 				case (int) TDCEnum.ELayer.LayerCreature:
 				case (int) TDCEnum.ELayer.LayerEnviroment:
-					{
-						SetEnemyEntity(entity);
-					}
+				case (int) TDCEnum.ELayer.LayerGObject: {
+					SetEnemyEntity(entity);
 					break;
-				case (int) TDCEnum.ELayer.LayerGObject:
-					{
-
-					}
-					break;
+				}
 			}
 		}
 	}
@@ -121,18 +115,18 @@ public class TDCPlayerController : TDCCreatureController
 	public override void OnSelectedItem (int itemIndex)
 	{
 		base.OnSelectedItem (itemIndex);
-		var item = m_Entity.GetInventory()[itemIndex];
+		var item = m_Entity.GetItemInventory()[itemIndex];
 		item.ExcuteItem();
 		if (item.GetData().Amount == 0)
 		{
 			m_Inventory.RemoveItem(itemIndex);
-			m_Entity.GetInventory()[itemIndex] = null;
+			m_Entity.GetItemInventory()[itemIndex] = null;
 		}
 	}
 
 	public override int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
 	{
-		var inventory = m_Entity.GetInventory();
+		var inventory = m_Entity.GetItemInventory();
 		var indexItemInInventory = FindItemSlot(gameType);
 		var emptySlot = FindEmptySlot();
 		if (emptySlot == -1)

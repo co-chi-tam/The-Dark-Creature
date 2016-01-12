@@ -189,7 +189,12 @@ public class TDCPlayer : TDCCreature
 		return m_Data.CurrentHungerPoint;
 	}
 
-	public override TDCItemController[] GetInventory()
+	public override int AddItemInventory(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
+	{
+		return m_Controller.AddItem(gameType, itemType, amount);
+	}
+
+	public override UIItemController[] GetItemInventory()
 	{
 		return m_Data.Inventory;
 	}
@@ -201,7 +206,8 @@ public class TDCPlayer : TDCCreature
 		{
 			var creatureType = enemy.GetCreatureType();
 			if (creatureType == TDCEnum.ECreatureType.Enviroment ||
-				creatureType == TDCEnum.ECreatureType.GObject) { 
+				creatureType == TDCEnum.ECreatureType.GObject || 
+				creatureType == TDCEnum.ECreatureType.Item) { 
 				return GetColliderRadius();
 			}
 		}
