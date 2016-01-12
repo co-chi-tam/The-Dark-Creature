@@ -2,7 +2,7 @@
 	"FlameBodySkill": 10,
 	"NormalRangeSkill": 10,
 	"NormalMeleeSkill": 10,
-	"LifeNotEasySkill": 10,
+	"LifeNotEasySkill": 2,
 	"BurnObjectSkill": 10,
 	"Dodono": 20,
 	"Satla": 20,
@@ -13,6 +13,12 @@
 	"Grass": 20,
 	"Bush": 20,
 	"BlueBerry": 20,
-	"CampFire": 5,
-	"Crystal": 10
+	"CampFire": 10,
+	"Crystal": 20,
+	"ItemMeat": 20,
+	"ItemMushroom": 20,
+	"ItemGrass": 20,
+	"ItemBush": 20,
+	"ItemBlueBerry": 20,
+	"ItemCrystal": 20
 }
