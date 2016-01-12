@@ -1,0 +1,21 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+	    {
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["SubtractValueEffect(NameValue:HungerPoint,Value:5)","SubtractValueEffect(NameValue:HeatPoint,Value:5)","AddValueEffect(NameValue:HealthPoint,Value:10)"]
+	    }
+    ],
+    "NoMethods": [
+   		{
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["PrintDebug(Meat Effect:Can not active effect)"]
+	    }
+    ]
+  }
+}
