@@ -261,6 +261,9 @@ public class TDCCreatureController : TDCBaseController {
 	internal virtual bool FoundEnemy() {
 		var mPos = TransformPosition;
 		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
+		if (colliders.Length == 0)
+			return false;
+
 		for (int i = 0; i < colliders.Length; i++) {
 			var target = m_GameManager.GetEntityByName (colliders[i].name);
 			if (target == null || target.GetActive () == false || target == this.GetEntity()) {
@@ -283,6 +286,8 @@ public class TDCCreatureController : TDCBaseController {
 		}
 		var mPos = TransformPosition;
 		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
+		if (colliders.Length == 0)
+			return false;
 		for (int i = 0; i < colliders.Length; i++) {
 			var food = m_GameManager.GetEntityByName (colliders[i].name);
 			if (food == null || food.GetActive () == false || food == this.GetEntity()) {

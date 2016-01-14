@@ -3,10 +3,16 @@ using System.Collections;
 
 public class TDCItem : TDCEntity
 {
+	#region Properties
+
 	private TDCItemController m_Controller;
 	private TDCItemData m_Data;
 	private bool m_ItemActive;
 	private TDCEntity m_Enemy;
+
+	#endregion
+
+	#region Contructor
 
 	public TDCItem(TDCBaseController ctrl, TDCBaseData data): base(ctrl, data)
 	{
@@ -15,12 +21,20 @@ public class TDCItem : TDCEntity
 		m_ItemActive = true;
 	}
 
+	#endregion
+
+	#region Main methods
+
 	public override void ApplyDamage(int damage, TDCEntity attacker)
 	{
 		base.ApplyDamage(damage, attacker);
 		m_ItemActive = false;
 		m_Enemy = attacker;
 	}
+
+	#endregion
+
+	#region Getter && Setter
 
 	public override void SetItemActive(bool value)
 	{
@@ -86,5 +100,7 @@ public class TDCItem : TDCEntity
 	{
 		return m_Controller.GetColliderRadius();
 	}
+
+	#endregion
 }
 

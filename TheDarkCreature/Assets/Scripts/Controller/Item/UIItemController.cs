@@ -43,28 +43,30 @@ public class UIItemController {
 			case TDCEnum.EItemType.Food:
 				m_Data.Amount--;
 				break;
-			case TDCEnum.EItemType.Weapon: 
+			case TDCEnum.EItemType.Weapon:{
+				var weaponData = m_Data as UIWeaponData;
+				weaponData.Duration -= weaponData.DecreaseDuration;
+				if (weaponData.Duration < 0f)
 				{
-					var weaponData = m_Data as UIWeaponData;
-					weaponData.Duration -= weaponData.DecreaseDuration;
-					if (weaponData.Duration < 0f)
-					{
-						m_Data.Amount--;
-					}
-				} break;
-			case TDCEnum.EItemType.GObject:
-			case TDCEnum.EItemType.Item:
-				{
-					var owner = m_Data.Owner;
-					TDCEntity obj = null;
-					if (m_GameManager.GetObjectPool(m_Data.GameType, ref obj))
-					{
-						obj.GetController().TransformPosition = owner.transform.V3Forward(-owner.GetColliderRadius());
-						obj.SetActive(true);
-					}
 					m_Data.Amount--;
 				}
 				break;
+			} 
+			case TDCEnum.EItemType.Item: {
+				// TODO
+				break;
+			}
+			case TDCEnum.EItemType.GObject:{
+				var owner = m_Data.Owner;
+				TDCEntity obj = null;
+				if (m_GameManager.GetObjectPool(m_Data.GameType, ref obj))
+				{
+					obj.GetController().TransformPosition = owner.transform.V3Forward(-owner.GetColliderRadius());
+					obj.SetActive(true);
+				}
+				m_Data.Amount--;
+				break;
+			}
 		}
 	}
 

@@ -83,6 +83,12 @@ public class TDCEnum{
 		GroupNestCreature = 2
 	}
 
+	public enum EGroupSpawnType : int {
+		None			= 0,
+		Random			= 1,
+		Center			= 2
+	}
+
 	public enum ELayer: int {
 		None 			= 0,
 		LayerCreature 	= 8,

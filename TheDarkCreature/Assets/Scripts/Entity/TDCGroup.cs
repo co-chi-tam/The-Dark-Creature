@@ -154,6 +154,11 @@ public class TDCGroup : TDCEntity
 		return m_Data.GroupType;
 	}
 
+	public override TDCEnum.EGroupSpawnType GetGroupSpawnType()
+	{
+		return m_Data.GroupSpawnType;
+	}
+
 	public override float GetColliderRadius()
 	{
 		return m_Controller.GetColliderRadius();

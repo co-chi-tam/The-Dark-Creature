@@ -176,6 +176,7 @@ public class TDCDataReader {
 			group.Icon = instance["IconPath"].ToString();
 			group.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			group.GroupType = (TDCEnum.EGroupType)int.Parse (instance ["GroupType"].ToString ());
+			group.GroupSpawnType = (TDCEnum.EGroupSpawnType)Enum.Parse (typeof(TDCEnum.EGroupSpawnType), instance ["GroupSpawnType"].ToString ());
 			group.Radius = float.Parse (instance ["Radius"].ToString ());
 			group.MemberType = (TDCEnum.EGameType) int.Parse (instance["MemberType"].ToString());
 			group.MaxMember = int.Parse (instance ["MaxMember"].ToString());

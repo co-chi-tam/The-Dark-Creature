@@ -333,6 +333,11 @@ public class TDCEntity : TDCPropertyReflection {
 		return TDCEnum.EGroupType.None;
 	}
 
+	public virtual TDCEnum.EGroupSpawnType GetGroupSpawnType()
+	{
+		return TDCEnum.EGroupSpawnType.None;
+	}
+
 	public virtual int GetCurrentMember() {
 		return 0;
 	}

@@ -12,12 +12,24 @@
 				},
 				{
 					"ID": 2,
-					"GameType": 202,
+					"GameType": 201,
 					"Position": "-50,0,50",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 3,
+					"GameType": 201,
+					"Position": "50,0,-50",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 3,
+					"GameType": 202,
+					"Position": "-20,0,50",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 4,
 					"GameType": 204,
 					"Position": "-50,0,-50",
 					"Rotation": "0,0,0"
@@ -25,13 +37,13 @@
 				{
 					"ID": 4,
 					"GameType": 205,
-					"Position": "50,0,-50",
+					"Position": "50,0,-20",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 5,
 					"GameType": 206,
-					"Position": "-50,0,100",
+					"Position": "-20,0,20",
 					"Rotation": "0,0,0"
 				},
 				{

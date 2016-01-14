@@ -158,7 +158,7 @@ public class TDCPlayer : TDCCreature
 
 	public override void SetHeat(int value)
 	{
-		m_Data.CurrentHeatPoint = value > m_Data.MaxHeatPoint ? m_Data.MaxHeatPoint : value;
+		m_Data.CurrentHeatPoint = value > m_Data.MaxHeatPoint ? m_Data.MaxHeatPoint : value < 0 ? 0 : value;
 		base.SetHeat(m_Data.CurrentHeatPoint);
 	}
 
@@ -169,7 +169,7 @@ public class TDCPlayer : TDCCreature
 
 	public override void SetSanity(int value)
 	{
-		m_Data.CurrentSanityPoint = value > m_Data.MaxSanityPoint ? m_Data.MaxSanityPoint : value;
+		m_Data.CurrentSanityPoint = value > m_Data.MaxSanityPoint ? m_Data.MaxSanityPoint : value < 0 ? 0 : value;
 		base.SetSanity(m_Data.CurrentSanityPoint);
 	}
 
