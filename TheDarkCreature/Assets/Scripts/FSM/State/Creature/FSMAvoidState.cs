@@ -11,8 +11,8 @@ public class FSMAvoidState : FSMBaseState
     public override void StartState()
     {
         m_Controller.SetAnimation(EAnimation.Run);
-        var direction = m_Controller.TransformPosition - m_Controller.GetEnemyPosition();
-        var newTarget = m_Controller.TransformPosition + direction.normalized * (m_Controller.GetDetectEnemyRange() + 10f);
+		var direction = (m_Controller.TransformPosition - m_Controller.GetEnemyPosition()).normalized;
+        var newTarget = m_Controller.TransformPosition + direction * (m_Controller.GetDetectEnemyRange() + 10f);
         m_Controller.SetTargetPosition(newTarget);
 		m_Controller.CallBackEvent("OnAvoid");
     }

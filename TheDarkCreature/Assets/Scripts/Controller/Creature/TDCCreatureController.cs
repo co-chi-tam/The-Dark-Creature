@@ -242,7 +242,7 @@ public class TDCCreatureController : TDCBaseController {
 		var target = GetTargetPosition();
 		mPosition.y = 0f;
 //		target.y = 0f;
-		return (mPosition - target).sqrMagnitude < 0.5f * 0.5f;  
+		return (mPosition - target).sqrMagnitude < 0.5f;  
 	}
 
 	internal override bool MoveToEnemy()
@@ -266,14 +266,16 @@ public class TDCCreatureController : TDCBaseController {
 		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
 		if (colliders.Length == 0)
 			return false;
-
 		for (int i = 0; i < colliders.Length; i++) {
 			var target = m_GameManager.GetEntityByName (colliders[i].name);
 			if (target == null || target.GetActive () == false || target == this.GetEntity()) {
 				continue;
 			} else {
 				if (GetTypeEnemies().IndexOf (target.GetGameType()) != -1) {
-					SetEnemyEntity(target);
+					if (GetEnemyEntity() == null)
+					{
+						SetEnemyEntity(target);
+					}
 					return true;
 				}
 			}
