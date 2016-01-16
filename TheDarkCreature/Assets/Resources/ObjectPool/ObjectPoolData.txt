@@ -20,5 +20,6 @@
 	"ItemGrass": 20,
 	"ItemBush": 20,
 	"ItemBlueBerry": 20,
-	"ItemCrystal": 20
+	"ItemCrystal": 20,
+	"EggDodono": 5
 }

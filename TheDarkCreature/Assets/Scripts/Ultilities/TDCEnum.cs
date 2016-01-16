@@ -49,7 +49,10 @@ public class TDCEnum{
 		NormalRangeSkill = 502,
 		NormalMeleeSkill = 503,
 		LifeNotEasySkill = 506,
-		BurnObjectSkill = 507
+		BurnObjectSkill = 507,
+
+		// Egg
+		EggDodono = 801
 	}
 
 	public enum ESkillType : int {
@@ -74,7 +77,7 @@ public class TDCEnum{
 		GObject		= 4,
 		FlyCreature	= 5,
 		FlyPlayer	= 6,
-		Item		= 7,
+		Item		= 7
 	}
 
 	public enum EGroupType : int {

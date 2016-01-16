@@ -44,7 +44,7 @@ public class TDCItemController : TDCCreatureController
 	public override void ResetObject()
 	{
 		base.ResetObject();
-		m_Entity.SetItemActive(true);
+		m_Entity.ResetObject();
 	}
 
 	public override void DropItem()

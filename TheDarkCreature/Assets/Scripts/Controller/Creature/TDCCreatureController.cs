@@ -29,6 +29,8 @@ public class TDCCreatureController : TDCBaseController {
 		var dieState    	= new FSMDieState(this);
 		var flyState 		= new FSMFlyState(this);
 		var landingState 	= new FSMLandingState(this);
+		var wildModeState 	= new FSMWildModeState(this);
+		var petModeState	= new FSMPetModeState(this);
 
 		m_FSMManager.RegisterState("IdleState", idleState);
 		m_FSMManager.RegisterState("MoveState", moveState);
@@ -40,6 +42,8 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("FlyAvoidState", flyAvoidState);
 		m_FSMManager.RegisterState("FlyState", flyState);
 		m_FSMManager.RegisterState("LandingState", landingState);
+		m_FSMManager.RegisterState("WildModeState", wildModeState);
+		m_FSMManager.RegisterState("PetModeState", petModeState);
 
 		m_FSMManager.RegisterCondition("IsActive", GetActive);
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
@@ -52,6 +56,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
 		m_FSMManager.RegisterCondition("IsEnemyDeath", IsEnemyDeath);
 		m_FSMManager.RegisterCondition("IsLandingFinish", IsLandingFinish);
+		m_FSMManager.RegisterCondition("HaveLeader", HaveLeader);
 	}
 
 	protected override void FixedUpdate ()
@@ -165,11 +170,7 @@ public class TDCCreatureController : TDCBaseController {
 	public override void ResetObject ()
 	{
 		base.ResetObject();
-		SetHealth (GetMaxHealth());
-		SetHeat(m_Entity.GetHeat() / 3);
-		SetSanity(m_Entity.GetSanity() / 3);
-		SetHunger(m_Entity.GetHunger() / 3);
-		SetEnemyEntity (null);
+		m_Entity.ResetObject();
 	}
 
 	public override void DropItem()
@@ -188,7 +189,9 @@ public class TDCCreatureController : TDCBaseController {
 				if (m_GameManager.GetObjectPool(itemType, ref item))
 				{
 					var pos = TDCUltilities.RandomAround(GetColliderRadius());
-					item.GetController().TransformPosition = this.TransformPosition + new Vector3(pos.x, 0f, pos.y);
+					var mPos = this.TransformPosition;
+					mPos.y = 0f;
+					item.GetController().TransformPosition = mPos + new Vector3(pos.x, 0f, pos.y);
 					item.SetActive(true);
 				}
 			}
@@ -229,7 +232,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal override bool IsDeath() {
-		return GetHealth() < 1 || GetActive() == false;
+		return GetHealth() <= 0 || GetActive() == false;
 	}
 
 	internal override bool MoveToTarget()
@@ -238,7 +241,7 @@ public class TDCCreatureController : TDCBaseController {
 		var mPosition = TransformPosition;
 		var target = GetTargetPosition();
 		mPosition.y = 0f;
-		target.y = 0f;
+//		target.y = 0f;
 		return (mPosition - target).sqrMagnitude < 0.5f * 0.5f;  
 	}
 
@@ -303,6 +306,10 @@ public class TDCCreatureController : TDCBaseController {
 			}
 		}
 		return false;
+	}
+
+	internal virtual bool HaveLeader() {
+		return m_Entity.GetLeader() != null;
 	}
 
 	#endregion

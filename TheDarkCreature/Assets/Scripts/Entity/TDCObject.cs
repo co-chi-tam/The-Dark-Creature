@@ -18,6 +18,21 @@ public class TDCObject : TDCEntity
 
 	#endregion
 
+	#region Main methods
+
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		SetHealth (GetMaxHealth());
+		SetHeat(GetHeat() / 3);
+		SetEnemyEntity (null);
+
+		m_HealthPoint.Value = 0;
+		m_HeatPoint.Value = 0;
+	}
+
+	#endregion
+
 	#region Getter && Setter
 
 	public override void SetData(TDCBaseData data)
@@ -69,7 +84,7 @@ public class TDCObject : TDCEntity
 		return m_Data.Inventory;
 	}
 
-	#endregion;
+	#endregion
 }
 
 

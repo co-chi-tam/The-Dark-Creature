@@ -105,6 +105,13 @@ public class TDCGameManager : MonoBehaviour {
 		var playerType = TDCGameSetting.Instance.GetPlayerType();
 		var player = CreatePlayer (playerType, Vector3.zero, Quaternion.identity);
 		player.SetActive(true);
+
+		TDCEntity egg = null;
+		if (GetObjectPool(TDCEnum.EGameType.EggDodono, ref egg))
+		{
+			egg.SetActive(true);	
+		}
+
 		var map = m_DataReader.GetMap(mapName);
 		for (int i = 0; i < map.Count; i++)
 		{
@@ -189,14 +196,14 @@ public class TDCGameManager : MonoBehaviour {
 		{
 			default:
 			case TDCEnum.EItemType.Food:
-				itemData = m_DataReader.GetUIFood(gameType);
+				itemData = m_DataReader.GetUIFoodData(gameType);
 				break;
 			case TDCEnum.EItemType.Weapon:
-				itemData = m_DataReader.GetUIWeapon(gameType);
+				itemData = m_DataReader.GetUIWeaponData(gameType);
 				break;
 			case TDCEnum.EItemType.GObject:
 			case TDCEnum.EItemType.Item:
-				itemData = m_DataReader.GetUIItem(gameType);
+				itemData = m_DataReader.GetUIItemData(gameType);
 				break;
 		}
 		if (itemData == null)
@@ -216,7 +223,7 @@ public class TDCGameManager : MonoBehaviour {
 		TDCBaseController controller = null;
 		TDCEntity entity = null;
 		var random = UnityEngine.Random.Range (0, 9999);
-		data = m_DataReader.GetPlayer (type);
+		data = m_DataReader.GetPlayerData (type);
 		gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 		switch ((data as TDCPlayerData).CreatureType)
 		{
@@ -258,7 +265,7 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.Taurot: 
 		case TDCEnum.EGameType.Vulbat:
 		case TDCEnum.EGameType.Crabystal: {
-			data = m_DataReader.GetCreature (type);
+			data = m_DataReader.GetCreatureData (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCCreatureData).CreatureType){
 			case TDCEnum.ECreatureType.GroundCreature:
@@ -277,7 +284,7 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.ItemBush:
 		case TDCEnum.EGameType.ItemBlueBerry:
 		case TDCEnum.EGameType.ItemCrystal: {
-			data = m_DataReader.GetItem(type);
+			data = m_DataReader.GetItemData(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCItemController> ();
 			entity = new TDCItem(controller, data);
@@ -297,7 +304,7 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.GroupBush:
 		case TDCEnum.EGameType.GroupCrystal:
 		case TDCEnum.EGameType.GroupCrabystal:{
-			data = m_DataReader.GetGroup(type);
+			data = m_DataReader.GetGroupData(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCGroupData).GroupType) {
 			case TDCEnum.EGroupType.GroupNestCreature:
@@ -315,14 +322,14 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.BlueBerry:		
 		case TDCEnum.EGameType.Bush: 
 		case TDCEnum.EGameType.Crystal: {
-			data = m_DataReader.GetEnviroment (type);
+			data = m_DataReader.GetEnviromentData (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEnviromentController> ();
 			entity = new TDCEnviroment(controller, data);
 			break;
 		}
 		case TDCEnum.EGameType.CampFire: {
-			data = m_DataReader.GetGObject(type);
+			data = m_DataReader.GetGObjectData(type);
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent <TDCCampFireController>();
 			entity = new TDCCampFire(controller, data);
@@ -343,6 +350,13 @@ public class TDCGameManager : MonoBehaviour {
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCActiveSkillController>();
 			entity = new TDCSkill(controller, data);
+			break;
+		}
+		case TDCEnum.EGameType.EggDodono:{
+			data = m_DataReader.GetEggData(type);	
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCEggController>();
+			entity = new TDCEgg(controller, data);
 			break;
 		}
 		default:

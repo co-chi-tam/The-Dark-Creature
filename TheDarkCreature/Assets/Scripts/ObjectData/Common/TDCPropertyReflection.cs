@@ -61,6 +61,25 @@ public class TDCPropertyReflection {
         return default(T);
     }
 
+	public object GetProperty(string name)
+	{
+		if (this.m_Properties.ContainsKey(name))
+		{
+			try
+			{
+				var propObj     = this.m_Properties[name];
+				var propInfo    = propObj.GetType().GetProperty("Value");
+				var propValue   = propInfo.GetValue(propObj, null);
+				return propValue;
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
+		return null;
+	}
+
     public void GetChangeValue<T>(string name, Action<T, T> onChange)
     {
         try

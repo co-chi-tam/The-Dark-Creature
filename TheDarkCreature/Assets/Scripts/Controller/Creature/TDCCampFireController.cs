@@ -91,6 +91,7 @@ public class TDCCampFireController : TDCObjectController {
 	public override void ResetObject()
 	{
 		base.ResetObject();
+		m_Entity.ResetObject();
 		m_FirePower = m_Entity.GetDuration();
 		m_Light.intensity = m_CurrentIntensity;
 		m_ParticleSystem.startSize = m_CurrentStartSize;

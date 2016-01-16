@@ -68,7 +68,7 @@ public class TDCBaseGroupController : TDCBaseController
 		
 	}
 
-	public virtual TDCEntity SpawnMember() {
+	public override TDCEntity SpawnMember() {
 		return null;
 	}
 

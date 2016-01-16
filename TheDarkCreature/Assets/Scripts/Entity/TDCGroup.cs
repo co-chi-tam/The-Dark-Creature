@@ -8,7 +8,6 @@ public class TDCGroup : TDCEntity
 
 	private TDCBaseGroupController m_Controller;
 	private TDCGroupData m_Data;
-	private int m_HealthPoint = 0;
 	private int m_DamageTake = 0;
 	protected Vector3 m_StartPosition;
 
@@ -48,12 +47,25 @@ public class TDCGroup : TDCEntity
 		{
 			CallBackEvent("OnAlive");
 		}
-		m_HealthPoint = GetHealth();
+
+		var health = GetHealth();
 		if (m_DamageTake != 0) {
-			m_HealthPoint -= m_DamageTake;
+			health -= m_DamageTake;
 			m_DamageTake = 0;
-			SetHealth(m_HealthPoint);
+			SetHealth(health);
 		}
+	}
+
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		SetHealth (GetMaxHealth());
+		SetHeat(GetHeat() / 3);
+		SetEnemyEntity (null);
+
+		m_DamageTake = 0;
+		m_HealthPoint.Value = 0;
+		m_HeatPoint.Value = 0;
 	}
 
 	#endregion

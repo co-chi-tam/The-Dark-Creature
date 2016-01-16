@@ -1,0 +1,21 @@
+﻿{
+	"eggs": [
+		{
+			"ID": 1,
+			"Name": "Egg Dodono",
+			"GameType": 801,
+			"CreatureType": 4,
+			"Description": "",
+			"ModelPath": ["Prefabs/Egg/EggDodono"],
+			"FSMPath": "FSM/Egg/EggFSM",
+			"CurrentHP": "5",
+			"MaxHP": "5",
+			"CurrentHeatPoint": "50",
+			"MaxHeatPoint": "100",
+			"Duration": 120,
+			"MemberType": "Dodono",
+			"IconPath": "",
+			"Inventory": [{"GameType":101,"Amount":2}]
+		}
+	]
+}

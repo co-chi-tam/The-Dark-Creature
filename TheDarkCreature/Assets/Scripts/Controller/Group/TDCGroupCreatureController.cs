@@ -64,6 +64,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 	public override void ResetObject()
 	{
 		base.ResetObject();
+		m_Entity.ResetObject();
 		m_PositionIndex = -1;
 		SetCurrentMember(0);
 	}

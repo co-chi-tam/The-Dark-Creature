@@ -115,6 +115,10 @@ public class TDCEntity : TDCPropertyReflection {
 
 	}
 
+	public virtual void ResetObject(){
+		
+	}
+
 	#endregion
 
 	#region Common
@@ -289,6 +293,10 @@ public class TDCEntity : TDCPropertyReflection {
 		return 0;
 	}
 
+	public virtual int GetMaxSanity() {
+		return 0;
+	}
+
 	public virtual void SetSanity(int value)
 	{
 		if (OnSanityChange != null)
@@ -298,6 +306,10 @@ public class TDCEntity : TDCPropertyReflection {
 	}
 
 	public virtual int GetHunger() {
+		return 0;
+	}
+
+	public virtual int GetMaxHunger() {
 		return 0;
 	}
 
@@ -448,6 +460,18 @@ public class TDCEntity : TDCPropertyReflection {
 	public virtual TDCEnum.EItemType GetItemType()
 	{
 		return TDCEnum.EItemType.None;
+	}
+
+	#endregion
+
+	#region Pet
+
+	public virtual void SetLeader(TDCEntity leader) {
+
+	}
+
+	public virtual TDCEntity GetLeader() {
+		return null;
 	}
 
 	#endregion

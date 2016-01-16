@@ -42,7 +42,7 @@ public class TDCPasiveSkillController : TDCSkillController {
 		{
 			var mPos = TransformPosition;
 			var valueName = pars["ValueName"].ToString();
-			var value = pars["ToValue"];
+			var value = float.Parse(pars["ToValue"].ToString());
 			mPos.y = 0f;
 			var colliders = Physics.OverlapSphere(mPos, GetEffectRadius(), m_ColliderLayerMask);
 			for (int i = 0; i < colliders.Length; i++)
@@ -54,7 +54,8 @@ public class TDCPasiveSkillController : TDCSkillController {
 				}
 				else
 				{
-					target.SetProperty(valueName, value);
+					var sourceValue = target.GetProperty<float>(valueName);
+					target.SetProperty(valueName, sourceValue + value);
 				}
 			}
 		}
@@ -88,18 +89,21 @@ public class TDCPasiveSkillController : TDCSkillController {
 		var toTarget = pars["ToTarget"];
 		var valueName = pars["ValueName"].ToString();
 		var toValue = float.Parse (pars["ToValue"].ToString());
+		var sourceValue = 0f;
 		if (toTarget.Equals("Enemy"))
 		{
 			var enemy = GetEnemyEntity();
 			if (enemy != null)
 			{
-				enemy.SetProperty(valueName, -toValue);
+				sourceValue = enemy.GetProperty<float>(valueName);
+				enemy.SetProperty(valueName, sourceValue - toValue);
 			}
 		} else if (toTarget.Equals("Owner")) {
 			var owner = GetOwnerEntity();
 			if (owner != null)
 			{
-				owner.SetProperty(valueName, -toValue);
+				sourceValue = owner.GetProperty<float>(valueName);
+				owner.SetProperty(valueName, sourceValue - toValue);
 			}
 		}
 	}

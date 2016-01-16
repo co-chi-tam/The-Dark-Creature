@@ -6,62 +6,70 @@
       "state_name": "IdleState",
       "states": [
         {
-          "condition_name": "IsActive",
-          "condition_value": true,
-          "state_name": "FindRandomState",
+          "condition_name": "HaveLeader",
+          "condition_value": false,
+          "state_name": "WildModeState",
           "states": [
             {
-              "condition_name": "CountdownWaitingTime",
+              "condition_name": "IsActive",
               "condition_value": true,
-              "state_name": "MoveState",
+              "state_name": "FindRandomState",
               "states": [
                 {
-                  "condition_name": "MoveToTarget",
+                  "condition_name": "CountdownWaitingTime",
                   "condition_value": true,
-                  "state_name": "IdleState",
-                  "states": []
-                },
-                {
-                  "condition_name": "FoundFood",
-                  "condition_value": true,
-                  "state_name": "ChaseState",
+                  "state_name": "MoveState",
                   "states": [
                     {
-                      "condition_name": "MoveToEnemy",
+                      "condition_name": "MoveToTarget",
                       "condition_value": true,
-                      "state_name": "WaitingOneSecondState",
+                      "state_name": "IdleState",
+                      "states": []
+                    },
+                    {
+                      "condition_name": "FoundFood",
+                      "condition_value": true,
+                      "state_name": "ChaseState",
                       "states": [
                         {
-                          "condition_name": "CountdownWaitingTime",
+                          "condition_name": "MoveToEnemy",
                           "condition_value": true,
-                          "state_name": "AttackState",
+                          "state_name": "WaitingOneSecondState",
                           "states": [
+                            {
+                              "condition_name": "CountdownWaitingTime",
+                              "condition_value": true,
+                              "state_name": "AttackState",
+                              "states": [
+                                {
+                                  "condition_name": "IsEnemyDeath",
+                                  "condition_value": true,
+                                  "state_name": "IdleState",
+                                  "states": []
+                                },
+                                {
+                                  "condition_name": "MoveToEnemy",
+                                  "condition_value": false,
+                                  "state_name": "ChaseState",
+                                  "states": []
+                                }
+                              ]
+                            },
                             {
                               "condition_name": "IsEnemyDeath",
                               "condition_value": true,
                               "state_name": "IdleState",
                               "states": []
-                            },
-                            {
-                              "condition_name": "MoveToEnemy",
-                              "condition_value": false,
-                              "state_name": "ChaseState",
-                              "states": []
                             }
                           ]
-                        },{
-                          "condition_name": "IsEnemyDeath",
+                        },
+                        {
+                          "condition_name": "IsToFarStartBattlePosition",
                           "condition_value": true,
-                          "state_name": "IdleState",
+                          "state_name": "FindRandomState",
                           "states": []
                         }
                       ]
-                    },
-                    {
-                      "condition_name": "IsToFarStartBattlePosition",
-                      "condition_value": true,
-                      "state_name": "FindRandomState",
-                      "states": []
                     }
                   ]
                 }

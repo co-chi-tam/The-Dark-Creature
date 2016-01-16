@@ -16,6 +16,8 @@ public class TDCCreature : TDCEntity
 
 	protected TDCSkillSlot m_NormalSkill;
 
+	private TDCEntity m_LeaderEntity;
+
 	private TDCEntity m_GroupEntity;
 	private TDCCreatureController m_Controller;
 	private TDCCreatureData m_Data;
@@ -104,6 +106,18 @@ public class TDCCreature : TDCEntity
 		{
 			// TODO
 		}
+	}
+
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		SetHealth (GetMaxHealth());
+		SetHeat(GetMaxHeat() / 3);
+		SetEnemyEntity (null);
+
+		m_DamageTake = 0;
+		m_SanityPoint.Value = 0;
+		m_HungerPoint.Value = 0;
 	}
 
 	#endregion
@@ -275,6 +289,16 @@ public class TDCCreature : TDCEntity
 	public override int GetMaxHeat()
 	{
 		return m_Data.MaxHeatPoint;
+	}
+
+	public override void SetLeader(TDCEntity leader)
+	{
+		m_LeaderEntity = leader;
+	}
+
+	public override TDCEntity GetLeader()
+	{
+		return m_LeaderEntity;
 	}
 
 	public override UIItemController[] GetItemInventory()

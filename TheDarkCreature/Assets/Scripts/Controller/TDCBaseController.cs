@@ -177,6 +177,10 @@ public class TDCBaseController : TDCMonoBehaviour
 		m_Entity.CallBackEvent(name);
 	}
 
+	public virtual TDCEntity SpawnMember() {
+		return null;
+	}
+
 	#endregion
 		
 	#region FSM
@@ -327,6 +331,10 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 
 	public virtual float GetMoveSpeed() {
+		return 0f;
+	}
+
+	public virtual float GetDuration() {
 		return 0f;
 	}
 

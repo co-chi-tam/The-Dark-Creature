@@ -9,7 +9,6 @@ public class TDCEnviroment : TDCEntity
 	private TDCEnviromentController m_Controller;
 	private TDCEnviromentData m_Data;
 	private int m_DamageTake = 0;
-	private int m_HealthPoint = 0;
 	#endregion
 
 	#region Contructor
@@ -31,11 +30,11 @@ public class TDCEnviroment : TDCEntity
 		{
 			CallBackEvent("OnAlive");
 		}
-		m_HealthPoint = GetHealth();
+		var health = GetHealth();
 		if (m_DamageTake != 0) {
-			m_HealthPoint -= m_DamageTake;
+			health -= m_DamageTake;
 			m_DamageTake = 0;
-			SetHealth(m_HealthPoint);
+			SetHealth(health);
 		}
 	}
 
@@ -49,6 +48,18 @@ public class TDCEnviroment : TDCEntity
 		{
 			m_DamageTake += damage;
 		}
+	}
+
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		SetHealth (GetMaxHealth());
+		SetHeat(GetHeat() / 3);
+		SetEnemyEntity (null);
+
+		m_DamageTake = 0;
+		m_HealthPoint.Value = 0;
+		m_HeatPoint.Value = 0;
 	}
 
 	#endregion

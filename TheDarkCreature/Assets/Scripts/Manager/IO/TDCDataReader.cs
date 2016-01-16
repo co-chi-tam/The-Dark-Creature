@@ -47,6 +47,7 @@ public class TDCDataReader {
 		var objectTextAsset = Resources.Load<TextAsset> ("Data/Creature/ObjectData");
 		var itemTextAsset = Resources.Load<TextAsset> ("Data/Creature/ItemData");
 		var skillTextAsset = Resources.Load<TextAsset>("Data/Skill/SkillData");
+		var eggTextAsset = Resources.Load<TextAsset>("Data/Egg/EggData");
 		var mapTextAsset = Resources.Load<TextAsset>("Data/Map/WorldMap");
 		var poolTextAsset = Resources.Load<TextAsset>("ObjectPool/ObjectPoolData");
 
@@ -60,6 +61,7 @@ public class TDCDataReader {
 		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
 		var jsonItem = Json.Deserialize (itemTextAsset.text) as Dictionary<string, object>;
 		var jsonSkill = Json.Deserialize (skillTextAsset.text) as Dictionary<string, object>;
+		var jsonEgg = Json.Deserialize (eggTextAsset.text) as Dictionary<string, object>;
 		var jsonMap = Json.Deserialize(mapTextAsset.text) as Dictionary<string, object>;
 		var jsonPool = Json.Deserialize(poolTextAsset.text) as Dictionary<string, object>;
 
@@ -73,6 +75,7 @@ public class TDCDataReader {
 		LoadPlayer (jsonPlayer["players"] as List<object>);
 		LoadItem (jsonItem["items"] as List<object>);
 		LoadSkill(jsonSkill["skills"] as List<object>);
+		LoadEgg(jsonEgg["eggs"] as List<object>);
 		LoadMap(jsonMap["map"] as List<object>);
 		LoadObjectPool(jsonPool);
 	}
@@ -330,6 +333,38 @@ public class TDCDataReader {
 		}
 	}
 
+	private void LoadEgg(List<object> values) {
+		for (int i = 0; i < values.Count; i++) {
+			var instance = values[i] as Dictionary<string, object>;
+			var egg = new TDCEggData ();
+			egg.ID = int.Parse (instance["ID"].ToString());
+			egg.Name = instance["Name"].ToString();
+			egg.Description = instance["Description"].ToString();
+			egg.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
+			egg.FSMPath = instance["FSMPath"].ToString ();
+			egg.Icon = instance["IconPath"].ToString();
+			egg.GameType = (TDCEnum.EGameType)int.Parse (instance["GameType"].ToString());
+			egg.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
+			egg.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
+			egg.MaxHP = int.Parse (instance["MaxHP"].ToString());
+			egg.CurrentHeatPoint = int.Parse (instance["CurrentHeatPoint"].ToString());
+			egg.MaxHeatPoint = int.Parse (instance["MaxHeatPoint"].ToString());
+			egg.Duration = int.Parse (instance["Duration"].ToString());
+			egg.MemberType = (TDCEnum.EGameType)Enum.Parse (typeof(TDCEnum.EGameType), instance["MemberType"].ToString());
+			var inventory = instance["Inventory"] as List<object>;
+			for (int x = 0; x < inventory.Count; x++) {
+				var invenData = inventory[x] as Dictionary<string, object>;
+				var gameType = (TDCEnum.EGameType)int.Parse (invenData["GameType"].ToString());
+				var amount = int.Parse (invenData["Amount"].ToString());
+				var itemType = m_ListItemData [gameType].ItemType;
+				var item = LoadItemData(itemType, gameType);
+				egg.Inventory[x] = new UIItemController (item);
+				egg.Inventory[x].GetData().Amount = amount;
+			}
+			m_ListCreatureData.Add (egg.GameType, egg);
+		}
+	}
+
 	private void LoadMap(List<object> value) {
 		for (int i = 0; i < value.Count; i++)
 		{
@@ -355,14 +390,14 @@ public class TDCDataReader {
 		UIItemData item = null;
 		switch (itemType) {
 			case TDCEnum.EItemType.Food:
-				item = GetUIFood (gameType);
+				item = GetUIFoodData (gameType);
 				break;
 			case TDCEnum.EItemType.Weapon:
-				item = GetUIWeapon (gameType);
+				item = GetUIWeaponData (gameType);
 				break;
 			case TDCEnum.EItemType.GObject:
 			case TDCEnum.EItemType.Item:
-				item = GetUIItem(gameType);
+				item = GetUIItemData(gameType);
 				break;
 		}
 		return item;
@@ -411,50 +446,55 @@ public class TDCDataReader {
 		return map;
 	}
 
-	public TDCCreatureData GetCreature(TDCEnum.EGameType creature) {
+	public TDCCreatureData GetCreatureData(TDCEnum.EGameType creature) {
 		var creatureData = TDCCreatureData.Clone (m_ListCreatureData [creature]);
 		return creatureData;
 	}
 
-	public UIItemData GetUIItem (TDCEnum.EGameType item) {
+	public TDCEggData GetEggData(TDCEnum.EGameType creature) {
+		var eggData = TDCEggData.Clone (m_ListCreatureData [creature] as TDCEggData);
+		return eggData;
+	}
+
+	public UIItemData GetUIItemData (TDCEnum.EGameType item) {
 		var itemData = UIItemData.Clone (m_ListItemData[item] as UIItemData);
 		itemData.Owner = null;
 		return itemData;
 	}
 
-	public UIFoodData GetUIFood (TDCEnum.EGameType food) {
+	public UIFoodData GetUIFoodData (TDCEnum.EGameType food) {
 		var foodData = UIFoodData.Clone (m_ListItemData[food] as UIFoodData);
 		foodData.Owner = null;
 		return foodData;
 	}
 
-	public UIWeaponData GetUIWeapon(TDCEnum.EGameType weapon) {
+	public UIWeaponData GetUIWeaponData(TDCEnum.EGameType weapon) {
 		var weapondata = UIWeaponData.Clone (m_ListItemData[weapon] as UIWeaponData);
 		weapondata.Owner = null;
 		return weapondata;
 	}
 
-	public TDCGroupData GetGroup(TDCEnum.EGameType group) {
+	public TDCGroupData GetGroupData(TDCEnum.EGameType group) {
 		var groupData = TDCGroupData.Clone (m_ListGroupData[group]);
 		return groupData;
 	}
 
-	public TDCPlayerData GetPlayer(TDCEnum.EGameType player) {
+	public TDCPlayerData GetPlayerData(TDCEnum.EGameType player) {
 		var playerData = TDCPlayerData.Clone (m_ListPlayerData[player] as TDCPlayerData);
 		return playerData;
 	}
 
-	public TDCItemData GetItem(TDCEnum.EGameType resource) {
+	public TDCItemData GetItemData(TDCEnum.EGameType resource) {
 		var item = TDCItemData.Clone (m_ListCreatureData[resource] as TDCItemData);
 		return item;
 	}
 
-	public TDCEnviromentData GetEnviroment(TDCEnum.EGameType resource) {
+	public TDCEnviromentData GetEnviromentData(TDCEnum.EGameType resource) {
 		var resourceData = TDCEnviromentData.Clone (m_ListCreatureData[resource] as TDCEnviromentData);
 		return resourceData;
 	}
 
-	public TDCGObjectData GetGObject(TDCEnum.EGameType gObject) {
+	public TDCGObjectData GetGObjectData(TDCEnum.EGameType gObject) {
 		var objectData = TDCGObjectData.Clone (m_ListCreatureData[gObject] as TDCGObjectData);
 		return objectData;
 	}

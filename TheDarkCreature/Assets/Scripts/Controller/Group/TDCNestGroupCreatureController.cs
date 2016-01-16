@@ -37,6 +37,11 @@ public class TDCNestGroupCreatureController : TDCGroupCreatureController
 		}
 	}
 
+	public override void ResetObject()
+	{
+		base.ResetObject();
+	}
+
 	#endregion
 
 	#region FSM

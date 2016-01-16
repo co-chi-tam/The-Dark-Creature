@@ -32,6 +32,12 @@ public class TDCItem : TDCEntity
 		m_Enemy = attacker;
 	}
 
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		SetItemActive(true);
+	}
+
 	#endregion
 
 	#region Getter && Setter

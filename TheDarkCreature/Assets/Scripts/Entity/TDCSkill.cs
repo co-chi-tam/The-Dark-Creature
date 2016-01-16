@@ -24,6 +24,16 @@ public class TDCSkill : TDCEntity
 
 	#endregion
 
+	#region Main methods
+
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		SetOwnerEntity(null);
+	}
+
+	#endregion
+
 	#region Getter && Setter
 
 	public override void SetEnemyEntity(TDCEntity entity)

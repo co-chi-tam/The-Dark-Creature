@@ -134,14 +134,13 @@ public class TDCSkillController : TDCBaseController {
 	public override void ResetObject()
 	{
 		base.ResetObject();
+		m_Entity.ResetObject();
 		m_IsFinishSkill = 1f;
 		m_GameManager.SetObjectPool(this.GetEntity());
 		m_EffectPerTime = m_Entity.GetEffectPerTime();
 		m_TimeDelay = m_Entity.GetTimeDelay();
 		m_TimeEffect = m_Entity.GetTimeEffect();
 		m_EffectRadius = m_Entity.GetEffectRadius();
-
-		SetOwnerEntity(null);
 	}
 
 	public override void MovePosition(Vector3 position)

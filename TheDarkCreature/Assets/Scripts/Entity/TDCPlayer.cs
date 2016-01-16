@@ -61,6 +61,15 @@ public class TDCPlayer : TDCCreature
 		base.ActiveSkill(index);
 	}
 
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		SetSanity(GetMaxSanity() / 3);
+		SetHunger(GetMaxHunger() / 3);
+		m_SanityPoint.Value = 0;
+		m_HungerPoint.Value = 0;
+	}
+
 	#endregion
 
 	#region Getter & Setter
@@ -187,6 +196,16 @@ public class TDCPlayer : TDCCreature
 	public override int GetHunger()
 	{
 		return m_Data.CurrentHungerPoint;
+	}
+
+	public override int GetMaxHunger()
+	{
+		return m_Data.MaxHungerPoint;
+	}
+
+	public override int GetMaxSanity()
+	{
+		return m_Data.MaxSanityPoint;
 	}
 
 	public override int AddItemInventory(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
