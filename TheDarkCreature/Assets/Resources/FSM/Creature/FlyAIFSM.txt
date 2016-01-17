@@ -65,7 +65,7 @@
                             {
                               "condition_name": "IsToFarStartBattlePosition",
                               "condition_value": true,
-                              "state_name": "FindRandomState",
+                              "state_name": "IdleState",
                               "states": []
                             }
                           ]
@@ -89,6 +89,49 @@
                 }
               ]
             }
+          ]
+        },{
+          "condition_name": "HaveLeader",
+          "condition_value": true,
+          "state_name": "PetModeState",
+          "states": [
+          	{
+	          "condition_name": "IsToFarLeaderPosition",
+	          "condition_value": true,
+	          "state_name": "FlyFollowState",
+	          "states": [
+	          	{
+                  "condition_name": "MoveToTarget",
+                  "condition_value": true,
+                  "state_name": "LandingState",
+                  "states": [
+                    {
+                      "condition_name": "IsLandingFinish",
+                      "condition_value": true,
+                      "state_name": "IdleState",
+                      "states": []
+                    }
+                  ]
+                },{
+	              "condition_name": "HaveEnemyByLeader",
+	              "condition_value": true,
+	              "state_name": "LandingState",
+	              "states": [
+	              	{
+                      "condition_name": "IsLandingFinish",
+                      "condition_value": true,
+                      "state_name": "ChaseState",
+                      "states": []
+                    }
+	              ]
+		        }
+	          ]
+	        },{
+              "condition_name": "HaveEnemyByLeader",
+              "condition_value": true,
+              "state_name": "ChaseState",
+              "states": []
+	        }
           ]
         }
       ]

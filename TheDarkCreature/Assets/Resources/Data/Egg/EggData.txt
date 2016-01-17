@@ -6,15 +6,16 @@
 			"GameType": 801,
 			"CreatureType": 4,
 			"Description": "",
+			"IconPath": "",
 			"ModelPath": ["Prefabs/Egg/EggDodono"],
 			"FSMPath": "FSM/Egg/EggFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
 			"CurrentHeatPoint": "50",
 			"MaxHeatPoint": "100",
-			"Duration": 120,
+			"Duration": 300,
 			"MemberType": "Dodono",
-			"IconPath": "",
+			"DetectRange": 20,
 			"Inventory": [{"GameType":101,"Amount":2}]
 		}
 	]

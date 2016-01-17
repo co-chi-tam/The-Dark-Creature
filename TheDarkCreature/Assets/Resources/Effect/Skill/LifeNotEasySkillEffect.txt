@@ -7,7 +7,7 @@
 		{
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["SubtractValueEffect(ToTarget:Owner,ValueName:HungerPoint,ToValue:1)","SubtractValueEffect(ToTarget:Owner,ValueName:SanityPoint,ToValue:1)"]
+	        "ExcuteMethods": ["SubtractValueEffect(ToTarget:Owner,ValueName:HungerPoint,ToValue:1)","SubtractValueEffect(ToTarget:Owner,ValueName:SanityPoint,ToValue:1)","SubtractValueEffect(ToTarget:Owner,ValueName:HeatPoint,ToValue:1)"]
 	    }
     ],
     "NoMethods": [

@@ -4,8 +4,12 @@ using System.Collections;
 public class TDCEgg : TDCEntity
 {
 	#region Properties
-	protected TDCEggController m_Controller;
-	protected TDCEggData m_Data;
+
+	private TDCEggController m_Controller;
+	private TDCEggData m_Data;
+	private TDCSkillSlot[] m_PassiveSkill;
+	private int m_DamageTake = 0;
+
 	#endregion
 
 	#region Contructor
@@ -14,16 +18,33 @@ public class TDCEgg : TDCEntity
 	{
 		m_Controller = ctrl as TDCEggController;
 		m_Data = data as TDCEggData;
+
+		m_PassiveSkill = new TDCSkillSlot[1];
+		m_PassiveSkill[0] = new TDCSkillSlot(TDCEnum.EGameType.LifeNotEasySkill, this);
 	}
 
 	#endregion
 
 	#region Main methods
-	private float m_Time = 0f;
+
+	public override void ApplyDamage(int damage, TDCEntity attacker)
+	{
+		base.ApplyDamage(damage, attacker);
+		if (attacker.GetActive())
+		{
+			m_DamageTake += damage;
+		}
+	}
 
 	public override void Update(float dt)
 	{
 		base.Update(dt);
+		if (GetActive())
+		{
+			CallBackEvent("OnAlive");
+		}
+		m_PassiveSkill[0].UpdateSkill(dt);
+
 		var health = GetHealth();
 		if (m_HealthPoint.Value != 0)
 		{
@@ -31,17 +52,16 @@ public class TDCEgg : TDCEntity
 			m_HealthPoint.Value = 0;
 			SetHealth(health);
 		}
+		if (m_DamageTake != 0) {
+			health -= m_DamageTake;
+			m_DamageTake = 0;
+			SetHealth(health);
+		}
 		if (m_HeatPoint.Value != 0)
 		{
 			var heat = GetHeat() + m_HeatPoint.Value;
 			m_HeatPoint.Value = 0;
 			SetHeat(heat);
-		}
-
-		if (Time.time - m_Time > 1f)
-		{
-			m_HeatPoint.Value += -1;
-			m_Time = Time.time;
 		}
 	}
 
@@ -82,7 +102,6 @@ public class TDCEgg : TDCEntity
 		{
 			m_Controller.gameObject.SetActive(value);
 		}
-		m_Time = Time.time;
 	}
 
 	public override float GetDuration()
@@ -140,9 +159,22 @@ public class TDCEgg : TDCEntity
 		return m_Data.MemberType;
 	}
 
+	public override float GetDetectRange()
+	{
+		return m_Data.DetectRange;
+	}
+
 	public override UIItemController[] GetItemInventory()
 	{
 		return m_Data.Inventory;
+	}
+
+	public override void SetTransformPosition(Vector3 pos) {
+		m_Controller.TransformPosition = pos;
+	}
+
+	public override Vector3 GetTransformPosition() {
+		return m_Controller.TransformPosition;
 	}
 
 	#endregion

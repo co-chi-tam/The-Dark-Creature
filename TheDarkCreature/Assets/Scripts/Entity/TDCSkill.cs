@@ -143,6 +143,15 @@ public class TDCSkill : TDCEntity
 		return m_EnemyEntity.GetController().TransformPosition;
 	}
 
+	public override void SetTransformPosition(Vector3 pos) {
+		m_Controller.TransformPosition = pos;
+	}
+
+	public override Vector3 GetTransformPosition() {
+		return m_Controller.TransformPosition;
+	}
+
 	#endregion
+
 }
 

@@ -349,6 +349,7 @@ public class TDCDataReader {
 			egg.MaxHP = int.Parse (instance["MaxHP"].ToString());
 			egg.CurrentHeatPoint = int.Parse (instance["CurrentHeatPoint"].ToString());
 			egg.MaxHeatPoint = int.Parse (instance["MaxHeatPoint"].ToString());
+			egg.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			egg.Duration = int.Parse (instance["Duration"].ToString());
 			egg.MemberType = (TDCEnum.EGameType)Enum.Parse (typeof(TDCEnum.EGameType), instance["MemberType"].ToString());
 			var inventory = instance["Inventory"] as List<object>;

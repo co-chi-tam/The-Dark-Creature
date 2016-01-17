@@ -76,6 +76,35 @@
               ]
             }
           ]
+        },{
+          "condition_name": "HaveLeader",
+          "condition_value": true,
+          "state_name": "PetModeState",
+          "states": [
+          	{
+	          "condition_name": "IsToFarLeaderPosition",
+	          "condition_value": true,
+	          "state_name": "FollowState",
+	          "states": [
+	          	{
+                  "condition_name": "MoveToTarget",
+                  "condition_value": true,
+                  "state_name": "IdleState",
+                  "states": []
+                },{
+	              "condition_name": "HaveEnemyByLeader",
+	              "condition_value": true,
+	              "state_name": "ChaseState",
+	              "states": []
+		        }
+	          ]
+	        },{
+              "condition_name": "HaveEnemyByLeader",
+              "condition_value": true,
+              "state_name": "ChaseState",
+              "states": []
+	        }
+          ]
         }
       ]
     },

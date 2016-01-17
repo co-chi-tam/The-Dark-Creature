@@ -54,7 +54,7 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 100,
 			"Damage": 7,
-			"NormalSkill": 502,
+			"NormalSkill": 503,
 			"Level": 1,
 			"Inventory": [
 				{

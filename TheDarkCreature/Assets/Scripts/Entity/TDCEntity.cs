@@ -176,6 +176,14 @@ public class TDCEntity : TDCPropertyReflection {
 		
 	}
 
+	public virtual void SetTransformPosition(Vector3 pos) {
+
+	}
+
+	public virtual Vector3 GetTransformPosition() {
+		return Vector3.zero;
+	}
+
 	#endregion
 
 	#region Creature
@@ -244,7 +252,7 @@ public class TDCEntity : TDCPropertyReflection {
 		
 	}
 
-	public virtual float GetDetectEnemyRange() {
+	public virtual float GetDetectRange() {
 		return 0f;
 	}
 
@@ -466,12 +474,16 @@ public class TDCEntity : TDCPropertyReflection {
 
 	#region Pet
 
-	public virtual void SetLeader(TDCEntity leader) {
+	public virtual void SetLeaderEntity(TDCEntity leader) {
 
 	}
 
-	public virtual TDCEntity GetLeader() {
+	public virtual TDCEntity GetLeaderEntity() {
 		return null;
+	}
+
+	public virtual Vector3 GetLeaderPosition() {
+		return Vector3.zero;
 	}
 
 	#endregion

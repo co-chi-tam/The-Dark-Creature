@@ -26,6 +26,7 @@ public class TDCEggData : TDCGObjectData
 		tmp.CurrentHeatPoint = instance.CurrentHeatPoint;
 		tmp.MaxHeatPoint = instance.MaxHeatPoint;
 		tmp.Duration = instance.Duration;
+		tmp.DetectRange = instance.DetectRange;
 		tmp.MemberType = instance.MemberType;
 		tmp.Inventory = instance.Inventory;
 		return tmp;

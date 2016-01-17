@@ -290,8 +290,8 @@ public class TDCBaseController : TDCMonoBehaviour
 		m_Entity.SetTargetPosition (pos);
 	}
 	
-	public virtual float GetDetectEnemyRange() {
-		return m_Entity.GetDetectEnemyRange();
+	public virtual float GetDetectRange() {
+		return m_Entity.GetDetectRange();
 	}
 
 	public virtual void SetGroupEntity(TDCEntity group) {
@@ -336,6 +336,18 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual float GetDuration() {
 		return 0f;
+	}
+
+	public virtual void SetLeaderEntity(TDCEntity leader) {
+		
+	}
+
+	public virtual TDCEntity GetLeaderEntity() {
+		return null;
+	}
+
+	public virtual Vector3 GetLeaderPosition() {
+		return Vector3.zero;
 	}
 
 	#endregion

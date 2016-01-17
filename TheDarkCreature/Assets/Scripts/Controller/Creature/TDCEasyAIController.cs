@@ -40,7 +40,7 @@ public class TDCEasyAIController : TDCCreatureController
 		m_Entity.ActiveSkill(index);
 	}
 
-	#endregion
+   	#endregion
 
     #region FSM
 
@@ -85,6 +85,30 @@ public class TDCEasyAIController : TDCCreatureController
 			SetEnemyEntity(null);
 		}
 		return result;
+	}
+
+	internal override bool IsToFarLeaderPosition()
+	{
+		var distance = (TransformPosition - m_Entity.GetLeaderPosition()).sqrMagnitude;
+		var range = GetDetectRange();
+		var result = distance > range * range;
+		return result;
+	}
+
+	internal override bool HaveLeader()
+	{
+		return m_Entity.GetLeaderEntity() != null;
+	}
+
+	internal override bool HaveEnemyByLeader()
+	{
+		var enemy = m_Entity.GetLeaderEntity().GetEnemyEntity();
+		var enemyCanAttack = true;
+		if (enemy != null && GetEnemyEntity() == null && enemy != this.GetEntity())
+		{
+			SetEnemyEntity(enemy);
+		}
+		return enemy != null && enemyCanAttack;
 	}
 
 	#endregion

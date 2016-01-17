@@ -20,7 +20,7 @@
 			"NormalSkill": 503,
 			"Enemies": [301,6,7,8],
 			"Foods": [52,53,54,55,102,103,104,105],
-			"Inventory": [{"GameType":101,"Amount":2}]
+			"Inventory": [{"GameType":101,"Amount":1}]
 		},{
 			"ID": 2,
 			"Name": "Satla",
@@ -41,7 +41,7 @@
 			"NormalSkill": 503,
 			"Enemies": [301,7],
 			"Foods": [5,52,54,101,102,103,104],
-			"Inventory": [{"GameType":101,"Amount":1}]
+			"Inventory": [{"GameType":101,"Amount":2}]
 		},{
 			"ID": 3,
 			"Name": "Taurot",
@@ -62,7 +62,7 @@
 			"NormalSkill": 503,
 			"Enemies": [301],
 			"Foods": [5,6,8,9,53,54,55,101,102,103,104,105,106],
-			"Inventory": [{"GameType":101,"Amount":1}]
+			"Inventory": [{"GameType":101,"Amount":3}]
 		},{
 			"ID": 3,
 			"Name": "Vulbat",
@@ -83,7 +83,7 @@
 			"NormalSkill": 503,
 			"Enemies": [301,7],
 			"Foods": [5,6,101],
-			"Inventory": [{"GameType":101,"Amount":1}]
+			"Inventory": [{"GameType":101,"Amount":2}]
 		},{
 			"ID": 4,
 			"Name": "Crabystal",
@@ -104,7 +104,7 @@
 			"NormalSkill": 502,
 			"Enemies": [301],
 			"Foods": [7,56,101,106],
-			"Inventory": [{"GameType":101,"Amount":1}]
+			"Inventory": [{"GameType":101,"Amount":3},{"GameType":106,"Amount":1}]
 		}
 	]
 }

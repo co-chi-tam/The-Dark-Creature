@@ -18,7 +18,7 @@ public static class TDCUltilities {
 		return Encoding.ASCII.GetBytes(value);
 	}
 
-	public static Vector2 RandomAround(float radius) {
+	public static Vector2 RandomInsideCircle(float radius) {
 		var randomRadius = Random.Range(0f, radius);
 		var randomDegree = Random.Range(0f, 360f);
 		var angleRadian = randomDegree * Mathf.PI / 180f; // Deg2Rad
@@ -28,13 +28,28 @@ public static class TDCUltilities {
 		return returnVetor;
 	}
 
+	public static Vector2 RandomAroundCircle(float radius) {
+		var randomDegree = Random.Range(0f, 360f);
+		var angleRadian = randomDegree * Mathf.PI / 180f; // Deg2Rad
+		Vector2 returnVetor = Vector2.zero;
+		returnVetor.x = radius * Mathf.Sin(angleRadian);
+		returnVetor.y = radius * Mathf.Cos(angleRadian);
+		return returnVetor;
+	}
+
 	public static Vector3 V3Forward(this Transform trans, float length = 1f) {
 		return trans.position + trans.rotation * Vector3.forward * length;
 	}
 
 	public static bool IsPlayer(TDCEntity entity) {
 		return entity.GetCreatureType() == TDCEnum.ECreatureType.GroundPlayer ||
-		entity.GetCreatureType() == TDCEnum.ECreatureType.FlyPlayer;
+			entity.GetCreatureType() == TDCEnum.ECreatureType.FlyPlayer;
+	}
+
+	public static bool IsCreature(TDCEntity entity) {
+		return entity.GetCreatureType() == TDCEnum.ECreatureType.GroundCreature ||
+			entity.GetCreatureType() == TDCEnum.ECreatureType.FlyCreature || 
+			IsPlayer(entity);
 	}
 
 }

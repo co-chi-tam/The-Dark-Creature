@@ -10,7 +10,7 @@ public class TDCBaseGroupController : TDCBaseController
 
 	#endregion
 
-    #region Implement Mono
+    #region Implement Monobehaviour
 
 	public override void Init ()
 	{

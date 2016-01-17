@@ -66,7 +66,7 @@ public class TDCFlyAIController : TDCEasyAIController
 		}
 		var mPos = TransformPosition;
 		mPos.y = 0f;
-		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
+		var colliders = Physics.OverlapSphere(mPos, GetDetectRange(), m_ColliderLayerMask);
 		for (int i = 0; i < colliders.Length; i++) {
 			var food = m_GameManager.GetEntityByName (colliders[i].name);
 			if (food == null || food.GetActive () == false || food == this.GetEntity()) {

@@ -37,7 +37,7 @@
 			"Name": "GroupGrass",
 			"GameType": 204,
 			"GroupType": 1,
-			"GroupSpawnType": "Center",
+			"GroupSpawnType": "Random",
 			"Description": "",
 			"ModelPath": ["Prefabs/Group/GroupCreature"],
 			"IconPath": "",

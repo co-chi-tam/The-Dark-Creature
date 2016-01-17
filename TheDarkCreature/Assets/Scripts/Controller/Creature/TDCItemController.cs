@@ -55,7 +55,7 @@ public class TDCItemController : TDCCreatureController
 		TDCEntity item = null;
 		if (m_GameManager.GetObjectPool(itemType, ref item))
 		{
-			var pos = TDCUltilities.RandomAround(GetColliderRadius());
+			var pos = UnityEngine.Random.insideUnitCircle * GetColliderRadius();
 			item.GetController().TransformPosition = this.TransformPosition + new Vector3(pos.x, 0f, pos.y);
 			item.SetActive(true);
 		}

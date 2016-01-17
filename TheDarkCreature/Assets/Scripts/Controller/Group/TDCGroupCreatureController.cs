@@ -13,7 +13,7 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
     #endregion
 
-    #region Implementation Mono
+    #region Implementation Monobehaviour
 
 	public override void Init()
 	{
@@ -86,10 +86,10 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		{
 			m_PositionIndex = (m_PositionIndex + 1) % m_ListMemberPosition.Count;
 			var memberPos = m_ListMemberPosition[m_PositionIndex];
+			member.GetController().ResetObject();
 			member.GetController().TransformPosition = memberPos;
 			member.SetStartPosition(memberPos);
 			member.SetGroupEntity(this.GetEntity());
-			member.GetController().ResetObject();
 			member.SetActive(true);
 			var memberCount = GetCurrentMember();
 			memberCount += 1;

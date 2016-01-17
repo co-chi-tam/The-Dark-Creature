@@ -8,7 +8,6 @@ public class TDCPlayer : TDCCreature
 
 	private TDCPlayerController m_Controller;
 	private TDCPlayerData m_Data;
-
 	private TDCSkillSlot[] m_PassiveSkills;
 
 	#endregion
@@ -137,7 +136,7 @@ public class TDCPlayer : TDCCreature
 		m_Controller.SetAnimation (anim);
 	}
 
-	public override float GetDetectEnemyRange() {
+	public override float GetDetectRange() {
 		return m_Data.DetectRange;
 	}
 
@@ -231,6 +230,14 @@ public class TDCPlayer : TDCCreature
 			}
 		}
 		return m_Data.AttackRange + GetColliderRadius();
+	}
+
+	public override void SetTransformPosition(Vector3 pos) {
+		m_Controller.TransformPosition = pos;
+	}
+
+	public override Vector3 GetTransformPosition() {
+		return m_Controller.TransformPosition;
 	}
 
 	#endregion

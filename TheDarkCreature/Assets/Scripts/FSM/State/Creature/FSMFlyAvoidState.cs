@@ -12,7 +12,7 @@ public class FSMFlyAvoidState : FSMBaseState
 	{
 		m_Controller.SetAnimation(EAnimation.Run);
 		var direction = (m_Controller.TransformPosition - m_Controller.GetEnemyPosition()).normalized;
-		var newTarget = m_Controller.TransformPosition + direction * (m_Controller.GetDetectEnemyRange() + 10f);
+		var newTarget = m_Controller.TransformPosition + direction * (m_Controller.GetDetectRange() + 10f);
 		newTarget.y = 0f;
 		m_Controller.SetTargetPosition(newTarget);
 		m_Controller.CallBackEvent("OnAvoid");

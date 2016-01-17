@@ -142,6 +142,15 @@ public class TDCEnviroment : TDCEntity
 	{
 		return m_Data.Inventory;
 	}
+
+	public override void SetTransformPosition(Vector3 pos) {
+		m_Controller.TransformPosition = pos;
+	}
+
+	public override Vector3 GetTransformPosition() {
+		return m_Controller.TransformPosition;
+	}
+
 	#endregion
 
 }

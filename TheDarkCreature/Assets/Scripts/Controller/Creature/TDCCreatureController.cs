@@ -31,6 +31,8 @@ public class TDCCreatureController : TDCBaseController {
 		var landingState 	= new FSMLandingState(this);
 		var wildModeState 	= new FSMWildModeState(this);
 		var petModeState	= new FSMPetModeState(this);
+		var followState 	= new FSMFollowState(this);
+		var flyFollowState	= new FSMFlyFollowState(this);
 
 		m_FSMManager.RegisterState("IdleState", idleState);
 		m_FSMManager.RegisterState("MoveState", moveState);
@@ -44,6 +46,8 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("LandingState", landingState);
 		m_FSMManager.RegisterState("WildModeState", wildModeState);
 		m_FSMManager.RegisterState("PetModeState", petModeState);
+		m_FSMManager.RegisterState("FollowState", followState);
+		m_FSMManager.RegisterState("FlyFollowState", flyFollowState);
 
 		m_FSMManager.RegisterCondition("IsActive", GetActive);
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
@@ -53,10 +57,12 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("IsToFarGroup", IsToFarGroup);
 		m_FSMManager.RegisterCondition("IsToFarStartBattlePosition", IsToFarStartBattlePosition);
 		m_FSMManager.RegisterCondition("IsToFarStartPosition", IsToFarStartPosition);
+		m_FSMManager.RegisterCondition("IsToFarLeaderPosition", IsToFarLeaderPosition);
 		m_FSMManager.RegisterCondition("FoundFood", FoundFood);
 		m_FSMManager.RegisterCondition("IsEnemyDeath", IsEnemyDeath);
 		m_FSMManager.RegisterCondition("IsLandingFinish", IsLandingFinish);
 		m_FSMManager.RegisterCondition("HaveLeader", HaveLeader);
+		m_FSMManager.RegisterCondition("HaveEnemyByLeader", HaveEnemyByLeader);
 	}
 
 	protected override void FixedUpdate ()
@@ -83,7 +89,7 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.OnDrawGizmos();
 		Gizmos.color = Color.magenta;
-		Gizmos.DrawWireSphere (TransformPosition, GetDetectEnemyRange());
+		Gizmos.DrawWireSphere (TransformPosition, GetDetectRange());
 		Gizmos.color = Color.red;
 		Gizmos.DrawWireSphere (TransformPosition, m_Entity.GetAttackRange());
 		Gizmos.color = Color.white;
@@ -98,6 +104,7 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		var curValue = base.GetObjectCurrentValue();
 		curValue["State"] = m_FSMManager.StateCurrentName;
+		curValue["Leader Name"] = m_Entity.GetLeaderEntity() == null ? "None" : m_Entity.GetLeaderEntity().GetController().name;
 		return curValue;
 	}
 
@@ -188,7 +195,7 @@ public class TDCCreatureController : TDCBaseController {
 				TDCEntity item = null;
 				if (m_GameManager.GetObjectPool(itemType, ref item))
 				{
-					var pos = TDCUltilities.RandomAround(GetColliderRadius());
+					var pos = UnityEngine.Random.insideUnitCircle * GetColliderRadius();
 					var mPos = this.TransformPosition;
 					mPos.y = 0f;
 					item.GetController().TransformPosition = mPos + new Vector3(pos.x, 0f, pos.y);
@@ -220,15 +227,19 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool IsToFarGroup() {
-		return true;
+		return false;
 	}
 
 	internal virtual bool IsToFarStartBattlePosition() {
-		return true;
+		return false;
 	}
 
 	internal virtual bool IsToFarStartPosition() {
-		return true;
+		return false;
+	}
+
+	internal virtual bool IsToFarLeaderPosition() {
+		return false;
 	}
 
 	internal override bool IsDeath() {
@@ -262,8 +273,13 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool FoundEnemy() {
+		var leader = GetLeaderEntity();
+		if (leader != null)
+		{
+			return false;
+		}
 		var mPos = TransformPosition;
-		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
+		var colliders = Physics.OverlapSphere(mPos, GetDetectRange(), m_ColliderLayerMask);
 		if (colliders.Length == 0)
 			return false;
 		for (int i = 0; i < colliders.Length; i++) {
@@ -290,7 +306,7 @@ public class TDCCreatureController : TDCBaseController {
 			return true;
 		}
 		var mPos = TransformPosition;
-		var colliders = Physics.OverlapSphere(mPos, GetDetectEnemyRange(), m_ColliderLayerMask);
+		var colliders = Physics.OverlapSphere(mPos, GetDetectRange(), m_ColliderLayerMask);
 		if (colliders.Length == 0)
 			return false;
 		for (int i = 0; i < colliders.Length; i++) {
@@ -311,7 +327,11 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	internal virtual bool HaveLeader() {
-		return m_Entity.GetLeader() != null;
+		return false;
+	}
+
+	internal virtual bool HaveEnemyByLeader() {
+		return false;
 	}
 
 	#endregion
@@ -356,8 +376,8 @@ public class TDCCreatureController : TDCBaseController {
 		}
 	}
 	
-	public override float GetDetectEnemyRange() {
-		return m_Entity.GetDetectEnemyRange();
+	public override float GetDetectRange() {
+		return m_Entity.GetDetectRange();
 	}
 
 	public virtual List<TDCEnum.EGameType> GetTypeEnemies() {
@@ -387,7 +407,22 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		return m_Entity.GetItemInventory();
 	}
-	
+
+	public override TDCEntity GetLeaderEntity()
+	{
+		return m_Entity.GetLeaderEntity();
+	}
+
+	public override void SetLeaderEntity(TDCEntity leader)
+	{
+		base.SetLeaderEntity(leader);
+		m_Entity.SetLeaderEntity(leader);
+	}
+
+	public override Vector3 GetLeaderPosition() {
+		return m_Entity.GetLeaderPosition();
+	}
+
 	#endregion
 
 }

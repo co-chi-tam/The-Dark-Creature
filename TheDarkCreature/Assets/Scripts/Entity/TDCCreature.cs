@@ -114,6 +114,7 @@ public class TDCCreature : TDCEntity
 		SetHealth (GetMaxHealth());
 		SetHeat(GetMaxHeat() / 3);
 		SetEnemyEntity (null);
+		SetLeaderEntity(null);
 
 		m_DamageTake = 0;
 		m_SanityPoint.Value = 0;
@@ -195,6 +196,14 @@ public class TDCCreature : TDCEntity
 		return m_StartBattlePosition;
 	}
 
+	public override void SetTransformPosition(Vector3 pos) {
+		m_Controller.TransformPosition = pos;
+	}
+
+	public override Vector3 GetTransformPosition() {
+		return m_Controller.TransformPosition;
+	}
+
 	public override void SetGroupEntity(TDCEntity group) {
 		m_GroupEntity = group;
 	}
@@ -245,7 +254,7 @@ public class TDCCreature : TDCEntity
 		m_Controller.SetAnimation (anim);
 	}
 
-	public override float GetDetectEnemyRange() {
+	public override float GetDetectRange() {
 		return m_Data.DetectRange;
 	}
 
@@ -291,14 +300,19 @@ public class TDCCreature : TDCEntity
 		return m_Data.MaxHeatPoint;
 	}
 
-	public override void SetLeader(TDCEntity leader)
+	public override void SetLeaderEntity(TDCEntity leader)
 	{
 		m_LeaderEntity = leader;
 	}
 
-	public override TDCEntity GetLeader()
+	public override TDCEntity GetLeaderEntity()
 	{
 		return m_LeaderEntity;
+	}
+
+	public override Vector3 GetLeaderPosition()
+	{
+		return m_LeaderEntity.GetController().TransformPosition;
 	}
 
 	public override UIItemController[] GetItemInventory()
