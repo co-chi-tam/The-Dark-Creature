@@ -54,7 +54,7 @@ public class TDCSkillController : TDCBaseController {
 	{
 		// base.FixedUpdate();
 		m_FSMManager.UpdateState();
-		if (m_TimeEffect > 0f)
+		if (m_TimeEffect >= 0f)
 		{
 			m_TimeEffect -= Time.fixedDeltaTime;
 		}

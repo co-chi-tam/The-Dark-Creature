@@ -138,7 +138,7 @@ public class TDCEnviroment : TDCEntity
 		return m_Controller.GetColliderRadius();
 	}
 
-	public override UIItemController[] GetItemInventory()
+	public override UIItemController[] GetInventory()
 	{
 		return m_Data.Inventory;
 	}

@@ -115,18 +115,18 @@ public class TDCPlayerController : TDCCreatureController
 	public override void OnSelectedItem (int itemIndex)
 	{
 		base.OnSelectedItem (itemIndex);
-		var item = m_Entity.GetItemInventory()[itemIndex];
+		var item = m_Entity.GetInventory()[itemIndex];
 		item.ExcuteItem();
 		if (item.GetData().Amount == 0)
 		{
 			m_Inventory.RemoveItem(itemIndex);
-			m_Entity.GetItemInventory()[itemIndex] = null;
+			m_Entity.GetInventory()[itemIndex] = null;
 		}
 	}
 
 	public override int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)
 	{
-		var inventory = m_Entity.GetItemInventory();
+		var inventory = m_Entity.GetInventory();
 		var indexItemInInventory = FindItemSlot(gameType);
 		var emptySlot = FindEmptySlot();
 		if (emptySlot == -1)

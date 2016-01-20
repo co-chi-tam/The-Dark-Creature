@@ -212,7 +212,7 @@ public class TDCPlayer : TDCCreature
 		return m_Controller.AddItem(gameType, itemType, amount);
 	}
 
-	public override UIItemController[] GetItemInventory()
+	public override UIItemController[] GetInventory()
 	{
 		return m_Data.Inventory;
 	}

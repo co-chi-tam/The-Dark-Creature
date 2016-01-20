@@ -11,8 +11,8 @@ public class FSMGroupSpawnAllMemberState : FSMBaseState {
 	}
 
 	public override void StartState() {
-		m_GroupController.SpawnAllMember();
 		m_GroupController.SetAnimation(EAnimation.Action1);
+		m_GroupController.SpawnAllMember();
 	}
 
 	public override void UpdateState() {

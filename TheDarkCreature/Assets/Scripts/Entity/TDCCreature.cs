@@ -113,8 +113,9 @@ public class TDCCreature : TDCEntity
 		base.ResetObject();
 		SetHealth (GetMaxHealth());
 		SetHeat(GetMaxHeat() / 3);
-		SetEnemyEntity (null);
 		SetLeaderEntity(null);
+		SetGroupEntity(null);
+		SetEnemyEntity (null);
 
 		m_DamageTake = 0;
 		m_SanityPoint.Value = 0;
@@ -315,7 +316,7 @@ public class TDCCreature : TDCEntity
 		return m_LeaderEntity.GetController().TransformPosition;
 	}
 
-	public override UIItemController[] GetItemInventory()
+	public override UIItemController[] GetInventory()
 	{
 		return m_Data.Inventory;
 	}

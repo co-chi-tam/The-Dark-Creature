@@ -9,7 +9,14 @@
 					"condition_name": "IsFireActive",
 					"condition_value": false,
 					"state_name": "DisableState",
-					"states": []
+					"states": [
+						{
+							"condition_name": "IsFireActive",
+							"condition_value": true,
+							"state_name": "FireState",
+							"states": []
+						}
+					]
 				}
 			]
 		},{

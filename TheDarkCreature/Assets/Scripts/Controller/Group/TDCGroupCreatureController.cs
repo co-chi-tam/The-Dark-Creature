@@ -8,8 +8,8 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
     #region Properties
     
-	private List<Vector3> m_ListMemberPosition;
-	private int m_PositionIndex = -1;
+	protected List<Vector3> m_ListMemberPosition;
+	protected int m_PositionIndex = -1;
 
     #endregion
 
@@ -43,21 +43,11 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
 	protected override void CreatePositionMember() {
 		base.CreatePositionMember ();
-		switch (m_Entity.GetGroupSpawnType())
-		{
-			case TDCEnum.EGroupSpawnType.Center:
-				m_ListMemberPosition.Add(m_Entity.GetController().TransformPosition);
-				break;
-			default:
-			case TDCEnum.EGroupSpawnType.Random: {
-				var maxMember = GetMaxMember() * 4;
-				for (int i = 0; i < maxMember; i++) {
-					var randomPosition = UnityEngine.Random.insideUnitCircle * GetGroupRadius();
-					var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y) + TransformPosition;
-					m_ListMemberPosition.Add(memPosition);
-				}
-				break;
-			}
+		var maxMember = 50;
+		for (int i = 0; i < maxMember; i++) {
+			var randomPosition = UnityEngine.Random.insideUnitCircle * GetGroupRadius();
+			var memPosition = new Vector3(randomPosition.x, 0f, randomPosition.y) + TransformPosition;
+			m_ListMemberPosition.Add(memPosition);
 		}
 	}
 
@@ -79,13 +69,28 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		SetCurrentMember(memberCount);
 	}
 
+	public override void AddGroupMember(TDCEntity member)
+	{
+		base.AddGroupMember(member);
+		member.SetGroupEntity(this.GetEntity());
+		var memberCount = GetCurrentMember();
+		memberCount += 1;
+		SetCurrentMember(memberCount);
+	}
+
 	public override TDCEntity SpawnMember ()
 	{
 		TDCEntity member = null;
 		if (m_GameManager.GetObjectPool (m_Entity.GetMemberType(), ref member))
 		{
-			m_PositionIndex = (m_PositionIndex + 1) % m_ListMemberPosition.Count;
-			var memberPos = m_ListMemberPosition[m_PositionIndex];
+			var memberPos = this.TransformPosition;
+			switch (m_Entity.GetGroupSpawnType())
+			{
+				case TDCEnum.EGroupSpawnType.Random:
+					m_PositionIndex = (m_PositionIndex + 1) % m_ListMemberPosition.Count;
+					memberPos = m_ListMemberPosition[m_PositionIndex];
+					break;
+			}
 			member.GetController().ResetObject();
 			member.GetController().TransformPosition = memberPos;
 			member.SetStartPosition(memberPos);

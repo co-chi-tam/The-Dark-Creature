@@ -35,7 +35,14 @@
 		          "condition_name": "IsDeath",
 		          "condition_value": true,
 		          "state_name": "GroupDeathState",
-		          "states": []
+		          "states": [
+		          	{
+						"condition_name": "IsActive",
+						"condition_value": true,
+						"state_name": "GroupIdleState",
+						"states": []
+					}
+		          ]
 			  }
 			]
 		}

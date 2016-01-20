@@ -51,7 +51,7 @@ public class TDCBaseController : TDCMonoBehaviour
 		SetTargetPosition (m_Transform.position);
 
 		m_AnimatorController = this.GetComponent<Animator> ();
-		m_Collider 		= this.GetComponent<CapsuleCollider> ();
+		m_Collider 			 = this.GetComponent<CapsuleCollider> ();
 		m_ObjectCurrentvalue = new Dictionary<string, object>();
 
 		m_GameManager 	= TDCGameManager.GetInstance();
@@ -70,11 +70,25 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 
 	protected virtual void OnEnable() {
-		
+		if (m_AnimatorController != null)
+		{
+			m_AnimatorController.enabled = true;
+		}
+		if (m_Collider != null)
+		{
+			m_Collider.enabled = true;
+		}
 	}
 
 	protected virtual void OnDisable() {
-	
+		if (m_AnimatorController != null)
+		{
+			m_AnimatorController.enabled = false;
+		}
+		if (m_Collider != null)
+		{
+			m_Collider.enabled = false;
+		}
 	}
 
 	protected virtual void Start()
@@ -125,11 +139,12 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual Dictionary<string, object> GetObjectCurrentValue() {
 		m_ObjectCurrentvalue["Active"] = GetActive();
-		m_ObjectCurrentvalue["EnemyName"] = GetEnemyEntity() != null ? GetEnemyEntity().GetController().name : "None";
 		m_ObjectCurrentvalue["HealthPoint"] = m_Entity.GetHealth();
 		m_ObjectCurrentvalue["HeatPoint"] = m_Entity.GetHeat();
 		m_ObjectCurrentvalue["SanityPoint"] = m_Entity.GetSanity();
 		m_ObjectCurrentvalue["HungerPoint"] = m_Entity.GetHunger();
+		m_ObjectCurrentvalue["Enemy Name"] = GetEnemyEntity() != null ? GetEnemyEntity().GetController().name : "None";
+		m_ObjectCurrentvalue["Group Name"] = m_Entity.GetGroupEntity() != null ? m_Entity.GetGroupEntity().GetController().name : "None";
 		return m_ObjectCurrentvalue;
 	}
 
@@ -241,6 +256,7 @@ public class TDCBaseController : TDCMonoBehaviour
 
 	public virtual void SetActive(bool value) {
 		m_Entity.SetActive(value);
+		this.gameObject.SetActive(value);
     }
 
     public virtual bool GetActive() {

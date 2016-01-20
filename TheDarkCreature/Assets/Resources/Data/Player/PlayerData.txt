@@ -44,7 +44,7 @@
 			"IconPath": "",
 			"MoveSpeed": 8,
 			"DetectRange": 20,
-			"AttackRange": 15,
+			"AttackRange": 2,
 			"CurrentHP": 35,
 			"MaxHP": 40,
 			"CurrentHeatPoint": 50,

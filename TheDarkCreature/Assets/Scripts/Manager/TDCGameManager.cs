@@ -105,13 +105,6 @@ public class TDCGameManager : MonoBehaviour {
 		var playerType = TDCGameSetting.Instance.GetPlayerType();
 		var player = CreatePlayer (playerType, Vector3.zero, Quaternion.identity);
 		player.SetActive(true);
-
-		TDCEntity egg = null;
-		if (GetObjectPool(TDCEnum.EGameType.EggDodono, ref egg))
-		{
-			egg.SetActive(true);	
-		}
-
 		var map = m_DataReader.GetMap(mapName);
 		for (int i = 0; i < map.Count; i++)
 		{

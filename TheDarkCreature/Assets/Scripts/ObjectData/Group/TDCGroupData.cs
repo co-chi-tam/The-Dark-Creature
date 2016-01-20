@@ -42,7 +42,7 @@ public class TDCGroupData : TDCCreatureData {
 		set { m_GroupSpawnType = value; }
 	}
 
-	public float TimeRespawnMember {
+	public float TimeSpawnMember {
 		get { return m_TimeRespawnMember; }
 		set { m_TimeRespawnMember = value; }
 	}
@@ -50,6 +50,7 @@ public class TDCGroupData : TDCCreatureData {
 	public TDCGroupData () : base ()
 	{
 		this.m_Radius = 0f;
+		this.m_MemberType = TDCEnum.EGameType.None;
 		this.m_CurrentMember = 0;
 		this.m_MaxMember = 0;
 		this.m_GroupType = TDCEnum.EGroupType.None;
@@ -71,10 +72,11 @@ public class TDCGroupData : TDCCreatureData {
 		tmp.GroupType = instance.GroupType;
 		tmp.GroupSpawnType = instance.GroupSpawnType;
 		tmp.Icon = instance.Icon;
-		tmp.TimeRespawnMember = instance.TimeRespawnMember;
+		tmp.TimeSpawnMember = instance.TimeSpawnMember;
 		tmp.FSMPath = instance.FSMPath;
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
+		tmp.Inventory = instance.Inventory;
 		return tmp;
 	}
 }

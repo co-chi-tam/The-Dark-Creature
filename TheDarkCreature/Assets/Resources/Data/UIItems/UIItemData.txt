@@ -16,6 +16,14 @@
 			"Description": "",
 			"IconPath": "Crystal",
 			"EffectPath": "Effect/Item/MeatEffect"
+		},{
+			"ID": 3,
+			"Name": "EggDodono",
+			"GameType": 801,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "Crystal",
+			"EffectPath": "Effect/Item/MeatEffect"
 		}
 	]
 }

@@ -71,11 +71,11 @@ public class TDCDataReader {
 		LoadEnviroment (jsonResource["enviroments"] as List<object>);
 		LoadCreature (jsonCreature["creatures"] as List<object>);
 		LoadObject (jsonObject["objects"] as List<object>);
-		LoadGroup (jsonGroup["groups"] as List<object>);
+		LoadEgg(jsonEgg["eggs"] as List<object>);
 		LoadPlayer (jsonPlayer["players"] as List<object>);
 		LoadItem (jsonItem["items"] as List<object>);
 		LoadSkill(jsonSkill["skills"] as List<object>);
-		LoadEgg(jsonEgg["eggs"] as List<object>);
+		LoadGroup (jsonGroup["groups"] as List<object>);
 		LoadMap(jsonMap["map"] as List<object>);
 		LoadObjectPool(jsonPool);
 	}
@@ -183,9 +183,19 @@ public class TDCDataReader {
 			group.Radius = float.Parse (instance ["Radius"].ToString ());
 			group.MemberType = (TDCEnum.EGameType) int.Parse (instance["MemberType"].ToString());
 			group.MaxMember = int.Parse (instance ["MaxMember"].ToString());
-			group.TimeRespawnMember = float.Parse (instance ["TimeRespawnMember"].ToString ());
 			group.CurrentHP = int.Parse (instance ["CurrentHP"].ToString ());
 			group.MaxHP = int.Parse (instance ["MaxHP"].ToString ());
+			group.TimeSpawnMember = float.Parse (instance ["TimeSpawnMember"].ToString ());
+			var inventory = instance["Inventory"] as List<object>;
+			for (int x = 0; x < inventory.Count; x++) {
+				var invenData = inventory[x] as Dictionary<string, object>;
+				var gameType = (TDCEnum.EGameType)int.Parse (invenData["GameType"].ToString());
+				var amount = int.Parse (invenData["Amount"].ToString());
+				var itemType = m_ListItemData [gameType].ItemType;
+				var item = LoadItemData(itemType, gameType);
+				group.Inventory[x] = new UIItemController (item);
+				group.Inventory[x].GetData().Amount = amount;
+			}
 			m_ListGroupData.Add (group.GameType, group);
 		}
 	}

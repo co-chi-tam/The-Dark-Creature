@@ -5,7 +5,7 @@ public class TDCObjectController : TDCBaseController
 {
 	public override UIItemController[] GetInventory()
 	{
-		return m_Entity.GetItemInventory();
+		return m_Entity.GetInventory();
 	}
 }
 

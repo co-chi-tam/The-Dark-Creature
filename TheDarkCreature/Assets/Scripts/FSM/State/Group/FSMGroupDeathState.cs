@@ -9,7 +9,7 @@ public class FSMGroupDeathState : FSMBaseState {
 	}
 
 	public override void StartState() {
-		m_Controller.ResetObject();
+		m_Controller.DropItem();
 		m_Controller.SetActive(false);
 		m_Controller.CallBackEvent("OnDealth");
 	}
@@ -20,7 +20,7 @@ public class FSMGroupDeathState : FSMBaseState {
 
 	public override void ExitState()
 	{
-
+		m_Controller.ResetObject();
 	}
 }
 

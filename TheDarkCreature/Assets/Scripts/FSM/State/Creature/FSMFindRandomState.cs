@@ -18,7 +18,7 @@ public class FSMFindRandomState : FSMBaseState
 		if (groupCtrl != null)
 		{
 			groupRadius = groupCtrl.GetGroupRadius();
-			groupPosition = m_Controller.GetGroupEntity().GetStartPosition();
+			groupPosition = m_Controller.GetGroupEntity().GetTransformPosition();
 		}
 		var random = Random.insideUnitCircle * groupRadius; // TDCUltilities.RandomAround(groupRadius);
 		m_Controller.SetTargetPosition (groupPosition + new Vector3(random.x, 0f, random.y));

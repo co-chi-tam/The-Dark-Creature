@@ -39,7 +39,7 @@ public class TDCEnviromentController : TDCCreatureController {
 
 	public override UIItemController[] GetInventory()
 	{
-		return m_Entity.GetItemInventory();
+		return m_Entity.GetInventory();
 	}
 
 	#endregion

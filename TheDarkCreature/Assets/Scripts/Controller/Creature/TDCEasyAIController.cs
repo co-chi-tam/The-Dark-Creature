@@ -102,13 +102,33 @@ public class TDCEasyAIController : TDCCreatureController
 
 	internal override bool HaveEnemyByLeader()
 	{
-		var enemy = m_Entity.GetLeaderEntity().GetEnemyEntity();
-		var enemyCanAttack = true;
-		if (enemy != null && GetEnemyEntity() == null && enemy != this.GetEntity())
+		var leaderEnemy = m_Entity.GetLeaderEntity().GetEnemyEntity();
+		var enemy = m_Entity.GetEnemyEntity();
+		if (leaderEnemy == null)
 		{
-			SetEnemyEntity(enemy);
+			if (enemy != null)
+			{
+				SetEnemyEntity(enemy);
+				return true;
+			}
+		} 
+		else if (GetEnemyEntity() == null && leaderEnemy != this.GetEntity())
+		{
+			SetEnemyEntity(leaderEnemy);
+			return true;
 		}
-		return enemy != null && enemyCanAttack;
+		return false;
+	}
+
+	internal override bool IsLeaderDeath()
+	{
+		var leader = m_Entity.GetLeaderEntity();
+		var result = leader == null || leader.GetActive() == false || leader.GetHealth() <= 0f;
+		if (result)
+		{
+			SetLeaderEntity(null);
+		}
+		return result;
 	}
 
 	#endregion

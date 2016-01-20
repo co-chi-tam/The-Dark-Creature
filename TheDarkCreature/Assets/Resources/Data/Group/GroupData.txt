@@ -13,15 +13,16 @@
 			"Radius": 100,
 			"MemberType": 5,
 			"MaxMember": 3,
-			"CurrentHP": 9999,
-			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"CurrentHP": 9,
+			"MaxHP": 9,
+			"TimeSpawnMember": 10,
+			"Inventory": [{"GameType":801,"Amount":1},{"GameType":103,"Amount":2},{"GameType":104,"Amount":3}]
 		},{
 			"ID": 2,
 			"Name": "GroupSatla",
 			"GameType": 202,
 			"GroupType": 1,
-			"GroupSpawnType": "Center",
+			"GroupSpawnType": "Random",
 			"Description": "",
 			"ModelPath": ["Prefabs/Group/GroupCreature"],
 			"IconPath": "",
@@ -31,7 +32,8 @@
 			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		},{
 			"ID": 3,
 			"Name": "GroupGrass",
@@ -47,7 +49,8 @@
 			"MaxMember": 10,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		},{
 			"ID": 4,
 			"Name": "GroupMushRoom",
@@ -63,7 +66,8 @@
 			"MaxMember": 10,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		},{
 			"ID": 5,
 			"Name": "GroupBush",
@@ -79,7 +83,8 @@
 			"MaxMember": 10,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		},{
 			"ID": 6,
 			"Name": "GroupBlueBerry",
@@ -95,13 +100,14 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		},{
 			"ID": 7,
 			"Name": "GroupTaurot",
 			"GameType": 208,
 			"GroupType": 1,
-			"GroupSpawnType": "Center",
+			"GroupSpawnType": "Random",
 			"Description": "",
 			"ModelPath": ["Prefabs/Group/GroupCreature"],
 			"IconPath": "",
@@ -111,7 +117,8 @@
 			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		},{
 			"ID": 8,
 			"Name": "GroupVulbat",
@@ -127,7 +134,8 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		},{
 			"ID": 9,
 			"Name": "GroupCrystal",
@@ -143,13 +151,14 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		},{
 			"ID": 10,
 			"Name": "GroupCrabystal",
 			"GameType": 211,
 			"GroupType": 2,
-			"GroupSpawnType": "Random",
+			"GroupSpawnType": "Center",
 			"Description": "",
 			"ModelPath": ["Prefabs/Group/NestCrabystal"],
 			"IconPath": "",
@@ -159,7 +168,8 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeRespawnMember": 10
+			"TimeSpawnMember": 10,
+			"Inventory": []
 		}
 	]
 }

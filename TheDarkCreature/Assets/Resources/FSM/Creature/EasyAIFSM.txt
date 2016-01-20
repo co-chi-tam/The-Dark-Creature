@@ -81,7 +81,12 @@
           "condition_value": true,
           "state_name": "PetModeState",
           "states": [
-          	{
+	        {
+	          "condition_name": "IsLeaderDeath",
+	          "condition_value": true,
+	          "state_name": "IdleState",
+	          "states": []
+	        },{
 	          "condition_name": "IsToFarLeaderPosition",
 	          "condition_value": true,
 	          "state_name": "FollowState",
@@ -91,12 +96,7 @@
                   "condition_value": true,
                   "state_name": "IdleState",
                   "states": []
-                },{
-	              "condition_name": "HaveEnemyByLeader",
-	              "condition_value": true,
-	              "state_name": "ChaseState",
-	              "states": []
-		        }
+                }
 	          ]
 	        },{
               "condition_name": "HaveEnemyByLeader",

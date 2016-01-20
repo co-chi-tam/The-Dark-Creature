@@ -12,6 +12,8 @@ public class TDCNestGroupCreatureController : TDCGroupCreatureController
 	public override void Init()
 	{
 		base.Init();
+
+		m_FSMManager.RegisterCondition("CanSpawnEggANDCountdownWaitingTime", CanSpawnEggANDCountdownWaitingTime);
 	}
 
 	protected override void Start()
@@ -33,13 +35,16 @@ public class TDCNestGroupCreatureController : TDCGroupCreatureController
 	{
 		base.SetAnimation(anim);
 		if (m_AnimatorController.runtimeAnimatorController != null) {
-			m_AnimatorController.SetInteger ("AnimParam", (int)anim);
+			m_AnimatorController.SetInteger ("AnimParam", (int) anim);
 		}
 	}
 
 	public override void ResetObject()
 	{
 		base.ResetObject();
+		m_Entity.ResetObject();
+		m_PositionIndex = -1;
+		SetCurrentMember(0);
 	}
 
 	#endregion

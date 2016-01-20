@@ -5,9 +5,9 @@ public class TDCEgg : TDCEntity
 {
 	#region Properties
 
+	private TDCEntity m_GroupEntity;
 	private TDCEggController m_Controller;
 	private TDCEggData m_Data;
-	private TDCSkillSlot[] m_PassiveSkill;
 	private int m_DamageTake = 0;
 
 	#endregion
@@ -18,9 +18,6 @@ public class TDCEgg : TDCEntity
 	{
 		m_Controller = ctrl as TDCEggController;
 		m_Data = data as TDCEggData;
-
-		m_PassiveSkill = new TDCSkillSlot[1];
-		m_PassiveSkill[0] = new TDCSkillSlot(TDCEnum.EGameType.LifeNotEasySkill, this);
 	}
 
 	#endregion
@@ -43,8 +40,6 @@ public class TDCEgg : TDCEntity
 		{
 			CallBackEvent("OnAlive");
 		}
-		m_PassiveSkill[0].UpdateSkill(dt);
-
 		var health = GetHealth();
 		if (m_HealthPoint.Value != 0)
 		{
@@ -69,7 +64,9 @@ public class TDCEgg : TDCEntity
 	{
 		base.ResetObject();
 		SetHealth (GetMaxHealth());
-		SetHeat(GetHeat() / 2);
+		SetHeat(GetMaxHeat() / 3);
+		SetLeaderEntity(null);
+		SetGroupEntity(null);
 		SetEnemyEntity (null);
 
 		m_HealthPoint.Value = 0;
@@ -164,7 +161,7 @@ public class TDCEgg : TDCEntity
 		return m_Data.DetectRange;
 	}
 
-	public override UIItemController[] GetItemInventory()
+	public override UIItemController[] GetInventory()
 	{
 		return m_Data.Inventory;
 	}
@@ -175,6 +172,16 @@ public class TDCEgg : TDCEntity
 
 	public override Vector3 GetTransformPosition() {
 		return m_Controller.TransformPosition;
+	}
+
+	public override TDCEntity GetGroupEntity()
+	{
+		return m_GroupEntity;
+	}
+
+	public override void SetGroupEntity(TDCEntity group)
+	{
+		m_GroupEntity = group;
 	}
 
 	#endregion

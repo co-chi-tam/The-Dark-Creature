@@ -15,17 +15,12 @@ public class TDCBaseGroupController : TDCBaseController
 	public override void Init ()
 	{
 		base.Init ();
-	}
 
-	protected override void Start()
-    {
-		base.Start();
-
-		var idleState = new FSMGroupIdleState(this);
-		var waitingState = new FSMGroupWaitingState(this);
-		var spawnMemberState = new FSMGroupSpawnMemberState(this);
+		var idleState 			= new FSMGroupIdleState(this);
+		var waitingState 		= new FSMGroupWaitingState(this);
+		var spawnMemberState 	= new FSMGroupSpawnMemberState(this);
 		var spawnAllMemberState = new FSMGroupSpawnAllMemberState(this);
-		var deathState = new FSMGroupDeathState(this);
+		var deathState 			= new FSMGroupDeathState(this);
 
 		m_FSMManager.RegisterState("GroupIdleState", idleState);
 		m_FSMManager.RegisterState("GroupWaitingState", waitingState);
@@ -36,6 +31,11 @@ public class TDCBaseGroupController : TDCBaseController
 		m_FSMManager.RegisterCondition("IsDeath", IsDeath);
 		m_FSMManager.RegisterCondition("IsFullGroup", IsFullGroup);
 		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
+	}
+
+	protected override void Start()
+    {
+		base.Start();
     }
 
 	protected override void OnDrawGizmos() {
@@ -59,9 +59,13 @@ public class TDCBaseGroupController : TDCBaseController
 
 	}
 
-	public virtual float GetTimeRespawnMember ()
+	public virtual float GetTimeSpawnMember ()
 	{
-		return m_Entity.GetTimeRespawnMember();
+		return m_Entity.GetTimeSpawnMember();
+	}
+
+	public virtual void AddGroupMember(TDCEntity member) {
+		
 	}
 
 	public virtual void ReturnMember(TDCEntity member) {
@@ -74,6 +78,30 @@ public class TDCBaseGroupController : TDCBaseController
 
 	public virtual void SpawnAllMember() {
 		
+	} 
+
+	public override void DropItem()
+	{
+		base.DropItem();
+		var inventory = GetInventory();
+		for (int i = 0; i < inventory.Length; i++)
+		{
+			if (inventory[i] == null)
+				continue;
+			var itemType = inventory[i].GetData().GameType;
+			var amount = inventory[i].GetData().Amount;
+			for (int x = 0; x < amount; x++) {
+				TDCEntity item = null;
+				if (m_GameManager.GetObjectPool(itemType, ref item))
+				{
+					var pos = UnityEngine.Random.insideUnitCircle * GetColliderRadius();
+					var mPos = this.TransformPosition;
+					mPos.y = 0f;
+					item.GetController().TransformPosition = mPos + new Vector3(pos.x, 0f, pos.y);
+					item.SetActive(true);
+				}
+			}
+		}
 	}
 
 	#endregion
@@ -84,9 +112,18 @@ public class TDCBaseGroupController : TDCBaseController
 		return false;
 	}
 
+	internal virtual bool IsFullEgg() {
+		return false;
+	}
+
 	internal override bool CountdownWaitingTime()
 	{
 		return base.CountdownWaitingTime();
+	}
+
+	internal virtual bool CanSpawnEggANDCountdownWaitingTime()
+	{
+		return false;
 	}
 
 	#endregion
@@ -97,7 +134,7 @@ public class TDCBaseGroupController : TDCBaseController
 		m_Entity.SetCurrentMember(value);
 #if UNITY_EDITOR
 		if (m_Entity.GetCurrentMember() < 0) {
-			Debug.LogError ("[GroupController] Something wrong");
+			Debug.LogError ("[GroupController] SetCurrentMember Something wrong");
 		}
 #endif
 	}
@@ -114,8 +151,13 @@ public class TDCBaseGroupController : TDCBaseController
 		return m_Entity.GetGroupRadius();
 	}
 
-	public virtual TDCEnum.EGameType GetGroupMemberType() {
-		return m_Entity.GetGroupMemberType();
+	public virtual TDCEnum.EGameType GetMemberType() {
+		return m_Entity.GetMemberType();
+	}
+
+	public override UIItemController[] GetInventory()
+	{
+		return m_Entity.GetInventory();
 	}
 
 	#endregion

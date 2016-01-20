@@ -63,6 +63,7 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("IsLandingFinish", IsLandingFinish);
 		m_FSMManager.RegisterCondition("HaveLeader", HaveLeader);
 		m_FSMManager.RegisterCondition("HaveEnemyByLeader", HaveEnemyByLeader);
+		m_FSMManager.RegisterCondition("IsLeaderDeath", IsLeaderDeath);
 	}
 
 	protected override void FixedUpdate ()
@@ -131,7 +132,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	protected int FindEmptySlot() {
-		var inventory = m_Entity.GetItemInventory();
+		var inventory = m_Entity.GetInventory();
 		for (int i = 0; i < inventory.Length; i++)
 		{
 			if (inventory[i] == null)
@@ -141,7 +142,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 
 	protected int FindItemSlot(TDCEnum.EGameType gameType) {
-		var inventory = m_Entity.GetItemInventory();
+		var inventory = m_Entity.GetInventory();
 		for (int i = 0; i < inventory.Length; i++)
 		{
 			if (inventory[i] == null)
@@ -190,7 +191,6 @@ public class TDCCreatureController : TDCBaseController {
 				continue;
 			var itemType = inventory[i].GetData().GameType;
 			var amount = inventory[i].GetData().Amount;
-
 			for (int x = 0; x < amount; x++) {
 				TDCEntity item = null;
 				if (m_GameManager.GetObjectPool(itemType, ref item))
@@ -253,7 +253,7 @@ public class TDCCreatureController : TDCBaseController {
 		var target = GetTargetPosition();
 		mPosition.y = 0f;
 //		target.y = 0f;
-		return (mPosition - target).sqrMagnitude < 0.5f;  
+		return (mPosition - target).sqrMagnitude < 0.5f * 0.5f;  
 	}
 
 	internal override bool MoveToEnemy()
@@ -334,6 +334,10 @@ public class TDCCreatureController : TDCBaseController {
 		return false;
 	}
 
+	internal virtual bool IsLeaderDeath() {
+		return false;
+	}
+
 	#endregion
 	
 	#region Getter & Setter
@@ -405,7 +409,7 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override UIItemController[] GetInventory()
 	{
-		return m_Entity.GetItemInventory();
+		return m_Entity.GetInventory();
 	}
 
 	public override TDCEntity GetLeaderEntity()

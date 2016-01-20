@@ -61,11 +61,15 @@ public class TDCEggController : TDCCreatureController
 				}
 			}
 			member.GetController().ResetObject();
+			member.SetGroupEntity(this.GetGroupEntity());
 			member.SetLeaderEntity(leader);
-			member.GetController().TransformPosition = this.TransformPosition;
+			member.SetTransformPosition(this.TransformPosition);
 			member.SetStartPosition(this.TransformPosition);
-			member.SetGroupEntity(null);
 			member.SetActive(true);	
+			if (this.GetGroupEntity() != null)
+			{
+				GetGroupEntity().AddGroupMember(member);
+			}
 		}
 		return member;
 	}
@@ -76,6 +80,13 @@ public class TDCEggController : TDCCreatureController
 		tmp["MemberType"] = m_Entity.GetMemberType();
 		tmp["Duration"] = m_WaitingTime;
 		return tmp;
+	}
+
+	public override void ResetObject()
+	{
+		base.ResetObject();
+		m_Entity.ResetObject();
+
 	}
 
 	#endregion
@@ -99,6 +110,17 @@ public class TDCEggController : TDCCreatureController
 	public override float GetDetectRange()
 	{
 		return m_Entity.GetDetectRange();
+	}
+
+	public override TDCEntity GetGroupEntity()
+	{
+		return m_Entity.GetGroupEntity();
+	}
+
+	public override void SetGroupEntity(TDCEntity group)
+	{
+		base.SetGroupEntity(group);
+		m_Entity.SetGroupEntity(group);
 	}
 
 	#endregion

@@ -334,7 +334,7 @@ public class TDCEntity : TDCPropertyReflection {
 		return 0;
 	}
 
-	public virtual UIItemController[] GetItemInventory()
+	public virtual UIItemController[] GetInventory()
 	{
 		return null;
 	}
@@ -374,11 +374,7 @@ public class TDCEntity : TDCPropertyReflection {
 		return 0;
 	}
 
-	public virtual TDCEnum.EGameType GetGroupMemberType() {
-		return TDCEnum.EGameType.None;
-	}
-
-	public virtual float GetTimeRespawnMember() {
+	public virtual float GetTimeSpawnMember() {
 		return 0f;
 	}
 
@@ -388,6 +384,10 @@ public class TDCEntity : TDCPropertyReflection {
 
 	public virtual void ReturnMember(TDCEntity member) {
 		
+	}
+
+	public virtual void AddGroupMember(TDCEntity member) {
+
 	}
 
 	#endregion

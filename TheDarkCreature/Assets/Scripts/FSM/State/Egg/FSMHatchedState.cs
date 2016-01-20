@@ -10,6 +10,7 @@ public class FSMHatchedState : FSMBaseState {
 	}
 
 	public override void StartState() {
+		m_Controller.ReturnObject(m_Controller.GetEntity());
 		m_Controller.SetActive (false);
 		m_Controller.CallBackEvent("OnDeath");
 		m_Controller.SpawnMember();

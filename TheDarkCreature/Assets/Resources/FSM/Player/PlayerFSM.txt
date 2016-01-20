@@ -55,7 +55,12 @@
 		              "states": [
 		              	
 		              ]
-		            }
+		            },{
+			          "condition_name": "IsEnemyDeath",
+			          "condition_value": false,
+			          "state_name": "ChaseState",
+			          "states": []
+			        }
 	              ]
 	            }
 			]

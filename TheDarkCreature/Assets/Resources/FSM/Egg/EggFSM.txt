@@ -9,7 +9,14 @@
 					"condition_name": "CountdownWaitingTime",
 					"condition_value": true,
 					"state_name": "HatchedState",
-					"states": []
+					"states": [
+						{
+							"condition_name": "IsActive",
+							"condition_value": true,
+							"state_name": "HatchingState",
+							"states": []
+						}
+					]
 				}
 			]
 		},{

@@ -56,6 +56,12 @@ public class TDCGroup : TDCEntity
 		}
 	}
 
+	public override void AddGroupMember(TDCEntity member)
+	{
+		base.AddGroupMember(member);
+		m_Controller.AddGroupMember(member);
+	}
+
 	public override void ResetObject()
 	{
 		base.ResetObject();
@@ -142,13 +148,9 @@ public class TDCGroup : TDCEntity
 		return m_Data.Radius;
 	}
 
-	public override TDCEnum.EGameType GetGroupMemberType() {
-		return m_Data.MemberType;
-	}
-
-	public override float GetTimeRespawnMember()
+	public override float GetTimeSpawnMember()
 	{
-		return m_Data.TimeRespawnMember;
+		return m_Data.TimeSpawnMember;
 	}
 
 	public override TDCEnum.EGameType GetMemberType()
@@ -182,6 +184,11 @@ public class TDCGroup : TDCEntity
 
 	public override Vector3 GetTransformPosition() {
 		return m_Controller.TransformPosition;
+	}
+
+	public override UIItemController[] GetInventory()
+	{
+		return m_Data.Inventory;
 	}
 
 	#endregion
