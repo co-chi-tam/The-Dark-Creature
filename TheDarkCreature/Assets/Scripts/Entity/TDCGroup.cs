@@ -56,12 +56,6 @@ public class TDCGroup : TDCEntity
 		}
 	}
 
-	public override void AddGroupMember(TDCEntity member)
-	{
-		base.AddGroupMember(member);
-		m_Controller.AddGroupMember(member);
-	}
-
 	public override void ResetObject()
 	{
 		base.ResetObject();

@@ -69,15 +69,6 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 		SetCurrentMember(memberCount);
 	}
 
-	public override void AddGroupMember(TDCEntity member)
-	{
-		base.AddGroupMember(member);
-		member.SetGroupEntity(this.GetEntity());
-		var memberCount = GetCurrentMember();
-		memberCount += 1;
-		SetCurrentMember(memberCount);
-	}
-
 	public override TDCEntity SpawnMember ()
 	{
 		TDCEntity member = null;

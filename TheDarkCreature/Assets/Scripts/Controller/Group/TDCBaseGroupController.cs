@@ -64,10 +64,6 @@ public class TDCBaseGroupController : TDCBaseController
 		return m_Entity.GetTimeSpawnMember();
 	}
 
-	public virtual void AddGroupMember(TDCEntity member) {
-		
-	}
-
 	public virtual void ReturnMember(TDCEntity member) {
 		
 	}
@@ -131,10 +127,12 @@ public class TDCBaseGroupController : TDCBaseController
 	#region Getter & Setter
 
 	public virtual void SetCurrentMember(int value) {
+		if (m_Entity.GetActive() == false)
+			return;
 		m_Entity.SetCurrentMember(value);
 #if UNITY_EDITOR
 		if (m_Entity.GetCurrentMember() < 0) {
-			Debug.LogError ("[GroupController] SetCurrentMember Something wrong");
+			Debug.LogError ("[GroupController] SetCurrentMember Something wrong " + this.name + " with value" + value);
 		}
 #endif
 	}

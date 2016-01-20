@@ -60,16 +60,12 @@ public class TDCEggController : TDCCreatureController
 					}
 				}
 			}
+			member.SetActive(true);
 			member.GetController().ResetObject();
 			member.SetGroupEntity(this.GetGroupEntity());
-			member.SetLeaderEntity(leader);
 			member.SetTransformPosition(this.TransformPosition);
 			member.SetStartPosition(this.TransformPosition);
-			member.SetActive(true);	
-			if (this.GetGroupEntity() != null)
-			{
-				GetGroupEntity().AddGroupMember(member);
-			}
+			member.SetLeaderEntity(leader);
 		}
 		return member;
 	}

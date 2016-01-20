@@ -386,10 +386,6 @@ public class TDCEntity : TDCPropertyReflection {
 		
 	}
 
-	public virtual void AddGroupMember(TDCEntity member) {
-
-	}
-
 	#endregion
 
 	#region Skill

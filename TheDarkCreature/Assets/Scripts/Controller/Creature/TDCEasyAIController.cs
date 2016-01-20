@@ -123,7 +123,7 @@ public class TDCEasyAIController : TDCCreatureController
 	internal override bool IsLeaderDeath()
 	{
 		var leader = m_Entity.GetLeaderEntity();
-		var result = leader == null || leader.GetActive() == false || leader.GetHealth() <= 0f;
+		var result = leader == null || leader.GetActive() == false;
 		if (result)
 		{
 			SetLeaderEntity(null);

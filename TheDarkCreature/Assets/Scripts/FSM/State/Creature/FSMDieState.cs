@@ -23,9 +23,9 @@ public class FSMDieState : FSMBaseState
 		{
 			m_Controller.ReturnObject(m_Controller.GetEntity());
 		}
-		m_Controller.SetGroupEntity(null);
 		m_Controller.CallBackEvent("OnDealth");
 		m_Controller.DropItem();
+		m_Controller.ResetObject();
 	}
 
     public override void UpdateState()
@@ -35,6 +35,6 @@ public class FSMDieState : FSMBaseState
 
     public override void ExitState()
     {
-		m_Controller.ResetObject();
+		
     }
 }

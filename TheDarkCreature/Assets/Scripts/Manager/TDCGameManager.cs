@@ -154,6 +154,10 @@ public class TDCGameManager : MonoBehaviour {
 		{
 			return result;
 		}
+		else
+		{
+			Debug.LogError("[GameManager] Set more pool " + type);
+		}
 		return null;
 	}
 
@@ -161,6 +165,10 @@ public class TDCGameManager : MonoBehaviour {
 		if (m_ObjectPool[type].Get(ref obj))
 		{
 			return true;
+		}
+		else
+		{
+			Debug.LogError("[GameManager] Set more pool " + type);
 		}
 		return false;
 	}
@@ -174,6 +182,7 @@ public class TDCGameManager : MonoBehaviour {
 		else
 		{
 			m_ObjectPool[gameType] = new TDCObjectPool<TDCEntity>();
+			Debug.LogError("[GameManager] Pool not instance " + gameType);
 		}
 		m_ObjectPool[gameType].Set(obj);
 		obj.GetController().transform.SetParent(this.transform);

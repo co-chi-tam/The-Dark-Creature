@@ -44,7 +44,7 @@ public class TDCPlayerController : TDCCreatureController
 	}
 
 	protected override void LateUpdate () {
-#if UNITY_EDITOR
+#if UNITY_EDITOR || UNITY_STANDALONE
 		if (Input.GetMouseButtonUp(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
