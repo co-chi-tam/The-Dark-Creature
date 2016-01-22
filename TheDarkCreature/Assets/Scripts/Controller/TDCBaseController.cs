@@ -12,7 +12,7 @@ public enum EAnimation:int {
 	Action2 = 4,
 	Attack1 = 5,
 	Attack2 = 6,
-    Hiden   = 7,
+    Sleep   = 7,
 	// TODO
 	Death     = 10
 }
@@ -29,12 +29,12 @@ public class TDCBaseController : TDCMonoBehaviour
 	protected TDCGameManager m_GameManager;
 	protected float m_WaitingTime = 3f;
 
-    public Vector3 TransformPosition {
+	public virtual Vector3 TransformPosition {
 		get { return m_Transform.position; }
 		set { m_Transform.position = value; }
 	}
 
-	public Quaternion TransformRotation {
+	public virtual Quaternion TransformRotation {
 		get { return m_Transform.rotation; }
 		set { m_Transform.rotation = value; }
 	}
@@ -153,7 +153,7 @@ public class TDCBaseController : TDCMonoBehaviour
 	}
 
 	public virtual void MovePosition(Vector3 position) {
-
+		CallBackEvent("OnMove");
 	}
 
 	public virtual void FlyPosition(Vector3 position) {

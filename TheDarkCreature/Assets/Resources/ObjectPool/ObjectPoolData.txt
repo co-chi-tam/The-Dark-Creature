@@ -4,6 +4,7 @@
 	"NormalMeleeSkill": 10,
 	"LifeNotEasySkill": 5,
 	"BurnObjectSkill": 10,
+	"AfraidTheDarkSkill": 5,
 	"Dodono": 20,
 	"Satla": 10,
 	"Taurot": 10,

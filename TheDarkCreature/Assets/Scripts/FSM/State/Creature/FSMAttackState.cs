@@ -20,8 +20,6 @@ public class FSMAttackState : FSMBaseState {
 			var enemyPos = m_Controller.GetEnemyPosition();
 			m_Controller.LookAtRotation(enemyPos);
 			m_Controller.ActiveSkill(0);
-			// Test
-//			AttackEnemy();
 		}
 	}
 	

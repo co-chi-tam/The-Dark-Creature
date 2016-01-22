@@ -21,15 +21,16 @@ public class TDCEntity : TDCPropertyReflection {
 
 	#region Event 
 
-	public event Action OnIdleEvent;
-	public event Action OnFindRandomEvent;
-	public event Action OnMoveEvent;
-	public event Action OnApplyDamageEvent;
-	public event Action OnAttackEvent;
-	public event Action OnAvoidEvent;
-	public event Action OnOverHeatdEvent;
-	public event Action OnAliveEvent;
-	public event Action OnDeathEvent;
+	protected event Action OnIdleEvent;
+	protected event Action OnFindRandomEvent;
+	protected event Action OnMoveEvent;
+	protected event Action OnApplyDamageEvent;
+	protected event Action OnAttackEvent;
+	protected event Action OnAvoidEvent;
+	protected event Action OnOverHeatdEvent;
+	protected event Action OnAliveEvent;
+	protected event Action OnDeathEvent;
+	protected event Action OnMidNightEvent;
 
 	public event Action<int, int> OnHealthChange;
 	public event Action<int, int> OnHeatChange;
@@ -75,6 +76,7 @@ public class TDCEntity : TDCPropertyReflection {
 		m_TriggerEvents.Add("OnOverHeat", OnOverHeatdEvent);
 		m_TriggerEvents.Add("OnAlive", OnAliveEvent);
 		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
+		m_TriggerEvents.Add("OnMidNight", OnMidNightEvent);
 	}
 
 	#endregion
@@ -445,6 +447,10 @@ public class TDCEntity : TDCPropertyReflection {
 
 	public virtual float GetDuration() {
 		return 0f;
+	}
+
+	public virtual bool GetIsShine() {
+		return false;
 	}
 
 	#endregion

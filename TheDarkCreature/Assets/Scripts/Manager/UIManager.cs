@@ -29,18 +29,17 @@ public class UIManager : MonoBehaviour {
 
 	#region Properties
 
-	[SerializeField]
-	private Image m_LoadingImage;
-	[SerializeField]
-	private Text m_HealthPointText;
-	[SerializeField]
-	private Text m_SanityPointText;
-	[SerializeField]
-	private Text m_HungerPointText;
-	[SerializeField]
-	private Text m_HeatPointText;
+	public Image LoadingImage;
+	public Image BloodScreenImage;
+	public Text HealthPointText;
+	public Text SanityPointText;
+	public Text HungerPointText;
+	public Text HeatPointText;
 
+	[SerializeField]
 	private TDCEntity m_Owner;
+
+	private float m_TimeRefreshScreen = 0f;
 
 	#endregion
 
@@ -48,6 +47,17 @@ public class UIManager : MonoBehaviour {
 
 	void Awake() {
 		m_Instance = this;
+	}
+
+	void LateUpdate() {
+		if (m_TimeRefreshScreen < 0f)
+		{
+			RefreshScreen();
+		}
+		else
+		{
+			m_TimeRefreshScreen -= Time.deltaTime;
+		}
 	}
 
 	#endregion
@@ -65,28 +75,41 @@ public class UIManager : MonoBehaviour {
 		m_Owner.OnHeatChange += UpdateUIHeatBar;
 		m_Owner.OnSanityChange += UpdateUISanityBar;
 		m_Owner.OnHungerChange += UpdateUIHungerBar;
-
-		m_Owner.OnDeathEvent += RemoveAllUIListener;
+		m_Owner.AddEventListener("OnApplyDamage", UpdateUIApplyDamage);
+		m_Owner.AddEventListener("OnDeath", RemoveAllUIListener);
 	}
 
 	public void EnableLoadingScreen(bool value) {
-		m_LoadingImage.gameObject.SetActive(value);
+		LoadingImage.gameObject.SetActive(value);
 	}
 
 	private void UpdateUIHealthBar(int source, int newValue) {
-		m_HealthPointText.text = newValue > 0 ? newValue.ToString() : "0";
+		HealthPointText.text = newValue > 0 ? newValue.ToString() : "0";
+		if (newValue < source)
+		{
+			UpdateUIApplyDamage();
+		}
 	}
 
 	private void UpdateUIHeatBar(int source, int newValue) {
-		m_HeatPointText.text = newValue > 0 ? newValue.ToString() : "0";
+		HeatPointText.text = newValue > 0 ? newValue.ToString() : "0";
 	}
 
 	private void UpdateUISanityBar(int source, int newValue) {
-		m_SanityPointText.text = newValue > 0 ? newValue.ToString() : "0";
+		SanityPointText.text = newValue > 0 ? newValue.ToString() : "0";
 	}
 
 	private void UpdateUIHungerBar(int source, int newValue) {
-		m_HungerPointText.text = newValue > 0 ? newValue.ToString() : "0";
+		HungerPointText.text = newValue > 0 ? newValue.ToString() : "0";
+	}
+
+	private void UpdateUIApplyDamage() {
+		BloodScreenImage.gameObject.SetActive(true);
+		m_TimeRefreshScreen = 0.25f;
+	}
+
+	private void RefreshScreen() {
+		BloodScreenImage.gameObject.SetActive(false);
 	}
 
 	private void RemoveAllUIListener() {

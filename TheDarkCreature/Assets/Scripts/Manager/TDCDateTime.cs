@@ -48,6 +48,7 @@ public class TDCDateTime : MonoBehaviour {
 	private float m_Tick = 0f;
 
 	public static float DeltaTime;
+	public static float Hour;
 
 	#endregion
 
@@ -157,7 +158,7 @@ public class TDCDateTime : MonoBehaviour {
 		}
 		m_Tick		= Time.deltaTime * m_Speed;
 		m_Timer 	+= m_Tick;
-		m_Hour 		= m_Timer / m_SecondPerHour;
+		Hour 		= m_Hour = m_Timer / m_SecondPerHour;
 		DeltaTime 	= m_Tick;
 
 		var day = m_HourPerDay * m_Day + m_Hour;
@@ -239,6 +240,18 @@ public class TDCDateTime : MonoBehaviour {
 		alarm.Callback = complete;
 		alarm.Repeat = repeat;
 		m_AlarmClocks.Add (alarm);
+	}
+
+	public static bool IsDayTime() {
+		return Hour > 6f && Hour < 18f;
+	}
+
+	public static bool IsNightTime() {
+		return (Hour > 18f && Hour < 24f) || (Hour > 0f && Hour < 6f);
+	}
+
+	public static bool IsMidNightTime() {
+		return (Hour > 20f && Hour < 24f) || (Hour > 0f && Hour < 4f);
 	}
 
 	#endregion

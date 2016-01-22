@@ -8,7 +8,6 @@ public class TDCPlayer : TDCCreature
 
 	private TDCPlayerController m_Controller;
 	private TDCPlayerData m_Data;
-	private TDCSkillSlot[] m_PassiveSkills;
 
 	#endregion
 
@@ -19,9 +18,9 @@ public class TDCPlayer : TDCCreature
 		m_Controller = ctrl as TDCPlayerController;
 		m_Data = data as TDCPlayerData;
 
-		m_PassiveSkills = new TDCSkillSlot[2];
-		m_PassiveSkills[0] = new TDCSkillSlot(TDCEnum.EGameType.LifeNotEasySkill, this);
-		m_PassiveSkills[1] = new TDCSkillSlot(TDCEnum.EGameType.BurnObjectSkill, this);
+		m_SkillSlotComponent.CreatePassiveSkillSlot(TDCEnum.EGameType.LifeNotEasySkill, 
+													TDCEnum.EGameType.BurnObjectSkill,
+													TDCEnum.EGameType.AfraidTheDarkSkill);
 	}
 
 	#endregion
@@ -31,9 +30,6 @@ public class TDCPlayer : TDCCreature
 	public override void Update(float dt)
 	{
 		base.Update(dt);
-
-		m_PassiveSkills[0].UpdateSkill(dt);
-		m_PassiveSkills[1].UpdateSkill(dt);
 
 		if (m_SanityPoint.Value != 0)
 		{

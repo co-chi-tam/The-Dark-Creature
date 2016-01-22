@@ -9,7 +9,7 @@ public class CameraController : MonoBehaviour
     private float _rotationUpDownSpeed = 120f;
     private float _rotationLeftRightSpeed = 120f;
     private float _maxUpdownRange = 60f;
-    private float _minUpdownRange = 40f;
+    private float _minUpdownRange = 45f;
     private float _x;
     private float _y;
 	[SerializeField]

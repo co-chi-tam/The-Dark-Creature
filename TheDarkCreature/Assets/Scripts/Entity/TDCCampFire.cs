@@ -39,5 +39,14 @@ public class TDCCampFire : TDCObject
 
 	#endregion
 
+	#region Getter && Setter
+
+	public override bool GetIsShine()
+	{
+		return m_Data.IsShine;
+	}
+
+	#endregion
+
 }
 

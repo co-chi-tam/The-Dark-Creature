@@ -19,6 +19,16 @@ public class TDCPasiveSkillController : TDCSkillController {
 
 	#endregion
 
+	#region Main methods
+
+	protected override void LoadEffect()
+	{
+		base.LoadEffect();
+		m_EffectManager.RegisterCondition("HaveCreatureIsShineAround", HaveCreatureIsShineAround);
+	}
+
+	#endregion
+
 	#region FSM
 
 	internal override bool CanActiveSkill()
@@ -29,6 +39,28 @@ public class TDCPasiveSkillController : TDCSkillController {
 	#endregion
 
 	#region Effect
+
+	internal virtual bool HaveCreatureIsShineAround(Dictionary<string, object> pars)
+	{
+		var mPos = TransformPosition;
+		mPos.y = 0f;
+		var colliders = Physics.OverlapSphere(mPos, GetEffectRadius(), m_ColliderLayerMask);
+		if (colliders.Length == 0)
+			return false;
+		for (int i = 0; i < colliders.Length; i++)
+		{
+			var target = m_GameManager.GetEntityByName(colliders[i].name);
+			if (target == null || target.GetActive() == false || target == this.GetEntity())
+			{
+				continue;
+			}
+			else if (target.GetIsShine())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
 
 	internal override bool CanActiveEffect(Dictionary<string, object> pars)
 	{
@@ -45,6 +77,8 @@ public class TDCPasiveSkillController : TDCSkillController {
 			var value = float.Parse(pars["ToValue"].ToString());
 			mPos.y = 0f;
 			var colliders = Physics.OverlapSphere(mPos, GetEffectRadius(), m_ColliderLayerMask);
+			if (colliders.Length == 0)
+				return;
 			for (int i = 0; i < colliders.Length; i++)
 			{
 				var target = m_GameManager.GetEntityByName(colliders[i].name);

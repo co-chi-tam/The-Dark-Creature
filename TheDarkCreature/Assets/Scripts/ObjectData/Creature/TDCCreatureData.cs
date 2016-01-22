@@ -17,6 +17,7 @@ public class TDCCreatureData : TDCBaseData {
 	private List<TDCEnum.EGameType> m_TypeEnemies;
 	private List<TDCEnum.EGameType> m_TypeFoods;
 	private TDCEnum.EGameType m_NormalSkill;
+	private bool m_IsShine;
 
     public UIItemController[] Inventory {
 		get { return m_Inventory; }
@@ -89,6 +90,12 @@ public class TDCCreatureData : TDCBaseData {
 		set { m_NormalSkill = value; }
 	}
 
+	public bool IsShine
+	{
+		get { return m_IsShine; }
+		set { m_IsShine = value; }
+	}
+
     public TDCCreatureData() : base()
 	{
 		m_MoveSpeed = new TDCObjectProperty<float>("MoveSpeed");
@@ -136,6 +143,7 @@ public class TDCCreatureData : TDCBaseData {
 		tmp.TypeFoods = instance.TypeFoods;
 		tmp.Inventory = instance.Inventory;
 		tmp.Icon = instance.Icon;
+		tmp.IsShine = instance.IsShine;
 		return tmp;
 	}
 

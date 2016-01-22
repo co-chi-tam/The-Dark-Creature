@@ -13,11 +13,9 @@ public class TDCCreature : TDCEntity
 	protected Vector3 m_TargetPosition;
 	protected Vector3 m_StartPosition;
 	protected Vector3 m_StartBattlePosition;
-
-	protected TDCSkillSlot m_NormalSkill;
+	protected TDCSkillSlotComponent m_SkillSlotComponent;
 
 	private TDCEntity m_LeaderEntity;
-
 	private TDCEntity m_GroupEntity;
 	private TDCCreatureController m_Controller;
 	private TDCCreatureData m_Data;
@@ -31,7 +29,8 @@ public class TDCCreature : TDCEntity
 		m_Controller = ctrl as TDCCreatureController;
 		m_Data = data as TDCCreatureData;
 
-		m_NormalSkill = new TDCSkillSlot(m_Data.NormalSkill, this);
+		m_SkillSlotComponent = new TDCSkillSlotComponent(this);
+		m_SkillSlotComponent.CreateNormalSkillSlot(m_Data.NormalSkill);
 	}
 
 	#endregion
@@ -49,8 +48,12 @@ public class TDCCreature : TDCEntity
 		{
 			CallBackEvent("OnOverHeat");
 		}
+		if (TDCDateTime.IsMidNightTime())
+		{
+			CallBackEvent("OnMidNight");
+		}
 
-		m_NormalSkill.UpdateSkill(Time.fixedDeltaTime);
+		m_SkillSlotComponent.UpdateComponent(Time.fixedDeltaTime);
 
 		if ((Time.time - m_TimeReset) > 1f)
 		{
@@ -98,14 +101,7 @@ public class TDCCreature : TDCEntity
 	public override void ActiveSkill(int index)
 	{
 		base.ActiveSkill(index);
-		if (index == 0)
-		{
-			m_NormalSkill.ActiveSkill();
-		}
-		else
-		{
-			// TODO
-		}
+		m_SkillSlotComponent.ActiveSkill(index);
 	}
 
 	public override void ResetObject()
@@ -178,8 +174,11 @@ public class TDCCreature : TDCEntity
 
 	public override void SetEnemyEntity(TDCEntity enemy)
 	{
+		if (m_EnemyEntity != enemy)
+		{
+			SetStartBattlePosition(m_Controller.TransformPosition);
+		}
 		m_EnemyEntity = enemy;
-		SetStartBattlePosition(m_Controller.TransformPosition);
 	}
 
 	public override TDCEntity GetEnemyEntity()
@@ -275,10 +274,8 @@ public class TDCCreature : TDCEntity
 
 	public override void SetHealth (int value)
 	{
+		base.SetHealth(value);
 		m_Data.CurrentHP = value > m_Data.MaxHP ? m_Data.MaxHP : value;
-		var percentHP = m_Data.CurrentHP / m_Data.MaxHP * 100;
-		CallBackEvent("OnHealthPoint" + percentHP);
-		base.SetHealth(m_Data.CurrentHP);
 	}
 
 	public override int GetMaxHealth() {

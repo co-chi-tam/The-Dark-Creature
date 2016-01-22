@@ -22,6 +22,7 @@ public class TDCItemData : TDCCreatureData
 		tmp.Icon = instance.Icon;
 		tmp.FSMPath = instance.FSMPath;
 		tmp.ModelPath = instance.ModelPath;
+		tmp.IsShine = instance.IsShine;
 		return tmp;
 	}
 }

@@ -339,18 +339,20 @@ public class TDCGameManager : MonoBehaviour {
 		}
 		case TDCEnum.EGameType.FlameBodySkill: 
 		case TDCEnum.EGameType.LifeNotEasySkill:
-		case TDCEnum.EGameType.BurnObjectSkill:{
-			data = m_DataReader.GetSkillData(type);	
-			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCPasiveSkillController>();
-			entity = new TDCSkill(controller, data);
-			break;
-		}
+		case TDCEnum.EGameType.BurnObjectSkill:
+		case TDCEnum.EGameType.AfraidTheDarkSkill:
 		case TDCEnum.EGameType.NormalMeleeSkill:
 		case TDCEnum.EGameType.NormalRangeSkill:{
 			data = m_DataReader.GetSkillData(type);	
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCActiveSkillController>();
+			switch ((data as TDCSkillData).SkillType) {
+			case TDCEnum.ESkillType.Active:
+				controller = gObject.AddComponent<TDCActiveSkillController>();
+				break;
+			case TDCEnum.ESkillType.Passive:
+				controller = gObject.AddComponent<TDCPasiveSkillController>();
+				break;
+			}
 			entity = new TDCSkill(controller, data);
 			break;
 		}

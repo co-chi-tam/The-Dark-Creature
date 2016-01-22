@@ -1,16 +1,16 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FSMWaitingState : FSMBaseState
+public class FSMSleepState : FSMBaseState
 {
-	public FSMWaitingState(TDCBaseController controller) : base (controller)
+	public FSMSleepState(TDCBaseController controller) : base (controller)
 	{
 
 	}
 
 	public override void StartState()
 	{
-		m_Controller.SetAnimation(EAnimation.Idle);
+		m_Controller.SetAnimation(EAnimation.Sleep);
 	}
 
 	public override void UpdateState()

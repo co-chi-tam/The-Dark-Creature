@@ -33,6 +33,12 @@ public class TDCCreatureController : TDCBaseController {
 		var petModeState	= new FSMPetModeState(this);
 		var followState 	= new FSMFollowState(this);
 		var flyFollowState	= new FSMFlyFollowState(this);
+		var dayModeState	= new FSMDayModeState(this);
+		var nightModeState	= new FSMNightModeState(this);
+		var flyHomeState	= new FSMFlyHomeState(this);
+		var landingHomeState = new FSMLandingHomeState(this);
+		var goHomeState 	= new FSMGoHomeState(this);
+		var sleepState 		= new FSMSleepState(this);
 
 		m_FSMManager.RegisterState("IdleState", idleState);
 		m_FSMManager.RegisterState("MoveState", moveState);
@@ -48,6 +54,12 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("PetModeState", petModeState);
 		m_FSMManager.RegisterState("FollowState", followState);
 		m_FSMManager.RegisterState("FlyFollowState", flyFollowState);
+		m_FSMManager.RegisterState("DayModeState", dayModeState);
+		m_FSMManager.RegisterState("NightModeState", nightModeState);
+		m_FSMManager.RegisterState("GoHomeState", goHomeState);
+		m_FSMManager.RegisterState("FlyHomeState", flyHomeState);
+		m_FSMManager.RegisterState("LandingHomeState", landingHomeState);
+		m_FSMManager.RegisterState("SleepState", sleepState);
 
 		m_FSMManager.RegisterCondition("IsActive", GetActive);
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
@@ -64,11 +76,15 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("HaveLeader", HaveLeader);
 		m_FSMManager.RegisterCondition("HaveEnemyByLeader", HaveEnemyByLeader);
 		m_FSMManager.RegisterCondition("IsLeaderDeath", IsLeaderDeath);
+		m_FSMManager.RegisterCondition("IsDayTime", TDCDateTime.IsDayTime);
+		m_FSMManager.RegisterCondition("IsNightTime", TDCDateTime.IsNightTime);
 	}
 
 	protected override void FixedUpdate ()
 	{
 		base.FixedUpdate ();
+		if (m_Entity.GetActive() == false)
+			return;
 		m_Entity.Update(Time.fixedDeltaTime);
 	}
 
@@ -169,6 +185,7 @@ public class TDCCreatureController : TDCBaseController {
 	}
 	
 	public override void MovePosition(Vector3 position) {
+		base.MovePosition(position);
 		position.y = 0f;
 		var direction = position - m_Transform.position;
 		m_Transform.position = m_Transform.position + direction.normalized * GetMoveSpeed() * Time.deltaTime;
@@ -253,7 +270,7 @@ public class TDCCreatureController : TDCBaseController {
 		var target = GetTargetPosition();
 		mPosition.y = 0f;
 //		target.y = 0f;
-		return (mPosition - target).sqrMagnitude < 0.5f * 0.5f;  
+		return (mPosition - target).sqrMagnitude < 0.5f;  
 	}
 
 	internal override bool MoveToEnemy()

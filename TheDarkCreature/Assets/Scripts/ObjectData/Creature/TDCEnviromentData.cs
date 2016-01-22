@@ -19,6 +19,7 @@ public class TDCEnviromentData : TDCCreatureData {
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
 		tmp.Inventory = instance.Inventory;
+		tmp.IsShine = instance.IsShine;
 		return tmp;
 	}
 }

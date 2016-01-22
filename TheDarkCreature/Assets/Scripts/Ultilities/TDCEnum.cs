@@ -49,7 +49,8 @@ public class TDCEnum{
 		NormalRangeSkill = 502,
 		NormalMeleeSkill = 503,
 		LifeNotEasySkill = 506,
-		BurnObjectSkill = 507,
+		BurnObjectSkill  = 507,
+		AfraidTheDarkSkill = 508,
 
 		// Egg
 		EggDodono = 801

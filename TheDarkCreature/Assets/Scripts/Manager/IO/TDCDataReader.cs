@@ -101,6 +101,7 @@ public class TDCDataReader {
 			creature.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			creature.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
 			creature.NormalSkill = (TDCEnum.EGameType)int.Parse (instance["NormalSkill"].ToString());
+			creature.IsShine = false;
 			ConvertToEnum (instance["Enemies"] as List<object>, creature.TypeEnemies);
 			ConvertToEnum (instance["Foods"] as List<object>, creature.TypeFoods);
 			var inventory = instance["Inventory"] as List<object>;
@@ -186,6 +187,7 @@ public class TDCDataReader {
 			group.CurrentHP = int.Parse (instance ["CurrentHP"].ToString ());
 			group.MaxHP = int.Parse (instance ["MaxHP"].ToString ());
 			group.TimeSpawnMember = float.Parse (instance ["TimeSpawnMember"].ToString ());
+			group.IsShine = false;
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
 				var invenData = inventory[x] as Dictionary<string, object>;
@@ -254,6 +256,7 @@ public class TDCDataReader {
 			player.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			player.NormalSkill = (TDCEnum.EGameType)int.Parse (instance["NormalSkill"].ToString());
 			player.Level = int.Parse (instance["Level"].ToString());
+			player.IsShine = false;
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
 				var invenData = inventory[x] as Dictionary<string, object>;
@@ -281,6 +284,7 @@ public class TDCDataReader {
 			gObject.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
 			gObject.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			gObject.Duration = float.Parse (instance ["Duration"].ToString ());
+			gObject.IsShine = bool.Parse(instance["IsShine"].ToString());
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
 				var invenData = inventory[x] as Dictionary<string, object>;
@@ -362,6 +366,7 @@ public class TDCDataReader {
 			egg.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			egg.Duration = int.Parse (instance["Duration"].ToString());
 			egg.MemberType = (TDCEnum.EGameType)Enum.Parse (typeof(TDCEnum.EGameType), instance["MemberType"].ToString());
+			egg.IsShine = false;
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
 				var invenData = inventory[x] as Dictionary<string, object>;

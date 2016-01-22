@@ -52,7 +52,9 @@ public class TDCSkillController : TDCBaseController {
 
 	protected override void FixedUpdate()
 	{
-		// base.FixedUpdate();
+		base.FixedUpdate();
+		if (m_Entity.GetActive() == false)
+			return;
 		m_FSMManager.UpdateState();
 		if (m_TimeEffect >= 0f)
 		{
@@ -72,7 +74,7 @@ public class TDCSkillController : TDCBaseController {
 
 	#region Main methods
 
-	private void LoadFSM() {
+	protected virtual void LoadFSM() {
 		var startState 		= new FSMStartSkillState(this);
 		var updateState 	= new FSMUpdateSkillState(this);
 		var excuteEffectState = new FSMExcuteEffectSkillState(this);
@@ -100,7 +102,7 @@ public class TDCSkillController : TDCBaseController {
 		m_FSMManager.RegisterCondition("HaveEndTimeEffect", HaveEndTimeEffect);
 	}
 
-	private void LoadEffect() {
+	protected virtual void LoadEffect() {
 		m_EffectManager.RegisterCondition("CanActiveEffect", CanActiveEffect);
 		m_EffectManager.RegisterCondition("CanPayHealthPoint", CanPayHealthPoint);
 		m_EffectManager.RegisterCondition("CanPayHeatPoint", CanPayHeatPoint);
@@ -119,7 +121,7 @@ public class TDCSkillController : TDCBaseController {
 							m_Entity.GetAttachEnemy() ? 
 							GetEnemyEntity().GetController().transform : 
 							this.transform;
-
+		
 		TransformPosition = position;
 		TransformRotation = rotation;
 		SetOwnerEntity(owner);

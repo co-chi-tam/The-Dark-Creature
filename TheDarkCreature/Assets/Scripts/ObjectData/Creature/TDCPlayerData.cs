@@ -75,6 +75,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.MaxSanityPoint = instance.MaxSanityPoint;
 		tmp.Level = instance.Level;
 		tmp.Inventory = instance.Inventory;
+		tmp.IsShine = instance.IsShine;
 		return tmp;
 	}
 

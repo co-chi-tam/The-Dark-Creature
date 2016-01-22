@@ -25,6 +25,7 @@ public class TDCGObjectData : TDCCreatureData{
 		tmp.Duration = instance.Duration;
 		tmp.CreatureType = instance.CreatureType;
 		tmp.Inventory = instance.Inventory;
+		tmp.IsShine = instance.IsShine;
 		return tmp;
 	}
 }

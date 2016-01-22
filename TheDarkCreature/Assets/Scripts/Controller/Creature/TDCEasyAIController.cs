@@ -37,7 +37,10 @@ public class TDCEasyAIController : TDCCreatureController
 	public override void ActiveSkill(int index)
 	{
 		base.ActiveSkill(index);
-		m_Entity.ActiveSkill(index);
+		if (MoveToEnemy())
+		{
+			m_Entity.ActiveSkill(index);
+		}
 	}
 
    	#endregion

@@ -12,7 +12,7 @@
 			"CostHeatPoint": 0,
 			"CostSanityPoint": 0,
 			"CostHungerPoint": 0,
-			"EffectRadius": 10,
+			"EffectRadius": 20,
 			"TimeDelay": 3,
 			"TimeEffect": 0,
 			"EffectPerTime": 0,
@@ -92,7 +92,7 @@
 			"ModelPath": ["Prefabs/Skill/LifeNotEasySkill"],
 			"FSMPath": "FSM/Skill/EffectUpdateSkillFSM"
 			"EffectPath": "Effect/Skill/LifeNotEasySkillEffect"
-		}{
+		},{
 			"ID": 4,
 			"Name": "Burn Object",
 			"Description": "",
@@ -115,6 +115,29 @@
 			"ModelPath": ["Prefabs/Skill/BurnObjectSkill"],
 			"FSMPath": "FSM/Skill/EffectPerSecondSkillFSM"
 			"EffectPath": "Effect/Skill/BurnObjectSkillEffect"
+		},{
+			"ID": 5,
+			"Name": "Afraid the dark",
+			"Description": "",
+			"GameType": 508,
+			"IconPath": "AfraidTheDark",
+			"SkillLevel": 1,
+			"SkillType": 1,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"CostHungerPoint": 0,
+			"EffectRadius": 30,
+			"TimeDelay": 10,
+			"TimeEffect": 10,
+			"EffectPerTime": 2,
+			"RepeatSkill": false,
+			"AttachOwner": true,
+			"AttachEnemy": false,
+			"TriggerEvent": "OnMidNight",
+			"ModelPath": ["Prefabs/Skill/AfraidTheDarkSkill"],
+			"FSMPath": "FSM/Skill/EffectPerSecondSkillFSM"
+			"EffectPath": "Effect/Skill/AfraidTheDarkSkillEffect"
 		}
 	]
 }

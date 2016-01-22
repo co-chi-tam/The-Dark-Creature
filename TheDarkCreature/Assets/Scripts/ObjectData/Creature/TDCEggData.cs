@@ -29,6 +29,7 @@ public class TDCEggData : TDCGObjectData
 		tmp.DetectRange = instance.DetectRange;
 		tmp.MemberType = instance.MemberType;
 		tmp.Inventory = instance.Inventory;
+		tmp.IsShine = instance.IsShine;
 		return tmp;
 	}
 

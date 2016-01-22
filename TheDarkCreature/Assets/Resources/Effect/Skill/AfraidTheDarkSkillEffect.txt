@@ -1,0 +1,29 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+	  {
+	    "ID": 3,
+	    "Type": 1,
+	    "Method": "HaveCreatureIsShineAround()",
+	    "YesMethods": [],
+	    "NoMethods": [
+	    	{
+		    	"ID": 1,
+	   			"Type": 10,
+		        "ExcuteMethods": ["SubtractValueEffect(ToTarget:Owner,ValueName:HealthPoint,ToValue:5)","SubtractValueEffect(ToTarget:Owner,ValueName:SanityPoint,ToValue:5)"]
+		    }
+	    ]
+	  }
+    ],
+    "NoMethods": [
+    	{
+	    	"ID": 2,
+   			"Type": 10,
+	        "ExcuteMethods": ["PrintDebug(BurnObject:Can not active effect)"]
+	    }
+    ]
+  }
+}

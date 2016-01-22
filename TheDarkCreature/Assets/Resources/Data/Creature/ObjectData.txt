@@ -10,7 +10,8 @@
 			"FSMPath": "FSM/Creature/CampFireFSM",
 			"IconPath": "CampFire",
 			"Duration": 120,
-			"Inventory": []
+			"Inventory": [],
+			"IsShine": true
 		}
 	]
 }
