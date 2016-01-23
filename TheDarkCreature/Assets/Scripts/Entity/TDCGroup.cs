@@ -185,6 +185,11 @@ public class TDCGroup : TDCEntity
 		return m_Data.Inventory;
 	}
 
+	public override bool GetIsShine()
+	{
+		return m_Data.IsShine;
+	}
+
 	#endregion
 
 }

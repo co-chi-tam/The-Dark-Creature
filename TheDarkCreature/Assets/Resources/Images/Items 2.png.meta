@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c85f2c9507707614583210f0d42c75a8
-timeCreated: 1452609001
+timeCreated: 1453552070
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -182,14 +182,14 @@ TextureImporter:
     21300350: Items 2_175
     21300352: Items 2_176
     21300354: Items 2_177
-    21300356: Items 2_178
+    21300356: Log
     21300358: Items 2_179
     21300360: Items 2_180
     21300362: Items 2_181
     21300364: Items 2_182
     21300366: Items 2_183
     21300368: Items 2_184
-    21300370: Items 2_185
+    21300370: Egg
     21300372: Items 2_186
     21300374: Items 2_187
     21300376: Items 2_188
@@ -2414,7 +2414,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 2_178
+    - name: Log
       rect:
         serializedVersion: 2
         x: 2
@@ -2491,7 +2491,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 2_185
+    - name: Egg
       rect:
         serializedVersion: 2
         x: 170

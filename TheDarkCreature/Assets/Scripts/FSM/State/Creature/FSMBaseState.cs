@@ -6,9 +6,9 @@ public class FSMBaseState : IState {
 
 	protected TDCBaseController m_Controller;
 
-	public FSMBaseState(TDCBaseController controller)
+	public FSMBaseState(IContext context)
 	{
-		m_Controller = controller;
+		m_Controller = context as TDCBaseController;
 	}
 	
 	public virtual void StartState()

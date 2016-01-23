@@ -1,0 +1,183 @@
+﻿{
+  "fsm": [
+    {
+      "condition_name": "IsRoot",
+      "condition_value": true,
+      "state_name": "IdleState",
+      "states": [
+        {
+          "condition_name": "HaveLeader",
+          "condition_value": false,
+          "state_name": "WildModeState",
+          "states": [
+          	{
+              "condition_name": "IsDayTime",
+              "condition_value": true,
+              "state_name": "DayModeState",
+              "states": [
+              	{
+                  "condition_name": "IsActive",
+                  "condition_value": true,
+                  "state_name": "GoHomeState",
+                  "states": [
+                  	{
+                      "condition_name": "MoveToTarget",
+                      "condition_value": true,
+                      "state_name": "SleepState",
+                      "states": [
+                      	{
+	                      "condition_name": "IsEnemyDeath",
+	                      "condition_value": false,
+	                      "state_name": "ChaseState",
+	                      "states": []
+	                    },{
+	                      "condition_name": "IsNightTime",
+	                      "condition_value": true,
+	                      "state_name": "IdleState",
+	                      "states": []
+	                    }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },{
+              "condition_name": "IsNightTime",
+              "condition_value": true,
+              "state_name": "NightModeState",
+              "states": [
+              {
+	              "condition_name": "IsActive",
+	              "condition_value": true,
+	              "state_name": "FindRandomState",
+	              "states": [
+	                {
+	                  "condition_name": "CountdownWaitingTime",
+	                  "condition_value": true,
+	                  "state_name": "MoveState",
+	                  "states": [
+	                    {
+	                      "condition_name": "MoveToTarget",
+	                      "condition_value": true,
+	                      "state_name": "IdleState",
+	                      "states": []
+	                    },
+	                    {
+	                      "condition_name": "FoundFood",
+	                      "condition_value": true,
+	                      "state_name": "ChaseState",
+	                      "states": [
+	                        {
+	                          "condition_name": "MoveToEnemy",
+	                          "condition_value": true,
+	                          "state_name": "WaitingOneSecondState",
+	                          "states": [
+	                            {
+	                              "condition_name": "CountdownWaitingTime",
+	                              "condition_value": true,
+	                              "state_name": "AttackState",
+	                              "states": [
+	                                {
+	                                  "condition_name": "IsEnemyDeath",
+	                                  "condition_value": true,
+	                                  "state_name": "IdleState",
+	                                  "states": []
+	                                },
+	                                {
+	                                  "condition_name": "MoveToEnemy",
+	                                  "condition_value": false,
+	                                  "state_name": "ChaseState",
+	                                  "states": []
+	                                }
+	                              ]
+	                            },
+	                            {
+	                              "condition_name": "IsEnemyDeath",
+	                              "condition_value": true,
+	                              "state_name": "IdleState",
+	                              "states": []
+	                            }
+	                          ]
+	                        },
+	                        {
+	                          "condition_name": "IsToFarStartBattlePosition",
+	                          "condition_value": true,
+	                          "state_name": "IdleState",
+	                          "states": []
+	                        }
+	                      ]
+	                    }
+	                  ]
+	                }
+	              ]
+	            }
+              ]
+            }
+          ]
+        },{
+          "condition_name": "HaveLeader",
+          "condition_value": true,
+          "state_name": "PetModeState",
+          "states": [
+	        {
+	          "condition_name": "IsLeaderDeath",
+	          "condition_value": true,
+	          "state_name": "IdleState",
+	          "states": []
+	        },{
+	          "condition_name": "IsToFarLeaderPosition",
+	          "condition_value": true,
+	          "state_name": "FollowState",
+	          "states": [
+	          	{
+                  "condition_name": "MoveToTarget",
+                  "condition_value": true,
+                  "state_name": "IdleState",
+                  "states": []
+                }
+	          ]
+	        },{
+              "condition_name": "HaveEnemyByLeader",
+              "condition_value": true,
+              "state_name": "ChaseState",
+              "states": []
+	        }
+          ]
+        }
+      ]
+    },
+    {
+      "condition_name": "IsAnyState",
+      "condition_value": true,
+      "state_name": "AnyState",
+      "states": [
+        {
+          "condition_name": "IsDeath",
+          "condition_value": true,
+          "state_name": "DieState",
+          "states": [
+            {
+              "condition_name": "IsDeath",
+              "condition_value": false,
+              "state_name": "IdleState",
+              "states": []
+            }
+          ]
+        },
+        {
+          "condition_name": "FoundEnemy",
+          "condition_value": true,
+          "state_name": "AvoidState",
+          "states": [
+            {
+              "condition_name": "MoveToTarget",
+              "condition_value": true,
+              "state_name": "IdleState",
+              "states": []
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

@@ -243,11 +243,11 @@ public class TDCDateTime : MonoBehaviour {
 	}
 
 	public static bool IsDayTime() {
-		return Hour > 6f && Hour < 18f;
+		return Hour > 5f && Hour < 18f;
 	}
 
 	public static bool IsNightTime() {
-		return (Hour > 18f && Hour < 24f) || (Hour > 0f && Hour < 6f);
+		return (Hour > 18f && Hour < 24f) || (Hour > 0f && Hour < 5f);
 	}
 
 	public static bool IsMidNightTime() {

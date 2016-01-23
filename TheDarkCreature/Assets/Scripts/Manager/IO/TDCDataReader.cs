@@ -187,7 +187,7 @@ public class TDCDataReader {
 			group.CurrentHP = int.Parse (instance ["CurrentHP"].ToString ());
 			group.MaxHP = int.Parse (instance ["MaxHP"].ToString ());
 			group.TimeSpawnMember = float.Parse (instance ["TimeSpawnMember"].ToString ());
-			group.IsShine = false;
+			group.IsShine = bool.Parse (instance ["IsShine"].ToString ());
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
 				var invenData = inventory[x] as Dictionary<string, object>;

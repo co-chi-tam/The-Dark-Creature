@@ -152,8 +152,8 @@ public class TDCPlayer : TDCCreature
 
 	public override void SetHealth (int value)
 	{
+		base.SetHealth(value);
 		m_Data.CurrentHP = value > m_Data.MaxHP ? m_Data.MaxHP : value;
-		base.SetHealth(m_Data.CurrentHP);
 	}
 
 	public override int GetMaxHealth() {

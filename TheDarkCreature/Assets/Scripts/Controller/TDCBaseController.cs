@@ -17,7 +17,7 @@ public enum EAnimation:int {
 	Death     = 10
 }
 
-public class TDCBaseController : TDCMonoBehaviour
+public class TDCBaseController : TDCMonoBehaviour, IContext
 {
 	#region Property
 

@@ -180,6 +180,8 @@ public class TDCCreatureController : TDCBaseController {
 		var mPos = m_Transform.position;
 		mPos.y = 0f;
 		var direction = mPos - rotation;
+		if (direction == Vector3.zero)
+			return;
 		Quaternion rot = Quaternion.LookRotation(direction);
 		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, Time.deltaTime * m_Entity.GetRotationSpeed());
 	}
@@ -227,7 +229,7 @@ public class TDCCreatureController : TDCBaseController {
 	#region FSM
 
 	internal bool IsLandingFinish() {
-		return TransformPosition.y < 0.001f;
+		return TransformPosition.y <= 0.001f;
 	}
 
 	internal override bool IsEnemyDeath() {
@@ -270,7 +272,7 @@ public class TDCCreatureController : TDCBaseController {
 		var target = GetTargetPosition();
 		mPosition.y = 0f;
 //		target.y = 0f;
-		return (mPosition - target).sqrMagnitude < 0.5f;  
+		return (mPosition - target).sqrMagnitude <= 0.5f * 0.5f;  
 	}
 
 	internal override bool MoveToEnemy()
@@ -280,7 +282,7 @@ public class TDCCreatureController : TDCBaseController {
 		{
 			var distance = (TransformPosition - GetEnemyPosition()).sqrMagnitude;
 			var range = GetEnemyEntity().GetColliderRadius() + m_Entity.GetAttackRange();
-			return distance < range * range; 
+			return distance <= range * range; 
 		}
 		return true;
 	}

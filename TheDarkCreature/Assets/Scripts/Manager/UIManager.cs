@@ -57,6 +57,12 @@ public class UIManager : MonoBehaviour {
 		else
 		{
 			m_TimeRefreshScreen -= Time.deltaTime;
+			if (BloodScreenImage.IsActive())
+			{
+				var color = BloodScreenImage.color;
+				color.a = m_TimeRefreshScreen * 0.5f / 1f;
+				BloodScreenImage.color = color;
+			}
 		}
 	}
 
@@ -105,11 +111,17 @@ public class UIManager : MonoBehaviour {
 
 	private void UpdateUIApplyDamage() {
 		BloodScreenImage.gameObject.SetActive(true);
-		m_TimeRefreshScreen = 0.25f;
+		var color = BloodScreenImage.color;
+		color.a = 0.5f;
+		BloodScreenImage.color = color;
+		m_TimeRefreshScreen = 1f;
 	}
 
 	private void RefreshScreen() {
 		BloodScreenImage.gameObject.SetActive(false);
+		var color = BloodScreenImage.color;
+		color.a = 0.5f;
+		BloodScreenImage.color = color;
 	}
 
 	private void RemoveAllUIListener() {

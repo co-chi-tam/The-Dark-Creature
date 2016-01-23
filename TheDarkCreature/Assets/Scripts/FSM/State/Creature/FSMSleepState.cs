@@ -11,6 +11,7 @@ public class FSMSleepState : FSMBaseState
 	public override void StartState()
 	{
 		m_Controller.SetAnimation(EAnimation.Sleep);
+
 	}
 
 	public override void UpdateState()

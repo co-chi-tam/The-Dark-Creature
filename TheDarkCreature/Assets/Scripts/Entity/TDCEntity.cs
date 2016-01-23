@@ -275,7 +275,8 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		if (OnHealthChange != null)
 		{
-			OnHealthChange(GetHealth(), value);
+			var health = GetHealth();
+			OnHealthChange(health, value);
 		}
 	}
 
