@@ -73,6 +73,26 @@ public class TDCPlane : TDCEntity
 		return m_Controller.TransformPosition;
 	}
 
+	public override string GetSeasonSpringTexture()
+	{
+		return m_Data.SpringTexture;
+	}
+
+	public override string GetSeasonSummerTexture()
+	{
+		return m_Data.SummerTexture;
+	}
+
+	public override string GetSeasonAutumnTexture()
+	{
+		return m_Data.AutumnTexture;
+	}
+
+	public override string GetSeasonWinterTexture()
+	{
+		return m_Data.WinterTexture;
+	}
+
 	#endregion
 }
 

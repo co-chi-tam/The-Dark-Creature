@@ -27,7 +27,7 @@ public class TDCDateTime : MonoBehaviour {
 	[SerializeField]
 	private float m_Hour 	= 0f;
 	[SerializeField]
-	private float m_Day 	= 1f;
+	private float m_Day 	= 0f;
 
 	[SerializeField]
 	private TDCEnum.EGameSeason m_Season = TDCEnum.EGameSeason.Spring;
@@ -37,7 +37,7 @@ public class TDCDateTime : MonoBehaviour {
 	private int m_SecondPerMinute = 60;
 	private int m_MinutePerHour = 60;
 	private int m_HourPerDay 	= 24;
-	private int m_DayPerSeason 	= 30;
+	private int m_DayPerSeason 	= 3;
 	private int m_SeasonCount	= 0;
 
 	private int m_SecondPerHour 	= 0;
@@ -142,13 +142,11 @@ public class TDCDateTime : MonoBehaviour {
 		m_SeasonCount 		= Enum.GetNames (typeof(TDCEnum.EGameSeason)).Length;
 		m_AlarmClocks 		= new List<AlarmClockInfo> ();
 		m_SunLightIntensity = m_DayLight.intensity;
-
-		m_Day = 1f;
 	}
 
 	void Start() {
 		SetHour (8);
-		SetSeason(TDCEnum.EGameSeason.Summer);
+		SetSeason(TDCEnum.EGameSeason.Winter);
 		SetupImage (m_SunImage, 0, 1f);
 		SetupImage (m_MoonImage, 1, 0f);
 		m_DayText.text = "Day " + m_Day.ToString();
@@ -172,14 +170,10 @@ public class TDCDateTime : MonoBehaviour {
 			m_Day ++;
 			m_Timer = 0f;
 			m_Hour = 0f;
-			m_DayText.text = "Day " + m_Day.ToString();
+			m_DayText.text = "Day " + (m_Day + 1).ToString();
 		}
 
-		if (m_Day % m_DayPerSeason == 0) {
-			m_CurrentSeason++;
-		}
-
-		m_Season	= (TDCEnum.EGameSeason)(m_CurrentSeason % m_SeasonCount);
+		m_Season	= (TDCEnum.EGameSeason)(((m_Day / m_DayPerSeason) + m_CurrentSeason) % m_SeasonCount);
 		Season 		= m_Season;
 
 		for (int i = 0; i < m_AlarmClocks.Count; i++) {

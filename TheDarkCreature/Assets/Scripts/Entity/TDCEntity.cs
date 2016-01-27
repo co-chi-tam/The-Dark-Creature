@@ -490,4 +490,24 @@ public class TDCEntity : TDCPropertyReflection {
 	}
 
 	#endregion
+
+	#region Plane
+
+	public virtual string GetSeasonSpringTexture() {
+		return string.Empty;
+	}
+
+	public virtual string GetSeasonSummerTexture() {
+		return string.Empty;
+	}
+
+	public virtual string GetSeasonAutumnTexture() {
+		return string.Empty;
+	}
+
+	public virtual string GetSeasonWinterTexture() {
+		return string.Empty;
+	}
+
+	#endregion
 }
