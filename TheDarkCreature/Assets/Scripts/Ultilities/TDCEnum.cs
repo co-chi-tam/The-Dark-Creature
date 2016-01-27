@@ -3,6 +3,7 @@ public class TDCEnum{
 
 	public enum EGameType : int {
 		None 		= 0,
+		GrassPlane	= 1,
 
 		// Creature
 		Dodono 		= 5,

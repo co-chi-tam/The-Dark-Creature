@@ -15,6 +15,7 @@ public class TDCDataReader {
 	private Dictionary<TDCEnum.EGameType, TDCGroupData> m_ListGroupData;
 	private Dictionary<TDCEnum.EGameType, TDCSkillData> m_ListSkillData;
 	private Dictionary<string, List<MapObjectData>> m_MapData;
+	private Dictionary<TDCEnum.EGameType, TDCPlaneData> m_ListPlaneData;
 	private List<TDCObjectPoolData> m_ListObjectPoolData;
 
 	#endregion
@@ -28,6 +29,7 @@ public class TDCDataReader {
 		m_ListItemData = new Dictionary<TDCEnum.EGameType, UIItemData> ();
 		m_ListSkillData = new Dictionary<TDCEnum.EGameType, TDCSkillData>();
 		m_MapData = new Dictionary<string, List<MapObjectData>>();
+		m_ListPlaneData = new Dictionary<TDCEnum.EGameType, TDCPlaneData>();
 		m_ListObjectPoolData = new List<TDCObjectPoolData>();
 
 		LoadData ();
@@ -49,6 +51,7 @@ public class TDCDataReader {
 		var skillTextAsset = Resources.Load<TextAsset>("Data/Skill/SkillData");
 		var eggTextAsset = Resources.Load<TextAsset>("Data/Egg/EggData");
 		var mapTextAsset = Resources.Load<TextAsset>("Data/Map/WorldMap");
+		var planeTextAsset = Resources.Load<TextAsset>("Data/Map/PlaneData");
 		var poolTextAsset = Resources.Load<TextAsset>("ObjectPool/ObjectPoolData");
 
 		var jsonUIItem = Json.Deserialize (uiItemAsset.text) as Dictionary<string, object>;
@@ -63,6 +66,7 @@ public class TDCDataReader {
 		var jsonSkill = Json.Deserialize (skillTextAsset.text) as Dictionary<string, object>;
 		var jsonEgg = Json.Deserialize (eggTextAsset.text) as Dictionary<string, object>;
 		var jsonMap = Json.Deserialize(mapTextAsset.text) as Dictionary<string, object>;
+		var jsonPlane = Json.Deserialize(planeTextAsset.text) as Dictionary<string, object>;
 		var jsonPool = Json.Deserialize(poolTextAsset.text) as Dictionary<string, object>;
 
 		LoadUIItem(jsonUIItem["items"] as List<object>);
@@ -76,6 +80,7 @@ public class TDCDataReader {
 		LoadItem (jsonItem["items"] as List<object>);
 		LoadSkill(jsonSkill["skills"] as List<object>);
 		LoadGroup (jsonGroup["groups"] as List<object>);
+		LoadPlane(jsonPlane["planes"] as List<object>);
 		LoadMap(jsonMap["map"] as List<object>);
 		LoadObjectPool(jsonPool);
 	}
@@ -381,6 +386,25 @@ public class TDCDataReader {
 		}
 	}
 
+	public void LoadPlane(List<object> values) {
+		for (int i = 0; i < values.Count; i++) {
+			var instance = values [i] as Dictionary<string, object>;
+			var plane = new TDCPlaneData ();
+			plane.ID = int.Parse (instance ["ID"].ToString ());
+			plane.Name = instance ["Name"].ToString ();
+			plane.Description = instance ["Description"].ToString ();
+			plane.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
+			plane.FSMPath = instance["FSMPath"].ToString();
+			plane.Icon = instance["IconPath"].ToString();
+			plane.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
+			plane.SpringTexture = instance["SpringTexture"].ToString();
+			plane.SummerTexture = instance["SummerTexture"].ToString();
+			plane.AutumnTexture = instance["AutumnTexture"].ToString();
+			plane.WinterTexture = instance["WinterTexture"].ToString();
+			m_ListPlaneData.Add (plane.GameType, plane);
+		}
+	}
+
 	private void LoadMap(List<object> value) {
 		for (int i = 0; i < value.Count; i++)
 		{
@@ -513,6 +537,11 @@ public class TDCDataReader {
 	public TDCGObjectData GetGObjectData(TDCEnum.EGameType gObject) {
 		var objectData = TDCGObjectData.Clone (m_ListCreatureData[gObject] as TDCGObjectData);
 		return objectData;
+	}
+
+	public TDCPlaneData GetPlaneData(TDCEnum.EGameType plane) {
+		var planeData = TDCPlaneData.Clone (m_ListPlaneData[plane] as TDCPlaneData);
+		return planeData;
 	}
 
 	#endregion

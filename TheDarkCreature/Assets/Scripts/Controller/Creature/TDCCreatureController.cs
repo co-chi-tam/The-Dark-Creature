@@ -120,7 +120,6 @@ public class TDCCreatureController : TDCBaseController {
 	public override Dictionary<string, object> GetObjectCurrentValue()
 	{
 		var curValue = base.GetObjectCurrentValue();
-		curValue["State"] = m_FSMManager.StateCurrentName;
 		curValue["Leader Name"] = m_Entity.GetLeaderEntity() == null ? "None" : m_Entity.GetLeaderEntity().GetController().name;
 		return curValue;
 	}

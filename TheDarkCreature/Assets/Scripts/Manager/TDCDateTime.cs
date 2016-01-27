@@ -27,7 +27,7 @@ public class TDCDateTime : MonoBehaviour {
 	[SerializeField]
 	private float m_Hour 	= 0f;
 	[SerializeField]
-	private float m_Day 	= 0f;
+	private float m_Day 	= 1f;
 
 	[SerializeField]
 	private TDCEnum.EGameSeason m_Season = TDCEnum.EGameSeason.Spring;
@@ -46,9 +46,11 @@ public class TDCDateTime : MonoBehaviour {
 
 	private float m_SunLightIntensity = 0f;
 	private float m_Tick = 0f;
+	private int m_CurrentSeason = 0;
 
 	public static float DeltaTime;
 	public static float Hour;
+	public static TDCEnum.EGameSeason Season;
 
 	#endregion
 
@@ -140,10 +142,13 @@ public class TDCDateTime : MonoBehaviour {
 		m_SeasonCount 		= Enum.GetNames (typeof(TDCEnum.EGameSeason)).Length;
 		m_AlarmClocks 		= new List<AlarmClockInfo> ();
 		m_SunLightIntensity = m_DayLight.intensity;
+
+		m_Day = 1f;
 	}
 
 	void Start() {
 		SetHour (8);
+		SetSeason(TDCEnum.EGameSeason.Summer);
 		SetupImage (m_SunImage, 0, 1f);
 		SetupImage (m_MoonImage, 1, 0f);
 		m_DayText.text = "Day " + m_Day.ToString();
@@ -169,8 +174,14 @@ public class TDCDateTime : MonoBehaviour {
 			m_Hour = 0f;
 			m_DayText.text = "Day " + m_Day.ToString();
 		}
-		m_Season	= (TDCEnum.EGameSeason)(m_Day / m_DayPerSeason % m_SeasonCount);
-	
+
+		if (m_Day % m_DayPerSeason == 0) {
+			m_CurrentSeason++;
+		}
+
+		m_Season	= (TDCEnum.EGameSeason)(m_CurrentSeason % m_SeasonCount);
+		Season 		= m_Season;
+
 		for (int i = 0; i < m_AlarmClocks.Count; i++) {
 			if (m_AlarmClocks[i].AlarmComplete ((int) m_Hour, (int) m_Day, m_Season)) {
 				if (m_AlarmClocks[i].Repeat == false) {
@@ -194,6 +205,26 @@ public class TDCDateTime : MonoBehaviour {
 
 	#region Main methods
 
+	public static bool IsDayTime() {
+		return Hour > 5f && Hour < 18f;
+	}
+
+	public static bool IsNightTime() {
+		return (Hour > 18f && Hour < 24f) || (Hour > 0f && Hour < 5f);
+	}
+
+	public static bool IsMidNightTime() {
+		return (Hour > 20f && Hour < 24f) || (Hour > 0f && Hour < 4f);
+	}
+
+	public static bool IsSeason(TDCEnum.EGameSeason season) {
+		return Season == season;
+	}
+
+	#endregion
+
+	#region Getter & Setter
+
 	private void SetupImage(Image image, int origin, float value) {
 		image.type = Image.Type.Filled;
 		image.fillMethod = Image.FillMethod.Horizontal;
@@ -208,7 +239,7 @@ public class TDCDateTime : MonoBehaviour {
 	public void SetDay(int day) {
 		m_Day = day;
 	}
-	
+
 	public void SetHourAlarmClock(int h, Action complete, bool repeat = false) {
 		var alarm = new AlarmClockInfo ();
 		alarm.SetAlarmHour (h);
@@ -224,7 +255,7 @@ public class TDCDateTime : MonoBehaviour {
 		alarm.Repeat = false;
 		m_AlarmClocks.Add (alarm);
 	}
-	
+
 	public void SetSeasonAlarmClock(TDCEnum.EGameSeason s, Action complete, bool repeat = false) {
 		var alarm = new AlarmClockInfo ();
 		alarm.SetAlarmSeason (s);
@@ -232,7 +263,7 @@ public class TDCDateTime : MonoBehaviour {
 		alarm.Repeat = repeat;
 		m_AlarmClocks.Add (alarm);
 	}
-	
+
 	public void SetDayPerSeasonAlarmClock(int d, TDCEnum.EGameSeason s, Action complete, bool repeat = false) {
 		var alarm = new AlarmClockInfo ();
 		alarm.SetAlarmDay (d);
@@ -242,24 +273,12 @@ public class TDCDateTime : MonoBehaviour {
 		m_AlarmClocks.Add (alarm);
 	}
 
-	public static bool IsDayTime() {
-		return Hour > 5f && Hour < 18f;
-	}
-
-	public static bool IsNightTime() {
-		return (Hour > 18f && Hour < 24f) || (Hour > 0f && Hour < 5f);
-	}
-
-	public static bool IsMidNightTime() {
-		return (Hour > 20f && Hour < 24f) || (Hour > 0f && Hour < 4f);
-	}
-
-	#endregion
-
-	#region Getter & Setter
-
 	public int Getday() {
 		return (int) m_Day;
+	}
+
+	public void SetSeason(TDCEnum.EGameSeason value) {
+		m_CurrentSeason = (int)value;
 	}
 
 	#endregion

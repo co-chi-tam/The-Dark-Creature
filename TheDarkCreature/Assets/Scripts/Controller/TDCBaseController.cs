@@ -139,6 +139,7 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 
 	public virtual Dictionary<string, object> GetObjectCurrentValue() {
 		m_ObjectCurrentvalue["Active"] = GetActive();
+		m_ObjectCurrentvalue["State Name"] = m_FSMManager != null ? m_FSMManager.StateCurrentName : "None";
 		m_ObjectCurrentvalue["HealthPoint"] = m_Entity.GetHealth();
 		m_ObjectCurrentvalue["HeatPoint"] = m_Entity.GetHeat();
 		m_ObjectCurrentvalue["SanityPoint"] = m_Entity.GetSanity();

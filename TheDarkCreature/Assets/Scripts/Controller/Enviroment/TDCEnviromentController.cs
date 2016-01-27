@@ -28,6 +28,12 @@ public class TDCEnviromentController : TDCCreatureController {
 		base.FixedUpdate ();
 		m_FSMManager.UpdateState();
 	}
+
+	protected override void OnDrawGizmos()
+	{
+		Gizmos.color = Color.cyan;
+		Gizmos.DrawWireSphere (TransformPosition, GetColliderRadius());
+	}
 	
 	#endregion
 	

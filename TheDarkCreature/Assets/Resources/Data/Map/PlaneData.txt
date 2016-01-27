@@ -1,0 +1,17 @@
+﻿{
+	"planes": [
+		{
+			"ID": 1,
+			"Name": "GrassPlane",
+			"GameType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Map/GrassLand"],
+			"FSMPath": "FSM/Map/GrassLandFSM",
+			"IconPath": "GrassLand",
+			"SpringTexture": "SpringGrassLand",
+			"SummerTexture": "SummerGrassLand",
+			"AutumnTexture": "AutumnGrassLand",
+			"WinterTexture": "WinterGrassLand",
+		}
+	]
+}

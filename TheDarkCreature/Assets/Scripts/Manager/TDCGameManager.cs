@@ -4,6 +4,7 @@ using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using ObjectPool;
+using Assets.Map;
 
 public class TDCGameManager : MonoBehaviour {
 
@@ -36,6 +37,7 @@ public class TDCGameManager : MonoBehaviour {
 	private Dictionary<string, TDCBaseController> m_ListControllers;
 	private Dictionary<string, TDCEntity> m_ListEntities;
 	private Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCEntity>> m_ObjectPool;
+	private Map m_Map;
 
     #endregion
 
@@ -56,6 +58,8 @@ public class TDCGameManager : MonoBehaviour {
     }
 
 	void Start() {
+		UnityEngine.Random.seed = (int) System.DateTime.Now.Ticks;
+	
 		var ui = UIManager.GetInstance();
 		ui.EnableLoadingScreen(true);
 		Debug.Log ("Loading " + Time.time);
@@ -102,9 +106,13 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public IEnumerator LoadMap(string mapName, Action complete = null) {
+		var plane = CreateCreature(TDCEnum.EGameType.GrassPlane, Vector3.zero, Quaternion.Euler(new Vector3(270f, 180f, 0f)));
+		plane.SetActive(true);
+
 		var playerType = TDCGameSetting.Instance.GetPlayerType();
 		var player = CreatePlayer (playerType, Vector3.zero, Quaternion.identity);
 		player.SetActive(true);
+
 		var map = m_DataReader.GetMap(mapName);
 		for (int i = 0; i < map.Count; i++)
 		{
@@ -118,6 +126,63 @@ public class TDCGameManager : MonoBehaviour {
 		{
 			complete();
 		}
+
+//		m_Map = new Map(200);
+//		var plane = GameObject.Find("Plane");
+//		var bound = plane.GetComponent<MeshFilter>().mesh.bounds;
+//		yield return m_Map != null && plane != null;
+//		var centers = m_Map.Graph.centers;
+//		var offsetPointX = bound.size.x / Map.Width;
+//		var offsetPointY = bound.size.y / Map.Height;
+//		for (int i = 0; i < centers.Count; i++)
+//		{
+//			var centerPoint = centers[i];
+//			if (centerPoint.biome == Biome.Ocean)
+//				continue;
+//			
+//			var gameType = TDCEnum.EGameType.None;
+//			switch (centerPoint.biome)
+//			{
+//				case Biome.Grassland:
+//					var grassRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupDodono, TDCEnum.EGameType.GroupGrass, TDCEnum.EGameType.GroupSatla };
+//					gameType = grassRegion[i % grassRegion.Length];
+//					break;
+//				case Biome.Marsh:
+//					var marshRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupMushRoom };
+//					gameType = marshRegion[i % marshRegion.Length];
+//					break;
+//				case Biome.TemperateDesert:
+//					var desertRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupBush, TDCEnum.EGameType.GroupVulbat };
+//					gameType = desertRegion[i % desertRegion.Length];
+//					break;
+//				case Biome.Lava:
+//					var laveRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupBlueBerry };
+//					gameType = laveRegion[i % laveRegion.Length];
+//					break;
+//				case Biome.RockLand:
+//					var rockRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupCrystal, TDCEnum.EGameType.GroupCrabystal, TDCEnum.EGameType.GroupTaurot };
+//					gameType = rockRegion[i % rockRegion.Length];
+//					break;
+//				default:
+////					var defaultRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupGrass, TDCEnum.EGameType.GroupBush, TDCEnum.EGameType.GroupMushRoom, TDCEnum.EGameType.GroupBlueBerry };
+////					gameType = defaultRegion[i % defaultRegion.Length];
+//					break;
+//			}
+//			if (gameType == TDCEnum.EGameType.None)
+//				continue;
+//			var point = centerPoint.point;
+//			var _X = (point.x - (Map.Width / 2f)) * offsetPointX;
+//			var _Y = (point.y - (Map.Height / 2f)) * offsetPointY;
+//			var obj = CreateCreature(gameType, new Vector3 (_X, 0f, _Y), Quaternion.identity);
+//			obj.SetActive(true);
+//			yield return obj != null;
+//		}
+//		yield return null;
+//		if (complete != null)
+//		{
+//			complete();
+//		}
+
 	}
 
 	public TDCBaseController GetControllerByIndex(int index) {
@@ -262,6 +327,13 @@ public class TDCGameManager : MonoBehaviour {
 		GameObject gObject = null;
 		var random = UnityEngine.Random.Range (0, 9999);
 		switch (type) { 
+		case TDCEnum.EGameType.GrassPlane: {
+			data = m_DataReader.GetPlaneData (type);
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCPlaneController> ();
+			entity = new TDCPlane(controller, data);
+			break;
+		}
 		case TDCEnum.EGameType.Dodono: 
 		case TDCEnum.EGameType.Satla: 
 		case TDCEnum.EGameType.Taurot: 
