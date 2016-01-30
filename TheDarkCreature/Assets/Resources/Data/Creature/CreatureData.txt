@@ -63,7 +63,7 @@
 			"Damage": 5,
 			"NormalSkill": [503],
 			"Enemies": [],
-			"Foods": [5,6,8,9,53,54,55,101,102,103,104,105,106],
+			"Foods": [5,6,8,9,10,53,54,55,101,102,103,104,105,106],
 			"IsShine": false,
 			"Inventory": [{"GameType":101,"Amount":3}]
 		},{
@@ -85,7 +85,7 @@
 			"Damage": 3,
 			"NormalSkill": [503],
 			"Enemies": [7],
-			"Foods": [5,6,101],
+			"Foods": [10,101,102,103,104,105],
 			"IsShine": false,
 			"Inventory": [{"GameType":101,"Amount":2}]
 		},{
@@ -129,7 +129,7 @@
 			"Damage": 2,
 			"NormalSkill": [503],
 			"Enemies": [211],
-			"Foods": [5,6,7,8,9,101,102,103,104,105],
+			"Foods": [8,101,102,103,104,105],
 			"IsShine": true,
 			"Inventory": [{"GameType":101,"Amount":1}]
 		}
