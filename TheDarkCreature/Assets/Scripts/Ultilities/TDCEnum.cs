@@ -3,7 +3,7 @@ public class TDCEnum{
 
 	public enum EGameType : int {
 		None 		= 0,
-		GrassPlane	= 1,
+		GrassLandPlane	= 1,
 
 		// Creature
 		Dodono 		= 5,
@@ -11,6 +11,7 @@ public class TDCEnum{
 		Taurot 		= 7,
 		Vulbat 		= 8,
 		Crabystal	= 9,
+		FireBuggy	= 10,
 
 		// Object
 		Mushroom	= 52,
@@ -41,6 +42,7 @@ public class TDCEnum{
 		GroupVulbat = 209,
 		GroupCrystal = 210,
 		GroupCrabystal = 211,
+		GroupFireBuggy = 212,
 
 		// Object
 		CampFire	= 301,
@@ -53,8 +55,18 @@ public class TDCEnum{
 		BurnObjectSkill  = 507,
 		AfraidTheDarkSkill = 508,
 
+		// Weather
+		WeatherNormalSkill 	= 509,
+		WeatherRainySkill 	= 510,
+		WeatherOverHeatSkill 	= 511,
+		WeatherWindySkill 	= 512,
+		WeatherSnowySkill 	= 513,
+
 		// Egg
-		EggDodono = 801
+		EggDodono = 801,
+
+		// Map
+		SeasonGrassLand = 1001,
 	}
 
 	public enum ESkillType : int {

@@ -13,7 +13,6 @@ public class TDCCreature : TDCEntity
 	protected Vector3 m_TargetPosition;
 	protected Vector3 m_StartPosition;
 	protected Vector3 m_StartBattlePosition;
-	protected TDCSkillSlotComponent m_SkillSlotComponent;
 
 	private TDCEntity m_LeaderEntity;
 	private TDCEntity m_GroupEntity;
@@ -30,7 +29,7 @@ public class TDCCreature : TDCEntity
 		m_Data = data as TDCCreatureData;
 
 		m_SkillSlotComponent = new TDCSkillSlotComponent(this);
-		m_SkillSlotComponent.CreateNormalSkillSlot(m_Data.NormalSkill);
+		m_SkillSlotComponent.CreateActiveSkillSlot(m_Data.NormalSkill);
 	}
 
 	#endregion
@@ -47,10 +46,6 @@ public class TDCCreature : TDCEntity
 		if (GetHeat() >= GetMaxHeat())
 		{
 			CallBackEvent("OnOverHeat");
-		}
-		if (TDCDateTime.IsMidNightTime())
-		{
-			CallBackEvent("OnMidNight");
 		}
 
 		m_SkillSlotComponent.UpdateComponent(Time.fixedDeltaTime);
@@ -331,6 +326,11 @@ public class TDCCreature : TDCEntity
 			}
 		}
 		return m_Data.AttackRange + GetColliderRadius();
+	}
+
+	public override bool GetIsShine()
+	{
+		return m_Data.IsShine;
 	}
 
 	#endregion

@@ -39,6 +39,10 @@ public class TDCGameManager : MonoBehaviour {
 	private Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCEntity>> m_ObjectPool;
 	private Map m_Map;
 
+	private TDCEntity m_PlaneEntity;
+	private TDCEntity m_SeasonEntity;
+	private TDCEntity m_WeatherEntity;
+
     #endregion
 
     #region Implementation Mono
@@ -106,8 +110,11 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public IEnumerator LoadMap(string mapName, Action complete = null) {
-		var plane = CreateCreature(TDCEnum.EGameType.GrassPlane, Vector3.zero, Quaternion.Euler(new Vector3(270f, 180f, 0f)));
+		var plane = CreateCreature(TDCEnum.EGameType.GrassLandPlane, Vector3.zero, Quaternion.Euler(new Vector3(270f, 180f, 0f)));
 		plane.SetActive(true);
+
+		var season = CreateCreature(TDCEnum.EGameType.SeasonGrassLand, Vector3.zero, Quaternion.identity);
+		season.SetActive(true);
 
 		var playerType = TDCGameSetting.Instance.GetPlayerType();
 		var player = CreatePlayer (playerType, Vector3.zero, Quaternion.identity);
@@ -327,23 +334,25 @@ public class TDCGameManager : MonoBehaviour {
 		GameObject gObject = null;
 		var random = UnityEngine.Random.Range (0, 9999);
 		switch (type) { 
-		case TDCEnum.EGameType.GrassPlane: {
+		case TDCEnum.EGameType.GrassLandPlane: {
 			data = m_DataReader.GetPlaneData (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCPlaneController> ();
 			entity = new TDCPlane(controller, data);
+			m_PlaneEntity = entity;
 			break;
 		}
 		case TDCEnum.EGameType.Dodono: 
 		case TDCEnum.EGameType.Satla: 
 		case TDCEnum.EGameType.Taurot: 
 		case TDCEnum.EGameType.Vulbat:
-		case TDCEnum.EGameType.Crabystal: {
+		case TDCEnum.EGameType.Crabystal: 
+		case TDCEnum.EGameType.FireBuggy: {
 			data = m_DataReader.GetCreatureData (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCCreatureData).CreatureType){
 			case TDCEnum.ECreatureType.GroundCreature:
-				controller = gObject.AddComponent<TDCEasyAIController> ();
+				controller = gObject.AddComponent<TDCGroundAIController> ();
 				break;
 			case TDCEnum.ECreatureType.FlyCreature:
 				controller = gObject.AddComponent<TDCFlyAIController> ();
@@ -377,7 +386,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.GroupBlueBerry: 
 		case TDCEnum.EGameType.GroupBush:
 		case TDCEnum.EGameType.GroupCrystal:
-		case TDCEnum.EGameType.GroupCrabystal:{
+		case TDCEnum.EGameType.GroupCrabystal:
+		case TDCEnum.EGameType.GroupFireBuggy: {
 			data = m_DataReader.GetGroupData(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCGroupData).GroupType) {
@@ -414,7 +424,12 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.BurnObjectSkill:
 		case TDCEnum.EGameType.AfraidTheDarkSkill:
 		case TDCEnum.EGameType.NormalMeleeSkill:
-		case TDCEnum.EGameType.NormalRangeSkill:{
+		case TDCEnum.EGameType.NormalRangeSkill:
+		case TDCEnum.EGameType.WeatherNormalSkill:
+		case TDCEnum.EGameType.WeatherRainySkill: 
+		case TDCEnum.EGameType.WeatherOverHeatSkill:
+		case TDCEnum.EGameType.WeatherWindySkill:
+		case TDCEnum.EGameType.WeatherSnowySkill: {
 			data = m_DataReader.GetSkillData(type);	
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			switch ((data as TDCSkillData).SkillType) {
@@ -433,6 +448,14 @@ public class TDCGameManager : MonoBehaviour {
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEggController>();
 			entity = new TDCEgg(controller, data);
+			break;
+		}
+		case TDCEnum.EGameType.SeasonGrassLand: {
+			data = m_DataReader.GetSeasonData (type);
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCSeasonController> ();
+			entity = new TDCSeason(controller, data);
+			m_SeasonEntity = entity;
 			break;
 		}
 		default:
@@ -454,5 +477,21 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
     #endregion
+
+	#region Getter && Setter
+
+	public TDCEntity GetPlane() {
+		return m_PlaneEntity;
+	}
+
+	public void SetInActiveWeatherEntity(TDCEntity value) {
+		m_WeatherEntity = value;
+	}
+
+	public TDCEntity GetInActiveWeatherEntity() {
+		return m_WeatherEntity;
+	}
+
+	#endregion
 
 }

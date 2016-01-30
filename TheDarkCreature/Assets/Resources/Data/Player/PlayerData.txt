@@ -21,8 +21,10 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 100,
 			"Damage": 2,
-			"NormalSkill": 503,
+			"NormalSkill": [503],
+			"PassiveSkills": [506,507,508],
 			"Level": 1,
+			"IsShine": false,
 			"Inventory": [
 				{
 					"GameType": 101,
@@ -54,8 +56,10 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 100,
 			"Damage": 7,
-			"NormalSkill": 503,
+			"NormalSkill": [503],
+			"PassiveSkills": [506,507,508],
 			"Level": 1,
+			"IsShine": false,
 			"Inventory": [
 				{
 					"GameType": 101,
@@ -87,8 +91,10 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 100,
 			"Damage": 3,
-			"NormalSkill": 503,
+			"NormalSkill": [503],
+			"PassiveSkills": [506,507,508],
 			"Level": 1,
+			"IsShine": false,
 			"Inventory": [
 				{
 					"GameType": 101,
@@ -120,8 +126,10 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 100,
 			"Damage": 7,
-			"NormalSkill": 503,
+			"NormalSkill": [503],
+			"PassiveSkills": [506,507,508],
 			"Level": 1,
+			"IsShine": false,
 			"Inventory": [
 				{
 					"GameType": 101,
@@ -153,8 +161,45 @@
 			"CurrentSanityPoint": 50,
 			"MaxSanityPoint": 100,
 			"Damage": 3,
-			"NormalSkill": 502,
+			"NormalSkill": [502],
+			"PassiveSkills": [506,507,508],
 			"Level": 1,
+			"IsShine": false,
+			"Inventory": [
+				{
+					"GameType": 101,
+					"Amount": 5
+				},
+				{
+					"GameType": 301,
+					"Amount": 5
+				}
+			]
+		},{
+			"ID": 6,
+			"Name": "PlayerFireBuggy",
+			"GameType": 10,
+			"CreatureType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Creature/FireBuggy"],
+			"FSMPath": "FSM/Player/PlayerFSM",
+			"IconPath": "",
+			"MoveSpeed": 8,
+			"DetectRange": 20,
+			"AttackRange": 2,
+			"CurrentHP": 80,
+			"MaxHP": 100,
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
+			"CurrentHungerPoint": 50,
+			"MaxHungerPoint": 100,
+			"CurrentSanityPoint": 50,
+			"MaxSanityPoint": 100,
+			"Damage": 2,
+			"NormalSkill": [503],
+			"PassiveSkills": [506,507],
+			"Level": 1,
+			"IsShine": true,
 			"Inventory": [
 				{
 					"GameType": 101,

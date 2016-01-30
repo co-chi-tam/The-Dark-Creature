@@ -1,0 +1,89 @@
+﻿{
+	"fsm": [
+		{
+			"condition_name": "IsRoot",
+			"condition_value": true,
+			"state_name": "SeasonIdleState",
+			"states": [
+				{
+					"condition_name": "IsSpring",
+					"condition_value": true,
+					"state_name": "SeasonSpringState",
+					"states": [
+						{
+							"condition_name": "IsSpring",
+							"condition_value": false,
+							"state_name": "SeasonIdleState",
+							"states": []
+						}, {
+							"condition_name": "CountdownWaitingTime",
+							"condition_value": true,
+							"state_name": "WeatherIdleState",
+							"states": [
+								{
+									"condition_name": "IsRainy",
+									"condition_value": true,
+									"state_name": "WeatherRainyState",
+									"states": [
+										{
+											"condition_name": "IsActive",
+											"condition_value": true,
+											"state_name": "SeasonIdleState",
+											"states": []
+										}
+									]
+								},{
+									"condition_name": "IsRainy",
+									"condition_value": false,
+									"state_name": "SeasonIdleState",
+									"states": []
+								}
+							]
+						}
+					]
+				},{
+					"condition_name": "IsSummer",
+					"condition_value": true,
+					"state_name": "SeasonSummerState",
+					"states": [
+						{
+							"condition_name": "IsSummer",
+							"condition_value": false,
+							"state_name": "SeasonIdleState",
+							"states": []
+						}
+					]
+				},{
+					"condition_name": "IsAutumn",
+					"condition_value": true,
+					"state_name": "SeasonAutumnState",
+					"states": [
+						{
+							"condition_name": "IsAutumn",
+							"condition_value": false,
+							"state_name": "SeasonIdleState",
+							"states": []
+						}
+					]
+				},{
+					"condition_name": "IsWinter",
+					"condition_value": true,
+					"state_name": "SeasonWinterState",
+					"states": [
+						{
+							"condition_name": "IsWinter",
+							"condition_value": false,
+							"state_name": "SeasonIdleState",
+							"states": []
+						}
+					]
+				}
+			]
+		},{
+			"condition_name": "IsAnyState",
+			"condition_value": true,
+			"state_name": "AnyState",
+			"states": []
+		}
+	]
+}

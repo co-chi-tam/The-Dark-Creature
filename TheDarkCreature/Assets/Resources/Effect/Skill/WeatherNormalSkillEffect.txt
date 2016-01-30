@@ -1,0 +1,17 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+		
+    ],
+    "NoMethods": [
+    	{
+	    	"ID": 2,
+   			"Type": 10,
+	        "ExcuteMethods": ["PrintDebug(WeatherNormalSkillEffect:Can not active effect)"]
+	    }
+    ]
+  }
+}

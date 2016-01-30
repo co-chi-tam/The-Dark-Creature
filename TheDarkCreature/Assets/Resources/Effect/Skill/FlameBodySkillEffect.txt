@@ -4,11 +4,25 @@
     "Type": 1,
     "Method": "CanActiveEffect()",
     "YesMethods": [
-		{
-	    	"ID": 1,
-   			"Type": 10,
-	        "ExcuteMethods": ["AddValueEffect(ToTarget:InRange,ValueName:HeatPoint,ToValue:1)"]
-	    }
+    	{
+		    "ID": 3,
+		    "Type": 1,
+		    "Method": "IsInTime(Time:Day)",
+		    "YesMethods": [
+				{
+			    	"ID": 4,
+		   			"Type": 10,
+			        "ExcuteMethods": ["AddValueEffect(ToTarget:InRange,ValueName:HeatPoint,ToValue:2)"]
+			    }
+		    ],
+		    "NoMethods": [
+				{
+			    	"ID": 5,
+		   			"Type": 10,
+			        "ExcuteMethods": ["AddValueEffect(ToTarget:InRange,ValueName:HeatPoint,ToValue:1)"]
+			    }
+		    ]
+		}
     ],
     "NoMethods": [
     	{

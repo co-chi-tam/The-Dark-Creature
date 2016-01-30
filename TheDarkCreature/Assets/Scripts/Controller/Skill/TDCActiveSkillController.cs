@@ -27,11 +27,6 @@ public class TDCActiveSkillController : TDCSkillController {
 		return GetEnemyEntity() != null;
 	}
 
-	internal override bool IsRepeatSkill()
-	{
-		return m_Entity.GetRepeatSkill();
-	}
-
 	#endregion
 
 	#region Effect

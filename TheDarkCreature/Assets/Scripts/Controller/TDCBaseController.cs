@@ -60,13 +60,29 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 		var waiting 		= new FSMWaitingState (this);
 		var waitingOne 		= new FSMWaitingOneSecondState (this);
 		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
+		var dayModeState	= new FSMDayModeState(this);
+		var nightModeState	= new FSMNightModeState(this);
 
 		m_FSMManager.RegisterState("WaitingState", waiting);
 		m_FSMManager.RegisterState("WaitingOneSecondState", waitingOne);
 		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
+		m_FSMManager.RegisterState("DayModeState", dayModeState);
+		m_FSMManager.RegisterState("NightModeState", nightModeState);
 
 		m_FSMManager.RegisterCondition("IsActive", IsActive);
 		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
+		m_FSMManager.RegisterCondition("IsDayTime", TDCDateTime.IsDayTime);
+		m_FSMManager.RegisterCondition("IsMidDayTime", TDCDateTime.IsMidDayTime);
+		m_FSMManager.RegisterCondition("IsNightTime", TDCDateTime.IsNightTime);
+		m_FSMManager.RegisterCondition("IsMidNightTime", TDCDateTime.IsMidNightTime);
+		m_FSMManager.RegisterCondition("IsSpring", IsSpring);
+		m_FSMManager.RegisterCondition("IsSummer", IsSummer);
+		m_FSMManager.RegisterCondition("IsAutumn", IsAutumn);
+		m_FSMManager.RegisterCondition("IsWinter", IsWinter);
+		m_FSMManager.RegisterCondition("IsRainy", IsRainy);
+		m_FSMManager.RegisterCondition("IsOverHeat", IsOverHeat);
+		m_FSMManager.RegisterCondition("IsWindy", IsWindy);
+		m_FSMManager.RegisterCondition("IsSnowy", IsSnowy);
 	}
 
 	protected virtual void OnEnable() {
@@ -197,6 +213,22 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 		return null;
 	}
 
+	public virtual void IsActiveSeasonSpring() {
+		
+	}
+
+	public virtual void IsActiveSeasonSummer() {
+		
+	}
+
+	public virtual void IsActiveSeasonAutumn() {
+		
+	}
+
+	public virtual void IsActiveSeasonWinter() {
+		
+	}
+
 	#endregion
 		
 	#region FSM
@@ -212,7 +244,7 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 
 	internal virtual bool CountdownWaitingTime() {
 		m_WaitingTime -= Time.deltaTime;
-		return m_WaitingTime <= 0;     
+		return m_WaitingTime <= 0f;     
 	}
 
 	internal virtual bool IsEnemyDeath()
@@ -228,6 +260,38 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 	internal virtual bool MoveToEnemy()
 	{
 		return true;
+	}
+
+	internal virtual bool IsSpring() {
+		return TDCDateTime.IsSeason (TDCEnum.EGameSeason.Spring);
+	}
+
+	internal virtual bool IsSummer() {
+		return TDCDateTime.IsSeason (TDCEnum.EGameSeason.Summer);
+	}
+
+	internal virtual bool IsAutumn() {
+		return TDCDateTime.IsSeason (TDCEnum.EGameSeason.Autumn);
+	}
+
+	internal virtual bool IsWinter() {
+		return TDCDateTime.IsSeason (TDCEnum.EGameSeason.Winter);
+	}
+
+	internal virtual bool IsRainy() {
+		return TDCDateTime.IsRainy();
+	}
+
+	internal virtual bool IsOverHeat() {
+		return TDCDateTime.IsOverHeat();
+	}
+
+	internal virtual bool IsWindy() {
+		return TDCDateTime.IsWindy();
+	}
+
+	internal virtual bool IsSnowy() {
+		return TDCDateTime.IsSnowy();
 	}
 
 	#endregion
@@ -368,4 +432,5 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 	}
 
 	#endregion
+
 }

@@ -15,7 +15,7 @@ public class TDCDataReader {
 	private Dictionary<TDCEnum.EGameType, TDCGroupData> m_ListGroupData;
 	private Dictionary<TDCEnum.EGameType, TDCSkillData> m_ListSkillData;
 	private Dictionary<string, List<MapObjectData>> m_MapData;
-	private Dictionary<TDCEnum.EGameType, TDCPlaneData> m_ListPlaneData;
+	private Dictionary<TDCEnum.EGameType, TDCBaseData> m_ListBiomeData;
 	private List<TDCObjectPoolData> m_ListObjectPoolData;
 
 	#endregion
@@ -29,7 +29,7 @@ public class TDCDataReader {
 		m_ListItemData = new Dictionary<TDCEnum.EGameType, UIItemData> ();
 		m_ListSkillData = new Dictionary<TDCEnum.EGameType, TDCSkillData>();
 		m_MapData = new Dictionary<string, List<MapObjectData>>();
-		m_ListPlaneData = new Dictionary<TDCEnum.EGameType, TDCPlaneData>();
+		m_ListBiomeData = new Dictionary<TDCEnum.EGameType, TDCBaseData>();
 		m_ListObjectPoolData = new List<TDCObjectPoolData>();
 
 		LoadData ();
@@ -49,9 +49,11 @@ public class TDCDataReader {
 		var objectTextAsset = Resources.Load<TextAsset> ("Data/Creature/ObjectData");
 		var itemTextAsset = Resources.Load<TextAsset> ("Data/Creature/ItemData");
 		var skillTextAsset = Resources.Load<TextAsset>("Data/Skill/SkillData");
+		var weatherSkillTextAsset = Resources.Load<TextAsset>("Data/Skill/WeatherData");
 		var eggTextAsset = Resources.Load<TextAsset>("Data/Egg/EggData");
 		var mapTextAsset = Resources.Load<TextAsset>("Data/Map/WorldMap");
 		var planeTextAsset = Resources.Load<TextAsset>("Data/Map/PlaneData");
+		var seasonTextAsset = Resources.Load<TextAsset>("Data/Map/SeasonData");
 		var poolTextAsset = Resources.Load<TextAsset>("ObjectPool/ObjectPoolData");
 
 		var jsonUIItem = Json.Deserialize (uiItemAsset.text) as Dictionary<string, object>;
@@ -64,9 +66,11 @@ public class TDCDataReader {
 		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
 		var jsonItem = Json.Deserialize (itemTextAsset.text) as Dictionary<string, object>;
 		var jsonSkill = Json.Deserialize (skillTextAsset.text) as Dictionary<string, object>;
+		var jsonWeatherkill = Json.Deserialize (weatherSkillTextAsset.text) as Dictionary<string, object>;
 		var jsonEgg = Json.Deserialize (eggTextAsset.text) as Dictionary<string, object>;
 		var jsonMap = Json.Deserialize(mapTextAsset.text) as Dictionary<string, object>;
 		var jsonPlane = Json.Deserialize(planeTextAsset.text) as Dictionary<string, object>;
+		var jsonSeason = Json.Deserialize(seasonTextAsset.text) as Dictionary<string, object>;
 		var jsonPool = Json.Deserialize(poolTextAsset.text) as Dictionary<string, object>;
 
 		LoadUIItem(jsonUIItem["items"] as List<object>);
@@ -79,8 +83,10 @@ public class TDCDataReader {
 		LoadPlayer (jsonPlayer["players"] as List<object>);
 		LoadItem (jsonItem["items"] as List<object>);
 		LoadSkill(jsonSkill["skills"] as List<object>);
+		LoadSkill(jsonWeatherkill["weathers"] as List<object>);
 		LoadGroup (jsonGroup["groups"] as List<object>);
 		LoadPlane(jsonPlane["planes"] as List<object>);
+		LoadSeason(jsonSeason["seasons"] as List<object>);
 		LoadMap(jsonMap["map"] as List<object>);
 		LoadObjectPool(jsonPool);
 	}
@@ -105,8 +111,7 @@ public class TDCDataReader {
 			creature.DetectRange = float.Parse (instance["DetectRange"].ToString());
 			creature.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			creature.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
-			creature.NormalSkill = (TDCEnum.EGameType)int.Parse (instance["NormalSkill"].ToString());
-			creature.IsShine = false;
+			creature.NormalSkill =  ConvertIntToEnums(instance["NormalSkill"] as List<object>);			creature.IsShine = bool.Parse (instance["IsShine"].ToString());;
 			ConvertToEnum (instance["Enemies"] as List<object>, creature.TypeEnemies);
 			ConvertToEnum (instance["Foods"] as List<object>, creature.TypeFoods);
 			var inventory = instance["Inventory"] as List<object>;
@@ -259,9 +264,10 @@ public class TDCDataReader {
 			player.MoveSpeed = float.Parse (instance["MoveSpeed"].ToString());
 			player.AttackRange = float.Parse (instance["AttackRange"].ToString());
 			player.DetectRange = float.Parse (instance["DetectRange"].ToString());
-			player.NormalSkill = (TDCEnum.EGameType)int.Parse (instance["NormalSkill"].ToString());
+			player.NormalSkill =  ConvertIntToEnums(instance["NormalSkill"] as List<object>);
+			player.PassiveSkill = ConvertIntToEnums(instance["PassiveSkills"] as List<object>);
 			player.Level = int.Parse (instance["Level"].ToString());
-			player.IsShine = false;
+			player.IsShine = bool.Parse (instance["IsShine"].ToString());;
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
 				var invenData = inventory[x] as Dictionary<string, object>;
@@ -341,13 +347,12 @@ public class TDCDataReader {
 			skillData.TimeDelay = float.Parse(skill["TimeDelay"].ToString());
 			skillData.TimeEffect = float.Parse(skill["TimeEffect"].ToString());
 			skillData.EffectPerTime = float.Parse(skill["EffectPerTime"].ToString());
-			skillData.RepeatSkill = bool.Parse(skill["RepeatSkill"].ToString());
 			skillData.AttachOwner = bool.Parse(skill["AttachOwner"].ToString());
 			skillData.AttachEnemy = bool.Parse(skill["AttachEnemy"].ToString());
 			skillData.ModelPath = ConvertTo<string> (skill["ModelPath"] as List<object>);
 			skillData.FSMPath = skill["FSMPath"].ToString();
 			skillData.EffectPath = skill["EffectPath"].ToString();
-			skillData.TriggerEnvent = skill["TriggerEvent"].ToString();
+			skillData.TriggerEnvent = ConvertTo<string> (skill["TriggerEvent"] as List<object>);
 			m_ListSkillData.Add(skillData.GameType, skillData);
 		}
 	}
@@ -401,7 +406,22 @@ public class TDCDataReader {
 			plane.SummerTexture = instance["SummerTexture"].ToString();
 			plane.AutumnTexture = instance["AutumnTexture"].ToString();
 			plane.WinterTexture = instance["WinterTexture"].ToString();
-			m_ListPlaneData.Add (plane.GameType, plane);
+			m_ListBiomeData.Add (plane.GameType, plane);
+		}
+	}
+
+	public void LoadSeason(List<object> values) {
+		for (int i = 0; i < values.Count; i++) {
+			var instance = values [i] as Dictionary<string, object>;
+			var season = new TDCSeasonData ();
+			season.ID = int.Parse (instance ["ID"].ToString ());
+			season.Name = instance ["Name"].ToString ();
+			season.Description = instance ["Description"].ToString ();
+			season.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
+			season.FSMPath = instance["FSMPath"].ToString();
+			season.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
+			season.Duration = float.Parse (instance ["Duration"].ToString ());
+			m_ListBiomeData.Add (season.GameType, season);
 		}
 	}
 
@@ -477,7 +497,7 @@ public class TDCDataReader {
 	}
 
 	public TDCSkillData GetSkillData(TDCEnum.EGameType skill) {
-		var skillData = TDCSkillData.Parse (m_ListSkillData[skill] as TDCSkillData);
+		var skillData = TDCSkillData.Clone (m_ListSkillData[skill] as TDCSkillData);
 		return skillData;
 	}
 
@@ -540,8 +560,13 @@ public class TDCDataReader {
 	}
 
 	public TDCPlaneData GetPlaneData(TDCEnum.EGameType plane) {
-		var planeData = TDCPlaneData.Clone (m_ListPlaneData[plane] as TDCPlaneData);
+		var planeData = TDCPlaneData.Clone (m_ListBiomeData[plane] as TDCPlaneData);
 		return planeData;
+	}
+
+	public TDCSeasonData GetSeasonData(TDCEnum.EGameType season) {
+		var seasonData = TDCSeasonData.Clone (m_ListBiomeData[season] as TDCSeasonData);
+		return seasonData;
 	}
 
 	#endregion
@@ -568,6 +593,22 @@ public class TDCDataReader {
 		var result = new T[instance.Count];
 		for (int i = 0; i < instance.Count; i++) {
 			result[i] = (T)Convert.ChangeType (instance[i], typeof (T));
+		}
+		return result;
+	}
+
+	private TDCEnum.EGameType[] ConvertIntToEnums (List<object> instance) {
+		var result = new TDCEnum.EGameType[instance.Count];
+		for (int i = 0; i < instance.Count; i++) {
+			result[i] = (TDCEnum.EGameType)int.Parse (instance[i].ToString());
+		}
+		return result;
+	}
+
+	private TDCEnum.EGameType[] ConvertStringToEnums (List<object> instance) {
+		var result = new TDCEnum.EGameType[instance.Count];
+		for (int i = 0; i < instance.Count; i++) {
+			result[i] = (TDCEnum.EGameType)Enum.Parse (typeof(TDCEnum.EGameType), instance[i].ToString());
 		}
 		return result;
 	}

@@ -3,7 +3,7 @@ using System;
 using System.Collections;
 using FSM;
 
-public class TDCEasyAIController : TDCCreatureController
+public class TDCGroundAIController : TDCCreatureController
 {
     #region Properties
 

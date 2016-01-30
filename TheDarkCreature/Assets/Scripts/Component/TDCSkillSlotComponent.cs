@@ -4,7 +4,7 @@ using System.Collections;
 public class TDCSkillSlotComponent
 {
 	private TDCEntity m_Owner;
-	private TDCSkillSlot m_NormalSkill;
+	private TDCSkillSlot[] m_ActiveSkills;
 	private TDCSkillSlot[] m_PassiveSkills;
 
 	public TDCSkillSlotComponent(TDCEntity owner)
@@ -12,8 +12,12 @@ public class TDCSkillSlotComponent
 		m_Owner = owner;
 	}
 
-	public void CreateNormalSkillSlot(TDCEnum.EGameType activeSkill) {
-		m_NormalSkill = new TDCSkillSlot(activeSkill, m_Owner);
+	public void CreateActiveSkillSlot(params TDCEnum.EGameType[] activeSkill) {
+		m_ActiveSkills = new TDCSkillSlot[activeSkill.Length];
+		for (int i = 0; i < activeSkill.Length; i++)
+		{
+			m_ActiveSkills[i] = new TDCSkillSlot(activeSkill[i], m_Owner);
+		}
 	}
 
 	public void CreatePassiveSkillSlot(params TDCEnum.EGameType[] passiveSkills) {
@@ -25,16 +29,17 @@ public class TDCSkillSlotComponent
 	}
 
 	public void ActiveSkill(int index) {
-		if (index == 0)
-		{
-			m_NormalSkill.ActiveSkill();
-		}
+		m_ActiveSkills[index].ActiveSkill();
 	}
 
 	public void UpdateComponent(float dt) {
-		if (m_Owner.GetActive() == false || m_NormalSkill == null)
+		if (m_Owner.GetActive() == false || m_ActiveSkills == null)
 			return;
-		m_NormalSkill.UpdateSkill(dt);
+		for (int i = 0; i < m_ActiveSkills.Length; i++)
+		{
+			m_ActiveSkills[i].UpdateSkill(dt);
+		}
+
 		if (m_PassiveSkills == null)
 			return;
 		for (int i = 0; i < m_PassiveSkills.Length; i++)

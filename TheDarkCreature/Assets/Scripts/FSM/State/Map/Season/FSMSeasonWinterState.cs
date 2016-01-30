@@ -4,15 +4,14 @@ using FSM;
 
 public class FSMSeasonWinterState : FSMBaseState {
 
-	private TDCPlaneController m_PlaneController;
-
 	public FSMSeasonWinterState(TDCBaseController controller) : base (controller)
 	{
-		m_PlaneController = controller as TDCPlaneController;
+		
 	}
 
 	public override void StartState() {
-		m_PlaneController.SetTextureBySeason(TDCEnum.EGameSeason.Winter);
+		m_Controller.IsActiveSeasonWinter();
+		m_Controller.SetWaitingTime(m_Controller.GetDuration());
 	}
 
 	public override void UpdateState() {

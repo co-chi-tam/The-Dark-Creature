@@ -28,16 +28,19 @@ public class TDCDateTime : MonoBehaviour {
 	private float m_Hour 	= 0f;
 	[SerializeField]
 	private float m_Day 	= 0f;
+	[SerializeField]
+	private float m_MoistureValue = 0f;
+	[SerializeField]
+	private float m_HeatValue = 0f;
 
 	[SerializeField]
 	private TDCEnum.EGameSeason m_Season = TDCEnum.EGameSeason.Spring;
 
 	private float m_Timer 		= 0f;
-//	private int m_TickPerSecond = 60;
 	private int m_SecondPerMinute = 60;
 	private int m_MinutePerHour = 60;
 	private int m_HourPerDay 	= 24;
-	private int m_DayPerSeason 	= 3;
+	private int m_DayPerSeason 	= 15;
 	private int m_SeasonCount	= 0;
 
 	private int m_SecondPerHour 	= 0;
@@ -51,6 +54,12 @@ public class TDCDateTime : MonoBehaviour {
 	public static float DeltaTime;
 	public static float Hour;
 	public static TDCEnum.EGameSeason Season;
+
+	private static float m_Moisture;
+	private static float m_Heat;
+
+	private float m_OffsetTimeMoisture;
+	private float m_OffsetTimeHeat;
 
 	#endregion
 
@@ -146,11 +155,14 @@ public class TDCDateTime : MonoBehaviour {
 
 	void Start() {
 		SetHour (8);
-		SetSeason(TDCEnum.EGameSeason.Winter);
+		SetSeason(TDCEnum.EGameSeason.Spring); 
 		SetupImage (m_SunImage, 0, 1f);
 		SetupImage (m_MoonImage, 1, 0f);
 		m_DayText.text = "Day " + m_Day.ToString();
 		DeltaTime = m_Tick;
+
+		m_OffsetTimeMoisture = UnityEngine.Random.Range(10, 9999);
+		m_OffsetTimeHeat = 9999 - m_OffsetTimeMoisture;
 	}
 	
 	void Update () {
@@ -184,6 +196,11 @@ public class TDCDateTime : MonoBehaviour {
 				}
 			}
 		}
+
+		var timeMoisture = (Time.time + m_OffsetTimeMoisture) / m_Speed;
+		var timeHeat = (Time.time + m_OffsetTimeHeat) / m_Speed;
+		m_MoistureValue = m_Moisture = Mathf.PerlinNoise(timeMoisture , timeMoisture);
+		m_HeatValue = m_Heat = Mathf.PerlinNoise(timeHeat, timeHeat);
 	}
 
 	void LateUpdate() {
@@ -208,11 +225,31 @@ public class TDCDateTime : MonoBehaviour {
 	}
 
 	public static bool IsMidNightTime() {
-		return (Hour > 20f && Hour < 24f) || (Hour > 0f && Hour < 4f);
+		return (Hour > 22f && Hour < 24f) || (Hour > 0f && Hour < 2f);
+	}
+
+	public static bool IsMidDayTime() {
+		return (Hour > 10f && Hour < 14f);
 	}
 
 	public static bool IsSeason(TDCEnum.EGameSeason season) {
 		return Season == season;
+	}
+
+	public static bool IsRainy() {
+		return m_Moisture > 0.85f;
+	}
+
+	public static bool IsOverHeat() {
+		return m_Heat > 0.85f;
+	}
+
+	public static bool IsWindy() {
+		return m_Moisture < 0.25f || m_Heat < 0.25f ;
+	}
+
+	public static bool IsSnowy() {
+		return m_Heat < 0.25f || m_Moisture < 0.25f;
 	}
 
 	#endregion

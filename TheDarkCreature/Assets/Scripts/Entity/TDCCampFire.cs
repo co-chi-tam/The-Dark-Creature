@@ -4,7 +4,9 @@ using System.Collections;
 public class TDCCampFire : TDCObject
 {
 	#region Properties
+
 	protected TDCSkillSlot m_NormalSkill;
+
 	#endregion
 
 	#region Contructor

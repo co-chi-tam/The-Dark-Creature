@@ -13,10 +13,9 @@ public class TDCSkillData : TDCBaseData
 	private float m_EffectPerTime;
 	private float m_EffectRadius;
 	private string m_EffectPath;
-	private bool m_RepeatSkill;
 	private bool m_AttachOwner;
 	private bool m_AttachEnemy;
-	private string m_TriggerEvent;
+	private string[] m_TriggerEvent;
 
 	public int SkillLevel
 	{
@@ -84,12 +83,6 @@ public class TDCSkillData : TDCBaseData
 		set { m_EffectPath = value; }
 	}
 
-	public bool RepeatSkill
-	{
-		get { return m_RepeatSkill; }
-		set { m_RepeatSkill = value; }
-	}
-
 	public bool AttachOwner
 	{
 		get { return m_AttachOwner; }
@@ -102,7 +95,7 @@ public class TDCSkillData : TDCBaseData
 		set { m_AttachEnemy = value; }
 	}
 
-	public string TriggerEnvent
+	public string[] TriggerEnvent
 	{
 		get { return m_TriggerEvent; }
 		set { m_TriggerEvent = value; }
@@ -121,13 +114,12 @@ public class TDCSkillData : TDCBaseData
 		this.m_EffectPerTime = 0f;
 		this.m_EffectRadius = 0f;
 		this.m_EffectPath = string.Empty;
-		this.m_RepeatSkill = false;
 		this.m_AttachOwner = false;
 		this.m_AttachEnemy = false;
-		this.m_TriggerEvent = string.Empty;
+		this.m_TriggerEvent = null;
 	}
 
-	public static TDCSkillData Parse(TDCSkillData instance) {
+	public static TDCSkillData Clone(TDCSkillData instance) {
 		var tmp = new TDCSkillData();
 		tmp.ID = instance.ID;
 		tmp.Name = instance.Name;
@@ -147,7 +139,6 @@ public class TDCSkillData : TDCBaseData
 		tmp.FSMPath = instance.FSMPath;
 		tmp.EffectPath = instance.EffectPath;
 		tmp.ModelPath = instance.ModelPath;
-		tmp.RepeatSkill = instance.RepeatSkill;
 		tmp.AttachOwner = instance.AttachOwner;
 		tmp.AttachEnemy = instance.AttachEnemy;
 		tmp.TriggerEnvent = instance.TriggerEnvent;

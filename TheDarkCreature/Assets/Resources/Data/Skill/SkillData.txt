@@ -16,10 +16,9 @@
 			"TimeDelay": 3,
 			"TimeEffect": 0,
 			"EffectPerTime": 0,
-			"RepeatSkill": true,
 			"AttachOwner": false,
 			"AttachEnemy": false,
-			"TriggerEvent": "OnAttack",
+			"TriggerEvent": ["None"],
 			"ModelPath": ["Prefabs/Skill/FlameBodySkill"],
 			"FSMPath": "FSM/Skill/FlameBodySkillFSM"
 			"EffectPath": "Effect/Skill/FlameBodySkillEffect"
@@ -39,10 +38,9 @@
 			"TimeDelay": 1,
 			"TimeEffect": 0,
 			"EffectPerTime": 0,
-			"RepeatSkill": false,
 			"AttachOwner": false,
 			"AttachEnemy": false,
-			"TriggerEvent": "OnActive",
+			"TriggerEvent": ["None"],
 			"ModelPath": ["Prefabs/Skill/NormalRangeSkill"],
 			"FSMPath": "FSM/Skill/NormalRangeSkillFSM"
 			"EffectPath": "Effect/Skill/NormalRangeSkillEffect"
@@ -62,10 +60,9 @@
 			"TimeDelay": 1,
 			"TimeEffect": 0,
 			"EffectPerTime": 0,
-			"RepeatSkill": false,
 			"AttachOwner": false,
 			"AttachEnemy": true,
-			"TriggerEvent": "OnActive",
+			"TriggerEvent": ["None"],
 			"ModelPath": ["Prefabs/Skill/NormalMeleeSkill"],
 			"FSMPath": "FSM/Skill/NormalMeleeSkillFSM"
 			"EffectPath": "Effect/Skill/NormalMeleeSkillEffect"
@@ -85,10 +82,9 @@
 			"TimeDelay": 10,
 			"TimeEffect": 1,
 			"EffectPerTime": 0,
-			"RepeatSkill": false,
 			"AttachOwner": true,
 			"AttachEnemy": false,
-			"TriggerEvent": "OnAlive",
+			"TriggerEvent": ["OnAlive"],
 			"ModelPath": ["Prefabs/Skill/LifeNotEasySkill"],
 			"FSMPath": "FSM/Skill/EffectUpdateSkillFSM"
 			"EffectPath": "Effect/Skill/LifeNotEasySkillEffect"
@@ -108,10 +104,9 @@
 			"TimeDelay": 30,
 			"TimeEffect": 25,
 			"EffectPerTime": 1,
-			"RepeatSkill": false,
 			"AttachOwner": true,
 			"AttachEnemy": false,
-			"TriggerEvent": "OnOverHeat",
+			"TriggerEvent": ["OnOverHeat"],
 			"ModelPath": ["Prefabs/Skill/BurnObjectSkill"],
 			"FSMPath": "FSM/Skill/EffectPerSecondSkillFSM"
 			"EffectPath": "Effect/Skill/BurnObjectSkillEffect"
@@ -131,10 +126,9 @@
 			"TimeDelay": 10,
 			"TimeEffect": 10,
 			"EffectPerTime": 2,
-			"RepeatSkill": false,
 			"AttachOwner": true,
 			"AttachEnemy": false,
-			"TriggerEvent": "OnMidNight",
+			"TriggerEvent": ["OnMidNight"],
 			"ModelPath": ["Prefabs/Skill/AfraidTheDarkSkill"],
 			"FSMPath": "FSM/Skill/EffectPerSecondSkillFSM"
 			"EffectPath": "Effect/Skill/AfraidTheDarkSkillEffect"

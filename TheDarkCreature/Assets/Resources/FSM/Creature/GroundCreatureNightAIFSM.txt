@@ -11,37 +11,6 @@
           "state_name": "WildModeState",
           "states": [
           	{
-              "condition_name": "IsDayTime",
-              "condition_value": true,
-              "state_name": "DayModeState",
-              "states": [
-              	{
-                  "condition_name": "IsActive",
-                  "condition_value": true,
-                  "state_name": "GoHomeState",
-                  "states": [
-                  	{
-                      "condition_name": "MoveToTarget",
-                      "condition_value": true,
-                      "state_name": "SleepState",
-                      "states": [
-                      	{
-	                      "condition_name": "IsEnemyDeath",
-	                      "condition_value": false,
-	                      "state_name": "ChaseState",
-	                      "states": []
-	                    },{
-	                      "condition_name": "IsNightTime",
-	                      "condition_value": true,
-	                      "state_name": "IdleState",
-	                      "states": []
-	                    }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            },{
               "condition_name": "IsNightTime",
               "condition_value": true,
               "state_name": "NightModeState",
@@ -111,6 +80,37 @@
 	                }
 	              ]
 	            }
+              ]
+            },{
+              "condition_name": "IsDayTime",
+              "condition_value": true,
+              "state_name": "DayModeState",
+              "states": [
+              	{
+                  "condition_name": "IsActive",
+                  "condition_value": true,
+                  "state_name": "GoHomeState",
+                  "states": [
+                  	{
+                      "condition_name": "MoveToTarget",
+                      "condition_value": true,
+                      "state_name": "SleepState",
+                      "states": [
+                      	{
+	                      "condition_name": "IsEnemyDeath",
+	                      "condition_value": false,
+	                      "state_name": "ChaseState",
+	                      "states": []
+	                    },{
+	                      "condition_name": "IsNightTime",
+	                      "condition_value": true,
+	                      "state_name": "IdleState",
+	                      "states": []
+	                    }
+                      ]
+                    }
+                  ]
+                }
               ]
             }
           ]

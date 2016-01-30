@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TDCFlyAIController : TDCEasyAIController
+public class TDCFlyAIController : TDCGroundAIController
 {
 	#region Properties
 

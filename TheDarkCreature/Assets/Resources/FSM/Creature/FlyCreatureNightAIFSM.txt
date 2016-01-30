@@ -11,39 +11,6 @@
           "state_name": "WildModeState",
           "states": [
           	{
-              "condition_name": "IsDayTime",
-              "condition_value": true,
-              "state_name": "DayModeState",
-              "states": [
-	            {
-                  "condition_name": "IsActive",
-                  "condition_value": true,
-                  "state_name": "FlyHomeState",
-                  "states": [
-                  	{
-                      "condition_name": "MoveToTarget",
-                      "condition_value": true,
-                      "state_name": "LandingHomeState",
-                      "states": [
-                      	{
-	                      "condition_name": "IsLandingFinish",
-	                      "condition_value": true,
-	                      "state_name": "SleepState",
-	                      "states": [
-	                      	{
-		                      "condition_name": "IsNightTime",
-		                      "condition_value": true,
-		                      "state_name": "IdleState",
-		                      "states": []
-		                    }
-	                      ]
-	                    }
-                      ]
-                    }
-                  ]
-                }
-	          ]
-	        },{
               "condition_name": "IsNightTime",
               "condition_value": true,
               "state_name": "NightModeState",
@@ -128,7 +95,40 @@
 	              ]
 	            }
               ]
-            }
+            },{
+              "condition_name": "IsDayTime",
+              "condition_value": true,
+              "state_name": "DayModeState",
+              "states": [
+	            {
+                  "condition_name": "IsActive",
+                  "condition_value": true,
+                  "state_name": "FlyHomeState",
+                  "states": [
+                  	{
+                      "condition_name": "MoveToTarget",
+                      "condition_value": true,
+                      "state_name": "LandingHomeState",
+                      "states": [
+                      	{
+	                      "condition_name": "IsLandingFinish",
+	                      "condition_value": true,
+	                      "state_name": "SleepState",
+	                      "states": [
+	                      	{
+		                      "condition_name": "IsNightTime",
+		                      "condition_value": true,
+		                      "state_name": "IdleState",
+		                      "states": []
+		                    }
+	                      ]
+	                    }
+                      ]
+                    }
+                  ]
+                }
+	          ]
+	        }
           ]
         },{
           "condition_name": "HaveLeader",

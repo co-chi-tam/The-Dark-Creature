@@ -93,7 +93,6 @@ public class TDCSkillController : TDCBaseController {
 
 		m_FSMManager.RegisterCondition("CanActiveSkill", CanActiveSkill);
 		m_FSMManager.RegisterCondition("HaveCreatureAroundOwner", HaveCreatureAroundOwner);
-		m_FSMManager.RegisterCondition("IsRepeatSkill", IsRepeatSkill);
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
 		m_FSMManager.RegisterCondition("MoveToEnemy", MoveToEnemy);
 		m_FSMManager.RegisterCondition("IsFinishSkill", IsFinishSkill);
@@ -107,6 +106,7 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectManager.RegisterCondition("CanPayHealthPoint", CanPayHealthPoint);
 		m_EffectManager.RegisterCondition("CanPayHeatPoint", CanPayHeatPoint);
 		m_EffectManager.RegisterCondition("CanPaySanityPoint", CanPaySanityPoint);
+		m_EffectManager.RegisterCondition("IsInTime", IsInTime);
 
 		m_EffectManager.RegisterExcuteMethod("ApplyDamageEffect", ApplyDamageEffect);
 		m_EffectManager.RegisterExcuteMethod("AddValueEffect", AddValueEffect);
@@ -279,10 +279,6 @@ public class TDCSkillController : TDCBaseController {
 		return GetActive();
 	}
 
-	internal virtual bool IsRepeatSkill() {
-		return m_Entity.GetRepeatSkill();
-	}
-
 	internal virtual bool HaveCreatureAroundOwner()
 	{
 		var colliders = Physics.OverlapSphere(TransformPosition, m_Entity.GetEffectRadius(), m_ColliderLayerMask);
@@ -304,12 +300,12 @@ public class TDCSkillController : TDCBaseController {
 	#region Effect
 
 	internal virtual void PrintDebug(Dictionary<string, object> pars) {
-//#if UNITY_EDITOR
-//		foreach (var item in pars)
-//		{
-//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-//		}
-//#endif
+#if UNITY_EDITOR
+		foreach (var item in pars)
+		{
+			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
+		}
+#endif
 	}
 
 	internal virtual void AddValueEffect(Dictionary<string, object> pars) {
@@ -364,6 +360,22 @@ public class TDCSkillController : TDCBaseController {
 
 	internal virtual bool CanPaySanityPoint(Dictionary<string, object> pars)
 	{
+		return false;
+	}
+
+	internal virtual bool IsInTime(Dictionary<string, object> pars) {
+		var time = pars["Time"].ToString();
+		switch (time)
+		{
+			case "Day":
+				return TDCDateTime.IsDayTime();
+			case "Night":
+				return TDCDateTime.IsNightTime();
+			case "MidDay":
+				return TDCDateTime.IsMidDayTime();
+			case "MidNight":
+				return TDCDateTime.IsMidNightTime();
+		}
 		return false;
 	}
 

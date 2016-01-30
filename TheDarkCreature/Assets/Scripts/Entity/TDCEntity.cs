@@ -17,6 +17,8 @@ public class TDCEntity : TDCPropertyReflection {
 
 	protected Dictionary<string, Action> m_TriggerEvents;
 
+	protected TDCSkillSlotComponent m_SkillSlotComponent;
+
 	#endregion
 
 	#region Event 
@@ -30,7 +32,6 @@ public class TDCEntity : TDCPropertyReflection {
 	protected event Action OnOverHeatdEvent;
 	protected event Action OnAliveEvent;
 	protected event Action OnDeathEvent;
-	protected event Action OnMidNightEvent;
 
 	public event Action<int, int> OnHealthChange;
 	public event Action<int, int> OnHeatChange;
@@ -76,7 +77,6 @@ public class TDCEntity : TDCPropertyReflection {
 		m_TriggerEvents.Add("OnOverHeat", OnOverHeatdEvent);
 		m_TriggerEvents.Add("OnAlive", OnAliveEvent);
 		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
-		m_TriggerEvents.Add("OnMidNight", OnMidNightEvent);
 	}
 
 	#endregion
@@ -427,10 +427,6 @@ public class TDCEntity : TDCPropertyReflection {
 	}
 
 	public virtual bool GetAttachEnemy() {
-		return false;
-	}
-
-	public virtual bool GetRepeatSkill() {
 		return false;
 	}
 

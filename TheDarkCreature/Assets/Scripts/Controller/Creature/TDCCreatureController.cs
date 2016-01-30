@@ -33,8 +33,6 @@ public class TDCCreatureController : TDCBaseController {
 		var petModeState	= new FSMPetModeState(this);
 		var followState 	= new FSMFollowState(this);
 		var flyFollowState	= new FSMFlyFollowState(this);
-		var dayModeState	= new FSMDayModeState(this);
-		var nightModeState	= new FSMNightModeState(this);
 		var flyHomeState	= new FSMFlyHomeState(this);
 		var landingHomeState = new FSMLandingHomeState(this);
 		var goHomeState 	= new FSMGoHomeState(this);
@@ -54,8 +52,6 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("PetModeState", petModeState);
 		m_FSMManager.RegisterState("FollowState", followState);
 		m_FSMManager.RegisterState("FlyFollowState", flyFollowState);
-		m_FSMManager.RegisterState("DayModeState", dayModeState);
-		m_FSMManager.RegisterState("NightModeState", nightModeState);
 		m_FSMManager.RegisterState("GoHomeState", goHomeState);
 		m_FSMManager.RegisterState("FlyHomeState", flyHomeState);
 		m_FSMManager.RegisterState("LandingHomeState", landingHomeState);
@@ -76,8 +72,6 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterCondition("HaveLeader", HaveLeader);
 		m_FSMManager.RegisterCondition("HaveEnemyByLeader", HaveEnemyByLeader);
 		m_FSMManager.RegisterCondition("IsLeaderDeath", IsLeaderDeath);
-		m_FSMManager.RegisterCondition("IsDayTime", TDCDateTime.IsDayTime);
-		m_FSMManager.RegisterCondition("IsNightTime", TDCDateTime.IsNightTime);
 	}
 
 	protected override void FixedUpdate ()
@@ -121,6 +115,7 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		var curValue = base.GetObjectCurrentValue();
 		curValue["Leader Name"] = m_Entity.GetLeaderEntity() == null ? "None" : m_Entity.GetLeaderEntity().GetController().name;
+		curValue["Attack range"] = m_Entity.GetAttackRange();
 		return curValue;
 	}
 

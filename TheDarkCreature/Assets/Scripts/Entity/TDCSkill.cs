@@ -110,11 +110,6 @@ public class TDCSkill : TDCEntity
 		return m_Data.EffectRadius;
 	}
 
-	public override bool GetRepeatSkill()
-	{
-		return m_Data.RepeatSkill;
-	}
-
 	public override bool GetAttachOwner()
 	{
 		return m_Data.AttachOwner;

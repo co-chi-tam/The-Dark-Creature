@@ -1,0 +1,13 @@
+﻿{
+	"seasons": [
+		{
+			"ID": 1,
+			"Name": "Season GrassLand",
+			"GameType": 1001,
+			"Description": "",
+			"ModelPath": ["Prefabs/Map/SeasonGrassLand"],
+			"FSMPath": "FSM/Map/SeasonGrassLandFSM",
+			"Duration": 120
+		}
+	]
+}

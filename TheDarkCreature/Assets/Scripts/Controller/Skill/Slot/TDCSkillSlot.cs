@@ -20,7 +20,10 @@ public class TDCSkillSlot {
 		m_SkillType = skillType;
 		m_Owner = owner;
 		m_TimeDelay = 0f;
-		m_Owner.AddEventListener(m_SkillData.TriggerEnvent, ActiveSkill);
+		for (int i = 0; i < m_SkillData.TriggerEnvent.Length; i++)
+		{
+			m_Owner.AddEventListener(m_SkillData.TriggerEnvent[i], ActiveSkill);
+		}
 	}
 
 	public void ActiveSkill() {
@@ -76,4 +79,12 @@ public class TDCSkillSlot {
 	public void SetOwnerEntity(TDCEntity owner) {
 		m_Owner = owner;
 	}
+
+	public void OnDestroy() {
+		for (int i = 0; i < m_SkillData.TriggerEnvent.Length; i++)
+		{
+			m_Owner.RemoveEventListener(m_SkillData.TriggerEnvent[i], ActiveSkill);
+		}
+	}
+
 }

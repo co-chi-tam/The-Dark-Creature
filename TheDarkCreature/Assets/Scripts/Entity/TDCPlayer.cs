@@ -18,9 +18,7 @@ public class TDCPlayer : TDCCreature
 		m_Controller = ctrl as TDCPlayerController;
 		m_Data = data as TDCPlayerData;
 
-		m_SkillSlotComponent.CreatePassiveSkillSlot(TDCEnum.EGameType.LifeNotEasySkill, 
-													TDCEnum.EGameType.BurnObjectSkill,
-													TDCEnum.EGameType.AfraidTheDarkSkill);
+		m_SkillSlotComponent.CreatePassiveSkillSlot(m_Data.PassiveSkill);
 	}
 
 	#endregion
@@ -234,6 +232,11 @@ public class TDCPlayer : TDCCreature
 
 	public override Vector3 GetTransformPosition() {
 		return m_Controller.TransformPosition;
+	}
+
+	public override bool GetIsShine()
+	{
+		return m_Data.IsShine;
 	}
 
 	#endregion
