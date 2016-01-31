@@ -3,7 +3,7 @@ public class TDCEnum{
 
 	public enum EGameType : int {
 		None 		= 0,
-		GrassLandPlane	= 1,
+		Sun			= 1,
 
 		// Creature
 		Dodono 		= 5,
@@ -54,19 +54,23 @@ public class TDCEnum{
 		LifeNotEasySkill = 506,
 		BurnObjectSkill  = 507,
 		AfraidTheDarkSkill = 508,
+		EyeOfNightSkill 	= 509,
 
 		// Weather
-		WeatherNormalSkill 	= 509,
-		WeatherRainySkill 	= 510,
-		WeatherOverHeatSkill 	= 511,
-		WeatherWindySkill 	= 512,
-		WeatherSnowySkill 	= 513,
+		WeatherNormalSkill 	= 601,
+		WeatherRainySkill 	= 602,
+		WeatherOverHeatSkill = 603,
+		WeatherWindySkill 	= 604,
+		WeatherSnowySkill 	= 605,
 
 		// Egg
 		EggDodono = 801,
 
 		// Map
 		SeasonGrassLand = 1001,
+
+		// Plane
+		GrassLandPlane	= 1101,
 	}
 
 	public enum ESkillType : int {

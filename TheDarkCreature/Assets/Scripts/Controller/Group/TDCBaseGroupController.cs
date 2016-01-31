@@ -44,15 +44,29 @@ public class TDCBaseGroupController : TDCBaseController
 		Gizmos.DrawWireSphere (TransformPosition, GetGroupRadius());
 	}
 
+	public override void OnBecameVisible()
+	{
+		base.OnBecameVisible();
+		m_AnimatorController.enabled = true;
+		m_Collider.enabled = true;
+	}
+
+	public override void OnBecameInvisible()
+	{
+		base.OnBecameInvisible();
+		m_AnimatorController.enabled = false;
+		m_Collider.enabled = false;
+	}
+
     #endregion
 
 	#region Main method
 
-	public override Dictionary<string, object> GetObjectCurrentValue()
+	public override void VisibleObject(bool value)
 	{
-		var curValue = base.GetObjectCurrentValue();
-		curValue["State"] = m_FSMManager.StateCurrentName;
-		return curValue;
+		base.VisibleObject(value);
+		m_AnimatorController.enabled = value;
+		m_Collider.enabled = value;
 	}
 
 	protected virtual void CreatePositionMember() {

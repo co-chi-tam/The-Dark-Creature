@@ -18,8 +18,6 @@ public class TDCDateTime : MonoBehaviour {
 	[SerializeField]
 	private Image m_MoonImage;
 	[SerializeField]
-	private Light m_DayLight;
-	[SerializeField]
 	private AnimationCurve m_DayNightCurve;
 	[Space (10f)]
 	[SerializeField]
@@ -47,12 +45,12 @@ public class TDCDateTime : MonoBehaviour {
 
 	private List<AlarmClockInfo> m_AlarmClocks;
 
-	private float m_SunLightIntensity = 0f;
 	private float m_Tick = 0f;
 	private int m_CurrentSeason = 0;
 
 	public static float DeltaTime;
 	public static float Hour;
+	public static float DeltaHour;
 	public static TDCEnum.EGameSeason Season;
 
 	private static float m_Moisture;
@@ -146,11 +144,10 @@ public class TDCDateTime : MonoBehaviour {
 	#region Implementation MonoBehaviour
 
 	void Awake () {
-		m_Active 			= m_SunImage != null && m_MoonImage != null && m_DayLight != null && m_DayText != null;
+		m_Active 			= m_SunImage != null && m_MoonImage != null && m_DayText != null;
 		m_SecondPerHour 	= m_SecondPerMinute * m_MinutePerHour;
 		m_SeasonCount 		= Enum.GetNames (typeof(TDCEnum.EGameSeason)).Length;
 		m_AlarmClocks 		= new List<AlarmClockInfo> ();
-		m_SunLightIntensity = m_DayLight.intensity;
 	}
 
 	void Start() {
@@ -205,11 +202,9 @@ public class TDCDateTime : MonoBehaviour {
 
 	void LateUpdate() {
 		DeltaTime	= m_Tick;
-
-		var value = m_Hour / 24;
-		m_SunImage.fillAmount 	= m_DayNightCurve.Evaluate (value);
+		var value 	= m_Hour / 24;
+		m_SunImage.fillAmount = DeltaHour = m_DayNightCurve.Evaluate (value);
 		m_MoonImage.fillAmount 	= 1f - m_DayNightCurve.Evaluate (value);
-		m_DayLight.intensity 	= m_SunImage.fillAmount * m_SunLightIntensity;
 	}
 
 	#endregion
@@ -225,7 +220,7 @@ public class TDCDateTime : MonoBehaviour {
 	}
 
 	public static bool IsMidNightTime() {
-		return (Hour > 22f && Hour < 24f) || (Hour > 0f && Hour < 2f);
+		return (Hour > 21f && Hour < 24f) || (Hour > 0f && Hour < 2f);
 	}
 
 	public static bool IsMidDayTime() {

@@ -23,50 +23,6 @@
 			"FSMPath": "FSM/Skill/FlameBodySkillFSM"
 			"EffectPath": "Effect/Skill/FlameBodySkillEffect"
 		},{
-			"ID": 1,
-			"Name": "Normal range skill",
-			"Description": "",
-			"GameType": 502,
-			"IconPath": "NormalRangeSkill",
-			"SkillLevel": 1,
-			"SkillType": 2,
-			"CostHealthPoint": 0,
-			"CostHeatPoint": 0,
-			"CostSanityPoint": 0,
-			"CostHungerPoint": 0,
-			"EffectRadius": 3,
-			"TimeDelay": 1,
-			"TimeEffect": 0,
-			"EffectPerTime": 0,
-			"AttachOwner": false,
-			"AttachEnemy": false,
-			"TriggerEvent": ["None"],
-			"ModelPath": ["Prefabs/Skill/NormalRangeSkill"],
-			"FSMPath": "FSM/Skill/NormalRangeSkillFSM"
-			"EffectPath": "Effect/Skill/NormalRangeSkillEffect"
-		},{
-			"ID": 2,
-			"Name": "Normal melee skill",
-			"Description": "",
-			"GameType": 503,
-			"IconPath": "NormalRangeSkill",
-			"SkillLevel": 1,
-			"SkillType": 2,
-			"CostHealthPoint": 0,
-			"CostHeatPoint": 0,
-			"CostSanityPoint": 0,
-			"CostHungerPoint": 0,
-			"EffectRadius": 3,
-			"TimeDelay": 1,
-			"TimeEffect": 0,
-			"EffectPerTime": 0,
-			"AttachOwner": false,
-			"AttachEnemy": true,
-			"TriggerEvent": ["None"],
-			"ModelPath": ["Prefabs/Skill/NormalMeleeSkill"],
-			"FSMPath": "FSM/Skill/NormalMeleeSkillFSM"
-			"EffectPath": "Effect/Skill/NormalMeleeSkillEffect"
-		},{
 			"ID": 3,
 			"Name": "Life not easy",
 			"Description": "",
@@ -132,6 +88,28 @@
 			"ModelPath": ["Prefabs/Skill/AfraidTheDarkSkill"],
 			"FSMPath": "FSM/Skill/EffectPerSecondSkillFSM"
 			"EffectPath": "Effect/Skill/AfraidTheDarkSkillEffect"
+		},{
+			"ID": 6,
+			"Name": "Eye of night",
+			"Description": "",
+			"GameType": 509,
+			"IconPath": "EyeOfNight",
+			"SkillLevel": 1,
+			"SkillType": 1,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"CostHungerPoint": 0,
+			"EffectRadius": 9999,
+			"TimeDelay": 10,
+			"TimeEffect": 5,
+			"EffectPerTime": 1,
+			"AttachOwner": true,
+			"AttachEnemy": false,
+			"TriggerEvent": ["OnNight"],
+			"ModelPath": ["Prefabs/Skill/EyeOfNightSkill"],
+			"FSMPath": "FSM/Skill/EffectUpdateSkillFSM"
+			"EffectPath": "Effect/Skill/EyeOfNightSkillEffect"
 		}
 	]
 }

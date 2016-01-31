@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TDCObject : TDCEntity
+public class TDCSun : TDCEntity
 {
 	#region Properties
-	protected TDCObjectController m_Controller;
-	protected TDCGObjectData m_Data;
+
+	protected TDCSunController m_Controller;
+	protected TDCSunData m_Data;
+
+	protected TDCObjectProperty<float> m_IntensityOffset;
+
 	#endregion
 
 	#region Contructor
 
-	public TDCObject(TDCBaseController ctrl, TDCBaseData data): base(ctrl, data)
+	public TDCSun(TDCBaseController ctrl, TDCBaseData data): base(ctrl, data)
 	{
-		m_Controller = ctrl as TDCObjectController;
-		m_Data = data as TDCGObjectData;
+		m_Controller = ctrl as TDCSunController;
+		m_Data = data as TDCSunData;
+
+		m_IntensityOffset = new TDCObjectProperty<float>("IntensityOffset");
+
+		RegisterProperty(m_IntensityOffset);
 	}
 
 	#endregion
@@ -28,12 +36,6 @@ public class TDCObject : TDCEntity
 	public override void ResetObject()
 	{
 		base.ResetObject();
-		SetHealth (GetMaxHealth());
-		SetHeat(GetHeat() / 3);
-		SetEnemyEntity (null);
-
-		m_HealthPoint.Value = 0;
-		m_HeatPoint.Value = 0;
 	}
 
 	#endregion
@@ -42,12 +44,12 @@ public class TDCObject : TDCEntity
 
 	public override void SetData(TDCBaseData data)
 	{
-		m_Data = data as TDCGObjectData;
+		m_Data = data as TDCSunData;
 	}
 
 	public override void SetController(TDCBaseController controller)
 	{
-		m_Controller = controller as TDCObjectController;
+		m_Controller = controller as TDCSunController;
 	}
 
 	public override TDCBaseController GetController()
@@ -64,11 +66,6 @@ public class TDCObject : TDCEntity
 		}
 	}
 
-	public override float GetDuration()
-	{
-		return m_Data.Duration;
-	}
-
 	public override string GetFSMPath()
 	{
 		return m_Data.FSMPath;
@@ -79,16 +76,6 @@ public class TDCObject : TDCEntity
 		return m_Data.GameType;
 	}
 
-	public override TDCEnum.ECreatureType GetCreatureType()
-	{
-		return m_Data.CreatureType;
-	}
-
-	public override UIItemController[] GetInventory()
-	{
-		return m_Data.Inventory;
-	}
-
 	public override void SetTransformPosition(Vector3 pos) {
 		m_Controller.TransformPosition = pos;
 	}
@@ -97,7 +84,13 @@ public class TDCObject : TDCEntity
 		return m_Controller.TransformPosition;
 	}
 
-	#endregion
-}
+	public override float GetIntensityOffset() {
+		var value = m_IntensityOffset.Value;
+		m_IntensityOffset.Value = 0f;
+		return value;
+	}
 
+	#endregion
+
+}
 

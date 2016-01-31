@@ -10,6 +10,7 @@
 	"WeatherOverHeatSkill": 1,
 	"WeatherWindySkill": 1,
 	"WeatherSnowySkill": 1,
+	"EyeOfNightSkill": 1,
 	"Dodono": 50,
 	"Satla": 50,
 	"Taurot": 50,

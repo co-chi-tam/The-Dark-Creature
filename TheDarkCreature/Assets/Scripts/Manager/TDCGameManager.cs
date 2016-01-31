@@ -41,7 +41,7 @@ public class TDCGameManager : MonoBehaviour {
 
 	private TDCEntity m_PlaneEntity;
 	private TDCEntity m_SeasonEntity;
-	private TDCEntity m_WeatherEntity;
+	private TDCEntity m_SunEntity;
 
     #endregion
 
@@ -110,6 +110,9 @@ public class TDCGameManager : MonoBehaviour {
 	}
 
 	public IEnumerator LoadMap(string mapName, Action complete = null) {
+		var sun = CreateCreature(TDCEnum.EGameType.Sun, new Vector3 (0f, 200f, 0f), Quaternion.Euler(new Vector3(75f, -30f, 0f)));
+		sun.SetActive(true);
+
 		var plane = CreateCreature(TDCEnum.EGameType.GrassLandPlane, Vector3.zero, Quaternion.Euler(new Vector3(270f, 180f, 0f)));
 		plane.SetActive(true);
 
@@ -334,6 +337,13 @@ public class TDCGameManager : MonoBehaviour {
 		GameObject gObject = null;
 		var random = UnityEngine.Random.Range (0, 9999);
 		switch (type) { 
+		case TDCEnum.EGameType.Sun:
+			data = m_DataReader.GetSunData (type);
+			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCSunController> ();
+			entity = new TDCSun(controller, data);
+			m_SunEntity = entity;
+			break;
 		case TDCEnum.EGameType.GrassLandPlane: {
 			data = m_DataReader.GetPlaneData (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
@@ -429,7 +439,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.WeatherRainySkill: 
 		case TDCEnum.EGameType.WeatherOverHeatSkill:
 		case TDCEnum.EGameType.WeatherWindySkill:
-		case TDCEnum.EGameType.WeatherSnowySkill: {
+		case TDCEnum.EGameType.WeatherSnowySkill: 
+		case TDCEnum.EGameType.EyeOfNightSkill: {
 			data = m_DataReader.GetSkillData(type);	
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			switch ((data as TDCSkillData).SkillType) {
@@ -484,12 +495,12 @@ public class TDCGameManager : MonoBehaviour {
 		return m_PlaneEntity;
 	}
 
-	public void SetInActiveWeatherEntity(TDCEntity value) {
-		m_WeatherEntity = value;
+	public void SetSunEntity(TDCEntity value) {
+		m_SunEntity = value;
 	}
 
-	public TDCEntity GetInActiveWeatherEntity() {
-		return m_WeatherEntity;
+	public TDCEntity GetSunEntity() {
+		return m_SunEntity;
 	}
 
 	#endregion

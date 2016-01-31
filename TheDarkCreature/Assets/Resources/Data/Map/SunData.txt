@@ -1,0 +1,13 @@
+﻿{
+	"suns": [
+		{
+			"ID": 1,
+			"Name": "Sun",
+			"GameType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Map/Sun"],
+			"FSMPath": "FSM/Map/SunFSM",
+			"IconPath": "Sun"
+		}
+	]
+}

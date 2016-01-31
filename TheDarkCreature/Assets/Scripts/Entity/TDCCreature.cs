@@ -29,7 +29,7 @@ public class TDCCreature : TDCEntity
 		m_Data = data as TDCCreatureData;
 
 		m_SkillSlotComponent = new TDCSkillSlotComponent(this);
-		m_SkillSlotComponent.CreateActiveSkillSlot(m_Data.NormalSkill);
+		m_SkillSlotComponent.CreateActiveSkillSlot(m_Data.ActiveSkill);
 	}
 
 	#endregion

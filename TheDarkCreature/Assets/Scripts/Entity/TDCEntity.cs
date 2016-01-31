@@ -8,6 +8,7 @@ public class TDCEntity : TDCPropertyReflection {
 	#region Properties
 
 	protected bool m_IsActive;
+	protected bool m_IsVisible;
 
 	protected TDCObjectProperty<float> m_OffsetSpeed;
 	protected TDCObjectProperty<int> m_HealthPoint;
@@ -32,6 +33,10 @@ public class TDCEntity : TDCPropertyReflection {
 	protected event Action OnOverHeatdEvent;
 	protected event Action OnAliveEvent;
 	protected event Action OnDeathEvent;
+	protected event Action OnDayEvent;
+	protected event Action OnMidDayEvent;
+	protected event Action OnNightEvent;
+	protected event Action OnMidNightEvent;
 
 	public event Action<int, int> OnHealthChange;
 	public event Action<int, int> OnHeatChange;
@@ -77,6 +82,10 @@ public class TDCEntity : TDCPropertyReflection {
 		m_TriggerEvents.Add("OnOverHeat", OnOverHeatdEvent);
 		m_TriggerEvents.Add("OnAlive", OnAliveEvent);
 		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
+		m_TriggerEvents.Add("OnDay", OnDayEvent);
+		m_TriggerEvents.Add("OnMidDay", OnMidDayEvent);
+		m_TriggerEvents.Add("OnNight", OnNightEvent);
+		m_TriggerEvents.Add("OnMidNight", OnMidNightEvent);
 	}
 
 	#endregion
@@ -106,7 +115,22 @@ public class TDCEntity : TDCPropertyReflection {
 	#region Main methods
 
 	public virtual void Update(float dt) {
-
+		if (TDCDateTime.IsDayTime())
+		{
+			CallBackEvent("OnDay");
+		}
+		if (TDCDateTime.IsMidDayTime())
+		{
+			CallBackEvent("OnMidDay");
+		}
+		if (TDCDateTime.IsNightTime())
+		{
+			CallBackEvent("OnNight");
+		}
+		if (TDCDateTime.IsMidNightTime())
+		{
+			CallBackEvent("OnMidNight");
+		}
 	}
 
 	public virtual void ApplyDamage(int damage, TDCEntity attacker) {
@@ -119,6 +143,10 @@ public class TDCEntity : TDCPropertyReflection {
 
 	public virtual void ResetObject(){
 		
+	}
+
+	public virtual void VisibleObject(bool value){
+		m_IsVisible = value;
 	}
 
 	#endregion
@@ -506,4 +534,13 @@ public class TDCEntity : TDCPropertyReflection {
 	}
 
 	#endregion
+
+	#region Sun
+
+	public virtual float GetIntensityOffset() {
+		return 0f;
+	}
+
+	#endregion
+
 }

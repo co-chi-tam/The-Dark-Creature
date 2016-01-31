@@ -60,6 +60,7 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 		var waiting 		= new FSMWaitingState (this);
 		var waitingOne 		= new FSMWaitingOneSecondState (this);
 		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
+		var sleepState 		= new FSMSleepState(this);
 		var dayModeState	= new FSMDayModeState(this);
 		var nightModeState	= new FSMNightModeState(this);
 
@@ -68,6 +69,7 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
 		m_FSMManager.RegisterState("DayModeState", dayModeState);
 		m_FSMManager.RegisterState("NightModeState", nightModeState);
+		m_FSMManager.RegisterState("SleepState", sleepState);
 
 		m_FSMManager.RegisterCondition("IsActive", IsActive);
 		m_FSMManager.RegisterCondition("CountdownWaitingTime", CountdownWaitingTime);
@@ -125,11 +127,11 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 	}
 
 	public virtual void OnBecameVisible() {
-		
+		m_Entity.VisibleObject(true);
 	}
 
 	public virtual void OnBecameInvisible() {
-		
+		m_Entity.VisibleObject(false);
 	}
 
 	protected virtual void OnDestroy() {
@@ -191,6 +193,15 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 
 	public virtual void ResetObject() {
 	
+	}
+
+	public virtual void VisibleObject(bool value) {
+		m_Entity.VisibleObject(value);
+		var childCount = m_Transform.childCount;
+		for (int i = 0; i < childCount; i++)
+		{
+			m_Transform.GetChild(i).gameObject.SetActive(value);
+		}
 	}
 
 	public virtual int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount) {

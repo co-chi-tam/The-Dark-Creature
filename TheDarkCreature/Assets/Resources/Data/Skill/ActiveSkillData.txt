@@ -1,0 +1,50 @@
+﻿{
+	"skills": [
+		{
+			"ID": 1,
+			"Name": "Normal range skill",
+			"Description": "",
+			"GameType": 502,
+			"IconPath": "NormalRangeSkill",
+			"SkillLevel": 1,
+			"SkillType": 2,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"CostHungerPoint": 0,
+			"EffectRadius": 3,
+			"TimeDelay": 1,
+			"TimeEffect": 0,
+			"EffectPerTime": 0,
+			"AttachOwner": false,
+			"AttachEnemy": false,
+			"TriggerEvent": ["None"],
+			"ModelPath": ["Prefabs/Skill/NormalRangeSkill"],
+			"FSMPath": "FSM/Skill/NormalRangeSkillFSM"
+			"EffectPath": "Effect/Skill/NormalRangeSkillEffect"
+		},{
+			"ID": 2,
+			"Name": "Normal melee skill",
+			"Description": "",
+			"GameType": 503,
+			"IconPath": "NormalRangeSkill",
+			"SkillLevel": 1,
+			"SkillType": 2,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"CostHungerPoint": 0,
+			"EffectRadius": 3,
+			"TimeDelay": 1,
+			"TimeEffect": 0,
+			"EffectPerTime": 0,
+			"AttachOwner": false,
+			"AttachEnemy": true,
+			"TriggerEvent": ["None"],
+			"ModelPath": ["Prefabs/Skill/NormalMeleeSkill"],
+			"FSMPath": "FSM/Skill/NormalMeleeSkillFSM"
+			"EffectPath": "Effect/Skill/NormalMeleeSkillEffect"
+		}
+	]
+}
+

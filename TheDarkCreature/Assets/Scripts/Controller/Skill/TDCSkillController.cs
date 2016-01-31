@@ -77,7 +77,8 @@ public class TDCSkillController : TDCBaseController {
 	protected virtual void LoadFSM() {
 		var startState 		= new FSMStartSkillState(this);
 		var updateState 	= new FSMUpdateSkillState(this);
-		var excuteEffectState = new FSMExcuteEffectSkillState(this);
+		var excuteEffectState 		= new FSMExcuteEffectSkillState(this);
+		var excuteEffectUpdateState = new FSMExcuteEffectUpdateSkillState(this);
 		var moveState 		= new FSMMoveState(this);
 		var chaseState 		= new FSMChaseState(this);
 		var endState 		= new FSMEndSkillState(this);
@@ -86,6 +87,7 @@ public class TDCSkillController : TDCBaseController {
 		m_FSMManager.RegisterState("StartSkillState", startState);
 		m_FSMManager.RegisterState("UpdateSkillState", updateState);
 		m_FSMManager.RegisterState("ExcuteEffectSkillState", excuteEffectState);
+		m_FSMManager.RegisterState("ExcuteEffectUpdateSkillState", excuteEffectUpdateState);
 		m_FSMManager.RegisterState("MoveState", moveState);
 		m_FSMManager.RegisterState("ChaseState", chaseState);
 		m_FSMManager.RegisterState("EndSkillState", endState);

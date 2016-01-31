@@ -1,0 +1,23 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+    	{
+		    "ID": 3,
+		    "Type": 1,
+		    "Method": "IsInTime(Time:Night)",
+		    "YesMethods": [
+				{
+			    	"ID": 4,
+		   			"Type": 10,
+			        "ExcuteMethods": ["SetValueEffect(ToTarget:Sun,ValueName:IntensityOffset,ToValue:0.25)"]
+			    }
+		    ],
+		    "NoMethods": []
+		}
+    ],
+    "NoMethods": []
+  }
+}

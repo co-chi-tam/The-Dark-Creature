@@ -66,7 +66,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.CurrentHP = instance.CurrentHP;
 		tmp.MaxHP = instance.MaxHP;
 		tmp.Damage = instance.Damage;
-		tmp.NormalSkill = instance.NormalSkill;
+		tmp.ActiveSkill = instance.ActiveSkill;
 		tmp.PassiveSkill = instance.PassiveSkill;
 		tmp.CurrentHeatPoint = instance.CurrentHeatPoint;
 		tmp.MaxHeatPoint = instance.MaxHeatPoint;
@@ -100,7 +100,7 @@ public class TDCPlayerData : TDCCreatureData {
 		tmp.Level = lh.Level + 1;
 		tmp.Inventory = lh.Inventory;
 		tmp.Icon = lh.Icon;
-		tmp.NormalSkill = lh.NormalSkill;
+		tmp.ActiveSkill = lh.ActiveSkill;
 		tmp.PassiveSkill = lh.PassiveSkill;
 		return tmp;
 	}

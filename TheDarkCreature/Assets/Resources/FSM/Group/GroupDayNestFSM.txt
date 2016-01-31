@@ -10,14 +10,19 @@
 	              "condition_value": true,
 	              "state_name": "DayModeState",
 	              "states": [
-	             		{
+	              		{
+			              "condition_name": "IsNightTime",
+			              "condition_value": true,
+			              "state_name": "GroupIdleState",
+			              "states": []
+			            },{
 							"condition_name": "IsFullGroup",
 							"condition_value": false,
 							"state_name": "GroupWaitingState",
 							"states": [
 								{
-									"condition_name": "IsDayTime",
-									"condition_value": false,
+									"condition_name": "IsNightTime",
+									"condition_value": true,
 									"state_name": "GroupIdleState",
 									"states": []
 								},{
@@ -36,7 +41,7 @@
 							]
 						}
 					]
-				} 
+				}
 			]
 		},{
 			"condition_name": "IsAnyState",

@@ -18,12 +18,6 @@
 				},
 				{
 					"ID": 3,
-					"GameType": 201,
-					"Position": "50,0,-50",
-					"Rotation": "0,0,0"
-				},
-				{
-					"ID": 3,
 					"GameType": 202,
 					"Position": "-20,0,50",
 					"Rotation": "0,0,0"

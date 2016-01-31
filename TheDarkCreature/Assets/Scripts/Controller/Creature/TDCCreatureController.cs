@@ -36,7 +36,6 @@ public class TDCCreatureController : TDCBaseController {
 		var flyHomeState	= new FSMFlyHomeState(this);
 		var landingHomeState = new FSMLandingHomeState(this);
 		var goHomeState 	= new FSMGoHomeState(this);
-		var sleepState 		= new FSMSleepState(this);
 
 		m_FSMManager.RegisterState("IdleState", idleState);
 		m_FSMManager.RegisterState("MoveState", moveState);
@@ -55,7 +54,6 @@ public class TDCCreatureController : TDCBaseController {
 		m_FSMManager.RegisterState("GoHomeState", goHomeState);
 		m_FSMManager.RegisterState("FlyHomeState", flyHomeState);
 		m_FSMManager.RegisterState("LandingHomeState", landingHomeState);
-		m_FSMManager.RegisterState("SleepState", sleepState);
 
 		m_FSMManager.RegisterCondition("IsActive", GetActive);
 		m_FSMManager.RegisterCondition("MoveToTarget", MoveToTarget);
@@ -94,6 +92,13 @@ public class TDCCreatureController : TDCBaseController {
 		base.OnBecameInvisible();
 		m_AnimatorController.enabled = false;
 		m_Collider.enabled = false;
+	}
+
+	public override void VisibleObject(bool value)
+	{
+		base.VisibleObject(value);
+		m_AnimatorController.enabled = value;
+		m_Collider.enabled = value;
 	}
 
 	protected override void OnDrawGizmos()
@@ -389,7 +394,7 @@ public class TDCCreatureController : TDCBaseController {
 	public override void SetAnimation(EAnimation anim) {
 		base.SetAnimation (anim);
 		if (m_AnimatorController.runtimeAnimatorController != null) {
-			m_AnimatorController.SetInteger ("AnimParam", (int)anim);
+			m_AnimatorController.SetInteger ("AnimParam", (int) anim);
 		}
 	}
 	

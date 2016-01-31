@@ -3,7 +3,7 @@
 		{
 			"ID": 1,
 			"Name": "GrassPlane",
-			"GameType": 1,
+			"GameType": 1101,
 			"Description": "",
 			"ModelPath": ["Prefabs/Map/GrassLand"],
 			"FSMPath": "FSM/Map/GrassLandFSM",

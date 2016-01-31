@@ -114,7 +114,13 @@ public class TDCPasiveSkillController : TDCSkillController {
 			{
 				owner.SetProperty(valueName, toValue);
 			}
-		}
+		} else if (toTarget.Equals("Sun")) {
+			var sun = m_GameManager.GetSunEntity();
+			if (sun != null)
+			{
+				sun.SetProperty(valueName, toValue);
+			}
+		} 
 	}
 
 	internal override void SubtractValueEffect(Dictionary<string, object> pars)

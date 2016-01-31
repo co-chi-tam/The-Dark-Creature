@@ -26,6 +26,11 @@ public class TDCSkill : TDCEntity
 
 	#region Main methods
 
+	public override void Update(float dt)
+	{
+		base.Update(dt);
+	}
+
 	public override void ResetObject()
 	{
 		base.ResetObject();
