@@ -9,8 +9,9 @@ public class FSMDestroySkillState : FSMBaseState {
 	}
 
 	public override void StartState() {
-		m_Controller.ResetObject();
 		m_Controller.SetActive(false);
+		m_Controller.ReturnObject();
+		m_Controller.ResetObject();
 	}
 
 	public override void UpdateState() {
@@ -19,6 +20,6 @@ public class FSMDestroySkillState : FSMBaseState {
 
 	public override void ExitState()
 	{
-
+		
 	}
 }

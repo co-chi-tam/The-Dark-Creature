@@ -212,8 +212,8 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 
 	}
 
-	public virtual void ReturnObject(TDCEntity obj) {
-		m_GameManager.SetObjectPool(obj);
+	public virtual void ReturnObject() {
+		
 	}
 
 	public virtual void CallBackEvent(string name) {

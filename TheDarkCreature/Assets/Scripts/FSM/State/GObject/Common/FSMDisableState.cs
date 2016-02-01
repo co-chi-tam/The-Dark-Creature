@@ -21,12 +21,12 @@ public class FSMDisableState : FSMBaseState {
 			}
 			else
 			{
-				m_Controller.ReturnObject(m_Controller.GetEntity());
+				m_Controller.ReturnObject();
 			}
 		}
 		else
 		{
-			m_Controller.ReturnObject(m_Controller.GetEntity());
+			m_Controller.ReturnObject();
 		}
 	}
 	

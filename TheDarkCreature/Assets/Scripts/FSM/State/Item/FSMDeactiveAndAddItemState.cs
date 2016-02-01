@@ -30,7 +30,7 @@ public class FSMDeactiveAndAddItemState : FSMBaseState
 		}
 		else
 		{
-			m_Controller.ReturnObject(m_Controller.GetEntity());
+			m_Controller.ReturnObject();
 		}
 		if (canAddItem == false)
 		{

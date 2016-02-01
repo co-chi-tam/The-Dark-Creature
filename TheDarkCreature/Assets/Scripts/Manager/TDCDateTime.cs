@@ -38,7 +38,7 @@ public class TDCDateTime : MonoBehaviour {
 	private int m_SecondPerMinute = 60;
 	private int m_MinutePerHour = 60;
 	private int m_HourPerDay 	= 24;
-	private int m_DayPerSeason 	= 15;
+	private int m_DayPerSeason 	= 30;
 	private int m_SeasonCount	= 0;
 
 	private int m_SecondPerHour 	= 0;
@@ -49,12 +49,16 @@ public class TDCDateTime : MonoBehaviour {
 	private int m_CurrentSeason = 0;
 
 	public static float DeltaTime;
-	public static float Hour;
 	public static float DeltaHour;
+	public static float Hour;
+	public static int DayFix;
 	public static TDCEnum.EGameSeason Season;
 
 	private static float m_Moisture;
 	private static float m_Heat;
+	private static int m_Day1FullMoon 	= 14;
+	private static int m_Day2FullMoon 	= 15;
+	private static int m_Day3FullMoon 	= 16;
 
 	private float m_OffsetTimeMoisture;
 	private float m_OffsetTimeHeat;
@@ -180,6 +184,7 @@ public class TDCDateTime : MonoBehaviour {
 			m_Timer = 0f;
 			m_Hour = 0f;
 			m_DayText.text = "Day " + (m_Day + 1).ToString();
+			DayFix = (int)m_Day % m_DayPerSeason;
 		}
 
 		m_Season	= (TDCEnum.EGameSeason)(((m_Day / m_DayPerSeason) + m_CurrentSeason) % m_SeasonCount);
@@ -229,6 +234,10 @@ public class TDCDateTime : MonoBehaviour {
 
 	public static bool IsSeason(TDCEnum.EGameSeason season) {
 		return Season == season;
+	}
+
+	public static bool IsFullMoon() {
+		return (DayFix == m_Day1FullMoon || DayFix == m_Day2FullMoon || DayFix == m_Day3FullMoon) && IsMidNightTime();
 	}
 
 	public static bool IsRainy() {

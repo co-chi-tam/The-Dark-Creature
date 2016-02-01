@@ -33,11 +33,6 @@ public class TDCSun : TDCEntity
 		base.Update(dt);
 	}
 
-	public override void ResetObject()
-	{
-		base.ResetObject();
-	}
-
 	#endregion
 
 	#region Getter && Setter
@@ -88,6 +83,11 @@ public class TDCSun : TDCEntity
 		var value = m_IntensityOffset.Value;
 		m_IntensityOffset.Value = 0f;
 		return value;
+	}
+
+	public override void SetIntensityOffset(float value) {
+		base.SetIntensityOffset(value);
+		m_IntensityOffset.Value = value;
 	}
 
 	#endregion

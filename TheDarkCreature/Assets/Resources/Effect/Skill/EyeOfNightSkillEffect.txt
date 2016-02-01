@@ -12,7 +12,7 @@
 				{
 			    	"ID": 4,
 		   			"Type": 10,
-			        "ExcuteMethods": ["SetValueEffect(ToTarget:Sun,ValueName:IntensityOffset,ToValue:0.25)"]
+			        "ExcuteMethods": ["SetValueEffect(ToTarget:Sun,ValueName:IntensityOffset,ToValue:0.2)"]
 			    }
 		    ],
 		    "NoMethods": []

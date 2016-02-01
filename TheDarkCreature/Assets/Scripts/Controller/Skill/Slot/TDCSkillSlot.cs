@@ -30,14 +30,13 @@ public class TDCSkillSlot {
 		if (DidEndTimeDelay() && CanPayCost())
 		{
 			m_TimeDelay = m_SkillData.TimeDelay;
-			m_SkillEntity = m_GameManager.GetObjectPool(m_SkillType);
-			if (m_SkillEntity != null)
+			if (m_GameManager.GetObjectPool(m_SkillType, ref m_SkillEntity))
 			{
 				m_SkillEntity.SetSlot(this);
-				m_SkillEntity.SetActive(true);
 				m_SkillEntity.SetOwnerEntity(m_Owner);
 				m_SkillEntity.SetTargetPosition(m_Owner.GetEnemyPosition());
 				m_SkillEntity.SetEnemyEntity(m_Owner.GetEnemyEntity());
+				m_SkillEntity.SetActive(true);
 				(m_SkillEntity.GetController() as TDCSkillController).StartSkill(m_Owner.GetController().TransformPosition, m_Owner.GetController().TransformRotation, m_Owner);
 				PayCost();
 			}
@@ -49,8 +48,7 @@ public class TDCSkillSlot {
 	}
 
 	public bool CanPayCost() {
-		if (m_Owner.GetCreatureType() != TDCEnum.ECreatureType.FlyPlayer &&
-			m_Owner.GetCreatureType() != TDCEnum.ECreatureType.GroundPlayer)
+		if (!TDCUltilities.IsPlayer(m_Owner))
 			return true;
 		var healthCost = m_Owner.GetHealth() >= m_SkillData.CostHealthPoint;
 		var heatCost = m_Owner.GetHeat() >= m_SkillData.CostHeatPoint;
@@ -60,17 +58,16 @@ public class TDCSkillSlot {
 	}
 
 	public void PayCost() {
-		if (m_Owner.GetCreatureType() != TDCEnum.ECreatureType.FlyPlayer &&
-		    m_Owner.GetCreatureType() != TDCEnum.ECreatureType.GroundPlayer)
+		if (!TDCUltilities.IsPlayer(m_Owner))
 			return;
-		m_Owner.SetProperty("HealthPoint", -m_SkillData.CostHealthPoint);
+//		m_Owner.SetProperty("HealthPoint", -m_SkillData.CostHealthPoint);
 		m_Owner.SetProperty("HeatPoint", -m_SkillData.CostHeatPoint);
 		m_Owner.SetProperty("SanityPoint", -m_SkillData.CostSanityPoint);
 		m_Owner.SetProperty("HungerPoint", -m_SkillData.CostHungerPoint);
 	}
 
 	public void UpdateSkill(float dt) {
-		if (m_TimeDelay > 0f)
+		if (m_TimeDelay >= 0f)
 		{
 			m_TimeDelay -= dt;
 		}

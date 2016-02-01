@@ -541,6 +541,10 @@ public class TDCEntity : TDCPropertyReflection {
 		return 0f;
 	}
 
+	public virtual void SetIntensityOffset(float value) {
+		
+	}
+
 	#endregion
 
 }

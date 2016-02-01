@@ -6,6 +6,8 @@ public class TDCSunController : TDCBaseController
 
 	#region Properties
 
+	[SerializeField]
+	private Gradient m_SunColorGradient;
 	private Light m_SunLight;
 	private float m_SunLightIntensity = 0f;
 
@@ -16,6 +18,11 @@ public class TDCSunController : TDCBaseController
 	public override void Init ()
 	{
 		base.Init ();
+
+		var color1 = new Color(255f / 255f, 255f / 255f, 234f / 255f, 255f / 255f);
+		var color2 = new Color(189f / 255f, 223f / 255f, 255f / 255f, 255f / 255f);
+		m_SunColorGradient = new Gradient();
+		m_SunColorGradient.colorKeys = new GradientColorKey[] { new GradientColorKey (color2, 0f), new GradientColorKey (color1, 1f) };
 
 		m_SunLight = this.GetComponent<Light>();
 		m_SunLightIntensity = m_SunLight != null ? m_SunLight.intensity : 0f;
@@ -47,7 +54,9 @@ public class TDCSunController : TDCBaseController
 	public void UpdateLight() {
 		var value = TDCDateTime.DeltaHour;
 		var lightOffset = m_Entity.GetIntensityOffset();
-		m_SunLight.intensity = Mathf.Clamp ((value * (m_SunLightIntensity - lightOffset)) + lightOffset, 0f, m_SunLightIntensity);
+		var calcLight = (value * (m_SunLightIntensity - lightOffset)) + lightOffset;
+		m_SunLight.intensity = calcLight;
+		m_SunLight.color = m_SunColorGradient.Evaluate (calcLight / m_SunLightIntensity);
 	}
 
 	#endregion

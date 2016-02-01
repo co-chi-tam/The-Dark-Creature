@@ -127,7 +127,7 @@
 			"MaxSanityPoint": 100,
 			"Damage": 7,
 			"ActiveSkill": [503],
-			"PassiveSkills": [506,507],
+			"PassiveSkills": [506,507,509],
 			"Level": 1,
 			"IsShine": false,
 			"Inventory": [
@@ -151,7 +151,7 @@
 			"IconPath": "",
 			"MoveSpeed": 9,
 			"DetectRange": 25,
-			"AttackRange": 12,
+			"AttackRange": 20,
 			"CurrentHP": 100,
 			"MaxHP": 120,
 			"CurrentHeatPoint": 50,
@@ -197,7 +197,7 @@
 			"MaxSanityPoint": 100,
 			"Damage": 2,
 			"ActiveSkill": [503],
-			"PassiveSkills": [506,507],
+			"PassiveSkills": [506,507,509],
 			"Level": 1,
 			"IsShine": true,
 			"Inventory": [

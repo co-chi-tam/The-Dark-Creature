@@ -47,6 +47,12 @@ public class TDCItemController : TDCCreatureController
 		m_Entity.ResetObject();
 	}
 
+	public override void ReturnObject()
+	{
+		base.ReturnObject();
+		m_GameManager.SetObjectPool(this.GetEntity());
+	}
+
 	public override void DropItem()
 	{
 		base.DropItem();

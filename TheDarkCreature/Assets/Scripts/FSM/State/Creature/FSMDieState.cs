@@ -21,7 +21,7 @@ public class FSMDieState : FSMBaseState
 		}
 		else
 		{
-			m_Controller.ReturnObject(m_Controller.GetEntity());
+			m_Controller.ReturnObject();
 		}
 		m_Controller.CallBackEvent("OnDealth");
 		m_Controller.DropItem();

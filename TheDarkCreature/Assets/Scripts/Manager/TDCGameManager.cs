@@ -137,9 +137,8 @@ public class TDCGameManager : MonoBehaviour {
 			complete();
 		}
 
-//		m_Map = new Map(200);
-//		var plane = GameObject.Find("Plane");
-//		var bound = plane.GetComponent<MeshFilter>().mesh.bounds;
+//		m_Map = new Map(150);
+//		var bound = plane.GetController().GetComponent<MeshFilter>().mesh.bounds;
 //		yield return m_Map != null && plane != null;
 //		var centers = m_Map.Graph.centers;
 //		var offsetPointX = bound.size.x / Map.Width;
@@ -154,27 +153,27 @@ public class TDCGameManager : MonoBehaviour {
 //			switch (centerPoint.biome)
 //			{
 //				case Biome.Grassland:
-//					var grassRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupDodono, TDCEnum.EGameType.GroupGrass, TDCEnum.EGameType.GroupSatla };
+//					var grassRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.None, TDCEnum.EGameType.GroupDodono, TDCEnum.EGameType.GroupGrass, TDCEnum.EGameType.GroupSatla };
 //					gameType = grassRegion[i % grassRegion.Length];
 //					break;
 //				case Biome.Marsh:
-//					var marshRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupMushRoom };
+//					var marshRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.None, TDCEnum.EGameType.GroupMushRoom };
 //					gameType = marshRegion[i % marshRegion.Length];
 //					break;
 //				case Biome.TemperateDesert:
-//					var desertRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupBush, TDCEnum.EGameType.GroupVulbat };
+//					var desertRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.None, TDCEnum.EGameType.GroupBush, TDCEnum.EGameType.GroupVulbat };
 //					gameType = desertRegion[i % desertRegion.Length];
 //					break;
 //				case Biome.Lava:
-//					var laveRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupBlueBerry };
-//					gameType = laveRegion[i % laveRegion.Length];
+//					var lavaRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.None, TDCEnum.EGameType.GroupBlueBerry, TDCEnum.EGameType.GroupFireBuggy };
+//					gameType = lavaRegion[i % lavaRegion.Length];
 //					break;
 //				case Biome.RockLand:
-//					var rockRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupCrystal, TDCEnum.EGameType.GroupCrabystal, TDCEnum.EGameType.GroupTaurot };
+//					var rockRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.None, TDCEnum.EGameType.GroupCrystal, TDCEnum.EGameType.GroupCrabystal, TDCEnum.EGameType.GroupTaurot };
 //					gameType = rockRegion[i % rockRegion.Length];
 //					break;
 //				default:
-////					var defaultRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.GroupGrass, TDCEnum.EGameType.GroupBush, TDCEnum.EGameType.GroupMushRoom, TDCEnum.EGameType.GroupBlueBerry };
+////					var defaultRegion = new TDCEnum.EGameType[] { TDCEnum.EGameType.None, TDCEnum.EGameType.GroupGrass, TDCEnum.EGameType.GroupBush, TDCEnum.EGameType.GroupMushRoom, TDCEnum.EGameType.GroupBlueBerry };
 ////					gameType = defaultRegion[i % defaultRegion.Length];
 //					break;
 //			}

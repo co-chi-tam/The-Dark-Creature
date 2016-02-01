@@ -48,7 +48,7 @@ public class TDCCreature : TDCEntity
 			CallBackEvent("OnOverHeat");
 		}
 
-		m_SkillSlotComponent.UpdateComponent(Time.fixedDeltaTime);
+		m_SkillSlotComponent.UpdateComponent(dt);
 
 		if ((Time.time - m_TimeReset) > 1f)
 		{

@@ -18,7 +18,9 @@ public class CameraController : MonoBehaviour
     private float _zoom = 5f;
     private float _minZoom = 10f;
     private const float _maxZoom = 60f;
-    private float _commonY = 2f;					//Y 
+	private float _commonY = 2f;					//Y 
+	[SerializeField]
+	private float _Offset = 15f;
     private Quaternion _rotation;
     private Vector3 _position;
     private bool _isFirstSetCamra = true;
@@ -60,8 +62,8 @@ public class CameraController : MonoBehaviour
 		if (_target == null)
 			return;
 #if UNITY_EDITOR
-        RotationAroundObjectByCamera();
-//        ZoomCamera();
+//        RotationAroundObjectByCamera();
+        ZoomCamera();
 #endif
         MoveCamera();
     }
@@ -80,7 +82,7 @@ public class CameraController : MonoBehaviour
         try
         {
             Vector3 angles = transform.eulerAngles;
-            transform.position = new Vector3(transform.position.x, transform.position.y, -_distance);
+			transform.position = new Vector3(transform.position.x, transform.position.y, -_distance - _Offset);
             _x = angles.y;
             _y = angles.x;
         }
@@ -94,6 +96,7 @@ public class CameraController : MonoBehaviour
     //Rotation camera around Target
     private void RotationAroundObjectByCamera()
     {
+		var targetPos = _target.position;
         if (Input.GetMouseButton(1) && _target != null)
         {
             _x += Input.GetAxis("Mouse X") * _rotationLeftRightSpeed * 0.02f;
@@ -101,7 +104,7 @@ public class CameraController : MonoBehaviour
 
             _y = ClampAngle(_y, _minUpdownRange, _maxUpdownRange);
             _rotation = Quaternion.Euler(_y, _x, 0);
-            _position = _rotation * new Vector3(0, _commonY, -_distance) + _target.position;
+			_position = _rotation * new Vector3(0, _commonY, -_distance) + targetPos;
             transform.rotation = _rotation;
             transform.position = _position;
         }
@@ -117,7 +120,7 @@ public class CameraController : MonoBehaviour
 
             _y = ClampAngle(_y, _minUpdownRange, _maxUpdownRange);
             _rotation = Quaternion.Euler(_y, _x, 0);
-            _position = _rotation * new Vector3(0, _commonY, -_distance) + _target.position;
+			_position = _rotation * new Vector3(0, _commonY, -_distance) + targetPos;
             transform.rotation = _rotation;
             transform.position = _position;
         }
@@ -132,7 +135,7 @@ public class CameraController : MonoBehaviour
         _y = ClampAngle(_y, _minUpdownRange, _maxUpdownRange);
         _rotation = Quaternion.Euler(_y, _x, 0);
         _position = _rotation * new Vector3(0, _commonY, -_distance) + _target.position;
-        transform.rotation = _rotation;
+//        transform.rotation = _rotation;
         transform.position = _position;
 
         _isFirstSetCamra = false;
@@ -211,6 +214,7 @@ public class CameraController : MonoBehaviour
     {
 		var target = _target.position;
 		target.y = 0f;
+		target.z -= _Offset;
         _position = _rotation * new Vector3(0.0f, _commonY, -_distance) + target;
 		transform.position = Vector3.Lerp(transform.position, _position, 5);
     }

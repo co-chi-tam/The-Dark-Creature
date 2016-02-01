@@ -23,8 +23,7 @@ public class TDCActiveSkillController : TDCSkillController {
 
 	internal override bool CanActiveSkill()
 	{
-		base.CanActiveSkill();
-		return GetEnemyEntity() != null;
+		return base.CanActiveSkill() && GetEnemyEntity() != null;
 	}
 
 	#endregion

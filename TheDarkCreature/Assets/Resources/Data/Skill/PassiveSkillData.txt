@@ -37,12 +37,12 @@
 			"EffectRadius": 1,
 			"TimeDelay": 10,
 			"TimeEffect": 1,
-			"EffectPerTime": 0,
+			"EffectPerTime": 1,
 			"AttachOwner": true,
 			"AttachEnemy": false,
 			"TriggerEvent": ["OnAlive"],
 			"ModelPath": ["Prefabs/Skill/LifeNotEasySkill"],
-			"FSMPath": "FSM/Skill/EffectUpdateSkillFSM"
+			"FSMPath": "FSM/Skill/EffectPerSecondSkillFSM"
 			"EffectPath": "Effect/Skill/LifeNotEasySkillEffect"
 		},{
 			"ID": 4,
@@ -101,9 +101,9 @@
 			"CostSanityPoint": 0,
 			"CostHungerPoint": 0,
 			"EffectRadius": 9999,
-			"TimeDelay": 10,
-			"TimeEffect": 5,
-			"EffectPerTime": 1,
+			"TimeDelay": 250,
+			"TimeEffect": 250,
+			"EffectPerTime": 0,
 			"AttachOwner": true,
 			"AttachEnemy": false,
 			"TriggerEvent": ["OnNight"],

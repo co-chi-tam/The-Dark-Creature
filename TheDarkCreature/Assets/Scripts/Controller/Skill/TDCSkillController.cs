@@ -140,11 +140,16 @@ public class TDCSkillController : TDCBaseController {
 		base.ResetObject();
 		m_Entity.ResetObject();
 		m_IsFinishSkill = 1f;
-		m_GameManager.SetObjectPool(this.GetEntity());
 		m_EffectPerTime = m_Entity.GetEffectPerTime();
 		m_TimeDelay = m_Entity.GetTimeDelay();
 		m_TimeEffect = m_Entity.GetTimeEffect();
 		m_EffectRadius = m_Entity.GetEffectRadius();
+	}
+
+	public override void ReturnObject()
+	{
+		base.ReturnObject();
+		m_GameManager.SetObjectPool(this.GetEntity());
 	}
 
 	public override void MovePosition(Vector3 position)
@@ -163,13 +168,6 @@ public class TDCSkillController : TDCBaseController {
 		var direction = m_Transform.position - rotation;
 		Quaternion rot = Quaternion.LookRotation(direction);
 		m_Transform.rotation = Quaternion.Slerp(m_Transform.rotation, rot, Time.deltaTime * 3f);
-	}
-
-	public override Dictionary<string, object> GetObjectCurrentValue()
-	{
-		var curValue = base.GetObjectCurrentValue();
-		curValue["State"] = m_FSMManager.StateCurrentName;
-		return curValue;
 	}
 
 	#endregion
@@ -274,7 +272,7 @@ public class TDCSkillController : TDCBaseController {
 
 	internal virtual bool IsFinishSkill() {
 		m_IsFinishSkill -= Time.deltaTime;
-		return m_IsFinishSkill < 0f;
+		return m_IsFinishSkill <= 0f;
 	}
 
 	internal virtual bool CanActiveSkill() {
