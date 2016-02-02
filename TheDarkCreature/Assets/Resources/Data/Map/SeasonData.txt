@@ -7,6 +7,14 @@
 			"Description": "",
 			"ModelPath": ["Prefabs/Map/SeasonGrassLand"],
 			"FSMPath": "FSM/Map/SeasonGrassLandFSM",
+			"MoistureSpring": [0.5,1],
+			"MoistureSummer": [0.75,1],
+			"MoistureAutumn": [0.25,1],
+			"MoistureWinter": [0.1,0.5],
+			"TemperatureSpring": [0.5,1],
+			"TemperatureSummer": [0.7,1],
+			"TemperatureAutumn": [0.1,0.75],
+			"TemperatureWinter": [0.1,0.5],
 			"Duration": 120
 		}
 	]

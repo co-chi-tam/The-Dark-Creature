@@ -547,4 +547,72 @@ public class TDCEntity : TDCPropertyReflection {
 
 	#endregion
 
+	#region Season
+
+	public virtual float GetMinMoistureSpring() {
+		return 0f;
+	}
+
+	public virtual float GetMaxMoistureSpring() {
+		return 0f;
+	}
+
+	public virtual float GetMinMoistureSummer() {
+		return 0f;
+	}
+
+	public virtual float GetMaxMoistureSummer() {
+		return 0f;
+	}
+
+	public virtual float GetMinMoistureAutumn() {
+		return 0f;
+	}
+
+	public virtual float GetMaxMoistureAutumn() {
+		return 0f;
+	}
+
+	public virtual float GetMinMoistureWinter() {
+		return 0f;
+	}
+
+	public virtual float GetMaxMoistureWinter() {
+		return 0f;
+	}
+
+	public virtual float GetMinTemperatureSpring() {
+		return 0f;
+	}
+
+	public virtual float GetMaxTemperatureSpring() {
+		return 0f;
+	}
+
+	public virtual float GetMinTemperatureSummer() {
+		return 0f;
+	}
+
+	public virtual float GetMaxTemperatureSummer() {
+		return 0f;
+	}
+
+	public virtual float GetMinTemperatureAutumn() {
+		return 0f;
+	}
+
+	public virtual float GetMaxTemperatureAutumn() {
+		return 0f;
+	}
+
+	public virtual float GetMinTemperatureWinter() {
+		return 0f;
+	}
+
+	public virtual float GetMaxTemperatureWinter() {
+		return 0f;
+	}
+
+	#endregion
+
 }

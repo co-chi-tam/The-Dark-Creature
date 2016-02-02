@@ -65,24 +65,44 @@ public class TDCSeasonController : TDCBaseController
 		base.IsActiveSeasonSpring();
 		var planeController = m_GameManager.GetPlane().GetController() as TDCPlaneController;
 		planeController.SetTextureBySeason(TDCEnum.EGameSeason.Spring);
+
+		TDCDateTime.MinMoisture = m_Entity.GetMinMoistureSpring();
+		TDCDateTime.MaxMoisture = m_Entity.GetMaxMoistureSpring();
+		TDCDateTime.MinTemperature = m_Entity.GetMinTemperatureSpring();
+		TDCDateTime.MaxTemperature = m_Entity.GetMaxTemperatureSpring();
 	}
 
 	public override void IsActiveSeasonSummer() {
 		base.IsActiveSeasonSummer();
 		var planeController = m_GameManager.GetPlane().GetController() as TDCPlaneController;
 		planeController.SetTextureBySeason(TDCEnum.EGameSeason.Summer);
+
+		TDCDateTime.MinMoisture = m_Entity.GetMinMoistureSummer();
+		TDCDateTime.MaxMoisture = m_Entity.GetMaxMoistureSummer();
+		TDCDateTime.MinTemperature = m_Entity.GetMinTemperatureSummer();
+		TDCDateTime.MaxTemperature = m_Entity.GetMaxTemperatureSummer();
 	}
 
 	public override void IsActiveSeasonAutumn() {
 		base.IsActiveSeasonAutumn();
 		var planeController = m_GameManager.GetPlane().GetController() as TDCPlaneController;
 		planeController.SetTextureBySeason(TDCEnum.EGameSeason.Autumn);
+
+		TDCDateTime.MinMoisture = m_Entity.GetMinMoistureAutumn();
+		TDCDateTime.MaxMoisture = m_Entity.GetMaxMoistureAutumn();
+		TDCDateTime.MinTemperature = m_Entity.GetMinTemperatureAutumn();
+		TDCDateTime.MaxTemperature = m_Entity.GetMaxTemperatureAutumn();
 	}
 
 	public override void IsActiveSeasonWinter() {
 		base.IsActiveSeasonWinter();
 		var planeController = m_GameManager.GetPlane().GetController() as TDCPlaneController;
 		planeController.SetTextureBySeason(TDCEnum.EGameSeason.Winter);
+
+		TDCDateTime.MinMoisture = m_Entity.GetMinMoistureWinter();
+		TDCDateTime.MaxMoisture = m_Entity.GetMaxMoistureWinter();
+		TDCDateTime.MinTemperature = m_Entity.GetMinTemperatureWinter();
+		TDCDateTime.MaxTemperature = m_Entity.GetMaxTemperatureWinter();
 	}
 
 	#endregion

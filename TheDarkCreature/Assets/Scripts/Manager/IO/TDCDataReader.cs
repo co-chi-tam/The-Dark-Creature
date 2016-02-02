@@ -42,7 +42,8 @@ public class TDCDataReader {
 		var uiFoodAsset = Resources.Load<TextAsset> ("Data/UIItems/UIFoodData");
 		var uiWeaponAsset = Resources.Load<TextAsset> ("Data/UIItems/UIWeaponData");
 		var uiItemAsset = Resources.Load<TextAsset> ("Data/UIItems/UIItemData");
-		var groupAsset = Resources.Load<TextAsset> ("Data/Group/GroupData");
+		var groupCreatureAsset = Resources.Load<TextAsset> ("Data/Group/GroupCreatureData");
+		var groupEnviromentAsset = Resources.Load<TextAsset> ("Data/Group/GroupEnviromentData");
 		var creatureAsset = Resources.Load<TextAsset> ("Data/Creature/CreatureData");
 		var playerAsset = Resources.Load<TextAsset> ("Data/Player/PlayerData");
 		var enviromentTextAsset = Resources.Load<TextAsset> ("Data/Creature/EnviromentData");
@@ -62,7 +63,8 @@ public class TDCDataReader {
 		var jsonUIFood = Json.Deserialize (uiFoodAsset.text) as Dictionary<string, object>;
 		var jsonUIWeapon = Json.Deserialize (uiWeaponAsset.text) as Dictionary<string, object>;
 		var jsonCreature = Json.Deserialize (creatureAsset.text) as Dictionary<string, object>;
-		var jsonGroup = Json.Deserialize (groupAsset.text) as Dictionary<string, object>;
+		var jsonGroupCreature = Json.Deserialize (groupCreatureAsset.text) as Dictionary<string, object>;
+		var jsonGroupEnviroment = Json.Deserialize (groupEnviromentAsset.text) as Dictionary<string, object>;
 		var jsonPlayer = Json.Deserialize (playerAsset.text) as Dictionary<string, object>;
 		var jsonResource = Json.Deserialize (enviromentTextAsset.text) as Dictionary<string, object>;
 		var jsonObject = Json.Deserialize (objectTextAsset.text) as Dictionary<string, object>;
@@ -89,7 +91,8 @@ public class TDCDataReader {
 		LoadSkill(jsonActiveSkill["skills"] as List<object>);
 		LoadSkill(jsonPassiveSkill["skills"] as List<object>);
 		LoadSkill(jsonWeatherkill["weathers"] as List<object>);
-		LoadGroup (jsonGroup["groups"] as List<object>);
+		LoadGroup (jsonGroupCreature["groups"] as List<object>);
+		LoadGroup (jsonGroupEnviroment["groups"] as List<object>);
 		LoadPlane(jsonPlane["planes"] as List<object>);
 		LoadSeason(jsonSeason["seasons"] as List<object>);
 		LoadSun(jsonSun["suns"] as List<object>);
@@ -426,6 +429,14 @@ public class TDCDataReader {
 			season.ModelPath = ConvertTo<string> (instance["ModelPath"] as List<object>);
 			season.FSMPath = instance["FSMPath"].ToString();
 			season.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
+			season.MoistureSpring = ConvertTo<float>(instance["MoistureSpring"] as List<object>);
+			season.MoistureSummer = ConvertTo<float>(instance["MoistureSummer"] as List<object>);
+			season.MoistureAutumn = ConvertTo<float>(instance["MoistureAutumn"] as List<object>);
+			season.MoistureWinter = ConvertTo<float>(instance["MoistureWinter"] as List<object>);
+			season.TemperatureSpring = ConvertTo<float>(instance["TemperatureSpring"] as List<object>);
+			season.TemperatureSummer = ConvertTo<float>(instance["TemperatureSummer"] as List<object>);
+			season.TemperatureAutumn = ConvertTo<float>(instance["TemperatureAutumn"] as List<object>);
+			season.TemperatureWinter = ConvertTo<float>(instance["TemperatureWinter"] as List<object>);
 			season.Duration = float.Parse (instance ["Duration"].ToString ());
 			m_ListBiomeData.Add (season.GameType, season);
 		}

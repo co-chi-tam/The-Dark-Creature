@@ -29,7 +29,7 @@ public class TDCDateTime : MonoBehaviour {
 	[SerializeField]
 	private float m_MoistureValue = 0f;
 	[SerializeField]
-	private float m_HeatValue = 0f;
+	private float m_TemperatureValue = 0f;
 
 	[SerializeField]
 	private TDCEnum.EGameSeason m_Season = TDCEnum.EGameSeason.Spring;
@@ -53,9 +53,13 @@ public class TDCDateTime : MonoBehaviour {
 	public static float Hour;
 	public static int DayFix;
 	public static TDCEnum.EGameSeason Season;
+	public static float MinMoisture = 0f;
+	public static float MaxMoisture = 1f;
+	public static float MinTemperature = 0f;
+	public static float MaxTemperature = 1f;
+	public static float Moisture;
+	public static float Temperature;
 
-	private static float m_Moisture;
-	private static float m_Heat;
 	private static int m_Day1FullMoon 	= 14;
 	private static int m_Day2FullMoon 	= 15;
 	private static int m_Day3FullMoon 	= 16;
@@ -200,9 +204,9 @@ public class TDCDateTime : MonoBehaviour {
 		}
 
 		var timeMoisture = (Time.time + m_OffsetTimeMoisture) / m_Speed;
-		var timeHeat = (Time.time + m_OffsetTimeHeat) / m_Speed;
-		m_MoistureValue = m_Moisture = Mathf.PerlinNoise(timeMoisture , timeMoisture);
-		m_HeatValue = m_Heat = Mathf.PerlinNoise(timeHeat, timeHeat);
+		var timeTemperature = (Time.time + m_OffsetTimeHeat) / m_Speed;
+		m_MoistureValue = Moisture = ((MaxMoisture - MinMoisture) * Mathf.PerlinNoise(timeMoisture , timeMoisture)) + MinMoisture;
+		m_TemperatureValue = Temperature = ((MaxTemperature - MinTemperature) * Mathf.PerlinNoise(timeTemperature, timeTemperature)) + MinTemperature;
 	}
 
 	void LateUpdate() {
@@ -241,19 +245,19 @@ public class TDCDateTime : MonoBehaviour {
 	}
 
 	public static bool IsRainy() {
-		return m_Moisture > 0.85f;
+		return Moisture > 0.85f;
 	}
 
 	public static bool IsOverHeat() {
-		return m_Heat > 0.85f;
+		return Temperature > 0.85f;
 	}
 
 	public static bool IsWindy() {
-		return m_Moisture < 0.25f || m_Heat < 0.25f ;
+		return Moisture < 0.25f || Temperature < 0.25f ;
 	}
 
 	public static bool IsSnowy() {
-		return m_Heat < 0.25f || m_Moisture < 0.25f;
+		return Temperature < 0.25f || Moisture < 0.25f;
 	}
 
 	#endregion

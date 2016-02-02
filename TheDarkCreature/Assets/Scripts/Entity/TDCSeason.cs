@@ -114,6 +114,70 @@ public class TDCSeason : TDCEntity
 		return m_Data.Duration;
 	}
 
+	public override float GetMinMoistureSpring() {
+		return m_Data.MoistureSpring[0];
+	}
+
+	public override float GetMaxMoistureSpring() {
+		return m_Data.MoistureSpring[1];
+	}
+
+	public override float GetMinMoistureSummer() {
+		return m_Data.MoistureSummer[0];
+	}
+
+	public override float GetMaxMoistureSummer() {
+		return m_Data.MoistureSummer[1];
+	}
+
+	public override float GetMinMoistureAutumn() {
+		return m_Data.MoistureAutumn[0];
+	}
+
+	public override float GetMaxMoistureAutumn() {
+		return m_Data.MoistureAutumn[1];
+	}
+
+	public override float GetMinMoistureWinter() {
+		return m_Data.MoistureWinter[0];
+	}
+
+	public override float GetMaxMoistureWinter() {
+		return m_Data.MoistureWinter[1];
+	}
+
+	public override float GetMinTemperatureSpring() {
+		return m_Data.TemperatureSpring[0];
+	}
+
+	public override float GetMaxTemperatureSpring() {
+		return m_Data.TemperatureSpring[1];
+	}
+
+	public override float GetMinTemperatureSummer() {
+		return m_Data.TemperatureSummer[0];
+	}
+
+	public override float GetMaxTemperatureSummer() {
+		return m_Data.TemperatureSummer[1];
+	}
+
+	public override float GetMinTemperatureAutumn() {
+		return m_Data.TemperatureAutumn[0];
+	}
+
+	public override float GetMaxTemperatureAutumn() {
+		return m_Data.TemperatureAutumn[1];
+	}
+
+	public override float GetMinTemperatureWinter() {
+		return m_Data.TemperatureWinter[0];
+	}
+
+	public override float GetMaxTemperatureWinter() {
+		return m_Data.TemperatureWinter[1];
+	}
+
 	#endregion
 
 }
