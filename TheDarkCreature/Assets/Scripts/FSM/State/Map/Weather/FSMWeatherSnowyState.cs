@@ -11,6 +11,7 @@ public class FSMWeatherSnowyState : FSMBaseState {
 
 	public override void StartState() {
 		m_Controller.ActiveSkill((int)TDCEnum.EGameType.WeatherSnowySkill);
+		Debug.Log("FSMWeatherSnowyState");
 	}
 
 	public override void UpdateState() {

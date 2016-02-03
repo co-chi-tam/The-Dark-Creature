@@ -35,6 +35,8 @@ public class UIManager : MonoBehaviour {
 	public Text SanityPointText;
 	public Text HungerPointText;
 	public Text HeatPointText;
+	public Button PickupButton;
+	public Button AttackButton;
 
 	[SerializeField]
 	private TDCEntity m_Owner;
@@ -83,10 +85,28 @@ public class UIManager : MonoBehaviour {
 		m_Owner.OnHungerChange += UpdateUIHungerBar;
 		m_Owner.AddEventListener("OnApplyDamage", UpdateUIApplyDamage);
 		m_Owner.AddEventListener("OnDeath", RemoveAllUIListener);
+
+		PickupButton.onClick.RemoveAllListeners();
+		PickupButton.onClick.AddListener(PressPickupButton);
+
+		AttackButton.onClick.RemoveAllListeners();
+		AttackButton.onClick.AddListener(PressAttackButton);
 	}
 
 	public void EnableLoadingScreen(bool value) {
 		LoadingImage.gameObject.SetActive(value);
+	}
+
+	private void PressPickupButton() {
+		if (m_Owner == null)
+			return;
+		m_Owner.GetController().ActiveAction(0);
+	}
+
+	private void PressAttackButton() {
+		if (m_Owner == null)
+			return;
+		m_Owner.GetController().ActiveAction(1);
 	}
 
 	private void UpdateUIHealthBar(int source, int newValue) {

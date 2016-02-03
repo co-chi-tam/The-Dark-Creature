@@ -99,10 +99,11 @@ public class UIInventory : MonoBehaviour {
 		if (m_OwnerEnity == null)
 			return;
 		m_ItemSlots = null;
-		m_ItemSlots = new UISlot [this.transform.childCount];
+		m_ItemSlots = new UISlot [20];
 		var inventory = m_OwnerEnity.GetInventory();
+		var panel = this.transform.GetChild(0);
 		for (int i = 0; i < inventory.Length; i++) {
-			var child = this.transform.GetChild (i).GetComponent<UISlot>();
+			var child = panel.GetChild (i).GetComponent<UISlot>();
 			if (inventory[i] != null) {
 				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
 				child.LoadSlot (i, inventory[i]);

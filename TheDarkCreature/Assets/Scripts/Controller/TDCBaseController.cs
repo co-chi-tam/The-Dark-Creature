@@ -171,6 +171,10 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 		
 	}
 
+	public virtual void ActiveAction(int index) {
+
+	}
+
 	public virtual void MovePosition(Vector3 position) {
 		CallBackEvent("OnMove");
 	}

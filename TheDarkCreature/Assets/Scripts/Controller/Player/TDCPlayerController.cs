@@ -45,13 +45,14 @@ public class TDCPlayerController : TDCCreatureController
 	}
 
 	protected override void LateUpdate () {
+		base.LateUpdate();
 #if UNITY_EDITOR || UNITY_STANDALONE
 		if (Input.GetMouseButtonUp(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
 			if (Physics.Raycast(ray, out hitInfo)) {
 				if (!EventSystem.current.IsPointerOverGameObject()) { 
-					PlayerAction(hitInfo);
+					ActiveAction(hitInfo);
 				}
             }
         }
@@ -70,7 +71,7 @@ public class TDCPlayerController : TDCCreatureController
 				if (Physics.Raycast(ray, out hitInfo)) {
 					if (m_TouchedUI)
                     {
-						PlayerAction(hitInfo);
+						ActiveAction(hitInfo);
                     }
 				}
 				break;
@@ -89,7 +90,7 @@ public class TDCPlayerController : TDCCreatureController
 		m_Entity.ActiveSkill(index);
 	}
 
-	private void PlayerAction(RaycastHit hitInfo) {
+	private void ActiveAction(RaycastHit hitInfo) {
 		var hitGameObject = hitInfo.collider.gameObject;
 		var entity = m_GameManager.GetEntityByName(hitGameObject.name);
 		if (entity != this.GetEntity())
@@ -105,12 +106,50 @@ public class TDCPlayerController : TDCCreatureController
 				}
 				case (int) TDCEnum.ELayer.LayerCreature:
 				case (int) TDCEnum.ELayer.LayerEnviroment:
-				case (int) TDCEnum.ELayer.LayerGObject: {
+				case (int) TDCEnum.ELayer.LayerGObject: 
+				case (int) TDCEnum.ELayer.LayerItem: {
 					SetEnemyEntity(entity);
 					break;
 				}
 			}
 		}
+	}
+
+	public override void ActiveAction(int index) {
+		base.ActiveAction(index);
+		var colliders = Physics.OverlapSphere(m_Transform.position, GetDetectRange(), m_ColliderLayerMask);
+		if (colliders.Length == 0)
+			return;
+		for (int i = 0; i < colliders.Length; i++)
+		{
+			var colliderObject = colliders[i].gameObject;
+			var layer = colliderObject.layer;
+			if (layer == (int) TDCEnum.ELayer.LayerPlane)
+				continue;
+			var entity = m_GameManager.GetEntityByName(colliderObject.name);
+			if (entity != this.GetEntity())
+			{
+				var point = colliderObject.transform.position;
+				point.y = 0f;
+				switch (layer)
+				{
+					case (int) TDCEnum.ELayer.LayerCreature: {
+							if (GetEnemyEntity() == null && index == 1)
+							{
+								SetEnemyEntity(entity);
+							}
+						} break;
+					case (int) TDCEnum.ELayer.LayerEnviroment:
+					case (int) TDCEnum.ELayer.LayerItem: {
+							if (GetEnemyEntity() == null && (index == 0 || index == 1))
+							{
+								SetEnemyEntity(entity);
+							}
+						} break;
+				}
+			}
+		}
+
 	}
 
 	public override void OnSelectedItem (int itemIndex)

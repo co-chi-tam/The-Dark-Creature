@@ -17,7 +17,7 @@ public class TDCCreatureController : TDCBaseController {
 	{
 		base.Init ();
 
-		m_ColliderLayerMask = 1 << 8 | 1 << 10 | 1 << 11 | 1 << 31;
+		m_ColliderLayerMask = 1 << (int)TDCEnum.ELayer.LayerCreature | 1 << (int)TDCEnum.ELayer.LayerEnviroment | 1 << (int)TDCEnum.ELayer.LayerGObject | 1 << (int)TDCEnum.ELayer.LayerItem | 1 << (int)TDCEnum.ELayer.LayerPlayer;
 
 		var idleState   	= new FSMIdleState(this);
 		var moveState   	= new FSMMoveState(this);

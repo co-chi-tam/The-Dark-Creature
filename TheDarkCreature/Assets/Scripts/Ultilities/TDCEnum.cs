@@ -116,6 +116,7 @@ public class TDCEnum{
 		LayerPlane 		= 9,
 		LayerEnviroment = 10,
 		LayerGObject	= 11,
+		LayerItem		= 12,
 		LayerPlayer		= 31
 	}
 

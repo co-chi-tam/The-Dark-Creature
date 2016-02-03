@@ -284,6 +284,7 @@ public class TDCGameManager : MonoBehaviour {
 		GameObject gObject = null;
 		TDCBaseController controller = null;
 		TDCEntity entity = null;
+		AudioListener listener = null;
 		var random = m_ListEntities.Count;
 		data = m_DataReader.GetPlayerData (type);
 		gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
@@ -297,6 +298,7 @@ public class TDCGameManager : MonoBehaviour {
 				break;
 		}
 		CameraController.Instance.Target = gObject.transform;
+		listener = gObject.AddComponent<AudioListener>();
 		data.ID = m_ListEntities.Count + 1;
 		entity = new TDCPlayer(controller, data);
 		entity.SetActive(false);

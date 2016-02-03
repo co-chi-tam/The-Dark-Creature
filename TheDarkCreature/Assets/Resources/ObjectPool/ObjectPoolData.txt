@@ -18,7 +18,7 @@
 	"Crabystal": 50,
 	"FireBuggy": 50,
 	"Mushroom": 50,
-	"Grass": 50,
+	"Grass": 20,
 	"Bush": 50,
 	"BlueBerry": 50,
 	"CampFire": 20,
