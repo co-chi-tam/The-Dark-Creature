@@ -10,7 +10,7 @@
 			"ModelPath": ["Prefabs/Group/DodonoHouse"],
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupDayNestFSM",
-			"Radius": 100,
+			"Radius": 50,
 			"MemberType": 5,
 			"MaxMember": 2,
 			"CurrentHP": 99,

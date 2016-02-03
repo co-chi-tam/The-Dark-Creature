@@ -245,11 +245,11 @@ public class TDCDateTime : MonoBehaviour {
 	}
 
 	public static bool IsRainy() {
-		return Moisture > 0.85f;
+		return Moisture > 0.8f && Moisture < 1f;
 	}
 
 	public static bool IsOverHeat() {
-		return Temperature > 0.85f;
+		return Temperature > 0.8f && Temperature < 1f;
 	}
 
 	public static bool IsWindy() {

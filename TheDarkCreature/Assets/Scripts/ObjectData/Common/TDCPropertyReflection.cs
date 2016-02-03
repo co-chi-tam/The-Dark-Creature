@@ -26,19 +26,22 @@ public class TDCPropertyReflection {
     }
 
     public void SetProperty(string name, object value)
-    {
-        try
-        {
-            var propObj = this.m_Properties[name];
-            var propInfo = propObj.GetType().GetProperty("Value");
-			var newValue = Convert.ChangeType(value, propInfo.PropertyType);
-            MethodInfo methodInfo = propInfo.GetSetMethod();
-			methodInfo.Invoke(propObj, new object[] { newValue });
-        }
-        catch (Exception ex)
-        {
-            throw new Exception(ex.Message);
-        }
+	{
+		if (this.m_Properties.ContainsKey(name))
+		{
+			try
+			{
+				var propObj = this.m_Properties[name];
+				var propInfo = propObj.GetType().GetProperty("Value");
+				var newValue = Convert.ChangeType(value, propInfo.PropertyType);
+				MethodInfo methodInfo = propInfo.GetSetMethod();
+				methodInfo.Invoke(propObj, new object[] { newValue });
+			}
+			catch (Exception ex)
+			{
+				throw new Exception(ex.Message);
+			}
+		}
     }
 
     public T GetProperty<T>(string name)

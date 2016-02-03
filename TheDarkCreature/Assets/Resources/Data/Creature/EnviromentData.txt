@@ -6,10 +6,12 @@
 			"GameType": 53,
 			"CreatureType": 3,
 			"Description": "",
-			"ModelPath": ["Prefabs/Enviroment/Grass1","Prefabs/Enviroment/Grass2","Prefabs/Enviroment/Grass3"],
+			"ModelPath": ["Prefabs/Enviroment/Grass1","Prefabs/Enviroment/Grass2"],
 			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
 			"IconPath": "",
 			"Inventory": [{"GameType":103,"Amount":1}]
 		},{
@@ -22,6 +24,8 @@
 			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
 			"IconPath": "",
 			"Inventory": [{"GameType":102,"Amount":1}]
 		},{
@@ -34,6 +38,8 @@
 			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
 			"IconPath": "",
 			"Inventory": [{"GameType":104,"Amount":1}]
 		},{
@@ -46,6 +52,8 @@
 			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "5",
 			"MaxHP": "5",
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
 			"IconPath": "",
 			"Inventory": [{"GameType":105,"Amount":1}]
 		},{
@@ -58,6 +66,8 @@
 			"FSMPath": "FSM/Creature/EnviromentFSM",
 			"CurrentHP": "100",
 			"MaxHP": "100",
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
 			"IconPath": "",
 			"Inventory": [{"GameType":106,"Amount":1}]
 		}

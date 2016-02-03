@@ -1,0 +1,710 @@
+fileFormatVersion: 2
+guid: e861ae3bba92eda40a1e5c4573ea165f
+timeCreated: 1454483318
+licenseType: Free
+ModelImporter:
+  serializedVersion: 19
+  fileIDToRecycleName:
+    100000: Armature
+    100002: Bone.Leg.001.L
+    100004: Bone.Leg.001.L.001
+    100006: Bone.Leg.002.L
+    100008: Bone.Leg.002.L.001
+    100010: Bone.Leg.003.L
+    100012: Bone.Leg.003.L.001
+    100014: Bone.Leg.004.L
+    100016: Bone.Leg.004.L.001
+    100018: Bone.Leg.005.L
+    100020: Bone.Leg.005.L.001
+    100022: Bone.Leg.006.L
+    100024: Bone.Leg.006.L.001
+    100026: Crabystal
+    100028: //RootNode
+    100030: CrystalBone
+    100032: IK.Crystal
+    100034: IK.Leg.L.001
+    100036: IK.Leg.L.002
+    100038: IK.Leg.R.001
+    100040: IK.Leg.R.002
+    100042: Root
+    400000: Armature
+    400002: Bone.Leg.001.L
+    400004: Bone.Leg.001.L.001
+    400006: Bone.Leg.002.L
+    400008: Bone.Leg.002.L.001
+    400010: Bone.Leg.003.L
+    400012: Bone.Leg.003.L.001
+    400014: Bone.Leg.004.L
+    400016: Bone.Leg.004.L.001
+    400018: Bone.Leg.005.L
+    400020: Bone.Leg.005.L.001
+    400022: Bone.Leg.006.L
+    400024: Bone.Leg.006.L.001
+    400026: Crabystal
+    400028: //RootNode
+    400030: CrystalBone
+    400032: IK.Crystal
+    400034: IK.Leg.L.001
+    400036: IK.Leg.L.002
+    400038: IK.Leg.R.001
+    400040: IK.Leg.R.002
+    400042: Root
+    4300000: Crabystal
+    7400000: Idle.001
+    7400002: Crabystal_Walk
+    7400004: Crabystal_Run
+    7400006: Crabystal_Action.001
+    7400008: Crabystal_Action.002
+    7400010: Crabystal_Attack.001
+    7400012: Crabystal_Attack.002
+    7400014: Crabystal_Death
+    7400016: Armature|Crabystal_Action.001
+    7400018: Armature|Crabystal_Action.002
+    7400020: Armature|Crabystal_Attack.001
+    7400022: Armature|Crabystal_Attack.002
+    7400024: Armature|Crabystal_Death
+    7400026: Armature|Crabystal_Run
+    7400028: Armature|Crabystal_Walk
+    7400030: Armature|Idle.001
+    9500000: //RootNode
+    13700000: Crabystal
+  materials:
+    importMaterials: 1
+    materialName: 0
+    materialSearch: 1
+  animations:
+    legacyGenerateAnimations: 4
+    bakeSimulation: 0
+    resampleRotations: 1
+    optimizeGameObjects: 0
+    motionNodeName: 
+    animationImportErrors: 
+    animationImportWarnings: 
+    animationRetargetingWarnings: 
+    animationDoRetargetingWarnings: 0
+    animationCompression: 1
+    animationRotationError: 0.5
+    animationPositionError: 0.5
+    animationScaleError: 0.5
+    animationWrapMode: 0
+    extraExposedTransformPaths: []
+    clipAnimations:
+    - serializedVersion: 16
+      name: Idle.001
+      takeName: Idle.001
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/IK.Crystal
+        weight: 1
+      - path: Armature/IK.Leg.L.001
+        weight: 1
+      - path: Armature/IK.Leg.L.002
+        weight: 1
+      - path: Armature/IK.Leg.R.001
+        weight: 1
+      - path: Armature/IK.Leg.R.002
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L/Bone.Leg.003.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001/Bone.Leg.003.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L/Bone.Leg.006.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001/Bone.Leg.006.L.001
+        weight: 1
+      - path: Armature/Root/CrystalBone
+        weight: 1
+      - path: Crabystal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crabystal_Walk
+      takeName: Crabystal_Walk
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/IK.Crystal
+        weight: 1
+      - path: Armature/IK.Leg.L.001
+        weight: 1
+      - path: Armature/IK.Leg.L.002
+        weight: 1
+      - path: Armature/IK.Leg.R.001
+        weight: 1
+      - path: Armature/IK.Leg.R.002
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L/Bone.Leg.003.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001/Bone.Leg.003.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L/Bone.Leg.006.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001/Bone.Leg.006.L.001
+        weight: 1
+      - path: Armature/Root/CrystalBone
+        weight: 1
+      - path: Crabystal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crabystal_Run
+      takeName: Crabystal_Run
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/IK.Crystal
+        weight: 1
+      - path: Armature/IK.Leg.L.001
+        weight: 1
+      - path: Armature/IK.Leg.L.002
+        weight: 1
+      - path: Armature/IK.Leg.R.001
+        weight: 1
+      - path: Armature/IK.Leg.R.002
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L/Bone.Leg.003.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001/Bone.Leg.003.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L/Bone.Leg.006.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001/Bone.Leg.006.L.001
+        weight: 1
+      - path: Armature/Root/CrystalBone
+        weight: 1
+      - path: Crabystal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crabystal_Action.001
+      takeName: Crabystal_Action.001
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/IK.Crystal
+        weight: 1
+      - path: Armature/IK.Leg.L.001
+        weight: 1
+      - path: Armature/IK.Leg.L.002
+        weight: 1
+      - path: Armature/IK.Leg.R.001
+        weight: 1
+      - path: Armature/IK.Leg.R.002
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L/Bone.Leg.003.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001/Bone.Leg.003.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L/Bone.Leg.006.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001/Bone.Leg.006.L.001
+        weight: 1
+      - path: Armature/Root/CrystalBone
+        weight: 1
+      - path: Crabystal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crabystal_Action.002
+      takeName: Crabystal_Action.002
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/IK.Crystal
+        weight: 1
+      - path: Armature/IK.Leg.L.001
+        weight: 1
+      - path: Armature/IK.Leg.L.002
+        weight: 1
+      - path: Armature/IK.Leg.R.001
+        weight: 1
+      - path: Armature/IK.Leg.R.002
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L/Bone.Leg.003.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001/Bone.Leg.003.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L/Bone.Leg.006.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001/Bone.Leg.006.L.001
+        weight: 1
+      - path: Armature/Root/CrystalBone
+        weight: 1
+      - path: Crabystal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crabystal_Attack.001
+      takeName: Crabystal_Attack.001
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/IK.Crystal
+        weight: 1
+      - path: Armature/IK.Leg.L.001
+        weight: 1
+      - path: Armature/IK.Leg.L.002
+        weight: 1
+      - path: Armature/IK.Leg.R.001
+        weight: 1
+      - path: Armature/IK.Leg.R.002
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L/Bone.Leg.003.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001/Bone.Leg.003.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L/Bone.Leg.006.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001/Bone.Leg.006.L.001
+        weight: 1
+      - path: Armature/Root/CrystalBone
+        weight: 1
+      - path: Crabystal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crabystal_Attack.002
+      takeName: Crabystal_Attack.002
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 1
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/IK.Crystal
+        weight: 1
+      - path: Armature/IK.Leg.L.001
+        weight: 1
+      - path: Armature/IK.Leg.L.002
+        weight: 1
+      - path: Armature/IK.Leg.R.001
+        weight: 1
+      - path: Armature/IK.Leg.R.002
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L/Bone.Leg.003.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001/Bone.Leg.003.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L/Bone.Leg.006.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001/Bone.Leg.006.L.001
+        weight: 1
+      - path: Armature/Root/CrystalBone
+        weight: 1
+      - path: Crabystal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    - serializedVersion: 16
+      name: Crabystal_Death
+      takeName: Crabystal_Death
+      firstFrame: 0
+      lastFrame: 22
+      wrapMode: 0
+      orientationOffsetY: 0
+      level: 0
+      cycleOffset: 0
+      loop: 0
+      hasAdditiveReferencePose: 0
+      loopTime: 0
+      loopBlend: 0
+      loopBlendOrientation: 0
+      loopBlendPositionY: 0
+      loopBlendPositionXZ: 0
+      keepOriginalOrientation: 0
+      keepOriginalPositionY: 1
+      keepOriginalPositionXZ: 0
+      heightFromFeet: 0
+      mirror: 0
+      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
+      curves: []
+      events: []
+      transformMask:
+      - path: 
+        weight: 1
+      - path: Armature
+        weight: 1
+      - path: Armature/IK.Crystal
+        weight: 1
+      - path: Armature/IK.Leg.L.001
+        weight: 1
+      - path: Armature/IK.Leg.L.002
+        weight: 1
+      - path: Armature/IK.Leg.R.001
+        weight: 1
+      - path: Armature/IK.Leg.R.002
+        weight: 1
+      - path: Armature/Root
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L/Bone.Leg.002.L/Bone.Leg.003.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.001.L.001/Bone.Leg.002.L.001/Bone.Leg.003.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L/Bone.Leg.005.L/Bone.Leg.006.L
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001
+        weight: 1
+      - path: Armature/Root/Bone.Leg.004.L.001/Bone.Leg.005.L.001/Bone.Leg.006.L.001
+        weight: 1
+      - path: Armature/Root/CrystalBone
+        weight: 1
+      - path: Crabystal
+        weight: 1
+      maskType: 0
+      maskSource: {instanceID: 0}
+      additiveReferencePoseFrame: 0
+    isReadable: 1
+  meshes:
+    lODScreenPercentages: []
+    globalScale: 1.2
+    meshCompression: 0
+    addColliders: 0
+    importBlendShapes: 1
+    swapUVChannels: 0
+    generateSecondaryUV: 0
+    useFileUnits: 1
+    optimizeMeshForGPU: 1
+    keepQuads: 0
+    weldVertices: 1
+    secondaryUVAngleDistortion: 8
+    secondaryUVAreaDistortion: 15.000001
+    secondaryUVHardAngle: 88
+    secondaryUVPackMargin: 4
+    useFileScale: 1
+  tangentSpace:
+    normalSmoothAngle: 60
+    normalImportMode: 0
+    tangentImportMode: 3
+  importAnimation: 1
+  copyAvatar: 0
+  humanDescription:
+    human: []
+    skeleton: []
+    armTwist: 0.5
+    foreArmTwist: 0.5
+    upperLegTwist: 0.5
+    legTwist: 0.5
+    armStretch: 0.05
+    legStretch: 0.05
+    feetSpacing: 0
+    rootMotionBoneName: 
+    hasTranslationDoF: 0
+  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  animationType: 2
+  humanoidOversampling: 1
+  additionalBone: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

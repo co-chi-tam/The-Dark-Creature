@@ -235,6 +235,8 @@ public class TDCDataReader {
 			enviroment.CreatureType = (TDCEnum.ECreatureType)int.Parse (instance["CreatureType"].ToString());
 			enviroment.CurrentHP = int.Parse (instance["CurrentHP"].ToString());
 			enviroment.MaxHP = int.Parse (instance["MaxHP"].ToString());
+			enviroment.CurrentHeatPoint = int.Parse (instance["CurrentHeatPoint"].ToString());
+			enviroment.MaxHeatPoint = int.Parse (instance["MaxHeatPoint"].ToString());
 			var inventory = instance["Inventory"] as List<object>;
 			for (int x = 0; x < inventory.Count; x++) {
 				var invenData = inventory[x] as Dictionary<string, object>;

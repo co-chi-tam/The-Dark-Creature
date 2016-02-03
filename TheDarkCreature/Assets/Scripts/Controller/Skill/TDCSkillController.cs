@@ -17,7 +17,7 @@ public class TDCSkillController : TDCBaseController {
 	protected LayerMask m_ColliderLayerMask;
 	protected EffectManager m_EffectManager;
 	protected Transform m_AttachTransform;
-	protected TDCBaseController[] m_ControllersInRadius;
+	protected TDCEntity[] m_EntitiesInRadius;
 
 	#endregion
 
@@ -285,11 +285,11 @@ public class TDCSkillController : TDCBaseController {
 		var haveCollider = colliders.Length > 0;
 		if (haveCollider)
 		{
-			m_ControllersInRadius = new TDCBaseController[colliders.Length];
+			m_EntitiesInRadius = new TDCEntity[colliders.Length];
 			for (int i = 0; i < colliders.Length; i++)
 			{
 				var gName = colliders[i].name;
-				m_ControllersInRadius[i] = m_GameManager.GetControllerByName(gName);
+				m_EntitiesInRadius[i] = m_GameManager.GetEntityByName(gName);
 			}
 		}
 		return haveCollider;

@@ -304,7 +304,7 @@ public class TDCEntity : TDCPropertyReflection {
 		if (OnHealthChange != null)
 		{
 			var health = GetHealth();
-			OnHealthChange(health, value);
+			OnHealthChange(health, value > GetMaxHealth() ? GetMaxHealth() : value);
 		}
 	}
 
@@ -324,7 +324,7 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		if (OnHeatChange != null)
 		{
-			OnHeatChange(GetHeat(), value);
+			OnHeatChange(GetHeat(), value > GetMaxHeat() ? GetMaxHeat() : value);
 		}
 	}
 
@@ -340,7 +340,7 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		if (OnSanityChange != null)
 		{
-			OnSanityChange(GetSanity(), value);
+			OnSanityChange(GetSanity(), value > GetMaxSanity() ? GetMaxSanity() : value);
 		}
 	}
 
@@ -356,7 +356,7 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		if (OnHungerChange != null)
 		{
-			OnHungerChange(GetSanity(), value);
+			OnHungerChange(GetSanity(), value > GetMaxHunger() ? GetMaxHunger() : value);
 		}
 	}
 

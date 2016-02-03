@@ -36,6 +36,13 @@ public class TDCEnviroment : TDCEntity
 			m_DamageTake = 0;
 			SetHealth(health);
 		}
+
+		if (m_HeatPoint.Value != 0)
+		{
+			var heat = GetHeat() + m_HeatPoint.Value;
+			m_HeatPoint.Value = 0;
+			SetHeat(heat);
+		}
 	}
 
 	public override void ApplyDamage(int damage, TDCEntity attacker)
@@ -92,6 +99,21 @@ public class TDCEnviroment : TDCEntity
 	public override int GetMaxHealth()
 	{
 		return m_Data.MaxHP;
+	}
+
+	public override void SetHeat(int value)
+	{
+		m_Data.CurrentHeatPoint = value;
+	}
+
+	public override int GetHeat()
+	{
+		return m_Data.CurrentHeatPoint;
+	}
+
+	public override int GetMaxHeat()
+	{
+		return m_Data.MaxHeatPoint;
 	}
 
 	public override void SetController(TDCBaseController controller)

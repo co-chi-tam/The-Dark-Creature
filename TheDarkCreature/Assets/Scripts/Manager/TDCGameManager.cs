@@ -34,7 +34,6 @@ public class TDCGameManager : MonoBehaviour {
     #region Properties
 
 	private TDCDataReader m_DataReader;
-	private Dictionary<string, TDCBaseController> m_ListControllers;
 	private Dictionary<string, TDCEntity> m_ListEntities;
 	private Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCEntity>> m_ObjectPool;
 	private Map m_Map;
@@ -52,7 +51,6 @@ public class TDCGameManager : MonoBehaviour {
 
 		DontDestroyOnLoad(this.gameObject);
 		m_DataReader = new TDCDataReader();
-		m_ListControllers = new Dictionary<string, TDCBaseController>();
 		m_ListEntities = new Dictionary<string, TDCEntity>();
 		m_ObjectPool = new Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCEntity>>();
 
@@ -194,18 +192,6 @@ public class TDCGameManager : MonoBehaviour {
 
 	}
 
-	public TDCBaseController GetControllerByIndex(int index) {
-		return m_ListControllers.ElementAt (index).Value;
-	}
-
-	public TDCBaseController GetControllerByName(string name) {
-		if (m_ListControllers.ContainsKey(name))
-		{
-			return m_ListControllers[name];
-		}
-		return null;
-	}
-
 	public TDCEntity GetEntityByIndex(int index) {
 		return m_ListEntities.ElementAt (index).Value;
 	}
@@ -298,7 +284,7 @@ public class TDCGameManager : MonoBehaviour {
 		GameObject gObject = null;
 		TDCBaseController controller = null;
 		TDCEntity entity = null;
-		var random = UnityEngine.Random.Range (0, 9999);
+		var random = m_ListEntities.Count;
 		data = m_DataReader.GetPlayerData (type);
 		gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 		switch ((data as TDCPlayerData).CreatureType)
@@ -316,13 +302,12 @@ public class TDCGameManager : MonoBehaviour {
 		entity.SetActive(false);
 		controller.SetEntity(entity);
 		controller.Init ();
-		controller.name = string.Format("{0}-{1}", type, m_ListControllers.Count);
+		controller.name = string.Format("{0}-{1}", type, m_ListEntities.Count);
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
 
 		m_ListEntities.Add(controller.name, entity);
-		m_ListControllers.Add(controller.name, controller);
 		return entity;
 	}
 
@@ -334,7 +319,7 @@ public class TDCGameManager : MonoBehaviour {
 		TDCBaseController controller = null;
 		TDCEntity entity = null;
 		GameObject gObject = null;
-		var random = UnityEngine.Random.Range (0, 9999);
+		var random = m_ListEntities.Count;
 		switch (type) { 
 		case TDCEnum.EGameType.Sun:
 			data = m_DataReader.GetSunData (type);
@@ -476,13 +461,12 @@ public class TDCGameManager : MonoBehaviour {
 		entity.SetActive(false);
 		controller.SetEntity(entity);
 		controller.Init ();
-		controller.name = string.Format("{0}-{1}", type, m_ListControllers.Count);
+		controller.name = string.Format("{0}-{1}", type, m_ListEntities.Count);
 		if (parent != null) {
 			gObject.transform.SetParent (parent.transform);		
 		}
 
 		m_ListEntities.Add(controller.name, entity);
-		m_ListControllers.Add(controller.name, controller);
 		return entity;
 	}
 

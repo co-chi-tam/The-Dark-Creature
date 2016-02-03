@@ -17,6 +17,8 @@ public class TDCEnviromentData : TDCCreatureData {
 		tmp.Icon = instance.Icon;
 		tmp.CreatureType = instance.CreatureType;
 		tmp.CurrentHP = instance.CurrentHP;
+		tmp.CurrentHeatPoint = instance.CurrentHeatPoint;
+		tmp.MaxHeatPoint = instance.MaxHeatPoint;
 		tmp.MaxHP = instance.MaxHP;
 		tmp.Inventory = instance.Inventory;
 		tmp.IsShine = instance.IsShine;

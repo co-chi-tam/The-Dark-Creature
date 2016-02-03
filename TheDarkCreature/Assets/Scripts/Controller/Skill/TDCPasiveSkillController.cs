@@ -70,11 +70,12 @@ public class TDCPasiveSkillController : TDCSkillController {
 	internal override void AddValueEffect(Dictionary<string, object> pars)
 	{
 		base.AddValueEffect(pars);
-		if (pars["ToTarget"].Equals("InRange"))
+		var toTarget = pars["ToTarget"].ToString();
+		var valueName = pars["ValueName"].ToString();
+		var toValue = float.Parse (pars["ToValue"].ToString());
+		if (toTarget.Equals("InRange"))
 		{
 			var mPos = TransformPosition;
-			var valueName = pars["ValueName"].ToString();
-			var value = float.Parse(pars["ToValue"].ToString());
 			mPos.y = 0f;
 			var colliders = Physics.OverlapSphere(mPos, GetEffectRadius(), m_ColliderLayerMask);
 			if (colliders.Length == 0)
@@ -89,7 +90,7 @@ public class TDCPasiveSkillController : TDCSkillController {
 				else
 				{
 					var sourceValue = target.GetProperty<float>(valueName);
-					target.SetProperty(valueName, sourceValue + value);
+					target.SetProperty(valueName, sourceValue + toValue);
 				}
 			}
 		}
@@ -98,53 +99,49 @@ public class TDCPasiveSkillController : TDCSkillController {
 	internal override void SetValueEffect(Dictionary<string, object> pars)
 	{
 		base.SetValueEffect(pars);
-		var toTarget = pars["ToTarget"];
+		var toTarget = pars["ToTarget"].ToString();
 		var valueName = pars["ValueName"].ToString();
 		var toValue = float.Parse (pars["ToValue"].ToString());
-		if (toTarget.Equals("Enemy"))
+		TDCEntity entityTarget = null; 
+		switch (toTarget)
 		{
-			var enemy = GetEnemyEntity();
-			if (enemy != null)
-			{
-				enemy.SetProperty(valueName, toValue);
-			}
-		} else if (toTarget.Equals("Owner")) {
-			var owner = GetOwnerEntity();
-			if (owner != null)
-			{
-				owner.SetProperty(valueName, toValue);
-			}
-		} else if (toTarget.Equals("Sun")) {
-			var sun = m_GameManager.GetSunEntity();
-			if (sun != null)
-			{
-				sun.SetProperty(valueName, toValue);
-			}
-		} 
+			case "Enemy":
+				entityTarget = GetEnemyEntity();
+				break;
+			case "Owner":
+				entityTarget = GetOwnerEntity();
+				break;
+			case "Sun":
+				entityTarget = m_GameManager.GetSunEntity();
+				break;
+		}
+		if (entityTarget != null)
+		{
+			entityTarget.SetProperty(valueName, toValue);
+		}
 	}
 
 	internal override void SubtractValueEffect(Dictionary<string, object> pars)
 	{
 		base.SubtractValueEffect(pars);
-		var toTarget = pars["ToTarget"];
+		var toTarget = pars["ToTarget"].ToString();
 		var valueName = pars["ValueName"].ToString();
 		var toValue = float.Parse (pars["ToValue"].ToString());
 		var sourceValue = 0f;
-		if (toTarget.Equals("Enemy"))
+		TDCEntity entityTarget = null; 
+		switch (toTarget)
 		{
-			var enemy = GetEnemyEntity();
-			if (enemy != null)
-			{
-				sourceValue = enemy.GetProperty<float>(valueName);
-				enemy.SetProperty(valueName, sourceValue - toValue);
-			}
-		} else if (toTarget.Equals("Owner")) {
-			var owner = GetOwnerEntity();
-			if (owner != null)
-			{
-				sourceValue = owner.GetProperty<float>(valueName);
-				owner.SetProperty(valueName, sourceValue - toValue);
-			}
+			case "Enemy":
+				entityTarget = GetEnemyEntity();
+				break;
+			case "Owner":
+				entityTarget = GetOwnerEntity();
+				break;
+		}
+		if (entityTarget != null)
+		{
+			sourceValue = entityTarget.GetProperty<float>(valueName);
+			entityTarget.SetProperty(valueName, sourceValue - toValue);
 		}
 	}
 
