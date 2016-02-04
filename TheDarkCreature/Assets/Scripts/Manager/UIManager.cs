@@ -31,10 +31,10 @@ public class UIManager : MonoBehaviour {
 
 	public Image LoadingImage;
 	public Image BloodScreenImage;
-	public Text HealthPointText;
-	public Text SanityPointText;
-	public Text HungerPointText;
-	public Text HeatPointText;
+	public Image HealthPointImage;
+	public Image HeatPointImage;
+	public Image SanityPointImage;
+	public Image HungerPointImage;
 	public Button PickupButton;
 	public Button AttackButton;
 
@@ -49,6 +49,13 @@ public class UIManager : MonoBehaviour {
 
 	void Awake() {
 		m_Instance = this;
+	}
+
+	void Start() {
+		HealthPointImage = SetupImage(HealthPointImage);
+		HeatPointImage = SetupImage(HeatPointImage);
+		HungerPointImage = SetupImage(HungerPointImage);
+		SanityPointImage = SetupImage(SanityPointImage);
 	}
 
 	void LateUpdate() {
@@ -74,10 +81,10 @@ public class UIManager : MonoBehaviour {
 
 	public void Init(TDCEntity owner) {
 		m_Owner = owner;
-		UpdateUIHealthBar(m_Owner.GetHealth(), m_Owner.GetHealth());
-		UpdateUIHeatBar(m_Owner.GetHeat(), m_Owner.GetHeat());
-		UpdateUISanityBar(m_Owner.GetSanity(), m_Owner.GetSanity());
-		UpdateUIHungerBar(m_Owner.GetHunger(), m_Owner.GetHunger());
+		UpdateUIHealthBar(m_Owner.GetHealth(), m_Owner.GetHealth(), m_Owner.GetMaxHealth());
+		UpdateUIHeatBar(m_Owner.GetHeat(), m_Owner.GetHeat(), m_Owner.GetMaxHeat());
+		UpdateUISanityBar(m_Owner.GetSanity(), m_Owner.GetSanity(), m_Owner.GetMaxSanity());
+		UpdateUIHungerBar(m_Owner.GetHunger(), m_Owner.GetHunger(), m_Owner.GetMaxHunger());
 
 		m_Owner.OnHealthChange += UpdateUIHealthBar;
 		m_Owner.OnHeatChange += UpdateUIHeatBar;
@@ -109,24 +116,24 @@ public class UIManager : MonoBehaviour {
 		m_Owner.GetController().ActiveAction(1);
 	}
 
-	private void UpdateUIHealthBar(int source, int newValue) {
-		HealthPointText.text = newValue > 0 ? newValue.ToString() : "0";
+	private void UpdateUIHealthBar(int source, int newValue, int max) {
+		HealthPointImage.fillAmount = (float)newValue / max;
 		if (newValue < source)
 		{
 			UpdateUIApplyDamage();
 		}
 	}
 
-	private void UpdateUIHeatBar(int source, int newValue) {
-		HeatPointText.text = newValue > 0 ? newValue.ToString() : "0";
+	private void UpdateUIHeatBar(int source, int newValue, int max) {
+		HeatPointImage.fillAmount = (float)newValue / max;
 	}
 
-	private void UpdateUISanityBar(int source, int newValue) {
-		SanityPointText.text = newValue > 0 ? newValue.ToString() : "0";
+	private void UpdateUISanityBar(int source, int newValue, int max) {
+		SanityPointImage.fillAmount = (float)newValue / max;
 	}
 
-	private void UpdateUIHungerBar(int source, int newValue) {
-		HungerPointText.text = newValue > 0 ? newValue.ToString() : "0";
+	private void UpdateUIHungerBar(int source, int newValue, int max) {
+		HungerPointImage.fillAmount = (float)newValue / max;
 	}
 
 	private void UpdateUIApplyDamage() {
@@ -149,6 +156,14 @@ public class UIManager : MonoBehaviour {
 		m_Owner.OnHeatChange -= UpdateUIHeatBar;
 		m_Owner.OnSanityChange -= UpdateUISanityBar;
 		m_Owner.OnHungerChange -= UpdateUIHungerBar;
+	}
+
+	private Image SetupImage(Image value) {
+		value.type = Image.Type.Filled;
+		value.fillAmount = 1f;
+		value.fillMethod = Image.FillMethod.Vertical;
+		value.fillOrigin = 0;
+		return value;
 	}
 
 	#endregion

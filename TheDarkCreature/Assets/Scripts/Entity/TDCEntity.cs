@@ -38,10 +38,10 @@ public class TDCEntity : TDCPropertyReflection {
 	protected event Action OnNightEvent;
 	protected event Action OnMidNightEvent;
 
-	public event Action<int, int> OnHealthChange;
-	public event Action<int, int> OnHeatChange;
-	public event Action<int, int> OnSanityChange;
-	public event Action<int, int> OnHungerChange;
+	public event Action<int, int, int> OnHealthChange;
+	public event Action<int, int, int> OnHeatChange;
+	public event Action<int, int, int> OnSanityChange;
+	public event Action<int, int, int> OnHungerChange;
 
 	public virtual void CallBackEvent(string name) {
 		if (m_TriggerEvents.ContainsKey(name))
@@ -304,7 +304,7 @@ public class TDCEntity : TDCPropertyReflection {
 		if (OnHealthChange != null)
 		{
 			var health = GetHealth();
-			OnHealthChange(health, value > GetMaxHealth() ? GetMaxHealth() : value);
+			OnHealthChange(health, value > GetMaxHealth() ? GetMaxHealth() : value, GetMaxHealth());
 		}
 	}
 
@@ -324,7 +324,7 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		if (OnHeatChange != null)
 		{
-			OnHeatChange(GetHeat(), value > GetMaxHeat() ? GetMaxHeat() : value);
+			OnHeatChange(GetHeat(), value > GetMaxHeat() ? GetMaxHeat() : value, GetMaxHeat());
 		}
 	}
 
@@ -340,7 +340,7 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		if (OnSanityChange != null)
 		{
-			OnSanityChange(GetSanity(), value > GetMaxSanity() ? GetMaxSanity() : value);
+			OnSanityChange(GetSanity(), value > GetMaxSanity() ? GetMaxSanity() : value, GetMaxSanity());
 		}
 	}
 
@@ -356,7 +356,7 @@ public class TDCEntity : TDCPropertyReflection {
 	{
 		if (OnHungerChange != null)
 		{
-			OnHungerChange(GetSanity(), value > GetMaxHunger() ? GetMaxHunger() : value);
+			OnHungerChange(GetSanity(), value > GetMaxHunger() ? GetMaxHunger() : value, GetMaxHunger());
 		}
 	}
 

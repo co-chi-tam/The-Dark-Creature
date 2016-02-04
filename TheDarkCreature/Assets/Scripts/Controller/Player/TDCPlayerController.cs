@@ -120,36 +120,44 @@ public class TDCPlayerController : TDCCreatureController
 		var colliders = Physics.OverlapSphere(m_Transform.position, GetDetectRange(), m_ColliderLayerMask);
 		if (colliders.Length == 0)
 			return;
+		string nearestEntityName = string.Empty;
+		float distance = float.MaxValue;
+		GameObject colliderObject = null;
 		for (int i = 0; i < colliders.Length; i++)
 		{
-			var colliderObject = colliders[i].gameObject;
+			colliderObject = colliders[i].gameObject;
 			var layer = colliderObject.layer;
-			if (layer == (int) TDCEnum.ELayer.LayerPlane)
+			if (layer == (int) TDCEnum.ELayer.LayerPlane || colliderObject.name == this.name)
 				continue;
-			var entity = m_GameManager.GetEntityByName(colliderObject.name);
-			if (entity != this.GetEntity())
+			var tempDis = (TransformPosition - colliders[i].transform.position).sqrMagnitude;
+			if (tempDis < distance)
 			{
-				var point = colliderObject.transform.position;
-				point.y = 0f;
-				switch (layer)
-				{
-					case (int) TDCEnum.ELayer.LayerCreature: {
-							if (GetEnemyEntity() == null && index == 1)
-							{
-								SetEnemyEntity(entity);
-							}
-						} break;
-					case (int) TDCEnum.ELayer.LayerEnviroment:
-					case (int) TDCEnum.ELayer.LayerItem: {
-							if (GetEnemyEntity() == null && (index == 0 || index == 1))
-							{
-								SetEnemyEntity(entity);
-							}
-						} break;
-				}
+				distance = tempDis;
+				nearestEntityName = colliderObject.name;
 			}
 		}
-
+		var entity = m_GameManager.GetEntityByName(nearestEntityName);
+		if (entity != this.GetEntity())
+		{
+			var point = colliderObject.transform.position;
+			point.y = 0f;
+			switch (colliderObject.layer)
+			{
+				case (int) TDCEnum.ELayer.LayerCreature: {
+						if (GetEnemyEntity() == null && index == 1)
+						{
+							SetEnemyEntity(entity);
+						}
+					} break;
+				case (int) TDCEnum.ELayer.LayerEnviroment:
+				case (int) TDCEnum.ELayer.LayerItem: {
+						if (GetEnemyEntity() == null && (index == 0 || index == 1))
+						{
+							SetEnemyEntity(entity);
+						}
+					} break;
+			}
+		}
 	}
 
 	public override void OnSelectedItem (int itemIndex)
