@@ -25,7 +25,7 @@
 			"GroupType": 1,
 			"GroupSpawnType": "Random",
 			"Description": "",
-			"ModelPath": ["Prefabs/Group/GroupCreature"],
+			"ModelPath": ["Prefabs/Group/SatlaHouse"],
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupDayFSM",
 			"Radius": 100,
@@ -33,7 +33,7 @@
 			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 10,
+			"TimeSpawnMember": 30,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -51,7 +51,7 @@
 			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 10,
+			"TimeSpawnMember": 60,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -69,7 +69,7 @@
 			"MaxMember": 3,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 10,
+			"TimeSpawnMember": 30,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -87,7 +87,7 @@
 			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 10,
+			"TimeSpawnMember": 60,
 			"IsShine": true,
 			"Inventory": []
 		},{
@@ -105,7 +105,7 @@
 			"MaxMember": 3,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 10,
+			"TimeSpawnMember": 30,
 			"IsShine": true,
 			"Inventory": []
 		}

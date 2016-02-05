@@ -15,7 +15,7 @@
 			"ItemType": 1,
 			"Description": "",
 			"IconPath": "Mushroom",
-			"EffectPath": "Effect/Item/MeatEffect"
+			"EffectPath": "Effect/Item/MushroomEffect"
 		},{
 			"ID": 3,
 			"Name": "Grass",
