@@ -10,7 +10,7 @@ public class FSMWeatherOverHeatState : FSMBaseState {
 	}
 
 	public override void StartState() {
-		m_Controller.ActiveSkill((int)TDCEnum.EGameType.WeatherOverHeatSkill);
+		m_Controller.Activekill((int)TDCEnum.EGameType.WeatherOverHeatSkill);
 		Debug.Log("FSMWeatherOverHeatState");
 	}
 

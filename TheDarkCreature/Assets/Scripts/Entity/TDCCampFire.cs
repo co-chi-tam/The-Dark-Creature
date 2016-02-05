@@ -26,9 +26,9 @@ public class TDCCampFire : TDCObject
 		m_NormalSkill.UpdateSkill(Time.fixedDeltaTime);
 	}
 
-	public override void ActiveSkill(int index)
+	public override void AddSkillChain(int index)
 	{
-		base.ActiveSkill(index);
+		base.AddSkillChain(index);
 		if (index == 0)
 		{
 			m_NormalSkill.ActiveSkill();

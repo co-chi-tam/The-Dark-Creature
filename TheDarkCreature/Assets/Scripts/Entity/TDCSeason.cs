@@ -35,25 +35,25 @@ public class TDCSeason : TDCEntity
 		m_SkillSlotComponent.UpdateComponent(dt);
 	}
 
-	public override void ActiveSkill(int index)
+	public override void AddSkillChain(int index)
 	{
-		base.ActiveSkill(index);
+		base.AddSkillChain(index);
 		switch ((TDCEnum.EGameType)index)
 		{
 			case TDCEnum.EGameType.WeatherNormalSkill:
-				m_SkillSlotComponent.ActiveSkill(0);
+				m_SkillSlotComponent.AddSkillChain(0);
 				break;
 			case TDCEnum.EGameType.WeatherRainySkill:
-				m_SkillSlotComponent.ActiveSkill(1);
+				m_SkillSlotComponent.AddSkillChain(1);
 				break;
 			case TDCEnum.EGameType.WeatherOverHeatSkill:
-				m_SkillSlotComponent.ActiveSkill(2);
+				m_SkillSlotComponent.AddSkillChain(2);
 				break;
 			case TDCEnum.EGameType.WeatherWindySkill:
-				m_SkillSlotComponent.ActiveSkill(3);
+				m_SkillSlotComponent.AddSkillChain(3);
 				break;
 			case TDCEnum.EGameType.WeatherSnowySkill:
-				m_SkillSlotComponent.ActiveSkill(4);
+				m_SkillSlotComponent.AddSkillChain(4);
 				break;
 		}
 	}

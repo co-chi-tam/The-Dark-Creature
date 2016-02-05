@@ -48,20 +48,20 @@ namespace FSM
 
         public void UpdateState()
         {
-            for (int i = 0; i < m_AnyState.ListStates.Count; i++)
-            {
-                var stateNext = m_AnyState.ListStates[i];
-                if (stateNext.StateName.Equals(m_Map.StateName))
-                {
-                    break;
-                }
-                if (m_Conditions[stateNext.ConditionName]() == stateNext.ConditionValue)
-                {
-                    m_Map = m_AnyState.ListStates[i];
-                    m_CurrentState = EState.StartState;
-                    break;
-                }
-            }
+			for (int i = 0; i < m_AnyState.ListStates.Count; i++)
+			{
+				var stateNext = m_AnyState.ListStates[i];
+				if (stateNext.StateName.Equals(m_Map.StateName))
+				{
+					continue;
+				}
+				else if (m_Conditions[stateNext.ConditionName]() == stateNext.ConditionValue)
+				{
+					m_Map = m_AnyState.ListStates[i];
+					m_CurrentState = EState.StartState;
+					break;
+				}
+			}
 
             var stateNow = m_States[m_Map.StateName];
 			StateCurrentName = m_Map.StateName;

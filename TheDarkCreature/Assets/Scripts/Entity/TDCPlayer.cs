@@ -46,12 +46,17 @@ public class TDCPlayer : TDCCreature
 
 	public override void ApplyDamage(int damage, TDCEntity attacker)
 	{
-		base.ApplyDamage(damage, attacker);
+		CallBackEvent("OnApplyDamage");
+
+		if (attacker.GetActive())
+		{
+			m_DamageTake += damage;
+		}
 	}
 
-	public override void ActiveSkill(int index)
+	public override void AddSkillChain(int index)
 	{
-		base.ActiveSkill(index);
+		base.AddSkillChain(index);
 	}
 
 	public override void ResetObject()
@@ -103,7 +108,9 @@ public class TDCPlayer : TDCCreature
 
 	public override float GetMoveSpeed()
 	{
-		return m_Data.MoveSpeed * m_OffsetSpeed.Value;
+		var offset = m_OffsetSpeed.Value;
+		m_OffsetSpeed.Value = 1f;
+		return m_Data.MoveSpeed * offset;
 	}
 
 	public override float GetRotationSpeed()
@@ -213,17 +220,7 @@ public class TDCPlayer : TDCCreature
 
 	public override float GetAttackRange()
 	{
-		var enemy = GetEnemyEntity();
-		if (enemy != null)
-		{
-			var creatureType = enemy.GetCreatureType();
-			if (creatureType == TDCEnum.ECreatureType.Enviroment ||
-				creatureType == TDCEnum.ECreatureType.GObject || 
-				creatureType == TDCEnum.ECreatureType.Item) { 
-				return GetColliderRadius();
-			}
-		}
-		return m_Data.AttackRange + GetColliderRadius();
+		return base.GetAttackRange();
 	}
 
 	public override void SetTransformPosition(Vector3 pos) {

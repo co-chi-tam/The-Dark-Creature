@@ -35,11 +35,17 @@ public class UIManager : MonoBehaviour {
 	public Image HeatPointImage;
 	public Image SanityPointImage;
 	public Image HungerPointImage;
+	// Action button
 	public Button PickupButton;
-	public Button AttackButton;
+
+	// Attack button
+	public Button NormalAttackButton;
+	public Button Skill1Button;
+	public Button Skill2Button;
+	public Button Skill3Button;
 
 	[SerializeField]
-	private TDCEntity m_Owner;
+	private TDCBaseController m_Owner;
 
 	private float m_TimeRefreshScreen = 0f;
 
@@ -79,41 +85,48 @@ public class UIManager : MonoBehaviour {
 
 	#region Main methods
 
-	public void Init(TDCEntity owner) {
+	public void Init(TDCBaseController owner) {
 		m_Owner = owner;
 		UpdateUIHealthBar(m_Owner.GetHealth(), m_Owner.GetHealth(), m_Owner.GetMaxHealth());
 		UpdateUIHeatBar(m_Owner.GetHeat(), m_Owner.GetHeat(), m_Owner.GetMaxHeat());
 		UpdateUISanityBar(m_Owner.GetSanity(), m_Owner.GetSanity(), m_Owner.GetMaxSanity());
 		UpdateUIHungerBar(m_Owner.GetHunger(), m_Owner.GetHunger(), m_Owner.GetMaxHunger());
 
-		m_Owner.OnHealthChange += UpdateUIHealthBar;
-		m_Owner.OnHeatChange += UpdateUIHeatBar;
-		m_Owner.OnSanityChange += UpdateUISanityBar;
-		m_Owner.OnHungerChange += UpdateUIHungerBar;
-		m_Owner.AddEventListener("OnApplyDamage", UpdateUIApplyDamage);
-		m_Owner.AddEventListener("OnDeath", RemoveAllUIListener);
+		m_Owner.GetEntity().OnHealthChange += UpdateUIHealthBar;
+		m_Owner.GetEntity().OnHeatChange += UpdateUIHeatBar;
+		m_Owner.GetEntity().OnSanityChange += UpdateUISanityBar;
+		m_Owner.GetEntity().OnHungerChange += UpdateUIHungerBar;
+		m_Owner.GetEntity().AddEventListener("OnApplyDamage", UpdateUIApplyDamage);
+		m_Owner.GetEntity().AddEventListener("OnDeath", RemoveAllUIListener);
 
 		PickupButton.onClick.RemoveAllListeners();
-		PickupButton.onClick.AddListener(PressPickupButton);
+		NormalAttackButton.onClick.RemoveAllListeners();
+		Skill1Button.onClick.RemoveAllListeners();
+		Skill2Button.onClick.RemoveAllListeners();
+		Skill3Button.onClick.RemoveAllListeners();
 
-		AttackButton.onClick.RemoveAllListeners();
-		AttackButton.onClick.AddListener(PressAttackButton);
+		PickupButton.onClick.AddListener(() => { PressActionButton(0); });
+		NormalAttackButton.onClick.AddListener(() => { PressActionButton(1); });
+
+		Skill1Button.onClick.AddListener(() => { PressAttackButton(1); });
+		Skill2Button.onClick.AddListener(() => { PressAttackButton(2); });
+		Skill3Button.onClick.AddListener(() => { PressAttackButton(3); });
 	}
 
 	public void EnableLoadingScreen(bool value) {
 		LoadingImage.gameObject.SetActive(value);
 	}
 
-	private void PressPickupButton() {
+	private void PressActionButton(int index) {
 		if (m_Owner == null)
 			return;
-		m_Owner.GetController().ActiveAction(0);
+		m_Owner.ActiveAction(index);
 	}
 
-	private void PressAttackButton() {
+	private void PressAttackButton(int index) {
 		if (m_Owner == null)
 			return;
-		m_Owner.GetController().ActiveAction(1);
+		m_Owner.Activekill(index);
 	}
 
 	private void UpdateUIHealthBar(int source, int newValue, int max) {
@@ -152,10 +165,10 @@ public class UIManager : MonoBehaviour {
 	}
 
 	private void RemoveAllUIListener() {
-		m_Owner.OnHealthChange -= UpdateUIHealthBar;
-		m_Owner.OnHeatChange -= UpdateUIHeatBar;
-		m_Owner.OnSanityChange -= UpdateUISanityBar;
-		m_Owner.OnHungerChange -= UpdateUIHungerBar;
+		m_Owner.GetEntity().OnHealthChange -= UpdateUIHealthBar;
+		m_Owner.GetEntity().OnHeatChange -= UpdateUIHeatBar;
+		m_Owner.GetEntity().OnSanityChange -= UpdateUISanityBar;
+		m_Owner.GetEntity().OnHungerChange -= UpdateUIHungerBar;
 	}
 
 	private Image SetupImage(Image value) {

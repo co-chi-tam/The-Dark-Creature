@@ -30,7 +30,8 @@ public class TDCEntity : TDCPropertyReflection {
 	protected event Action OnApplyDamageEvent;
 	protected event Action OnAttackEvent;
 	protected event Action OnAvoidEvent;
-	protected event Action OnOverHeatdEvent;
+	protected event Action OnOverHeatEvent;
+	protected event Action OnUnderHeatEvent;
 	protected event Action OnAliveEvent;
 	protected event Action OnDeathEvent;
 	protected event Action OnDayEvent;
@@ -79,7 +80,8 @@ public class TDCEntity : TDCPropertyReflection {
 		m_TriggerEvents.Add("OnApplyDamage", OnApplyDamageEvent);
 		m_TriggerEvents.Add("OnAttack", OnAttackEvent);
 		m_TriggerEvents.Add("OnAvoid", OnAvoidEvent);
-		m_TriggerEvents.Add("OnOverHeat", OnOverHeatdEvent);
+		m_TriggerEvents.Add("OnOverHeat", OnOverHeatEvent);
+		m_TriggerEvents.Add("OnUnderHeat", OnUnderHeatEvent);
 		m_TriggerEvents.Add("OnAlive", OnAliveEvent);
 		m_TriggerEvents.Add("OnDeath", OnDeathEvent);
 		m_TriggerEvents.Add("OnDay", OnDayEvent);
@@ -137,7 +139,7 @@ public class TDCEntity : TDCPropertyReflection {
 
 	}
 
-	public virtual void ActiveSkill(int index) {
+	public virtual void AddSkillChain(int index) {
 
 	}
 
@@ -212,6 +214,10 @@ public class TDCEntity : TDCPropertyReflection {
 
 	public virtual Vector3 GetTransformPosition() {
 		return Vector3.zero;
+	}
+
+	public virtual bool GetVisibleObject() {
+		return m_IsVisible;
 	}
 
 	#endregion
@@ -447,6 +453,10 @@ public class TDCEntity : TDCPropertyReflection {
 	}
 
 	public virtual float GetEffectRadius() {
+		return 0f;
+	}
+
+	public virtual float GetEffectRange() {
 		return 0f;
 	}
 

@@ -124,18 +124,10 @@ public class TDCCreatureController : TDCBaseController {
 		return curValue;
 	}
 
-	public override void ActiveSkill(int index) {
-		base.ActiveSkill(index);
-	}
-
 	public override void ApplyDamage (int damage, TDCEntity attacker)
 	{
 		base.ApplyDamage(damage, attacker);
 		m_Entity.ApplyDamage(damage, attacker);
-		if (GetEnemyEntity() == null)
-		{
-			SetEnemyEntity(attacker);
-		}
 	}
 
 	public virtual void OnSelectedItem(int itemIndex) {
@@ -381,12 +373,6 @@ public class TDCCreatureController : TDCBaseController {
 		return m_Entity.GetDamage();
 	}
 
-	public override void SetHeat(int value)
-	{
-		base.SetHeat(value);
-		m_Entity.SetHeat(value);
-	}
-
 	public override float GetColliderRadius() {
 		return base.GetColliderRadius();
 	}
@@ -423,6 +409,22 @@ public class TDCCreatureController : TDCBaseController {
 
 	public override int GetMaxHealth() {
 		return m_Entity.GetMaxHealth();
+	}
+
+	public override int GetHeat()
+	{
+		return m_Entity.GetHeat();
+	}
+
+	public override void SetHeat(int value)
+	{
+		base.SetHeat(value);
+		m_Entity.SetHeat(value);
+	}
+
+	public override int GetMaxHeat()
+	{
+		return m_Entity.GetMaxHeat();
 	}
 
 	public override UIItemController[] GetInventory()

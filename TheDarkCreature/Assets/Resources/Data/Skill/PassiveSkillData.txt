@@ -14,6 +14,7 @@
 			"CostHungerPoint": 0,
 			"EffectRadius": 20,
 			"TimeDelay": 3,
+			"EffectRange": 1,
 			"TimeEffect": 0,
 			"EffectPerTime": 0,
 			"AttachOwner": false,
@@ -35,6 +36,7 @@
 			"CostSanityPoint": 0,
 			"CostHungerPoint": 0,
 			"EffectRadius": 1,
+			"EffectRange": 1,
 			"TimeDelay": 10,
 			"TimeEffect": 1,
 			"EffectPerTime": 1,
@@ -57,6 +59,7 @@
 			"CostSanityPoint": 0,
 			"CostHungerPoint": 0,
 			"EffectRadius": 1,
+			"EffectRange": 1,
 			"TimeDelay": 30,
 			"TimeEffect": 25,
 			"EffectPerTime": 1,
@@ -79,6 +82,7 @@
 			"CostSanityPoint": 0,
 			"CostHungerPoint": 0,
 			"EffectRadius": 30,
+			"EffectRange": 1,
 			"TimeDelay": 10,
 			"TimeEffect": 10,
 			"EffectPerTime": 2,
@@ -101,6 +105,7 @@
 			"CostSanityPoint": 0,
 			"CostHungerPoint": 0,
 			"EffectRadius": 9999,
+			"EffectRange": 1,
 			"TimeDelay": 250,
 			"TimeEffect": 250,
 			"EffectPerTime": 0,
@@ -110,6 +115,29 @@
 			"ModelPath": ["Prefabs/Skill/EyeOfNightSkill"],
 			"FSMPath": "FSM/Skill/EffectUpdateSkillFSM"
 			"EffectPath": "Effect/Skill/EyeOfNightSkillEffect"
+		},{
+			"ID": 7,
+			"Name": "Cold as Ice Skill",
+			"Description": "",
+			"GameType": 511,
+			"IconPath": "ColdAsIceSkill",
+			"SkillLevel": 1,
+			"SkillType": 1,
+			"CostHealthPoint": 0,
+			"CostHeatPoint": 0,
+			"CostSanityPoint": 0,
+			"CostHungerPoint": 0,
+			"EffectRadius": 9999,
+			"EffectRange": 1,
+			"TimeDelay": 10,
+			"TimeEffect": 5,
+			"EffectPerTime": 0,
+			"AttachOwner": true,
+			"AttachEnemy": false,
+			"TriggerEvent": ["OnUnderHeat"],
+			"ModelPath": ["Prefabs/Skill/ColdAsIceSkill"],
+			"FSMPath": "FSM/Skill/EffectUpdateSkillFSM"
+			"EffectPath": "Effect/Skill/ColdAsIceSkillEffect"
 		}
 	]
 }

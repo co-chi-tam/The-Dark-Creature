@@ -1,0 +1,21 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+    	{
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["ApplyDamageEffect(ToTarget:Enemy,Damage:5)","AddValueEffect(ToTarget:Target,ValueName:HeatPoint,ToValue:3)"]
+	    }
+    ],
+    "NoMethods": [
+    	{
+	    	"ID": 2,
+   			"Type": 10,
+	        "ExcuteMethods": ["PrintDebug(LavaSpotSkillEffect:Can not active effect)"]
+	    }
+    ]
+  }
+}

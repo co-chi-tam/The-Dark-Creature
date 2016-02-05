@@ -167,8 +167,8 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 		return m_ObjectCurrentvalue;
 	}
 
-	public virtual void ActiveSkill(int index) {
-		
+	public virtual void Activekill(int index) {
+
 	}
 
 	public virtual void ActiveAction(int index) {
@@ -177,6 +177,10 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 
 	public virtual void MovePosition(Vector3 position) {
 		CallBackEvent("OnMove");
+		if (m_Entity.GetVisibleObject() == false)
+		{
+			VisibleObject(true);
+		}
 	}
 
 	public virtual void FlyPosition(Vector3 position) {
@@ -241,6 +245,10 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 	}
 
 	public virtual void IsActiveSeasonWinter() {
+		
+	}
+
+	public virtual void StartSkill() {
 		
 	}
 
@@ -414,12 +422,36 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 
 	}
 
+	public virtual int GetHeat() {
+		return 0;
+	}
+
+	public virtual int GetMaxHeat() {
+		return 0;
+	}
+
 	public virtual void SetHunger(int value) {
 
 	}
 
+	public virtual int GetHunger() {
+		return 0;
+	}
+
+	public virtual int GetMaxHunger() {
+		return 0;
+	}
+
 	public virtual void SetSanity(int value) {
 
+	}
+
+	public virtual int GetSanity() {
+		return 0;
+	}
+
+	public virtual int GetMaxSanity() {
+		return 0;
 	}
 
 	public virtual UIItemController[] GetInventory() {

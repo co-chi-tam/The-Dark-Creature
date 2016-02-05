@@ -109,6 +109,7 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectManager.RegisterCondition("CanPayHeatPoint", CanPayHeatPoint);
 		m_EffectManager.RegisterCondition("CanPaySanityPoint", CanPaySanityPoint);
 		m_EffectManager.RegisterCondition("IsInTime", IsInTime);
+		m_EffectManager.RegisterCondition("HaveCreatureIsShineAround", HaveCreatureIsShineAround);
 
 		m_EffectManager.RegisterExcuteMethod("ApplyDamageEffect", ApplyDamageEffect);
 		m_EffectManager.RegisterExcuteMethod("AddValueEffect", AddValueEffect);
@@ -117,17 +118,30 @@ public class TDCSkillController : TDCBaseController {
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
 	}
 
-	public virtual void StartSkill(Vector3 position, Quaternion rotation, TDCEntity owner) {
+	public override void StartSkill() {
+		base.StartSkill();
+		var owner = m_Entity.GetOwnerEntity() != null ? m_Entity.GetOwnerEntity() : m_Entity;
+		var enemy = m_Entity.GetEnemyEntity() != null ? m_Entity.GetEnemyEntity() : m_Entity;
+
 		m_AttachTransform = m_Entity.GetAttachOwner() ? 
-							m_Entity.GetOwnerEntity().GetController().transform : 
+							owner.GetController().transform : 
 							m_Entity.GetAttachEnemy() ? 
-							GetEnemyEntity().GetController().transform : 
+							enemy.GetController().transform : 
 							this.transform;
 		
-		TransformPosition = position;
-		TransformRotation = rotation;
-		SetOwnerEntity(owner);
-		SetActive(true);
+		if (m_Entity.GetAttachOwner())
+		{
+			TransformPosition = owner.GetTransformPosition();
+		}
+		else if (m_Entity.GetAttachEnemy())
+		{
+			TransformPosition = enemy.GetTransformPosition();
+		}
+		else 
+		{
+			TransformPosition = owner.GetTransformPosition();
+		}
+		TransformRotation = Quaternion.identity;
 	}
 
 	public virtual void ExcuteEffect() {
@@ -176,6 +190,10 @@ public class TDCSkillController : TDCBaseController {
 
 	public virtual float GetEffectRadius() {
 		return m_Entity.GetEffectRadius();
+	}
+
+	public virtual float GetEffectRange() {
+		return m_Entity.GetEffectRange();
 	}
 
 	public override TDCEntity GetEnemyEntity()
@@ -246,7 +264,7 @@ public class TDCSkillController : TDCBaseController {
 
 	internal override bool IsEnemyDeath()
 	{
-		return GetEnemyEntity() != null && GetEnemyEntity().GetActive();
+		return GetEnemyEntity() == null || !GetEnemyEntity().GetActive();
 	}
 
 	internal override bool MoveToEnemy()
@@ -277,6 +295,13 @@ public class TDCSkillController : TDCBaseController {
 
 	internal virtual bool CanActiveSkill() {
 		return GetActive();
+//		if (m_Entity.GetSkillType() == TDCEnum.ESkillType.Passive)
+//			return GetActive();
+//		if (m_Entity.GetOwnerEntity() == null || m_Entity.GetEnemyEntity() == null)
+//			return false;
+//		var range = m_Entity.GetEffectRange();
+//		var distance = (TransformPosition - m_Entity.GetEnemyEntity().GetTransformPosition()).sqrMagnitude;
+//		return distance < range * range;
 	}
 
 	internal virtual bool HaveCreatureAroundOwner()
@@ -299,6 +324,28 @@ public class TDCSkillController : TDCBaseController {
 
 	#region Effect
 
+	internal virtual bool HaveCreatureIsShineAround(Dictionary<string, object> pars)
+	{
+		var mPos = TransformPosition;
+		mPos.y = 0f;
+		var colliders = Physics.OverlapSphere(mPos, GetEffectRadius(), m_ColliderLayerMask);
+		if (colliders.Length == 0)
+			return false;
+		for (int i = 0; i < colliders.Length; i++)
+		{
+			var target = m_GameManager.GetEntityByName(colliders[i].name);
+			if (target == null || target.GetActive() == false || target == this.GetEntity())
+			{
+				continue;
+			}
+			else if (target.GetIsShine())
+			{
+				return true;
+			}
+		}
+		return false;
+	}
+
 	internal virtual void PrintDebug(Dictionary<string, object> pars) {
 #if UNITY_EDITOR
 		foreach (var item in pars)
@@ -309,39 +356,107 @@ public class TDCSkillController : TDCBaseController {
 	}
 
 	internal virtual void AddValueEffect(Dictionary<string, object> pars) {
-//#if UNITY_EDITOR
-//		foreach (var item in pars)
-//		{
-//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-//		}
-//#endif
+		var toTarget = pars["ToTarget"].ToString();
+		var valueName = pars["ValueName"].ToString();
+		var toValue = float.Parse (pars["ToValue"].ToString());
+		if (toTarget.Equals("InRange"))
+		{
+			var mPos = TransformPosition;
+			mPos.y = 0f;
+			var colliders = Physics.OverlapSphere(mPos, GetEffectRadius(), m_ColliderLayerMask);
+			if (colliders.Length == 0)
+				return;
+			for (int i = 0; i < colliders.Length; i++)
+			{
+				var target = m_GameManager.GetEntityByName(colliders[i].name);
+				if (target == null || target.GetActive() == false || target == this.GetEntity())
+				{
+					continue;
+				}
+				else
+				{
+					var sourceValue = target.GetProperty<float>(valueName);
+					target.SetProperty(valueName, sourceValue + toValue);
+				}
+			}
+		}
 	}
 
 	internal virtual void SubtractValueEffect(Dictionary<string, object> pars) {
-//#if UNITY_EDITOR
-//		foreach (var item in pars)
-//		{
-//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-//		}
-//#endif
+		var toTarget = pars["ToTarget"].ToString();
+		var valueName = pars["ValueName"].ToString();
+		var toValue = float.Parse (pars["ToValue"].ToString());
+		var sourceValue = 0f;
+		TDCEntity entityTarget = null; 
+		switch (toTarget)
+		{
+			case "Enemy":
+				entityTarget = GetEnemyEntity();
+				break;
+			case "Owner":
+				entityTarget = GetOwnerEntity();
+				break;
+		}
+		if (entityTarget != null)
+		{
+			sourceValue = entityTarget.GetProperty<float>(valueName);
+			entityTarget.SetProperty(valueName, sourceValue - toValue);
+		}
 	}
 
 	internal virtual void ApplyDamageEffect(Dictionary<string, object> pars) {
-//#if UNITY_EDITOR
-//		foreach (var item in pars)
-//		{
-//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-//		}
-//#endif
+		var toTarget = pars["ToTarget"];
+		var damage = int.Parse(pars["Damage"].ToString());
+		if (toTarget.Equals("Enemy"))
+		{
+			var enemy = GetEnemyEntity();
+			if (enemy != null)
+			{
+				enemy.ApplyDamage(damage + GetDamage(), m_Entity.GetOwnerEntity());
+			}
+		} else if (toTarget.Equals("InRange"))
+		{
+			var mPos = TransformPosition;
+			mPos.y = 0f;
+			var colliders = Physics.OverlapSphere(mPos, GetEffectRadius(), m_ColliderLayerMask);
+			if (colliders.Length == 0)
+				return;
+			for (int i = 0; i < colliders.Length; i++)
+			{
+				var target = m_GameManager.GetEntityByName(colliders[i].name);
+				if (target == null || target.GetActive() == false)
+				{
+					continue;
+				}
+				else
+				{
+					target.ApplyDamage(damage + GetDamage(), m_Entity.GetOwnerEntity());
+				}
+			}
+		}
 	}
 
 	internal virtual void SetValueEffect(Dictionary<string, object> pars) {
-//#if UNITY_EDITOR
-//		foreach (var item in pars)
-//		{
-//			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
-//		}
-//#endif
+		var toTarget = pars["ToTarget"].ToString();
+		var valueName = pars["ValueName"].ToString();
+		var toValue = float.Parse (pars["ToValue"].ToString());
+		TDCEntity entityTarget = null; 
+		switch (toTarget)
+		{
+			case "Enemy":
+				entityTarget = GetEnemyEntity();
+				break;
+			case "Owner":
+				entityTarget = GetOwnerEntity();
+				break;
+			case "Sun":
+				entityTarget = m_GameManager.GetSunEntity();
+				break;
+		}
+		if (entityTarget != null)
+		{
+			entityTarget.SetProperty(valueName, toValue);
+		}
 	}
 
 	internal virtual bool CanActiveEffect(Dictionary<string, object> pars) {

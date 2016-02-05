@@ -34,13 +34,10 @@ public class TDCGroundAIController : TDCCreatureController
 
 	#region Main methods
 
-	public override void ActiveSkill(int index)
+	public override void Activekill(int index)
 	{
-		base.ActiveSkill(index);
-		if (MoveToEnemy())
-		{
-			m_Entity.ActiveSkill(index);
-		}
+		base.Activekill(index);
+		m_Entity.AddSkillChain(index);
 	}
 
    	#endregion
@@ -70,7 +67,7 @@ public class TDCGroundAIController : TDCCreatureController
 
 	internal override bool IsToFarStartBattlePosition() {
 		var distance = (TransformPosition - m_Entity.GetStartBattlePosition()).sqrMagnitude;
-		var range = 50f;
+		var range = GetDetectRange();
 		var result = distance > range * range;
 		if (result)
 		{
@@ -81,7 +78,7 @@ public class TDCGroundAIController : TDCCreatureController
 
 	internal override bool IsToFarStartPosition() {
 		var distance = (TransformPosition - m_Entity.GetStartPosition()).sqrMagnitude;
-		var range = 50f;
+		var range = GetDetectRange();
 		var result = distance > range * range;
 		if (result)
 		{

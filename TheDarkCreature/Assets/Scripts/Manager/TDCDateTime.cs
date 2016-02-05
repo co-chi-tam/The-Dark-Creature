@@ -26,10 +26,6 @@ public class TDCDateTime : MonoBehaviour {
 	private float m_Hour 	= 0f;
 	[SerializeField]
 	private float m_Day 	= 0f;
-	[SerializeField]
-	private float m_MoistureValue = 0f;
-	[SerializeField]
-	private float m_TemperatureValue = 0f;
 
 	[SerializeField]
 	private TDCEnum.EGameSeason m_Season = TDCEnum.EGameSeason.Spring;
@@ -205,8 +201,8 @@ public class TDCDateTime : MonoBehaviour {
 
 		var timeMoisture = (Time.time + m_OffsetTimeMoisture) / m_Speed;
 		var timeTemperature = (Time.time + m_OffsetTimeHeat) / m_Speed;
-		m_MoistureValue = Moisture = ((MaxMoisture - MinMoisture) * Mathf.PerlinNoise(timeMoisture , timeMoisture)) + MinMoisture;
-		m_TemperatureValue = Temperature = ((MaxTemperature - MinTemperature) * Mathf.PerlinNoise(timeTemperature, timeTemperature)) + MinTemperature;
+		Moisture = ((MaxMoisture - MinMoisture) * Mathf.PerlinNoise(timeMoisture , timeMoisture)) + MinMoisture;
+		Temperature = ((MaxTemperature - MinTemperature) * Mathf.PerlinNoise(timeTemperature, timeTemperature)) + MinTemperature;
 	}
 
 	void LateUpdate() {

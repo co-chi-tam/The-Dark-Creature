@@ -110,12 +110,15 @@ public class TDCGameManager : MonoBehaviour {
 	public IEnumerator LoadMap(string mapName, Action complete = null) {
 		var sun = CreateCreature(TDCEnum.EGameType.Sun, new Vector3 (0f, 200f, 0f), Quaternion.Euler(new Vector3(75f, -30f, 0f)));
 		sun.SetActive(true);
+		m_SunEntity = sun;
 
 		var plane = CreateCreature(TDCEnum.EGameType.GrassLandPlane, Vector3.zero, Quaternion.Euler(new Vector3(270f, 180f, 0f)));
 		plane.SetActive(true);
+		m_PlaneEntity = plane;
 
 		var season = CreateCreature(TDCEnum.EGameType.SeasonGrassLand, Vector3.zero, Quaternion.identity);
 		season.SetActive(true);
+		m_SeasonEntity = season;
 
 		var playerType = TDCGameSetting.Instance.GetPlayerType();
 		var player = CreatePlayer (playerType, Vector3.zero, Quaternion.identity);
@@ -284,10 +287,10 @@ public class TDCGameManager : MonoBehaviour {
 		GameObject gObject = null;
 		TDCBaseController controller = null;
 		TDCEntity entity = null;
-		AudioListener listener = null;
 		var random = m_ListEntities.Count;
 		data = m_DataReader.GetPlayerData (type);
 		gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+		gObject.AddComponent<AudioListener>();
 		switch ((data as TDCPlayerData).CreatureType)
 		{
 			case TDCEnum.ECreatureType.GroundPlayer:
@@ -298,7 +301,7 @@ public class TDCGameManager : MonoBehaviour {
 				break;
 		}
 		CameraController.Instance.Target = gObject.transform;
-		listener = gObject.AddComponent<AudioListener>();
+
 		data.ID = m_ListEntities.Count + 1;
 		entity = new TDCPlayer(controller, data);
 		entity.SetActive(false);
@@ -328,14 +331,12 @@ public class TDCGameManager : MonoBehaviour {
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCSunController> ();
 			entity = new TDCSun(controller, data);
-			m_SunEntity = entity;
 			break;
 		case TDCEnum.EGameType.GrassLandPlane: {
 			data = m_DataReader.GetPlaneData (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCPlaneController> ();
 			entity = new TDCPlane(controller, data);
-			m_PlaneEntity = entity;
 			break;
 		}
 		case TDCEnum.EGameType.Dodono: 
@@ -421,12 +422,16 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.AfraidTheDarkSkill:
 		case TDCEnum.EGameType.NormalMeleeSkill:
 		case TDCEnum.EGameType.NormalRangeSkill:
+		case TDCEnum.EGameType.LavaSpotSkill:
+		case TDCEnum.EGameType.FreezeSkill:		
 		case TDCEnum.EGameType.WeatherNormalSkill:
 		case TDCEnum.EGameType.WeatherRainySkill: 
 		case TDCEnum.EGameType.WeatherOverHeatSkill:
 		case TDCEnum.EGameType.WeatherWindySkill:
 		case TDCEnum.EGameType.WeatherSnowySkill: 
-		case TDCEnum.EGameType.EyeOfNightSkill: {
+		case TDCEnum.EGameType.EyeOfNightSkill: 
+		case TDCEnum.EGameType.DarkSwallowSkill: 
+		case TDCEnum.EGameType.ColdAsIceSkill: {
 			data = m_DataReader.GetSkillData(type);	
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			switch ((data as TDCSkillData).SkillType) {
@@ -452,7 +457,6 @@ public class TDCGameManager : MonoBehaviour {
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCSeasonController> ();
 			entity = new TDCSeason(controller, data);
-			m_SeasonEntity = entity;
 			break;
 		}
 		default:

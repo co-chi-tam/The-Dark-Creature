@@ -97,10 +97,10 @@ public class TDCCampFireController : TDCObjectController {
 		m_ParticleSystem.startSize = m_CurrentStartSize;
 	}
 
-	public override void ActiveSkill(int index)
+	public override void Activekill(int index)
 	{
-		base.ActiveSkill(index);
-		m_Entity.ActiveSkill(index);
+		base.Activekill(index);
+		m_Entity.AddSkillChain(index);
 	}
 
 	#endregion

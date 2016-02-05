@@ -20,7 +20,7 @@ public class FSMFireState : FSMBaseState {
 		var time = Time.time + m_OffsetTime;
 		m_CampFireController.UpdateFirePower (Time.deltaTime);
 		m_CampFireController.SetIntensity(Mathf.PerlinNoise (time, time));
-		m_CampFireController.ActiveSkill(0);
+		m_CampFireController.Activekill(0);
 	}
 	
 	public override void ExitState()

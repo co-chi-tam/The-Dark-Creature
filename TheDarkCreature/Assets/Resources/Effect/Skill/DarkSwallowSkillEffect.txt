@@ -1,0 +1,21 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+		{
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["ApplyDamageEffect(ToTarget:InRange,Damage:10)","SubtractValueEffect(ToTarget:Owner,ValueName:SanityPoint,ToValue:2)"]
+	    }
+    ],
+    "NoMethods": [
+    	{
+	    	"ID": 2,
+   			"Type": 10,
+	        "ExcuteMethods": ["PrintDebug(DarkSwallowEffect:Can not active effect)"]
+	    }
+    ]
+  }
+}

@@ -24,7 +24,12 @@
 							]
 						}
 					]
-				} 
+				},{
+					"condition_name": "CanActiveSkill",
+					"condition_value": false,
+					"state_name": "DestroySkillState",
+					"states": []
+				}
 			]
 		},{
 			"condition_name": "IsAnyState",
@@ -33,7 +38,7 @@
 			"states": [
 				{
 					"condition_name": "IsEnemyDeath",
-					"condition_value": false,
+					"condition_value": true,
 					"state_name": "DestroySkillState",
 					"states": []
 				}

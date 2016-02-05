@@ -55,10 +55,10 @@ public class TDCSeasonController : TDCBaseController
 
 	#region Main methods
 
-	public override void ActiveSkill(int index)
+	public override void Activekill(int index)
 	{
-		base.ActiveSkill(index);
-		m_Entity.ActiveSkill(index);
+		base.Activekill(index);
+		m_Entity.AddSkillChain(index);
 	}
 
 	public override void IsActiveSeasonSpring() {

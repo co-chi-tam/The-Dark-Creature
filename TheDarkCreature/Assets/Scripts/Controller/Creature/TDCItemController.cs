@@ -57,7 +57,6 @@ public class TDCItemController : TDCCreatureController
 	{
 		base.DropItem();
 		var itemType = m_Entity.GetGameType();
-		var amount = 1;
 		TDCEntity item = null;
 		if (m_GameManager.GetObjectPool(itemType, ref item))
 		{

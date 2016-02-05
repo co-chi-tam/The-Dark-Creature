@@ -355,6 +355,7 @@ public class TDCDataReader {
 			skillData.CostHungerPoint = int.Parse(skill["CostHungerPoint"].ToString());
 			skillData.CostSanityPoint = int.Parse(skill["CostSanityPoint"].ToString());
 			skillData.EffectRadius = float.Parse(skill["EffectRadius"].ToString());
+			skillData.EffectRange = float.Parse(skill["EffectRange"].ToString());
 			skillData.TimeDelay = float.Parse(skill["TimeDelay"].ToString());
 			skillData.TimeEffect = float.Parse(skill["TimeEffect"].ToString());
 			skillData.EffectPerTime = float.Parse(skill["EffectPerTime"].ToString());

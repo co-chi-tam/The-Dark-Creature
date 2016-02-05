@@ -12,6 +12,7 @@ public class TDCSkillData : TDCBaseData
 	private float m_TimeEffect;
 	private float m_EffectPerTime;
 	private float m_EffectRadius;
+	private float m_EffectRange;
 	private string m_EffectPath;
 	private bool m_AttachOwner;
 	private bool m_AttachEnemy;
@@ -77,6 +78,12 @@ public class TDCSkillData : TDCBaseData
 		set { m_EffectRadius = value; }
 	}
 
+	public float EffectRange
+	{
+		get { return m_EffectRange; }
+		set { m_EffectRange = value; }
+	}
+
 	public string EffectPath
 	{
 		get { return m_EffectPath; }
@@ -113,6 +120,7 @@ public class TDCSkillData : TDCBaseData
 		this.m_TimeEffect = 0f;
 		this.m_EffectPerTime = 0f;
 		this.m_EffectRadius = 0f;
+		this.m_EffectRange = 0f;
 		this.m_EffectPath = string.Empty;
 		this.m_AttachOwner = false;
 		this.m_AttachEnemy = false;
@@ -136,6 +144,7 @@ public class TDCSkillData : TDCBaseData
 		tmp.TimeEffect = instance.TimeEffect;
 		tmp.EffectPerTime = instance.EffectPerTime;
 		tmp.EffectRadius = instance.EffectRadius;
+		tmp.EffectRange = instance.EffectRange;
 		tmp.FSMPath = instance.FSMPath;
 		tmp.EffectPath = instance.EffectPath;
 		tmp.ModelPath = instance.ModelPath;

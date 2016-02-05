@@ -5,6 +5,8 @@ using ObjectPool;
 
 public class TDCSkillSlot {
 
+	#region Properties
+
 	private TDCEntity m_Owner;
 	private TDCEnum.EGameType m_SkillType;
 	private TDCSkillData m_SkillData;
@@ -12,6 +14,10 @@ public class TDCSkillSlot {
 	private TDCEntity m_SkillEntity;
 
 	private float m_TimeDelay;
+
+	#endregion
+
+	#region Contructor
 
 	public TDCSkillSlot(TDCEnum.EGameType skillType, TDCEntity owner)
 	{
@@ -26,28 +32,47 @@ public class TDCSkillSlot {
 		}
 	}
 
+	#endregion
+
+	#region Main methods
+
 	public void ActiveSkill() {
-		if (DidEndTimeDelay() && CanPayCost())
+		if (CanActiveSkill())
 		{
 			m_TimeDelay = m_SkillData.TimeDelay;
 			if (m_GameManager.GetObjectPool(m_SkillType, ref m_SkillEntity))
 			{
 				m_SkillEntity.SetSlot(this);
 				m_SkillEntity.SetOwnerEntity(m_Owner);
-				m_SkillEntity.SetTargetPosition(m_Owner.GetEnemyPosition());
 				m_SkillEntity.SetEnemyEntity(m_Owner.GetEnemyEntity());
+				m_SkillEntity.SetTargetPosition(m_Owner.GetEnemyPosition());
+				m_SkillEntity.GetController().StartSkill();
 				m_SkillEntity.SetActive(true);
-				(m_SkillEntity.GetController() as TDCSkillController).StartSkill(m_Owner.GetController().TransformPosition, m_Owner.GetController().TransformRotation, m_Owner);
 				PayCost();
 			}
 		}
 	}
 
-	public bool DidEndTimeDelay() {
+	private bool CanActiveSkill() {
+		return DidEndTimeDelay() && CanPayCost() && IsInRange();
+	}
+
+	private bool DidEndTimeDelay() {
 		return m_TimeDelay <= 0f;
 	}
 
-	public bool CanPayCost() {
+	private bool IsInRange() {
+		if (m_SkillData.SkillType == TDCEnum.ESkillType.Passive)
+			return true;
+		if (m_Owner == null || m_Owner.GetEnemyEntity() == null)
+			return false;
+		var enemy = m_Owner.GetEnemyEntity();
+		var distance = (m_Owner.GetTransformPosition() - enemy.GetTransformPosition()).sqrMagnitude;
+		var range = GetEffectRange() + enemy.GetColliderRadius();
+		return distance <= range * range;
+	}
+
+	private bool CanPayCost() {
 		if (!TDCUltilities.IsPlayer(m_Owner))
 			return true;
 		var healthCost = m_Owner.GetHealth() >= m_SkillData.CostHealthPoint;
@@ -57,7 +82,7 @@ public class TDCSkillSlot {
 		return healthCost && heatCost && sanityCost && hungerCost;
 	}
 
-	public void PayCost() {
+	private void PayCost() {
 		if (!TDCUltilities.IsPlayer(m_Owner))
 			return;
 //		m_Owner.SetProperty("HealthPoint", -m_SkillData.CostHealthPoint);
@@ -73,15 +98,29 @@ public class TDCSkillSlot {
 		}
 	}
 
-	public void SetOwnerEntity(TDCEntity owner) {
-		m_Owner = owner;
-	}
-
-	public void OnDestroy() {
+	private void OnDestroy() {
 		for (int i = 0; i < m_SkillData.TriggerEnvent.Length; i++)
 		{
 			m_Owner.RemoveEventListener(m_SkillData.TriggerEnvent[i], ActiveSkill);
 		}
 	}
+
+	#endregion
+
+	#region Getter && Setter
+
+	public void SetOwnerEntity(TDCEntity owner) {
+		m_Owner = owner;
+	}
+
+	public float GetEffectRadius() {
+		return m_SkillData.EffectRadius;
+	}
+
+	public float GetEffectRange() {
+		return m_SkillData.EffectRange + m_Owner.GetAttackRange();
+	}
+
+	#endregion
 
 }

@@ -48,13 +48,17 @@ public class TDCEnum{
 		CampFire	= 301,
 
 		// Skill
-		FlameBodySkill   = 501,
-		NormalRangeSkill = 502,
-		NormalMeleeSkill = 503,
-		LifeNotEasySkill = 506,
-		BurnObjectSkill  = 507,
-		AfraidTheDarkSkill = 508,
+		FlameBodySkill   	= 501,
+		NormalRangeSkill 	= 502,
+		NormalMeleeSkill 	= 503,
+		LavaSpotSkill 		= 504,
+		FreezeSkill     	= 505,
+		LifeNotEasySkill 	= 506,
+		BurnObjectSkill  	= 507,
+		AfraidTheDarkSkill 	= 508,
 		EyeOfNightSkill 	= 509,
+		DarkSwallowSkill 	= 510,
+		ColdAsIceSkill 		= 511,
 
 		// Weather
 		WeatherNormalSkill 	= 601,
@@ -76,7 +80,7 @@ public class TDCEnum{
 	public enum ESkillType : int {
 		None 		= 0,
 		Passive 	= 1,
-		Active 		= 2,
+		Active 		= 2
 	}
 
 	public enum EItemType : int {

@@ -19,7 +19,7 @@ public class FSMAttackState : FSMBaseState {
 		{
 			var enemyPos = m_Controller.GetEnemyPosition();
 			m_Controller.LookAtRotation(enemyPos);
-			m_Controller.ActiveSkill(0);
+			m_Controller.Activekill(0);
 		}
 	}
 	
@@ -28,8 +28,4 @@ public class FSMAttackState : FSMBaseState {
 		m_Controller.SetTargetPosition(m_Controller.TransformPosition);
 	}
 
-	public void AttackEnemy() {
-		var damage = m_Controller.GetDamage();
-		m_Controller.GetEnemyEntity().ApplyDamage(damage, m_Controller.GetEntity());
-	}
 }

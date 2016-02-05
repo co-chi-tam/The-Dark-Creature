@@ -130,7 +130,6 @@ public class UIItemController {
 //		}
 //#endif
 		var nameValue = pars["NameValue"].ToString();
-		var value = pars["ToValue"];
 		var toValue = float.Parse (pars["ToValue"].ToString());
 		m_Data.Owner.GetEntity().SetProperty(nameValue, -toValue);
 	}

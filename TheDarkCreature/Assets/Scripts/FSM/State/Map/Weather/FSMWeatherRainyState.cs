@@ -10,7 +10,7 @@ public class FSMWeatherRainyState : FSMBaseState {
 	}
 
 	public override void StartState() {
-		m_Controller.ActiveSkill((int)TDCEnum.EGameType.WeatherRainySkill);
+		m_Controller.Activekill((int)TDCEnum.EGameType.WeatherRainySkill);
 		Debug.Log("FSMWeatherRainyState");
 	}
 

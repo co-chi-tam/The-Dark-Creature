@@ -8,7 +8,6 @@ public class TDCCreature : TDCEntity
 	#region Properties
 
 	protected int m_DamageTake = 0;
-	protected float m_TimeReset = 0f;
 	protected TDCEntity m_EnemyEntity;
 	protected Vector3 m_TargetPosition;
 	protected Vector3 m_StartPosition;
@@ -47,14 +46,12 @@ public class TDCCreature : TDCEntity
 		{
 			CallBackEvent("OnOverHeat");
 		}
+		if (GetHeat() <= 0)
+		{
+			CallBackEvent("OnUnderHeat");
+		}
 
 		m_SkillSlotComponent.UpdateComponent(dt);
-
-		if ((Time.time - m_TimeReset) > 1f)
-		{
-			m_OffsetSpeed.SetValue (1f);
-			m_TimeReset = Time.time;
-		}
 
 		var health = GetHealth();
 		if (m_HealthPoint.Value != 0)
@@ -87,16 +84,20 @@ public class TDCCreature : TDCEntity
 		{
 			m_DamageTake += damage;
 		}
+
 		if (GetEnemyEntity() == null)
 		{
 			SetEnemyEntity(attacker);
 		}
 	}
 
-	public override void ActiveSkill(int index)
+	public override void AddSkillChain(int index)
 	{
-		base.ActiveSkill(index);
-		m_SkillSlotComponent.ActiveSkill(index);
+		base.AddSkillChain(index);
+		if (m_EnemyEntity != null)
+		{
+			m_SkillSlotComponent.AddSkillChain(index);
+		}
 	}
 
 	public override void ResetObject()
@@ -222,7 +223,9 @@ public class TDCCreature : TDCEntity
 
 	public override float GetMoveSpeed()
 	{
-		return m_Data.MoveSpeed * m_OffsetSpeed.Value;
+		var offset = m_OffsetSpeed.Value;
+		m_OffsetSpeed.Value = 1f;
+		return m_Data.MoveSpeed * offset;
 	}
 
 	public override float GetRotationSpeed()
@@ -320,10 +323,15 @@ public class TDCCreature : TDCEntity
 		{
 			var creatureType = enemy.GetCreatureType();
 			if (creatureType == TDCEnum.ECreatureType.Enviroment ||
-				creatureType == TDCEnum.ECreatureType.GObject || 
-				creatureType == TDCEnum.ECreatureType.Item) { 
+			    creatureType == TDCEnum.ECreatureType.GObject ||
+			    creatureType == TDCEnum.ECreatureType.Item)
+			{ 
 				return GetColliderRadius();
 			}
+//			else
+//			{
+//				return GetColliderRadius() + m_SkillSlotComponent.GetEffectRange();
+//			}
 		}
 		return m_Data.AttackRange + GetColliderRadius();
 	}
