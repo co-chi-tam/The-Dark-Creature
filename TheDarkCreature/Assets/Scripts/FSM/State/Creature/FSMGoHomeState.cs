@@ -14,9 +14,15 @@ public class FSMGoHomeState : FSMBaseState
 		m_Controller.SetAnimation(EAnimation.Run);
 		var groupCtrl = m_Controller.GetGroupEntity();
 		var homePosition = m_Controller.GetStartPosition();
-		if (groupCtrl != null)
+		var distance = 20f;
+		if (groupCtrl != null && groupCtrl.GetActive())
 		{
 			homePosition = m_Controller.GetGroupEntity().GetTransformPosition();
+		}
+		else
+		{
+			var random = Random.insideUnitCircle * distance; // TDCUltilities.RandomAround(groupRadius);
+			homePosition = homePosition + new Vector3(random.x, 0f, random.y);
 		}
 		m_Controller.SetTargetPosition (homePosition);
 	}

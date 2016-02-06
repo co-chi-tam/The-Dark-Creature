@@ -15,7 +15,7 @@
 			"MaxMember": 2,
 			"CurrentHP": 99,
 			"MaxHP": 99,
-			"TimeSpawnMember": 10,
+			"TimeSpawnMember": 30,
 			"IsShine": false,
 			"Inventory": [{"GameType":801,"Amount":1},{"GameType":103,"Amount":2},{"GameType":104,"Amount":3}]
 		},{
@@ -33,7 +33,7 @@
 			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 30,
+			"TimeSpawnMember": 60,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -51,7 +51,7 @@
 			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 60,
+			"TimeSpawnMember": 120,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -69,7 +69,7 @@
 			"MaxMember": 3,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 30,
+			"TimeSpawnMember": 60,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -87,7 +87,7 @@
 			"MaxMember": 2,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 60,
+			"TimeSpawnMember": 120,
 			"IsShine": true,
 			"Inventory": []
 		},{
@@ -105,7 +105,7 @@
 			"MaxMember": 3,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 30,
+			"TimeSpawnMember": 60,
 			"IsShine": true,
 			"Inventory": []
 		}

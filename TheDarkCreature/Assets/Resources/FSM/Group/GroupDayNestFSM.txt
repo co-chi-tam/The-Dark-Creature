@@ -3,7 +3,7 @@
 		{
 			"condition_name": "IsRoot",
 			"condition_value": true,
-			"state_name": "GroupIdleState",
+			"state_name": "GroupSpawnAllMemberState",
 			"states": [
 				{
 	              "condition_name": "IsDayTime",

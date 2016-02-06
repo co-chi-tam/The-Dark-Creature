@@ -60,6 +60,7 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 		var waiting 		= new FSMWaitingState (this);
 		var waitingOne 		= new FSMWaitingOneSecondState (this);
 		var waitingOne2Three = new FSMWaitingOne2ThreeSecondState (this);
+		var waitingThree2Five = new FSMWaitingThree2FiveSecondState (this);
 		var sleepState 		= new FSMSleepState(this);
 		var dayModeState	= new FSMDayModeState(this);
 		var nightModeState	= new FSMNightModeState(this);
@@ -67,6 +68,7 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 		m_FSMManager.RegisterState("WaitingState", waiting);
 		m_FSMManager.RegisterState("WaitingOneSecondState", waitingOne);
 		m_FSMManager.RegisterState("WaitingOne2ThreeSecondState", waitingOne2Three);
+		m_FSMManager.RegisterState("WaitingThree2FiveSecondState", waitingThree2Five);
 		m_FSMManager.RegisterState("DayModeState", dayModeState);
 		m_FSMManager.RegisterState("NightModeState", nightModeState);
 		m_FSMManager.RegisterState("SleepState", sleepState);

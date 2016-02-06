@@ -15,7 +15,7 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 30,
+			"TimeSpawnMember": 60,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -33,7 +33,7 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 30,
+			"TimeSpawnMember": 60,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -51,7 +51,7 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 30,
+			"TimeSpawnMember": 60,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -69,7 +69,7 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 30,
+			"TimeSpawnMember": 60,
 			"IsShine": false,
 			"Inventory": []
 		},{

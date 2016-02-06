@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
 using System.Collections;
+using System.Collections.Generic;
 using FSM;
 
 public class TDCGroundAIController : TDCCreatureController
@@ -114,8 +115,16 @@ public class TDCGroundAIController : TDCCreatureController
 		} 
 		else if (GetEnemyEntity() == null && leaderEnemy != this.GetEntity())
 		{
-			SetEnemyEntity(leaderEnemy);
-			return true;
+			var enemyIsFood = leaderEnemy.GetCreatureType() == TDCEnum.ECreatureType.Item;
+			if (enemyIsFood)
+			{
+				return false;
+			}
+			else
+			{
+				SetEnemyEntity(leaderEnemy);
+				return true;
+			}
 		}
 		return false;
 	}
