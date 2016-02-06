@@ -23,7 +23,7 @@
 			"Name": "GroupSatla",
 			"GameType": 202,
 			"GroupType": 1,
-			"GroupSpawnType": "Random",
+			"GroupSpawnType": "Center",
 			"Description": "",
 			"ModelPath": ["Prefabs/Group/SatlaHouse"],
 			"IconPath": "",

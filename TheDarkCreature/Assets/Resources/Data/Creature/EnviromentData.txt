@@ -1,8 +1,8 @@
 {
 	"enviroments": [
 		{
-			"ID": 1,
-			"Name": "Object Grass",
+			"ID": 0,
+			"Name": "Grass",
 			"GameType": 53,
 			"CreatureType": 3,
 			"Description": "",
@@ -16,7 +16,7 @@
 			"Inventory": [{"GameType":103,"Amount":1}]
 		},{
 			"ID": 1,
-			"Name": "Object Mushroom",
+			"Name": "Mushroom",
 			"GameType": 52,
 			"CreatureType": 3,
 			"Description": "",
@@ -30,7 +30,7 @@
 			"Inventory": [{"GameType":102,"Amount":1}]
 		},{
 			"ID": 2,
-			"Name": "Object Bush",
+			"Name": "Bush",
 			"GameType": 54,
 			"CreatureType": 3,
 			"Description": "",
@@ -44,7 +44,7 @@
 			"Inventory": [{"GameType":104,"Amount":1}]
 		},{
 			"ID": 3,
-			"Name": "Object Blue berry",
+			"Name": "Blue berry",
 			"GameType": 55,
 			"CreatureType": 3,
 			"Description": "",
@@ -57,8 +57,8 @@
 			"IconPath": "",
 			"Inventory": [{"GameType":105,"Amount":1}]
 		},{
-			"ID": 3,
-			"Name": "Object Crystal",
+			"ID": 4,
+			"Name": "Crystal",
 			"GameType": 56,
 			"CreatureType": 3,
 			"Description": "",
@@ -70,6 +70,20 @@
 			"MaxHeatPoint": 100,
 			"IconPath": "",
 			"Inventory": [{"GameType":106,"Amount":1}]
+		},{
+			"ID": 5,
+			"Name": "Leto tree",
+			"GameType": 57,
+			"CreatureType": 3,
+			"Description": "",
+			"ModelPath": ["Prefabs/Enviroment/LetoTree1","Prefabs/Enviroment/LetoTree2","Prefabs/Enviroment/LetoTree3"],
+			"FSMPath": "FSM/Creature/EnviromentFSM",
+			"CurrentHP": "50",
+			"MaxHP": "50",
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
+			"IconPath": "",
+			"Inventory": [{"GameType":107,"Amount":3}]
 		}
 	]
 }

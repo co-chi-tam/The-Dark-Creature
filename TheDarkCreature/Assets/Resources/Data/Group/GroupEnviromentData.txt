@@ -90,6 +90,24 @@
 			"TimeSpawnMember": 60,
 			"IsShine": false,
 			"Inventory": []
+		},{
+			"ID": 6,
+			"Name": "GroupLetoTree",
+			"GameType": 213,
+			"GroupType": 1,
+			"GroupSpawnType": "Random",
+			"Description": "",
+			"ModelPath": ["Prefabs/Group/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupNormalFSM",
+			"Radius": 100,
+			"MemberType": 57,
+			"MaxMember": 10,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
+			"TimeSpawnMember": 120,
+			"IsShine": false,
+			"Inventory": []
 		}
 	]
 }

@@ -13,12 +13,13 @@ public class TDCEnum{
 		Crabystal	= 9,
 		FireBuggy	= 10,
 
-		// Object
+		// Enviroment
 		Mushroom	= 52,
 		Grass		= 53,
 		Bush		= 54,
 		BlueBerry	= 55,
 		Crystal		= 56,
+		LetoTree	= 57,
 
 		// Weapon
 		Trap		= 71,
@@ -30,6 +31,7 @@ public class TDCEnum{
 		ItemBush 		= 104,
 		ItemBlueBerry	= 105,
 		ItemCrystal		= 106,
+		ItemLog			= 107,
 
 		// Group
 		GroupDodono	= 201,
@@ -43,6 +45,7 @@ public class TDCEnum{
 		GroupCrystal = 210,
 		GroupCrabystal = 211,
 		GroupFireBuggy = 212,
+		GroupLetoTree = 213,
 
 		// Object
 		CampFire	= 301,

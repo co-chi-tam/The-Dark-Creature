@@ -24,6 +24,14 @@
 			"Description": "",
 			"IconPath": "Crystal",
 			"EffectPath": "Effect/Item/MeatEffect"
+		},{
+			"ID": 4,
+			"Name": "ItemLog",
+			"GameType": 107,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "Log",
+			"EffectPath": "Effect/Item/MeatEffect"
 		}
 	]
 }

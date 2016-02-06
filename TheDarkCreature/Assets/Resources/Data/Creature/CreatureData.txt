@@ -63,7 +63,7 @@
 			"Damage": 5,
 			"ActiveSkill": [503],
 			"Enemies": [],
-			"Foods": [5,6,8,9,10,53,54,55,101,102,103,104,105,106],
+			"Foods": [5,6,8,9,10,53,54,55,56,57,101,102,103,104,105,106,107],
 			"IsShine": false,
 			"Inventory": [{"GameType":101,"Amount":3}]
 		},{
@@ -131,7 +131,7 @@
 			"Enemies": [211],
 			"Foods": [8,101,102,103,104,105],
 			"IsShine": true,
-			"Inventory": [{"GameType":101,"Amount":1}]
+			"Inventory": [{"GameType":101,"Amount":2}]
 		}
 	]
 }
