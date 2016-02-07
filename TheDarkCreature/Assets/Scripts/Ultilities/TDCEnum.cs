@@ -32,6 +32,7 @@ public class TDCEnum{
 		ItemBlueBerry	= 105,
 		ItemCrystal		= 106,
 		ItemLog			= 107,
+		ItemCampfire	= 108,
 
 		// Group
 		GroupDodono	= 201,
@@ -48,7 +49,7 @@ public class TDCEnum{
 		GroupLetoTree = 213,
 
 		// Object
-		CampFire	= 301,
+		Campfire	= 301,
 
 		// Skill
 		FlameBodySkill   	= 501,
@@ -133,4 +134,13 @@ public class TDCEnum{
 		Autumn = 2,
 		Winter = 3
 	}
+
+	public enum ECraftingTab : byte {
+		None = 0,
+		Survival = 1,
+		Weapon = 2,
+		Food = 3,
+		Other = 10
+	}
+
 }

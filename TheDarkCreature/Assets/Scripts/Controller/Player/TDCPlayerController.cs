@@ -122,6 +122,13 @@ public class TDCPlayerController : TDCCreatureController
 		var colliders = Physics.OverlapSphere(m_Transform.position, GetDetectRange(), m_ColliderLayerMask);
 		if (colliders.Length == 0)
 			return;
+		QuickSort.SimpleSort(colliders, (x, y) =>
+			{
+				var _xDist = (TransformPosition - x.transform.position).sqrMagnitude;
+				var _yDist = (TransformPosition - y.transform.position).sqrMagnitude;
+				return _xDist > _yDist ? 1 : _xDist < _yDist ? -1 : 0;
+			});
+			
 		for (int i = 0; i < colliders.Length; i++)
 		{
 			var colliderObject = colliders[i].gameObject;
@@ -167,11 +174,6 @@ public class TDCPlayerController : TDCCreatureController
 		base.OnSelectedItem (itemIndex);
 		var item = m_Entity.GetInventory()[itemIndex];
 		item.ExcuteItem();
-		if (item.GetData().Amount == 0)
-		{
-			m_Inventory.RemoveItem(itemIndex);
-			m_Entity.GetInventory()[itemIndex] = null;
-		}
 	}
 
 	public override int AddItem(TDCEnum.EGameType gameType, TDCEnum.EItemType itemType, int amount)

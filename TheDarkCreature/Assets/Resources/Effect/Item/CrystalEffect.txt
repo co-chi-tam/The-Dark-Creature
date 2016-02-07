@@ -1,0 +1,21 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+	    {
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["CreateObjectEffect(GameType:106,Amount:1)"]
+	    }
+    ],
+    "NoMethods": [
+   		{
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["PrintDebug(Campfire:Can not active effect)"]
+	    }
+    ]
+  }
+}

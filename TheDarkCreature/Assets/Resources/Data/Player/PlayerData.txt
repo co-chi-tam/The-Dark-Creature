@@ -28,10 +28,10 @@
 			"Inventory": [
 				{
 					"GameType": 101,
-					"Amount": 5
+					"Amount": 10
 				},
 				{
-					"GameType": 301,
+					"GameType": 108,
 					"Amount": 5
 				}
 			]
@@ -60,16 +60,7 @@
 			"PassiveSkills": [506,507,508,511],
 			"Level": 1,
 			"IsShine": false,
-			"Inventory": [
-				{
-					"GameType": 101,
-					"Amount": 5
-				},
-				{
-					"GameType": 301,
-					"Amount": 5
-				}
-			]
+			"Inventory": []
 		},{
 			"ID": 3,
 			"Name": "PlayerTaurot",
@@ -95,16 +86,7 @@
 			"PassiveSkills": [506,507,508,511],
 			"Level": 1,
 			"IsShine": false,
-			"Inventory": [
-				{
-					"GameType": 101,
-					"Amount": 5
-				},
-				{
-					"GameType": 301,
-					"Amount": 5
-				}
-			]
+			"Inventory": []
 		},{
 			"ID": 4,
 			"Name": "PlayerVulbat",
@@ -130,16 +112,7 @@
 			"PassiveSkills": [506,507,509,511],
 			"Level": 1,
 			"IsShine": false,
-			"Inventory": [
-				{
-					"GameType": 101,
-					"Amount": 5
-				},
-				{
-					"GameType": 301,
-					"Amount": 5
-				}
-			]
+			"Inventory": []
 		},{
 			"ID": 5,
 			"Name": "PlayerCrabystal",
@@ -165,16 +138,7 @@
 			"PassiveSkills": [506,507,508],
 			"Level": 1,
 			"IsShine": false,
-			"Inventory": [
-				{
-					"GameType": 101,
-					"Amount": 5
-				},
-				{
-					"GameType": 301,
-					"Amount": 5
-				}
-			]
+			"Inventory": []
 		},{
 			"ID": 6,
 			"Name": "PlayerFireBuggy",
@@ -200,16 +164,7 @@
 			"PassiveSkills": [506,507,509,511],
 			"Level": 1,
 			"IsShine": true,
-			"Inventory": [
-				{
-					"GameType": 101,
-					"Amount": 5
-				},
-				{
-					"GameType": 301,
-					"Amount": 5
-				}
-			]
+			"Inventory": []
 		}
 	]
 }

@@ -2,11 +2,11 @@
 	"items": [
 		{
 			"ID": 0,
-			"Name": "CampFire",
-			"GameType": 301,
+			"Name": "Campfire",
+			"GameType": 108,
 			"ItemType": 4,
 			"Description": "",
-			"IconPath": "CampFire",
+			"IconPath": "Campfire",
 			"EffectPath": "Effect/Item/CampFireEffect"
 		},{
 			"ID": 2,
@@ -15,7 +15,7 @@
 			"ItemType": 4,
 			"Description": "",
 			"IconPath": "Crystal",
-			"EffectPath": "Effect/Item/MeatEffect"
+			"EffectPath": "Effect/Item/CrystalEffect"
 		},{
 			"ID": 3,
 			"Name": "EggDodono",
@@ -31,7 +31,7 @@
 			"ItemType": 4,
 			"Description": "",
 			"IconPath": "Log",
-			"EffectPath": "Effect/Item/MeatEffect"
+			"EffectPath": "Effect/Item/LogEffect"
 		}
 	]
 }

@@ -42,11 +42,11 @@ public class TDCCreature : TDCEntity
 		{
 			CallBackEvent("OnAlive");
 		}
-		if (GetHeat() >= GetMaxHeat())
+		if (GetHeat() >= GetMaxHeat() - 10)
 		{
 			CallBackEvent("OnOverHeat");
 		}
-		if (GetHeat() <= 0)
+		if (GetHeat() <= 10)
 		{
 			CallBackEvent("OnUnderHeat");
 		}

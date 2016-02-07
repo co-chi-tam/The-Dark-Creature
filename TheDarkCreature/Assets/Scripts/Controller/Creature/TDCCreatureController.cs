@@ -205,10 +205,12 @@ public class TDCCreatureController : TDCBaseController {
 				TDCEntity item = null;
 				if (m_GameManager.GetObjectPool(itemType, ref item))
 				{
-					var pos = UnityEngine.Random.insideUnitCircle * GetColliderRadius();
-					var mPos = this.TransformPosition;
-					mPos.y = 0f;
-					item.GetController().TransformPosition = mPos + new Vector3(pos.x, 0f, pos.y);
+					var randomAroundPosition = UnityEngine.Random.insideUnitCircle * GetColliderRadius();
+					var myPosition = this.TransformPosition;
+					myPosition.x += randomAroundPosition.x;
+					myPosition.y = 0f;
+					myPosition.z += randomAroundPosition.y;
+					item.SetTransformPosition(myPosition); 
 					item.SetActive(true);
 				}
 			}
@@ -285,6 +287,10 @@ public class TDCCreatureController : TDCBaseController {
 	internal virtual bool FoundEnemy() {
 		var leader = GetLeaderEntity();
 		if (leader != null)
+		{
+			return false;
+		}
+		if (!m_Entity.GetVisibleObject())
 		{
 			return false;
 		}

@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class TDCCampFire : TDCObject
+public class TDCCampfire : TDCObject
 {
 	#region Properties
 
@@ -11,7 +11,7 @@ public class TDCCampFire : TDCObject
 
 	#region Contructor
 
-	public TDCCampFire(TDCBaseController ctrl, TDCBaseData data): base(ctrl, data)
+	public TDCCampfire(TDCBaseController ctrl, TDCBaseData data): base(ctrl, data)
 	{
 		m_NormalSkill = new TDCSkillSlot(TDCEnum.EGameType.FlameBodySkill, this);
 	}

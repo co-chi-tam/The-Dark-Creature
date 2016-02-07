@@ -1,0 +1,16 @@
+﻿{
+	"craftings": [
+		{
+			"ID": 1,
+			"Name": "Campfire",
+			"Description": "",
+			"GameType": 108,
+			"Amount": 1,
+			"CraftingTab": 1,
+			"Elements": [
+				{"GameType": 104, "Amount": 2},
+				{"GameType": 107, "Amount": 4}
+			]
+		}
+	]
+}

@@ -70,6 +70,16 @@
 			"ModelPath": ["Prefabs/Item/ItemLog"],
 			"FSMPath": "FSM/Item/ItemFSM",
 			"IconPath": "Log"
+		},{
+			"ID": 8,
+			"Name": "Campfire",
+			"GameType": 108,
+			"CreatureType": 7,
+			"ItemType": 4,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemCampfire"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Campfire"
 		}
 	]
 }

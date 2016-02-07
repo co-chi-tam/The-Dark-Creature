@@ -37,6 +37,7 @@ public class TDCGameManager : MonoBehaviour {
 	private Dictionary<string, TDCEntity> m_ListEntities;
 	private Dictionary<TDCEnum.EGameType, TDCObjectPool<TDCEntity>> m_ObjectPool;
 	private Map m_Map;
+	private UIManager m_UIManager;
 
 	private TDCEntity m_PlaneEntity;
 	private TDCEntity m_SeasonEntity;
@@ -62,13 +63,13 @@ public class TDCGameManager : MonoBehaviour {
 	void Start() {
 		UnityEngine.Random.seed = (int) System.DateTime.Now.Ticks;
 	
-		var ui = UIManager.GetInstance();
-		ui.EnableLoadingScreen(true);
+		m_UIManager = UIManager.GetInstance();
+		m_UIManager.EnableLoadingScreen(true);
 		Debug.Log ("Loading " + Time.time);
 		HandleLoadObjectPool(() => {
 			HandleLoadMap("World1", () => {
 				Debug.Log ("Complete " + Time.time);
-				ui.EnableLoadingScreen(false);
+				m_UIManager.EnableLoadingScreen(false);
 			});
 		});
     }
@@ -97,6 +98,7 @@ public class TDCGameManager : MonoBehaviour {
 				var obj = CreateCreature(poolData.GameType, Vector3.zero, Quaternion.identity, this.gameObject);
 				obj.SetActive(false);
 				m_ObjectPool[poolData.GameType].Create(obj);
+				m_UIManager.SetLoadingStep(i * x);
 				yield return obj != null;
 			}
 		}
@@ -130,6 +132,7 @@ public class TDCGameManager : MonoBehaviour {
 			var mapObj = map[i];
 			var obj = CreateCreature(mapObj.GameType, mapObj.Position, mapObj.Rotation);
 			obj.SetActive(true);
+			m_UIManager.SetLoadingStep(i + 3);
 			yield return obj != null;
 		}
 		yield return null;
@@ -364,7 +367,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.ItemBush:
 		case TDCEnum.EGameType.ItemBlueBerry:
 		case TDCEnum.EGameType.ItemCrystal: 
-		case TDCEnum.EGameType.ItemLog:{
+		case TDCEnum.EGameType.ItemLog:
+		case TDCEnum.EGameType.ItemCampfire: {
 			data = m_DataReader.GetItemData(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCItemController> ();
@@ -412,11 +416,11 @@ public class TDCGameManager : MonoBehaviour {
 			entity = new TDCEnviroment(controller, data);
 			break;
 		}
-		case TDCEnum.EGameType.CampFire: {
+		case TDCEnum.EGameType.Campfire: {
 			data = m_DataReader.GetGObjectData(type);
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
-			controller = gObject.AddComponent <TDCCampFireController>();
-			entity = new TDCCampFire(controller, data);
+			controller = gObject.AddComponent <TDCCampfireController>();
+			entity = new TDCCampfire(controller, data);
 			break;
 		}
 		case TDCEnum.EGameType.FlameBodySkill: 
@@ -493,6 +497,10 @@ public class TDCGameManager : MonoBehaviour {
 
 	public TDCEntity GetSunEntity() {
 		return m_SunEntity;
+	}
+
+	public TDCCraftingData GetCraftingData(TDCEnum.EGameType gameType) {
+		return m_DataReader.GetCraftingData(gameType);
 	}
 
 	#endregion

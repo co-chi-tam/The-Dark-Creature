@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: b461d0575b5b907458c8137ab38c4877
-timeCreated: 1452343839
+timeCreated: 1454775245
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -285,7 +285,7 @@ TextureImporter:
     21300556: 34x34icons180709_278
     21300558: 34x34icons180709_279
     21300560: 34x34icons180709_280
-    21300562: CampFire
+    21300562: Campfire
     21300564: 34x34icons180709_282
     21300566: 34x34icons180709_283
     21300568: 34x34icons180709_284
@@ -3846,7 +3846,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: CampFire
+    - name: Campfire
       rect:
         serializedVersion: 2
         x: 35

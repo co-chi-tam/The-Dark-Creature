@@ -8,8 +8,10 @@ public class UIItemController {
 	#region Properties
 
 	private TDCGameManager m_GameManager;
+	private UIInventory m_Inventory;
 	private EffectManager m_EffectManager;
 	private UIItemData m_Data;
+	private int m_Index;
 
 	#endregion
 
@@ -25,13 +27,14 @@ public class UIItemController {
 	{
 		m_Data = data;
 		m_GameManager = TDCGameManager.GetInstance();
+		m_Inventory = UIInventory.GetInstance();
 
 		m_EffectManager = new EffectManager();
 		m_EffectManager.LoadEffect(m_Data.EffectPath);
 		m_EffectManager.RegisterCondition("CanActiveEffect", CanActiveEffect);
 
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
-		m_EffectManager.RegisterExcuteMethod("ExcuteEffect", ExcuteEffect);
+		m_EffectManager.RegisterExcuteMethod("CreateObjectEffect", CreateObjectEffect);
 		m_EffectManager.RegisterExcuteMethod("AddValueEffect", AddValueEffect);
 		m_EffectManager.RegisterExcuteMethod("SubtractValueEffect", SubtractValueEffect);
 	}
@@ -41,12 +44,13 @@ public class UIItemController {
 		switch (type)
 		{
 			case TDCEnum.EItemType.Food:
+			case TDCEnum.EItemType.GObject:
 				m_Data.Amount--;
 				break;
 			case TDCEnum.EItemType.Weapon:{
 				var weaponData = m_Data as UIWeaponData;
 				weaponData.Duration -= weaponData.DecreaseDuration;
-				if (weaponData.Duration < 0f)
+				if (weaponData.Duration <= 0f)
 				{
 					m_Data.Amount--;
 				}
@@ -56,18 +60,27 @@ public class UIItemController {
 				// TODO
 				break;
 			}
-			case TDCEnum.EItemType.GObject:{
-				var owner = m_Data.Owner;
-				TDCEntity obj = null;
-				if (m_GameManager.GetObjectPool(m_Data.GameType, ref obj))
-				{
-					obj.GetController().TransformPosition = owner.transform.V3Forward(-owner.GetColliderRadius());
-					obj.SetActive(true);
-				}
-				m_Data.Amount--;
-				break;
-			}
 		}
+		if (m_Data.Amount == 0)
+		{
+			m_Inventory.RemoveItem(m_Index);
+			m_Data.Owner.GetInventory()[m_Index] = null;
+		}
+	}
+
+	public bool DecreaseAmountItem(int amount) {
+		if (m_Data.Amount >= amount)
+		{
+			m_Data.Amount -= amount;
+			if (m_Data.Amount == 0)
+			{
+				m_Inventory.RemoveItem(m_Index);
+				m_Data.Owner.GetInventory()[m_Index] = null;
+			}
+			return true;
+		}
+		Debug.LogError("[UIItemController] Something wrong");
+		return false;
 	}
 
 	#endregion
@@ -98,7 +111,7 @@ public class UIItemController {
 //#endif
 	}
 
-	protected virtual void ExcuteEffect(Dictionary<string, object> pars)
+	protected virtual void CreateObjectEffect(Dictionary<string, object> pars)
 	{
 //#if UNITY_EDITOR
 //		foreach (var item in pars)
@@ -106,6 +119,18 @@ public class UIItemController {
 //			Debug.Log(string.Format("[{0} : {1}]", item.Key, item.Value));
 //		}
 //#endif
+		TDCEntity obj = null;
+		var gameType = (TDCEnum.EGameType)int.Parse (pars["GameType"].ToString());
+		var amount = int.Parse (pars["Amount"].ToString());
+		for (int i = 0; i < amount; i++)
+		{
+			if (m_GameManager.GetObjectPool(gameType, ref obj))
+			{
+				obj.GetController().TransformPosition = 
+					m_Data.Owner.transform.V3Forward(-m_Data.Owner.GetColliderRadius());
+				obj.SetActive(true);
+			}
+		}
 	}
 
 	protected virtual void AddValueEffect(Dictionary<string, object> pars)
@@ -138,8 +163,22 @@ public class UIItemController {
 
 	#region Getter & Setter
 
+	public void SetIndex(int value) {
+		m_Index = value;
+	}
+
 	public UIItemData GetData() {
 		return m_Data;
+	}
+
+	public TDCEnum.EGameType GetGameType() {
+		if (GetAmount() == 0)
+			return TDCEnum.EGameType.None;
+		return m_Data.GameType;
+	}
+
+	public int GetAmount() {
+		return m_Data.Amount;
 	}
 
 	#endregion

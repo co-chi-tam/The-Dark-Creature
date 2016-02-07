@@ -4,12 +4,12 @@ using FSM;
 
 public class FSMFireState : FSMBaseState {
 
-	private TDCCampFireController m_CampFireController;
+	private TDCCampfireController m_CampfireController;
 	private float m_OffsetTime;
 
 	public FSMFireState(TDCBaseController controller) : base (controller)
 	{
-		m_CampFireController = controller as TDCCampFireController;
+		m_CampfireController = controller as TDCCampfireController;
 	}
 	
 	public override void StartState() {
@@ -18,9 +18,9 @@ public class FSMFireState : FSMBaseState {
 	
 	public override void UpdateState() {
 		var time = Time.time + m_OffsetTime;
-		m_CampFireController.UpdateFirePower (Time.deltaTime);
-		m_CampFireController.SetIntensity(Mathf.PerlinNoise (time, time));
-		m_CampFireController.Activekill(0);
+		m_CampfireController.UpdateFirePower (Time.deltaTime);
+		m_CampfireController.SetIntensity(Mathf.PerlinNoise (time, time));
+		m_CampfireController.Activekill(0);
 	}
 	
 	public override void ExitState()

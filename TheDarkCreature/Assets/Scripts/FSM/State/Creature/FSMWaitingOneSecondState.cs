@@ -10,7 +10,7 @@ public class FSMWaitingOneSecondState : FSMBaseState
 	
 	public override void StartState()
 	{
-		var random = Random.Range(0, 9999) % 2;
+		var random = Mathf.PerlinNoise (Time.time, Time.time) * 2f; // Random.Range(0, 9999) % 2;
 		m_Controller.SetAnimation(random < 1 ? EAnimation.Action1 : EAnimation.Action2);
 		m_Controller.SetWaitingTime (1f);
 	}

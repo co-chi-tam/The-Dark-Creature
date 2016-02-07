@@ -16,6 +16,7 @@ public class TDCDataReader {
 	private Dictionary<TDCEnum.EGameType, TDCSkillData> m_ListSkillData;
 	private Dictionary<string, List<MapObjectData>> m_MapData;
 	private Dictionary<TDCEnum.EGameType, TDCBaseData> m_ListBiomeData;
+	private Dictionary<TDCEnum.EGameType, TDCCraftingData> m_ListCraftingData;
 	private List<TDCObjectPoolData> m_ListObjectPoolData;
 
 	#endregion
@@ -30,6 +31,7 @@ public class TDCDataReader {
 		m_ListSkillData = new Dictionary<TDCEnum.EGameType, TDCSkillData>();
 		m_MapData = new Dictionary<string, List<MapObjectData>>();
 		m_ListBiomeData = new Dictionary<TDCEnum.EGameType, TDCBaseData>();
+		m_ListCraftingData = new Dictionary<TDCEnum.EGameType, TDCCraftingData>();
 		m_ListObjectPoolData = new List<TDCObjectPoolData>();
 
 		LoadData ();
@@ -53,6 +55,7 @@ public class TDCDataReader {
 		var passiveSkillTextAsset = Resources.Load<TextAsset>("Data/Skill/PassiveSkillData");
 		var weatherSkillTextAsset = Resources.Load<TextAsset>("Data/Skill/WeatherData");
 		var eggTextAsset = Resources.Load<TextAsset>("Data/Egg/EggData");
+		var craftingTextAsset = Resources.Load<TextAsset>("Data/Crafting/CraftingData");
 		var mapTextAsset = Resources.Load<TextAsset>("Data/Map/WorldMap");
 		var planeTextAsset = Resources.Load<TextAsset>("Data/Map/PlaneData");
 		var seasonTextAsset = Resources.Load<TextAsset>("Data/Map/SeasonData");
@@ -73,6 +76,7 @@ public class TDCDataReader {
 		var jsonPassiveSkill = Json.Deserialize (passiveSkillTextAsset.text) as Dictionary<string, object>;
 		var jsonWeatherkill = Json.Deserialize (weatherSkillTextAsset.text) as Dictionary<string, object>;
 		var jsonEgg = Json.Deserialize (eggTextAsset.text) as Dictionary<string, object>;
+		var jsonCrafting = Json.Deserialize (craftingTextAsset.text) as Dictionary<string, object>;
 		var jsonMap = Json.Deserialize(mapTextAsset.text) as Dictionary<string, object>;
 		var jsonPlane = Json.Deserialize(planeTextAsset.text) as Dictionary<string, object>;
 		var jsonSeason = Json.Deserialize(seasonTextAsset.text) as Dictionary<string, object>;
@@ -86,8 +90,9 @@ public class TDCDataReader {
 		LoadCreature (jsonCreature["creatures"] as List<object>);
 		LoadObject (jsonObject["objects"] as List<object>);
 		LoadEgg(jsonEgg["eggs"] as List<object>);
-		LoadPlayer (jsonPlayer["players"] as List<object>);
 		LoadItem (jsonItem["items"] as List<object>);
+		LoadPlayer (jsonPlayer["players"] as List<object>);
+		LoadCrafting (jsonCrafting["craftings"] as List<object>);
 		LoadSkill(jsonActiveSkill["skills"] as List<object>);
 		LoadSkill(jsonPassiveSkill["skills"] as List<object>);
 		LoadSkill(jsonWeatherkill["weathers"] as List<object>);
@@ -290,6 +295,30 @@ public class TDCDataReader {
                 player.Inventory[x].GetData().Amount = amount;
 			}
 			m_ListPlayerData.Add (player.GameType, player);
+		}
+	}
+
+	public void LoadCrafting(List<object> values) {
+		for (int i = 0; i < values.Count; i++) {
+			var instance = values [i] as Dictionary<string, object>;
+			var crafting = new TDCCraftingData ();
+			crafting.ID = int.Parse (instance ["ID"].ToString ());
+			crafting.Name = instance ["Name"].ToString ();
+			crafting.Description = instance ["Description"].ToString ();
+			crafting.GameType = (TDCEnum.EGameType)int.Parse (instance ["GameType"].ToString ());
+			crafting.Amount = int.Parse (instance ["Amount"].ToString ());
+			var elements = instance["Elements"] as List<object>;
+			crafting.Elements = new TDCElement[elements.Count];
+			for (int x = 0; x < elements.Count; x++) {
+				var elem = elements[x] as Dictionary<string, object>;
+				crafting.Elements[x] = new TDCElement()
+				{ 	
+					ID = x,  
+					GameType = (TDCEnum.EGameType)int.Parse(elem["GameType"].ToString()),
+					Amount = int.Parse(elem["Amount"].ToString())
+				};
+			}
+			m_ListCraftingData.Add (crafting.GameType, crafting);
 		}
 	}
 
@@ -591,6 +620,11 @@ public class TDCDataReader {
 	public TDCGObjectData GetGObjectData(TDCEnum.EGameType gObject) {
 		var objectData = TDCGObjectData.Clone (m_ListCreatureData[gObject] as TDCGObjectData);
 		return objectData;
+	}
+
+	public TDCCraftingData GetCraftingData(TDCEnum.EGameType gameType) {
+		var craftingData = TDCCraftingData.Clone (m_ListCraftingData[gameType] as TDCCraftingData);
+		return craftingData;
 	}
 
 	public TDCPlaneData GetPlaneData(TDCEnum.EGameType plane) {

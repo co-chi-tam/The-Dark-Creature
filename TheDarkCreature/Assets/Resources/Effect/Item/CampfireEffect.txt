@@ -7,7 +7,7 @@
 	    {
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["ExcuteEffect(GameType:301)"]
+	        "ExcuteMethods": ["CreateObjectEffect(GameType:301,Amount:1)"]
 	    }
     ],
     "NoMethods": [

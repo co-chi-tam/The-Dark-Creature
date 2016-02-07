@@ -186,7 +186,11 @@ public class TDCBaseController : TDCMonoBehaviour, IContext
 	}
 
 	public virtual void FlyPosition(Vector3 position) {
-
+		CallBackEvent("OnMove");
+		if (m_Entity.GetVisibleObject() == false)
+		{
+			VisibleObject(true);
+		}
 	}
 
 	public virtual void LandingPosition(Vector3 position) {

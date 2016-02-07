@@ -41,7 +41,7 @@
 			"Name": "GroupTaurot",
 			"GameType": 208,
 			"GroupType": 1,
-			"GroupSpawnType": "Random",
+			"GroupSpawnType": "Center",
 			"Description": "",
 			"ModelPath": ["Prefabs/Group/GroupCreature"],
 			"IconPath": "",

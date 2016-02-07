@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FSM;
 
-public class TDCCampFireController : TDCObjectController {
+public class TDCCampfireController : TDCObjectController {
 
 	#region Property
 	private ParticleSystem m_ParticleSystem;

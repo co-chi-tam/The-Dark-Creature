@@ -83,6 +83,7 @@ public class UIInventory : MonoBehaviour {
 		m_ItemSlots[index].OnSelectedSlot = m_OwnerController.OnSelectedItem;
 		m_ItemSlots[index].LoadSlot (index, item);
 		m_OwnerEnity.GetInventory()[index].GetData().Owner = m_OwnerController;
+		m_OwnerEnity.GetInventory()[index].SetIndex(index);
 		return true;
 	}
 
@@ -108,6 +109,7 @@ public class UIInventory : MonoBehaviour {
 				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
 				child.LoadSlot (i, inventory[i]);
 				inventory[i].GetData().Owner = m_OwnerController;
+				inventory[i].SetIndex(i);
 			}
 			m_ItemSlots[i] = child;
 		}
@@ -121,6 +123,7 @@ public class UIInventory : MonoBehaviour {
 			{
 				child.OnSelectedSlot = m_OwnerController.OnSelectedItem;
 				child.LoadSlot(i, inventory[i]);
+				inventory[i].SetIndex (i);
 				inventory[i].GetData().Owner = m_OwnerController;
 			}
 			else

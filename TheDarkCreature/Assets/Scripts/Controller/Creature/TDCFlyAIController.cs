@@ -35,6 +35,7 @@ public class TDCFlyAIController : TDCGroundAIController
 
 	public override void FlyPosition(Vector3 position)
 	{
+		base.FlyPosition(position);
 		m_TimeFlying = (m_TimeFlying + Time.deltaTime) > 1f ? 1f : (m_TimeFlying + Time.deltaTime);
 		position.y = 0f;
 		var mPos = m_Transform.position;
@@ -48,6 +49,7 @@ public class TDCFlyAIController : TDCGroundAIController
 
 	public override void LandingPosition(Vector3 position)
 	{
+		base.LandingPosition(position);
 		var mPos = m_Transform.position;
 		m_TimeFlying = (m_TimeFlying - Time.deltaTime) < 0f ? 0f : (m_TimeFlying - Time.deltaTime);
 		mPos.y = m_FlyCurve.Evaluate(m_TimeFlying) * m_FlyHeight;
