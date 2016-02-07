@@ -15,14 +15,14 @@
 			"ItemType": 4,
 			"Description": "",
 			"IconPath": "Crystal",
-			"EffectPath": "Effect/Item/CrystalEffect"
+			"EffectPath": "Effect/Item/DropItSelfEffect"
 		},{
 			"ID": 3,
 			"Name": "EggDodono",
 			"GameType": 801,
 			"ItemType": 4,
 			"Description": "",
-			"IconPath": "Crystal",
+			"IconPath": "Egg",
 			"EffectPath": "Effect/Item/MeatEffect"
 		},{
 			"ID": 4,
@@ -31,7 +31,15 @@
 			"ItemType": 4,
 			"Description": "",
 			"IconPath": "Log",
-			"EffectPath": "Effect/Item/LogEffect"
+			"EffectPath": "Effect/Item/DropItSelfEffect"
+		},{
+			"ID": 5,
+			"Name": "ItemRock",
+			"GameType": 109,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "Rock",
+			"EffectPath": "Effect/Item/DropItSelfEffect"
 		}
 	]
 }

@@ -10,12 +10,6 @@
 	        "ExcuteMethods": ["CreateObjectEffect(GameType:301,Amount:1)"]
 	    }
     ],
-    "NoMethods": [
-   		{
-	    	"ID": 1,
-   			"Type": 10,
-	        "ExcuteMethods": ["PrintDebug(Campfire:Can not active effect)"]
-	    }
-    ]
+    "NoMethods": []
   }
 }

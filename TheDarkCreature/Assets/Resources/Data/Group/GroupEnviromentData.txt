@@ -87,7 +87,7 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 60,
+			"TimeSpawnMember": 180,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -106,6 +106,24 @@
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
 			"TimeSpawnMember": 120,
+			"IsShine": false,
+			"Inventory": []
+		},{
+			"ID": 7,
+			"Name": "GroupRock",
+			"GameType": 214,
+			"GroupType": 1,
+			"GroupSpawnType": "Random",
+			"Description": "",
+			"ModelPath": ["Prefabs/Group/GroupCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupNormalFSM",
+			"Radius": 100,
+			"MemberType": 58,
+			"MaxMember": 5,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
+			"TimeSpawnMember": 180,
 			"IsShine": false,
 			"Inventory": []
 		}

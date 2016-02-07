@@ -43,7 +43,7 @@
 			"GroupType": 1,
 			"GroupSpawnType": "Center",
 			"Description": "",
-			"ModelPath": ["Prefabs/Group/GroupCreature"],
+			"ModelPath": ["Prefabs/Group/TaurotHouse"],
 			"IconPath": "",
 			"FSMPath": "FSM/Group/GroupDayFSM",
 			"Radius": 100,

@@ -368,7 +368,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.ItemBlueBerry:
 		case TDCEnum.EGameType.ItemCrystal: 
 		case TDCEnum.EGameType.ItemLog:
-		case TDCEnum.EGameType.ItemCampfire: {
+		case TDCEnum.EGameType.ItemCampfire: 
+		case TDCEnum.EGameType.ItemRock: {
 			data = m_DataReader.GetItemData(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCItemController> ();
@@ -388,7 +389,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.GroupBlueBerry: 
 		case TDCEnum.EGameType.GroupBush:
 		case TDCEnum.EGameType.GroupCrystal:
-		case TDCEnum.EGameType.GroupLetoTree:		
+		case TDCEnum.EGameType.GroupLetoTree:	
+		case TDCEnum.EGameType.GroupRock:		
 		case TDCEnum.EGameType.GroupCrabystal:
 		case TDCEnum.EGameType.GroupFireBuggy: {
 			data = m_DataReader.GetGroupData(type);
@@ -409,7 +411,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.BlueBerry:		
 		case TDCEnum.EGameType.Bush: 
 		case TDCEnum.EGameType.Crystal:
-		case TDCEnum.EGameType.LetoTree: {
+		case TDCEnum.EGameType.LetoTree: 
+		case TDCEnum.EGameType.Rock: {
 			data = m_DataReader.GetEnviromentData (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEnviromentController> ();

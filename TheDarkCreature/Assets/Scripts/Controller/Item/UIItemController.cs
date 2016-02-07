@@ -35,6 +35,7 @@ public class UIItemController {
 
 		m_EffectManager.RegisterExcuteMethod("PrintDebug", PrintDebug);
 		m_EffectManager.RegisterExcuteMethod("CreateObjectEffect", CreateObjectEffect);
+		m_EffectManager.RegisterExcuteMethod("DropItSelfEffect", DropItSelfEffect);
 		m_EffectManager.RegisterExcuteMethod("AddValueEffect", AddValueEffect);
 		m_EffectManager.RegisterExcuteMethod("SubtractValueEffect", SubtractValueEffect);
 	}
@@ -92,7 +93,7 @@ public class UIItemController {
 		m_EffectManager.ExcuteEffect();
 	}
 
-	protected virtual bool CanActiveEffect(Dictionary<string, object> pars)
+	internal virtual bool CanActiveEffect(Dictionary<string, object> pars)
 	{
 		var active = m_Data.Amount > 0 && m_Data.Owner != null && m_Data.Owner.GetStateName() != "FlyState";;
 		if (active)
@@ -111,7 +112,7 @@ public class UIItemController {
 //#endif
 	}
 
-	protected virtual void CreateObjectEffect(Dictionary<string, object> pars)
+	internal virtual void CreateObjectEffect(Dictionary<string, object> pars)
 	{
 //#if UNITY_EDITOR
 //		foreach (var item in pars)
@@ -133,7 +134,22 @@ public class UIItemController {
 		}
 	}
 
-	protected virtual void AddValueEffect(Dictionary<string, object> pars)
+	internal virtual void DropItSelfEffect(Dictionary<string, object> pars) {
+		TDCEntity obj = null;
+		var gameType = m_Data.GameType;
+		var amount = int.Parse (pars["Amount"].ToString());
+		for (int i = 0; i < amount; i++)
+		{
+			if (m_GameManager.GetObjectPool(gameType, ref obj))
+			{
+				obj.GetController().TransformPosition = 
+					m_Data.Owner.transform.V3Forward(-m_Data.Owner.GetColliderRadius());
+				obj.SetActive(true);
+			}
+		}
+	}
+
+	internal virtual void AddValueEffect(Dictionary<string, object> pars)
 	{
 //#if UNITY_EDITOR
 //		foreach (var item in pars)
@@ -146,7 +162,7 @@ public class UIItemController {
 		m_Data.Owner.GetEntity().SetProperty(nameValue, toValue);
 	}
 
-	protected virtual void SubtractValueEffect(Dictionary<string, object> pars)
+	internal virtual void SubtractValueEffect(Dictionary<string, object> pars)
 	{
 //#if UNITY_EDITOR
 //		foreach (var item in pars)

@@ -80,6 +80,16 @@
 			"ModelPath": ["Prefabs/Item/ItemCampfire"],
 			"FSMPath": "FSM/Item/ItemFSM",
 			"IconPath": "Campfire"
+		},{
+			"ID": 9,
+			"Name": "ItemRock",
+			"GameType": 109,
+			"CreatureType": 7,
+			"ItemType": 4,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemRock"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Rock"
 		}
 	]
 }

@@ -30,6 +30,12 @@
 				},
 				{
 					"ID": 4,
+					"GameType": 204,
+					"Position": "50,0,50",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 4,
 					"GameType": 205,
 					"Position": "50,0,-20",
 					"Rotation": "0,0,0"
@@ -80,6 +86,12 @@
 					"ID": 12,
 					"GameType": 213,
 					"Position": "100,0,-50",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 13,
+					"GameType": 214,
+					"Position": "-50,0,-50",
 					"Rotation": "0,0,0"
 				}
 			]

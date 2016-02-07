@@ -7,7 +7,7 @@
 	    {
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["AddValueEffect(NameValue:HungerPoint,ToValue:5)","SubtractValueEffect(NameValue:HeatPoint,ToValue:5)","AddValueEffect(NameValue:HealthPoint,ToValue:10)"]
+	        "ExcuteMethods": ["DropItSelfEffect(Amount:1)"]
 	    }
     ],
     "NoMethods": []

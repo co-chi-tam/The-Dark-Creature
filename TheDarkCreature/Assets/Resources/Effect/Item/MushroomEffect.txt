@@ -10,12 +10,6 @@
 	        "ExcuteMethods": ["AddValueEffect(NameValue:HungerPoint,ToValue:5)","AddValueEffect(NameValue:SanityPoint,ToValue:15)","AddValueEffect(NameValue:HealthPoint,ToValue:5)"]
 	    }
     ],
-    "NoMethods": [
-   		{
-	    	"ID": 1,
-   			"Type": 10,
-	        "ExcuteMethods": ["PrintDebug(Meat Effect:Can not active effect)"]
-	    }
-    ]
+    "NoMethods": []
   }
 }

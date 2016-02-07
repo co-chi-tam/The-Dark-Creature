@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c85f2c9507707614583210f0d42c75a8
-timeCreated: 1453552070
+timeCreated: 1454824604
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -136,7 +136,7 @@ TextureImporter:
     21300258: Items 2_129
     21300260: Items 2_130
     21300262: Items 2_131
-    21300264: Items 2_132
+    21300264: Rock
     21300266: Items 2_133
     21300268: Items 2_134
     21300270: Items 2_135
@@ -1908,7 +1908,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 2_132
+    - name: Rock
       rect:
         serializedVersion: 2
         x: 50

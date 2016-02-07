@@ -8,6 +8,7 @@
 			"Amount": 1,
 			"CraftingTab": 1,
 			"Elements": [
+				{"GameType": 103, "Amount": 2},
 				{"GameType": 104, "Amount": 2},
 				{"GameType": 107, "Amount": 4}
 			]

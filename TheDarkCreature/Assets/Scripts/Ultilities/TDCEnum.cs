@@ -20,6 +20,7 @@ public class TDCEnum{
 		BlueBerry	= 55,
 		Crystal		= 56,
 		LetoTree	= 57,
+		Rock		= 58,
 
 		// Weapon
 		Trap		= 71,
@@ -33,6 +34,7 @@ public class TDCEnum{
 		ItemCrystal		= 106,
 		ItemLog			= 107,
 		ItemCampfire	= 108,
+		ItemRock		= 109,
 
 		// Group
 		GroupDodono	= 201,
@@ -47,6 +49,7 @@ public class TDCEnum{
 		GroupCrabystal = 211,
 		GroupFireBuggy = 212,
 		GroupLetoTree = 213,
+		GroupRock 	= 214,
 
 		// Object
 		Campfire	= 301,

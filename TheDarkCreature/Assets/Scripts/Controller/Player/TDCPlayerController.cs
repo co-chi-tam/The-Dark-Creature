@@ -47,7 +47,7 @@ public class TDCPlayerController : TDCCreatureController
 	protected override void LateUpdate () {
 		base.LateUpdate();
 #if UNITY_EDITOR || UNITY_STANDALONE
-		if (Input.GetMouseButtonUp(0)) {
+		if (Input.GetMouseButtonDown(0)) {
             Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
             RaycastHit hitInfo;
 			if (Physics.Raycast(ray, out hitInfo)) {
@@ -62,18 +62,18 @@ public class TDCPlayerController : TDCCreatureController
 			switch (touchPhase) {
 			case TouchPhase.Began:
 				m_TouchedUI = !EventSystem.current.IsPointerOverGameObject(Input.GetTouch(0).fingerId);
-				break;
-			case TouchPhase.Moved:
-				break;
-			case TouchPhase.Ended:
 				Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 				RaycastHit hitInfo;
 				if (Physics.Raycast(ray, out hitInfo)) {
 					if (m_TouchedUI)
-                    {
+					{
 						ActiveAction(hitInfo);
-                    }
+					}
 				}
+				break;
+			case TouchPhase.Moved:
+				break;
+			case TouchPhase.Ended:
 				break;
 			}
 		}
