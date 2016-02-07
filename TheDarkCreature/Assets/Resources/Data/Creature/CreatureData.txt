@@ -148,10 +148,10 @@
 			"MaxHP": 20,
 			"CurrentHeatPoint": 50,
 			"MaxHeatPoint": 100,
-			"Damage": 4,
+			"Damage": 3,
 			"ActiveSkill": [502],
 			"Enemies": [7],
-			"Foods": [5,6,8,10,52,54,55,101,102,104,105],
+			"Foods": [5,6,8,10,52,53,55,101,102,104,105],
 			"IsShine": false,
 			"Inventory": [{"GameType":102,"Amount":1},{"GameType":104,"Amount":1}]
 		}

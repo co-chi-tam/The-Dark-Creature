@@ -7,97 +7,133 @@
 				{
 					"ID": 1,
 					"GameType": 201,
-					"Position": "50,0,50",
+					"Position": "-50,0,50",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 2,
 					"GameType": 201,
-					"Position": "-50,0,50",
+					"Position": "50,0,-50",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 2,
+					"GameType": 201,
+					"Position": "-100,0,-200",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 3,
 					"GameType": 202,
-					"Position": "-20,0,50",
-					"Rotation": "0,0,0"
-				},
-				{
-					"ID": 4,
-					"GameType": 204,
-					"Position": "-50,0,-50",
-					"Rotation": "0,0,0"
-				},
-				{
-					"ID": 4,
-					"GameType": 204,
 					"Position": "50,0,50",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 4,
+					"GameType": 204,
+					"Position": "0,0,0",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 4,
+					"GameType": 204,
+					"Position": "50,0,25",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 4,
 					"GameType": 205,
-					"Position": "50,0,-20",
+					"Position": "-50,0,-20",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 4,
+					"GameType": 205,
+					"Position": "-20,0,-50",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 5,
 					"GameType": 206,
-					"Position": "-20,0,20",
+					"Position": "-100,0,100",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 5,
+					"GameType": 206,
+					"Position": "100,0,100",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 6,
 					"GameType": 207,
-					"Position": "-50,0,100",
+					"Position": "100,0,-100",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 6,
+					"GameType": 207,
+					"Position": "-100,0,-100",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 7,
 					"GameType": 208,
-					"Position": "100,0,-50",
+					"Position": "-50,0,-150",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 8,
 					"GameType": 209,
-					"Position": "100,0,-100",
+					"Position": "0,0,-200",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 9,
 					"GameType": 210,
-					"Position": "100,0,100",
+					"Position": "100,0,-100",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 10,
 					"GameType": 211,
-					"Position": "100,0,100",
+					"Position": "150,0,-50",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 11,
 					"GameType": 212,
-					"Position": "-50,0,-20",
+					"Position": "-150,0,50",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 12,
 					"GameType": 213,
-					"Position": "100,0,-50",
+					"Position": "200,0,100",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 12,
+					"GameType": 213,
+					"Position": "0,0,-300",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 13,
 					"GameType": 214,
-					"Position": "-50,0,-50",
+					"Position": "0,0,-100",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 13,
+					"GameType": 214,
+					"Position": "200,0,200",
 					"Rotation": "0,0,0"
 				},
 				{
 					"ID": 14,
 					"GameType": 215,
-					"Position": "-50,0,100",
+					"Position": "-100,0,-100",
 					"Rotation": "0,0,0"
 				}
 			]
