@@ -12,6 +12,7 @@ public class TDCEnum{
 		Vulbat 		= 8,
 		Crabystal	= 9,
 		FireBuggy	= 10,
+		Wobell		= 11,
 
 		// Enviroment
 		Mushroom	= 52,
@@ -50,6 +51,7 @@ public class TDCEnum{
 		GroupFireBuggy = 212,
 		GroupLetoTree = 213,
 		GroupRock 	= 214,
+		GroupWobell 	= 215,
 
 		// Object
 		Campfire	= 301,

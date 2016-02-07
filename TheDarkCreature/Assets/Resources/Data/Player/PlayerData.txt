@@ -165,6 +165,32 @@
 			"Level": 1,
 			"IsShine": true,
 			"Inventory": []
+		},{
+			"ID": 7,
+			"Name": "PlayerWobell",
+			"GameType": 11,
+			"CreatureType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Creature/Wobell"],
+			"FSMPath": "FSM/Player/PlayerFSM",
+			"IconPath": "",
+			"MoveSpeed": 4,
+			"DetectRange": 20,
+			"AttackRange": 25,
+			"CurrentHP": 30,
+			"MaxHP": 50,
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
+			"CurrentHungerPoint": 50,
+			"MaxHungerPoint": 100,
+			"CurrentSanityPoint": 50,
+			"MaxSanityPoint": 100,
+			"Damage": 2,
+			"ActiveSkill": [502,504,505,510],
+			"PassiveSkills": [506,507,508,511],
+			"Level": 1,
+			"IsShine": false,
+			"Inventory": []
 		}
 	]
 }

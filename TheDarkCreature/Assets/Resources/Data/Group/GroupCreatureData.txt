@@ -108,6 +108,24 @@
 			"TimeSpawnMember": 60,
 			"IsShine": true,
 			"Inventory": []
+		},{
+			"ID": 7,
+			"Name": "GroupWobell",
+			"GameType": 215,
+			"GroupType": 2,
+			"GroupSpawnType": "Center",
+			"Description": "",
+			"ModelPath": ["Prefabs/Group/NestCreature"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupNormalFSM",
+			"Radius": 100,
+			"MemberType": 11,
+			"MaxMember": 3,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
+			"TimeSpawnMember": 60,
+			"IsShine": true,
+			"Inventory": []
 		}
 	]
 }

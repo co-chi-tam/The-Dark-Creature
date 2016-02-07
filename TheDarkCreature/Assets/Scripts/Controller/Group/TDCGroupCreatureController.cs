@@ -41,6 +41,13 @@ public class TDCGroupCreatureController : TDCBaseGroupController {
 
     #region Main method
 
+	public override Dictionary<string, object> GetObjectCurrentValue()
+	{
+		var tmp = base.GetObjectCurrentValue();
+		tmp["Member current"] = GetCurrentMember() + " / " + GetMaxMember();
+		return tmp;
+	}
+
 	protected override void CreatePositionMember() {
 		base.CreatePositionMember ();
 		var maxMember = 50;

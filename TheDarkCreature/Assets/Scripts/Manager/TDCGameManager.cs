@@ -347,7 +347,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.Taurot: 
 		case TDCEnum.EGameType.Vulbat:
 		case TDCEnum.EGameType.Crabystal: 
-		case TDCEnum.EGameType.FireBuggy: {
+		case TDCEnum.EGameType.FireBuggy: 
+		case TDCEnum.EGameType.Wobell: {
 			data = m_DataReader.GetCreatureData (type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCCreatureData).CreatureType){
@@ -392,7 +393,8 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.GroupLetoTree:	
 		case TDCEnum.EGameType.GroupRock:		
 		case TDCEnum.EGameType.GroupCrabystal:
-		case TDCEnum.EGameType.GroupFireBuggy: {
+		case TDCEnum.EGameType.GroupFireBuggy: 
+		case TDCEnum.EGameType.GroupWobell: {
 			data = m_DataReader.GetGroupData(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
 			switch ((data as TDCGroupData).GroupType) {

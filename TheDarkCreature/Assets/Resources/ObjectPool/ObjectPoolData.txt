@@ -21,6 +21,7 @@
 	"Vulbat": 50,
 	"Crabystal": 50,
 	"FireBuggy": 50,
+	"Wobell": 50,
 	"Mushroom": 50,
 	"Grass": 20,
 	"Bush": 50,
