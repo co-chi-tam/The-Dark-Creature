@@ -56,6 +56,7 @@ public class UIManager : MonoBehaviour {
 	// Crafting sample
 	[Space(10f)]
 	public Button CraftingCampfireButton;
+	public Button CraftingBigCampfireButton;
 
 	// Owner
 	[Space(10f)]
@@ -113,8 +114,12 @@ public class UIManager : MonoBehaviour {
 
 	private void SetupCraftingButton() {
 		CraftingCampfireButton.onClick.RemoveAllListeners();
+		CraftingBigCampfireButton.onClick.RemoveAllListeners();
 		CraftingCampfireButton.onClick.AddListener(() => { 
 			PressedCraftingButton(TDCEnum.EGameType.ItemCampfire); 
+		});
+		CraftingBigCampfireButton.onClick.AddListener(() => { 
+			PressedCraftingButton(TDCEnum.EGameType.ItemBigCampfire); 
 		});
 	}
 

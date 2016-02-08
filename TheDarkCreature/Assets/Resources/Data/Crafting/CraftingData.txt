@@ -9,8 +9,19 @@
 			"CraftingTab": 1,
 			"Elements": [
 				{"GameType": 103, "Amount": 2},
-				{"GameType": 104, "Amount": 2},
 				{"GameType": 107, "Amount": 4}
+			]
+		},{
+			"ID": 2,
+			"Name": "BigCampfire",
+			"Description": "",
+			"GameType": 110,
+			"Amount": 1,
+			"CraftingTab": 1,
+			"Elements": [
+				{"GameType": 103, "Amount": 2},
+				{"GameType": 107, "Amount": 4},
+				{"GameType": 109, "Amount": 2}
 			]
 		}
 	]

@@ -48,6 +48,11 @@ public class TDCCampfire : TDCObject
 		return m_Data.IsShine;
 	}
 
+	public override float GetColliderRadius()
+	{
+		return m_Controller.GetColliderRadius();
+	}
+
 	#endregion
 
 }

@@ -127,8 +127,9 @@ public class UIItemController {
 		{
 			if (m_GameManager.GetObjectPool(gameType, ref obj))
 			{
+				var distance = m_Data.Owner.GetColliderRadius() + obj.GetColliderRadius();
 				obj.GetController().TransformPosition = 
-					m_Data.Owner.transform.V3Forward(-m_Data.Owner.GetColliderRadius());
+					m_Data.Owner.transform.V3Forward(-distance);
 				obj.SetActive(true);
 			}
 		}

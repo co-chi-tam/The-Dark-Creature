@@ -1,6 +1,6 @@
 fileFormatVersion: 2
-guid: 5eac2d1a478c18e49ab823bd41ad822e
-timeCreated: 1451149729
+guid: c6445e645fa31fc42a23cfa0003a99de
+timeCreated: 1454893989
 licenseType: Free
 ModelImporter:
   serializedVersion: 19
@@ -9,7 +9,7 @@ ModelImporter:
     400000: //RootNode
     2300000: //RootNode
     3300000: //RootNode
-    4300000: Cube
+    4300000: Bush
   materials:
     importMaterials: 1
     materialName: 0

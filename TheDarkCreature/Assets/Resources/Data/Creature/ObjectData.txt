@@ -2,7 +2,7 @@
 	"objects": [
 		{
 			"ID": 1,
-			"Name": "CampFire",
+			"Name": "Campfire",
 			"GameType": 301,
 			"CreatureType": 4,
 			"Description": "",
@@ -10,6 +10,18 @@
 			"FSMPath": "FSM/Creature/CampFireFSM",
 			"IconPath": "CampFire",
 			"Duration": 120,
+			"Inventory": [],
+			"IsShine": true
+		},{
+			"ID": 2,
+			"Name": "BigCampfire",
+			"GameType": 302,
+			"CreatureType": 4,
+			"Description": "",
+			"ModelPath": ["Prefabs/Creature/BigCampFire"],
+			"FSMPath": "FSM/Creature/CampFireFSM",
+			"IconPath": "BigCampFire",
+			"Duration": 300,
 			"Inventory": [],
 			"IsShine": true
 		}

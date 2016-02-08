@@ -181,6 +181,8 @@ public class TDCCreatureController : TDCBaseController {
 		base.MovePosition(position);
 		position.y = 0f;
 		var direction = position - m_Transform.position;
+		if (direction == Vector3.zero)
+			return;
 		m_Transform.position = m_Transform.position + direction.normalized * GetMoveSpeed() * Time.deltaTime;
 		LookAtRotation(position);
 	}

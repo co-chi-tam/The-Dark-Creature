@@ -97,6 +97,11 @@ public class TDCObject : TDCEntity
 		return m_Controller.TransformPosition;
 	}
 
+	public override float GetColliderRadius()
+	{
+		return m_Controller.GetColliderRadius();
+	}
+
 	#endregion
 }
 

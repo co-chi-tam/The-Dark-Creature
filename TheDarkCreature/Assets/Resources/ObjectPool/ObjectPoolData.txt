@@ -30,6 +30,7 @@
 	"LetoTree": 50,
 	"Rock": 50,
 	"Campfire": 20,
+	"BigCampfire": 20,
 	"ItemMeat": 20,
 	"ItemMushroom": 20,
 	"ItemGrass": 20,
@@ -39,5 +40,6 @@
 	"ItemLog": 20,
 	"ItemRock": 20,
 	"ItemCampfire": 20,
+	"ItemBigCampfire": 20,
 	"EggDodono": 5
 }

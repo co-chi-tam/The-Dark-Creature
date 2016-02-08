@@ -1,0 +1,15 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+	    {
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["CreateObjectEffect(GameType:302,Amount:1)"]
+	    }
+    ],
+    "NoMethods": []
+  }
+}

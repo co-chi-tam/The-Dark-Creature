@@ -87,7 +87,7 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 180,
+			"TimeSpawnMember": 300,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -105,7 +105,7 @@
 			"MaxMember": 10,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 120,
+			"TimeSpawnMember": 180,
 			"IsShine": false,
 			"Inventory": []
 		},{
@@ -123,7 +123,7 @@
 			"MaxMember": 5,
 			"CurrentHP": 9999,
 			"MaxHP": 9999,
-			"TimeSpawnMember": 180,
+			"TimeSpawnMember": 300,
 			"IsShine": false,
 			"Inventory": []
 		}

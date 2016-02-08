@@ -370,6 +370,7 @@ public class TDCGameManager : MonoBehaviour {
 		case TDCEnum.EGameType.ItemCrystal: 
 		case TDCEnum.EGameType.ItemLog:
 		case TDCEnum.EGameType.ItemCampfire: 
+		case TDCEnum.EGameType.ItemBigCampfire:
 		case TDCEnum.EGameType.ItemRock: {
 			data = m_DataReader.GetItemData(type);
 			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
@@ -421,7 +422,8 @@ public class TDCGameManager : MonoBehaviour {
 			entity = new TDCEnviroment(controller, data);
 			break;
 		}
-		case TDCEnum.EGameType.Campfire: {
+		case TDCEnum.EGameType.Campfire:
+		case TDCEnum.EGameType.BigCampfire:{
 			data = m_DataReader.GetGObjectData(type);
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent <TDCCampfireController>();

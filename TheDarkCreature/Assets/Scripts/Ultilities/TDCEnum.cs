@@ -36,6 +36,7 @@ public class TDCEnum{
 		ItemLog			= 107,
 		ItemCampfire	= 108,
 		ItemRock		= 109,
+		ItemBigCampfire	= 110,
 
 		// Group
 		GroupDodono	= 201,
@@ -55,6 +56,7 @@ public class TDCEnum{
 
 		// Object
 		Campfire	= 301,
+		BigCampfire	= 302,
 
 		// Skill
 		FlameBodySkill   	= 501,

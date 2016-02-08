@@ -40,6 +40,14 @@
 			"Description": "",
 			"IconPath": "Rock",
 			"EffectPath": "Effect/Item/DropItSelfEffect"
+		},{
+			"ID": 5,
+			"Name": "ItemBigCampfire",
+			"GameType": 110,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "BigCampfire",
+			"EffectPath": "Effect/Item/BigCampFireEffect"
 		}
 	]
 }

@@ -41,7 +41,7 @@
 			"Damage": 2,
 			"ActiveSkill": [503],
 			"Enemies": [7],
-			"Foods": [5,52,54,101,102,103,104],
+			"Foods": [5,52,54,101,102,104],
 			"IsShine": false,
 			"Inventory": [{"GameType":101,"Amount":2}]
 		},{
@@ -119,7 +119,7 @@
 			"ModelPath": ["Prefabs/Creature/FireBuggy"],
 			"FSMPath": "FSM/Creature/GroundCreatureNightAIFSM",
 			"IconPath": "",
-			"MoveSpeed": 5,
+			"MoveSpeed": 6,
 			"DetectRange": 20,
 			"AttackRange": 2,
 			"CurrentHP": 25,
@@ -141,7 +141,7 @@
 			"ModelPath": ["Prefabs/Creature/Wobell"],
 			"FSMPath": "FSM/Creature/GroundCreatureAIFSM",
 			"IconPath": "",
-			"MoveSpeed": 3,
+			"MoveSpeed": 5,
 			"DetectRange": 20,
 			"AttackRange": 20,
 			"CurrentHP": 20,
@@ -151,7 +151,7 @@
 			"Damage": 3,
 			"ActiveSkill": [502],
 			"Enemies": [7],
-			"Foods": [5,6,8,10,52,53,55,101,102,104,105],
+			"Foods": [5,6,8,10,52,53,55,101,102,103,104,105],
 			"IsShine": false,
 			"Inventory": [{"GameType":102,"Amount":1},{"GameType":104,"Amount":1}]
 		}
