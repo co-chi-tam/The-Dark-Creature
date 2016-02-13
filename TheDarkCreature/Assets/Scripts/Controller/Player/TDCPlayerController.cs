@@ -106,9 +106,17 @@ public class TDCPlayerController : TDCCreatureController
 				}
 				case (int) TDCEnum.ELayer.LayerCreature:
 				case (int) TDCEnum.ELayer.LayerEnviroment:
-				case (int) TDCEnum.ELayer.LayerGObject: 
 				case (int) TDCEnum.ELayer.LayerItem: {
 					SetEnemyEntity(entity);
+					break;
+				}
+
+				case (int) TDCEnum.ELayer.LayerGObject:
+				{
+					point = TDCUltilities.GetPositionByRadius(entity.GetTransformPosition(), TransformPosition, entity.GetColliderRadius());
+					point.y = 0f;
+					SetTargetPosition(point);
+					SetEnemyEntity(null);
 					break;
 				}
 			}

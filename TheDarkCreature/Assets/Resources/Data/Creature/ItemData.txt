@@ -100,6 +100,46 @@
 			"ModelPath": ["Prefabs/Item/ItemBigCampfire"],
 			"FSMPath": "FSM/Item/ItemFSM",
 			"IconPath": "BigCampfire"
+		},{
+			"ID": 11,
+			"Name": "ItemHorn",
+			"GameType": 111,
+			"CreatureType": 7,
+			"ItemType": 4,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemHorn"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Horn"
+		},{
+			"ID": 12,
+			"Name": "ItemBatWing",
+			"GameType": 112,
+			"CreatureType": 7,
+			"ItemType": 1,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemBatWing"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "BatWing"
+		},{
+			"ID": 13,
+			"Name": "ItemStick",
+			"GameType": 113,
+			"CreatureType": 7,
+			"ItemType": 4,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemStick"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Stick"
+		},{
+			"ID": 14,
+			"Name": "ItemCoal",
+			"GameType": 114,
+			"CreatureType": 7,
+			"ItemType": 4,
+			"Description": "",
+			"ModelPath": ["Prefabs/Item/ItemCoal"],
+			"FSMPath": "FSM/Item/ItemFSM",
+			"IconPath": "Coal"
 		}
 	]
 }

@@ -40,6 +40,14 @@
 			"Description": "",
 			"IconPath": "BlueBerry",
 			"EffectPath": "Effect/Item/BlueBerryEffect"
+		},{
+			"ID": 5,
+			"Name": "BatWing",
+			"GameType": 112,
+			"ItemType": 1,
+			"Description": "",
+			"IconPath": "BatWing",
+			"EffectPath": "Effect/Item/BatWingEffect"
 		}
 	]
 }

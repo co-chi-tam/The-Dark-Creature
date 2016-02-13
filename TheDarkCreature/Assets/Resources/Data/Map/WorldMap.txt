@@ -135,6 +135,18 @@
 					"GameType": 215,
 					"Position": "-100,0,-100",
 					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 15,
+					"GameType": 216,
+					"Position": "-200,0,100",
+					"Rotation": "0,0,0"
+				},
+				{
+					"ID": 16,
+					"GameType": 217,
+					"Position": "-200,0,100",
+					"Rotation": "0,0,0"
 				}
 			]
 		}

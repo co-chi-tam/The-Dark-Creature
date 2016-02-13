@@ -22,6 +22,7 @@
 	"Crabystal": 50,
 	"FireBuggy": 50,
 	"Wobell": 50,
+	"Beary": 50,
 	"Mushroom": 50,
 	"Grass": 20,
 	"Bush": 50,
@@ -29,6 +30,7 @@
 	"Crystal": 50,
 	"LetoTree": 50,
 	"Rock": 50,
+	"BearyTree": 50,
 	"Campfire": 20,
 	"BigCampfire": 20,
 	"ItemMeat": 20,
@@ -41,5 +43,9 @@
 	"ItemRock": 20,
 	"ItemCampfire": 20,
 	"ItemBigCampfire": 20,
+	"ItemHorn": 20,
+	"ItemBatWing": 20,
+	"ItemCoal": 20,
+	"ItemStick": 20,
 	"EggDodono": 5
 }

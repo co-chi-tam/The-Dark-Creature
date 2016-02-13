@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: c85f2c9507707614583210f0d42c75a8
-timeCreated: 1454824604
+timeCreated: 1455331611
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -77,7 +77,7 @@ TextureImporter:
     21300140: Items 2_70
     21300142: Items 2_71
     21300144: Items 2_72
-    21300146: Items 2_73
+    21300146: Stick
     21300148: Items 2_74
     21300150: Items 2_75
     21300152: Items 2_76
@@ -187,7 +187,7 @@ TextureImporter:
     21300360: Items 2_180
     21300362: Items 2_181
     21300364: Items 2_182
-    21300366: Items 2_183
+    21300366: Horn
     21300368: Items 2_184
     21300370: Egg
     21300372: Items 2_186
@@ -344,7 +344,7 @@ TextureImporter:
     21300674: Items 2_337
     21300676: Items 2_338
     21300678: Items 2_339
-    21300680: Items 2_340
+    21300680: Coal
     21300682: Items 2_341
     21300684: Items 2_342
     21300686: Items 2_343
@@ -1259,7 +1259,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 2_73
+    - name: Stick
       rect:
         serializedVersion: 2
         x: 360
@@ -2469,7 +2469,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 2_183
+    - name: Horn
       rect:
         serializedVersion: 2
         x: 122
@@ -4201,7 +4201,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 2_340
+    - name: Coal
       rect:
         serializedVersion: 2
         x: 145

@@ -41,7 +41,7 @@
 			"CurrentHeatPoint": 50,
 			"MaxHeatPoint": 100,
 			"IconPath": "",
-			"Inventory": [{"GameType":104,"Amount":1}]
+			"Inventory": [{"GameType":104,"Amount":1},{"GameType":113,"Amount":1}]
 		},{
 			"ID": 3,
 			"Name": "Blue berry",
@@ -98,6 +98,20 @@
 			"MaxHeatPoint": 100,
 			"IconPath": "",
 			"Inventory": [{"GameType":109,"Amount":3}]
+		},{
+			"ID": 7,
+			"Name": "BearyTree",
+			"GameType": 59,
+			"CreatureType": 3,
+			"Description": "",
+			"ModelPath": ["Prefabs/Enviroment/BearyTree1","Prefabs/Enviroment/BearyTree2"],
+			"FSMPath": "FSM/Creature/EnviromentFSM",
+			"CurrentHP": "50",
+			"MaxHP": "50",
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
+			"IconPath": "",
+			"Inventory": [{"GameType":107,"Amount":2},{"GameType":114,"Amount":1}]
 		}
 	]
 }

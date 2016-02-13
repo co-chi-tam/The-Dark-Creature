@@ -13,6 +13,7 @@ public class TDCEnum{
 		Crabystal	= 9,
 		FireBuggy	= 10,
 		Wobell		= 11,
+		Beary		= 12,
 
 		// Enviroment
 		Mushroom	= 52,
@@ -22,9 +23,7 @@ public class TDCEnum{
 		Crystal		= 56,
 		LetoTree	= 57,
 		Rock		= 58,
-
-		// Weapon
-		Trap		= 71,
+		BearyTree	= 59,
 
 		// Item
 		ItemMeat 		= 101,
@@ -37,6 +36,10 @@ public class TDCEnum{
 		ItemCampfire	= 108,
 		ItemRock		= 109,
 		ItemBigCampfire	= 110,
+		ItemHorn		= 111,
+		ItemBatWing		= 112,
+		ItemStick		= 113,
+		ItemCoal		= 114,
 
 		// Group
 		GroupDodono	= 201,
@@ -53,10 +56,15 @@ public class TDCEnum{
 		GroupLetoTree = 213,
 		GroupRock 	= 214,
 		GroupWobell 	= 215,
+		GroupBeary	 	= 216,
+		GroupBearyTree	= 217,
 
 		// Object
 		Campfire	= 301,
 		BigCampfire	= 302,
+
+		// Weapon
+		Trap		= 401,
 
 		// Skill
 		FlameBodySkill   	= 501,
@@ -116,7 +124,8 @@ public class TDCEnum{
 	public enum EGroupType : int {
 		None			= 0,
 		GroupCreature	= 1,
-		GroupNestCreature = 2
+		GroupNestCreature = 2,
+		GroupHunter		= 3
 	}
 
 	public enum EGroupSpawnType : int {

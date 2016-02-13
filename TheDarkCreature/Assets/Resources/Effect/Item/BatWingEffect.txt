@@ -1,0 +1,15 @@
+﻿{
+  "effect": {
+    "ID": 0,
+    "Type": 1,
+    "Method": "CanActiveEffect()",
+    "YesMethods": [
+	    {
+	    	"ID": 1,
+   			"Type": 10,
+	        "ExcuteMethods": ["AddValueEffect(NameValue:HungerPoint,ToValue:10)","AddValueEffect(NameValue:SanityPoint,ToValue:5)","AddValueEffect(NameValue:HealthPoint,ToValue:10)","SubtractValueEffect(NameValue:SanityPoint,ToValue:10)"]
+	    }
+    ],
+    "NoMethods": []
+  }
+}

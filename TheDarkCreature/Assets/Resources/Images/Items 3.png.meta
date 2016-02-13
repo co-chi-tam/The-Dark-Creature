@@ -1,6 +1,6 @@
 fileFormatVersion: 2
 guid: e153fc6e3e7467442bfc44b27b46969f
-timeCreated: 1452608954
+timeCreated: 1455331450
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
@@ -135,7 +135,7 @@ TextureImporter:
     21300256: Items 3_128
     21300258: Items 3_129
     21300260: Items 3_130
-    21300262: Items 3_131
+    21300262: BeardHair
     21300264: Items 3_132
     21300266: Items 3_133
     21300268: Items 3_134
@@ -151,7 +151,7 @@ TextureImporter:
     21300288: Items 3_144
     21300290: Items 3_145
     21300292: Items 3_146
-    21300294: Items 3_147
+    21300294: BatWing
     21300296: Items 3_148
     21300298: Items 3_149
     21300300: Items 3_150
@@ -1748,7 +1748,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 3_131
+    - name: BeardHair
       rect:
         serializedVersion: 2
         x: 101
@@ -1924,7 +1924,7 @@ TextureImporter:
       pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
-    - name: Items 3_147
+    - name: BatWing
       rect:
         serializedVersion: 2
         x: 103

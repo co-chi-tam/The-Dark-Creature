@@ -126,6 +126,24 @@
 			"TimeSpawnMember": 60,
 			"IsShine": true,
 			"Inventory": []
+		},{
+			"ID": 8,
+			"Name": "GroupBeary",
+			"GameType": 216,
+			"GroupType": 1,
+			"GroupSpawnType": "Center",
+			"Description": "",
+			"ModelPath": ["Prefabs/Group/BearyHouse"],
+			"IconPath": "",
+			"FSMPath": "FSM/Group/GroupDayFSM",
+			"Radius": 50,
+			"MemberType": 12,
+			"MaxMember": 2,
+			"CurrentHP": 9999,
+			"MaxHP": 9999,
+			"TimeSpawnMember": 120,
+			"IsShine": false,
+			"Inventory": []
 		}
 	]
 }

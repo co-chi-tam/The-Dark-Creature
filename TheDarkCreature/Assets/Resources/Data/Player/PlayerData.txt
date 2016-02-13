@@ -191,6 +191,32 @@
 			"Level": 1,
 			"IsShine": false,
 			"Inventory": []
+		},{
+			"ID": 3,
+			"Name": "PlayerTaurot",
+			"GameType": 12,
+			"CreatureType": 2,
+			"Description": "",
+			"ModelPath": ["Prefabs/Creature/Beary1"],
+			"FSMPath": "FSM/Player/PlayerFSM",
+			"IconPath": "",
+			"MoveSpeed": 10,
+			"DetectRange": 25,
+			"AttackRange": 2,
+			"CurrentHP": 165,
+			"MaxHP": 185,
+			"CurrentHeatPoint": 50,
+			"MaxHeatPoint": 100,
+			"CurrentHungerPoint": 50,
+			"MaxHungerPoint": 100,
+			"CurrentSanityPoint": 50,
+			"MaxSanityPoint": 100,
+			"Damage": 3,
+			"ActiveSkill": [503,504,505,510],
+			"PassiveSkills": [506,507,508,511],
+			"Level": 1,
+			"IsShine": false,
+			"Inventory": []
 		}
 	]
 }

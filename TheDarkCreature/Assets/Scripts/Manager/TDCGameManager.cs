@@ -328,154 +328,108 @@ public class TDCGameManager : MonoBehaviour {
 		TDCEntity entity = null;
 		GameObject gObject = null;
 		var random = m_ListEntities.Count;
-		switch (type) { 
-		case TDCEnum.EGameType.Sun:
-			data = m_DataReader.GetSunData (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCSunController> ();
+		var typeIndex = (int)type;
+		if (typeIndex == (int)TDCEnum.EGameType.Sun)
+		{
+			data = m_DataReader.GetSunData(type);
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCSunController>();
 			entity = new TDCSun(controller, data);
-			break;
-		case TDCEnum.EGameType.GrassLandPlane: {
-			data = m_DataReader.GetPlaneData (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCPlaneController> ();
+		}
+		else if (typeIndex == (int)TDCEnum.EGameType.GrassLandPlane)
+		{
+			data = m_DataReader.GetPlaneData(type);
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCPlaneController>();
 			entity = new TDCPlane(controller, data);
-			break;
 		}
-		case TDCEnum.EGameType.Dodono: 
-		case TDCEnum.EGameType.Satla: 
-		case TDCEnum.EGameType.Taurot: 
-		case TDCEnum.EGameType.Vulbat:
-		case TDCEnum.EGameType.Crabystal: 
-		case TDCEnum.EGameType.FireBuggy: 
-		case TDCEnum.EGameType.Wobell: {
-			data = m_DataReader.GetCreatureData (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			switch ((data as TDCCreatureData).CreatureType){
-			case TDCEnum.ECreatureType.GroundCreature:
-				controller = gObject.AddComponent<TDCGroundAIController> ();
-				break;
-			case TDCEnum.ECreatureType.FlyCreature:
-				controller = gObject.AddComponent<TDCFlyAIController> ();
-				break;
+		else if (typeIndex == (int)TDCEnum.EGameType.SeasonGrassLand)
+		{
+			data = m_DataReader.GetSeasonData(type);
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCSeasonController>();
+			entity = new TDCSeason(controller, data);
+		}
+		else if (typeIndex >= 5 && typeIndex < 50) // Creature
+		{
+			data = m_DataReader.GetCreatureData(type);
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			switch ((data as TDCCreatureData).CreatureType)
+			{
+				case TDCEnum.ECreatureType.GroundCreature:
+					controller = gObject.AddComponent<TDCGroundAIController>();
+					break;
+				case TDCEnum.ECreatureType.FlyCreature:
+					controller = gObject.AddComponent<TDCFlyAIController>();
+					break;
 			}
-			entity = new TDCCreature(controller, data);
-			break;
+			entity = new TDCCreature(controller, data); 
 		}
-		case TDCEnum.EGameType.ItemMeat: 
-		case TDCEnum.EGameType.ItemMushroom:
-		case TDCEnum.EGameType.ItemGrass:
-		case TDCEnum.EGameType.ItemBush:
-		case TDCEnum.EGameType.ItemBlueBerry:
-		case TDCEnum.EGameType.ItemCrystal: 
-		case TDCEnum.EGameType.ItemLog:
-		case TDCEnum.EGameType.ItemCampfire: 
-		case TDCEnum.EGameType.ItemBigCampfire:
-		case TDCEnum.EGameType.ItemRock: {
+		else if (typeIndex > 50 && typeIndex < 100) // Enviroment
+		{
+			data = m_DataReader.GetEnviromentData(type);
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCEnviromentController>();
+			entity = new TDCEnviroment(controller, data);
+		}
+		else if (typeIndex > 100 && typeIndex < 200) // Item
+		{
 			data = m_DataReader.GetItemData(type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCItemController> ();
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			controller = gObject.AddComponent<TDCItemController>();
 			entity = new TDCItem(controller, data);
-			break;
 		}
-		case TDCEnum.EGameType.Trap: {
-			//TODO
-			break;
-		}
-		case TDCEnum.EGameType.GroupDodono:
-		case TDCEnum.EGameType.GroupSatla: 
-		case TDCEnum.EGameType.GroupTaurot: 
-		case TDCEnum.EGameType.GroupVulbat: 
-		case TDCEnum.EGameType.GroupGrass:
-		case TDCEnum.EGameType.GroupMushRoom:
-		case TDCEnum.EGameType.GroupBlueBerry: 
-		case TDCEnum.EGameType.GroupBush:
-		case TDCEnum.EGameType.GroupCrystal:
-		case TDCEnum.EGameType.GroupLetoTree:	
-		case TDCEnum.EGameType.GroupRock:		
-		case TDCEnum.EGameType.GroupCrabystal:
-		case TDCEnum.EGameType.GroupFireBuggy: 
-		case TDCEnum.EGameType.GroupWobell: {
+		else if (typeIndex > 200 && typeIndex < 300) // Group
+		{
 			data = m_DataReader.GetGroupData(type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			switch ((data as TDCGroupData).GroupType) {
-			case TDCEnum.EGroupType.GroupNestCreature:
-				controller = gObject.AddComponent<TDCNestGroupCreatureController> ();
-				break;
-			case TDCEnum.EGroupType.GroupCreature:
-				controller = gObject.AddComponent<TDCGroupCreatureController> ();
-				break;
+			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
+			switch ((data as TDCGroupData).GroupType)
+			{
+				case TDCEnum.EGroupType.GroupNestCreature:
+					controller = gObject.AddComponent<TDCNestGroupCreatureController>();
+					break;
+				case TDCEnum.EGroupType.GroupCreature:
+					controller = gObject.AddComponent<TDCGroupCreatureController>();
+					break;
 			}
 			entity = new TDCGroup(controller, data);
-			break;
 		}
-		case TDCEnum.EGameType.Grass:
-		case TDCEnum.EGameType.Mushroom: 
-		case TDCEnum.EGameType.BlueBerry:		
-		case TDCEnum.EGameType.Bush: 
-		case TDCEnum.EGameType.Crystal:
-		case TDCEnum.EGameType.LetoTree: 
-		case TDCEnum.EGameType.Rock: {
-			data = m_DataReader.GetEnviromentData (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCEnviromentController> ();
-			entity = new TDCEnviroment(controller, data);
-			break;
-		}
-		case TDCEnum.EGameType.Campfire:
-		case TDCEnum.EGameType.BigCampfire:{
+		else if (typeIndex > 300 && typeIndex < 400) // Object
+		{
 			data = m_DataReader.GetGObjectData(type);
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent <TDCCampfireController>();
 			entity = new TDCCampfire(controller, data);
-			break;
 		}
-		case TDCEnum.EGameType.FlameBodySkill: 
-		case TDCEnum.EGameType.LifeNotEasySkill:
-		case TDCEnum.EGameType.BurnObjectSkill:
-		case TDCEnum.EGameType.AfraidTheDarkSkill:
-		case TDCEnum.EGameType.NormalMeleeSkill:
-		case TDCEnum.EGameType.NormalRangeSkill:
-		case TDCEnum.EGameType.LavaSpotSkill:
-		case TDCEnum.EGameType.FreezeSkill:		
-		case TDCEnum.EGameType.WeatherNormalSkill:
-		case TDCEnum.EGameType.WeatherRainySkill: 
-		case TDCEnum.EGameType.WeatherOverHeatSkill:
-		case TDCEnum.EGameType.WeatherWindySkill:
-		case TDCEnum.EGameType.WeatherSnowySkill: 
-		case TDCEnum.EGameType.EyeOfNightSkill: 
-		case TDCEnum.EGameType.DarkSwallowSkill: 
-		case TDCEnum.EGameType.ColdAsIceSkill: {
+		else if (typeIndex > 400 && typeIndex < 500) // Weapon
+		{
+			// TODO
+		}
+		else if (typeIndex > 500 && typeIndex < 700) // Skill
+		{
 			data = m_DataReader.GetSkillData(type);	
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
-			switch ((data as TDCSkillData).SkillType) {
-			case TDCEnum.ESkillType.Active:
-				controller = gObject.AddComponent<TDCActiveSkillController>();
-				break;
-			case TDCEnum.ESkillType.Passive:
-				controller = gObject.AddComponent<TDCPasiveSkillController>();
-				break;
+			switch ((data as TDCSkillData).SkillType)
+			{
+				case TDCEnum.ESkillType.Active:
+					controller = gObject.AddComponent<TDCActiveSkillController>();
+					break;
+				case TDCEnum.ESkillType.Passive:
+					controller = gObject.AddComponent<TDCPasiveSkillController>();
+					break;
 			}
 			entity = new TDCSkill(controller, data);
-			break;
 		}
-		case TDCEnum.EGameType.EggDodono:{
+		else if (typeIndex > 800 && typeIndex < 900) // Egg
+		{
 			data = m_DataReader.GetEggData(type);	
 			gObject = GameObject.Instantiate(Resources.Load<GameObject>(data.ModelPath[0]), position, rotation) as GameObject;
 			controller = gObject.AddComponent<TDCEggController>();
 			entity = new TDCEgg(controller, data);
-			break;
 		}
-		case TDCEnum.EGameType.SeasonGrassLand: {
-			data = m_DataReader.GetSeasonData (type);
-			gObject = GameObject.Instantiate (Resources.Load<GameObject> (data.ModelPath[random % data.ModelPath.Length]), position, rotation) as GameObject;
-			controller = gObject.AddComponent<TDCSeasonController> ();
-			entity = new TDCSeason(controller, data);
-			break;
-		}
-		default:
-
-			break;
+		else
+		{
+			Debug.LogError("[GameManager] Out of index");
 		}
 		data.ID = m_ListEntities.Count + 1;
 		entity.SetActive(false);

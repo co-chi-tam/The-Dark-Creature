@@ -7,7 +7,7 @@
 	    {
 	    	"ID": 1,
    			"Type": 10,
-	        "ExcuteMethods": ["AddValueEffect(NameValue:HungerPoint,ToValue:15)","AddValueEffect(NameValue:SanityPoint,ToValue:5)","AddValueEffect(NameValue:HealthPoint,ToValue:5)"]
+	        "ExcuteMethods": ["AddValueEffect(NameValue:HungerPoint,ToValue:15)","AddValueEffect(NameValue:SanityPoint,ToValue:5)","AddValueEffect(NameValue:HealthPoint,ToValue:5)","AddValueEffect(NameValue:SanityPoint,ToValue:5)"]
 	    }
     ],
     "NoMethods": []

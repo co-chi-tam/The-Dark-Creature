@@ -48,6 +48,30 @@
 			"Description": "",
 			"IconPath": "BigCampfire",
 			"EffectPath": "Effect/Item/BigCampFireEffect"
+		},{
+			"ID": 6,
+			"Name": "ItemHorn",
+			"GameType": 111,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "Horn",
+			"EffectPath": "Effect/Item/DropItSelfEffect"
+		},{
+			"ID": 7,
+			"Name": "ItemStick",
+			"GameType": 113,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "Stick",
+			"EffectPath": "Effect/Item/DropItSelfEffect"
+		},{
+			"ID": 8,
+			"Name": "ItemCoal",
+			"GameType": 114,
+			"ItemType": 4,
+			"Description": "",
+			"IconPath": "Coal",
+			"EffectPath": "Effect/Item/DropItSelfEffect"
 		}
 	]
 }
