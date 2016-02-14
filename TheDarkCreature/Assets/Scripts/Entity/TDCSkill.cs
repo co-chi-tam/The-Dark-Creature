@@ -115,7 +115,7 @@ public class TDCSkill : TDCEntity
 		return m_Data.EffectRadius;
 	}
 
-	public virtual float GetEffectRange() {
+	public override float GetEffectRange() {
 		return m_Data.EffectRange;
 	}
 

@@ -42,7 +42,7 @@ public class CUIEventDragManager : CUIEventManager, IDropHandler, IBeginDragHand
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (!m_bIsActive) return;
+		if (!m_bIsActive) return;
         if (EventOnEndDrag != null)
         {
             EventOnEndDrag(this.gameObject, m_vTouchPosition);
@@ -53,10 +53,10 @@ public class CUIEventDragManager : CUIEventManager, IDropHandler, IBeginDragHand
 
     public void OnDrop(UnityEngine.EventSystems.PointerEventData eventData)
     {
-        if (!m_bIsActive) return;
+		if (!m_bIsActive) return;
         if (EventOnDrop != null)
         {
-            EventOnDrop(this.gameObject, m_vTouchPosition);
+			EventOnDrop(this.gameObject, m_vTouchPosition);
         }
         m_bIsPressed = false;
         m_fTimesPress = 0;

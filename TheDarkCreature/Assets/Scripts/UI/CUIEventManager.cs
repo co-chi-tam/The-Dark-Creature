@@ -29,14 +29,14 @@ public class CUIEventManager : MonoBehaviour, IPointerEnterHandler, IPointerExit
 
 	#region Monobehaviour Implementation
 
-//    public virtual void LateUpdate() {
-//		if (Input.touchCount != 0) {
-//			m_vTouchPosition = Input.GetTouch(0).position;
-//		} else {
-//			m_vTouchPosition = Input.mousePosition;
-//		}
+    public virtual void FixedUpdate() {
+		if (Input.touchCount != 0) {
+			m_vTouchPosition = Input.GetTouch(0).position;
+		} else {
+			m_vTouchPosition = Input.mousePosition;
+		}
 //		DetectLongPress ();
-//	}
+	}
 
 	#endregion
 

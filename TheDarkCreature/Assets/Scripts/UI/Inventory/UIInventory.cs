@@ -77,6 +77,8 @@ public class UIInventory : MonoBehaviour {
 		m_OwnerController = owner;
 		m_OwnerEnity = owner.GetEntity();
 		LoadAllSlots();	
+		this.GetComponentInChildren<CUIGridLayout>().enabled = false;
+		this.GetComponentInChildren<ContentSizeFitter>().enabled = false;
 	}
 
 	public bool AddItem(int index, UIItemController item) {

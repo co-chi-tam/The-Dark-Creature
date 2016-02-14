@@ -63,12 +63,12 @@ public static class TDCUltilities {
 			IsPlayer(entity);
 	}
 
-	public static Vector3 GetPositionByRadius(Vector3 center, Vector3 position, float radius) {
+	public static Vector3 GetPositionByRadius(Vector3 center, Vector3 position, float radius, float radius2 = 0f) {
 		var direction = (center - position).normalized;
 		var point = center;
-		point.x -= direction.x * radius;
-		point.y -= direction.y * radius;
-		point.z -= direction.z * radius; 
+		point.x -= direction.x * (radius + radius2);
+		point.y -= direction.y * (radius + radius2);
+		point.z -= direction.z * (radius + radius2);
 		return point;
 	}
 

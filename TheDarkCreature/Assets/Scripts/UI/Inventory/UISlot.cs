@@ -19,24 +19,54 @@ public class UISlot : MonoBehaviour {
 		set { m_SlotIndex = value; }
 	}
 	[SerializeField]
-	private Image m_IconImage = null;
+	private Image m_IconImage;
 	[SerializeField]
-	private Text m_AmountItem = null;
+	private Text m_AmountItem;
 	[SerializeField]
-	private Button m_ItemButton = null;
+	private Button m_ItemButton;
+	[SerializeField]
+	private CUIEventDragManager m_DragManager;
 
 	private UIItemController m_ItemController;
 	private Sprite m_NoImage;
+	private Vector3 m_StartPosition;
+	private bool m_StartDrag = false;
 
 	#endregion 
 
-	#region Main method
+	#region Mono Behaviour
 
 	void Start() {
 		m_ItemButton.onClick.AddListener (() => {
 			OnPointerClick();
 		});
 		m_NoImage = TDCUltilities.LoadImage ("NoImage");
+
+		m_DragManager = this.GetComponent<CUIEventDragManager>();
+		m_DragManager.EventOnBeginDrag += OnBeginDrag;
+		m_DragManager.EventOnDrag += OnDrag;
+		m_DragManager.EventOnEndDrag += OnEndDrag;
+
+		m_StartPosition = this.transform.localPosition;
+	}
+
+	#endregion 
+
+	#region Main methods
+
+	private void OnBeginDrag(GameObject obj, Vector3 pos) {
+		
+		m_StartDrag = true;
+	}
+
+	private void OnDrag(GameObject obj, Vector3 pos) {
+		pos.z = 10f;
+		obj.transform.position = Camera.main.ScreenToWorldPoint (pos);
+	}
+
+	private void OnEndDrag(GameObject obj, Vector3 pos) {
+		obj.transform.localPosition = m_StartPosition;
+		m_StartDrag = false;
 	}
 
 	public void LoadSlot(UIItemController item) {
@@ -69,4 +99,5 @@ public class UISlot : MonoBehaviour {
 	}
 
 	#endregion
+
 }

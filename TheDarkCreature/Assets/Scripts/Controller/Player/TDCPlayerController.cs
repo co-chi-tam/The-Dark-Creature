@@ -113,7 +113,7 @@ public class TDCPlayerController : TDCCreatureController
 
 				case (int) TDCEnum.ELayer.LayerGObject:
 				{
-					point = TDCUltilities.GetPositionByRadius(entity.GetTransformPosition(), TransformPosition, entity.GetColliderRadius());
+					point = TDCUltilities.GetPositionByRadius(entity.GetTransformPosition(), TransformPosition, entity.GetColliderRadius(), this.GetColliderRadius());
 					point.y = 0f;
 					SetTargetPosition(point);
 					SetEnemyEntity(null);
